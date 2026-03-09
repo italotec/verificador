@@ -1,0 +1,3 @@
+/* Minimal overrides — Tailwind handles most of the styling */
+* { box-sizing: border-box; }
+body { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <title>{{ title or "Verificador" }}</title>
+</head>
+<body class="bg-zinc-950 text-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center font-bold text-indigo-400">V</div>
+        <div>
+          <div class="text-lg font-semibold">Verificador</div>
+          <div class="text-xs text-zinc-400">dark • clean • by day</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        {% if current_user.is_authenticated %}
+          <span class="text-sm text-zinc-300">
+            Olá, <b>{{ current_user.username }}</b>
+          </span>
+
+          {# Client status pill — polled via JS, visible when agent reports online/offline #}
+          <span id="agent-status-pill"
+                class="hidden text-xs px-2.5 py-1 rounded-full font-semibold border
+                       border-zinc-700 bg-zinc-900 text-zinc-500">
+            Client <span id="agent-status-dot">…</span>
+          </span>
+
+          <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
+             href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
+
+          <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
+             href="{{ url_for('account.account') }}">Minha Conta</a>
+
+          {% if current_user.is_admin %}
+            <a class="text-sm px-3 py-2 rounded-lg bg-indigo-700 hover:bg-indigo-600"
+               href="{{ url_for('admin.admin_users') }}">Admin</a>
+          {% endif %}
+
+          <a class="text-sm px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800"
+             href="{{ url_for('auth.logout') }}">Sair</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="space-y-2 mb-6">
+          {% for cat, msg in messages %}
+            <div class="rounded-xl px-4 py-3 border
+              {% if cat == 'error' %} border-red-700 bg-red-950/40
+              {% else %} border-emerald-700 bg-emerald-950/30 {% endif %}">
+              <div class="text-sm">{{ msg }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+  // ── Agent status polling ──────────────────────────────────────────────────
+  (function () {
+    const pill = document.getElementById("agent-status-pill");
+    const dot  = document.getElementById("agent-status-dot");
+    if (!pill) return;
+
+    const BASE = "text-xs px-2.5 py-1 rounded-full font-semibold border";
+    const ONLINE  = BASE + " border-emerald-700/60 bg-emerald-950/40 text-emerald-400";
+    const OFFLINE = BASE + " border-red-800/60 bg-red-950/40 text-red-400";
+
+    async function checkAgent() {
+      try {
+        const r = await fetch("/agent/status");
+        const d = await r.json();
+        pill.className = d.online ? ONLINE : OFFLINE;
+        dot.textContent = d.online ? "Online" : "Offline";
+      } catch {
+        // silently ignore if endpoint not available
+      }
+    }
+
+    checkAgent();
+    setInterval(checkAgent, 5000);
+  })();
+  </script>
+</body>
+</html>

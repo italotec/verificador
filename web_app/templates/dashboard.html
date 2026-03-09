@@ -1,0 +1,475 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# ── Macro: profile table — must be defined before use ── #}
+{% macro render_table(profiles, tab) %}
+<div class="overflow-x-auto">
+  <table class="min-w-full text-sm">
+    <thead class="text-zinc-400">
+      <tr class="border-b border-zinc-800">
+        <th class="text-left py-2 pr-4">Perfil</th>
+        <th class="text-left py-2">Status</th>
+        <th class="text-left py-2">Progresso</th>
+        <th class="text-left py-2">Última msg</th>
+        <th class="text-center py-2">Screenshot</th>
+        <th class="text-right py-2">Ações</th>
+      </tr>
+    </thead>
+    <tbody class="text-zinc-200">
+      {% for p in profiles %}
+      {% set job = p.job %}
+      <tr class="border-b border-zinc-900 group" id="row-{{ p.user_id }}">
+
+        {# Profile name / ID #}
+        <td class="py-3 pr-4">
+          <div class="font-semibold">{{ p.name or p.user_id }}</div>
+          <div class="text-xs text-zinc-500 font-mono">{{ p.user_id }}</div>
+        </td>
+
+        {# Status badge #}
+        <td class="py-3" id="status-{{ p.user_id }}">
+          {% if job.status == 'running' %}
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-yellow-900/60 text-yellow-300 animate-pulse">
+              Executando
+            </span>
+          {% elif job.status == 'queued' %}
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-900/60 text-blue-300 animate-pulse">
+              Na fila
+            </span>
+          {% elif job.status == 'success' %}
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/60 text-emerald-300">
+              Verificado
+            </span>
+          {% elif job.status == 'error' %}
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-red-900/60 text-red-300">
+              Erro
+            </span>
+          {% else %}
+            <span class="px-2 py-0.5 rounded text-xs font-bold bg-zinc-700/60 text-zinc-400">
+              Aguardando
+            </span>
+          {% endif %}
+        </td>
+
+        {# Progress bars — 5 steps #}
+        <td class="py-3" id="steps-{{ p.user_id }}">
+          <div class="flex gap-0.5" title="BM | Info | Domínio | WABA | Verificação">
+            {% set s = p.steps|default({}) %}
+            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('bm_created') else 'bg-zinc-700' }}"></div>
+            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('business_info') else 'bg-zinc-700' }}"></div>
+            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('domain_verified') else 'bg-zinc-700' }}"></div>
+            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('waba_created') else 'bg-zinc-700' }}"></div>
+            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('verification_done') else 'bg-zinc-700' }}"></div>
+          </div>
+        </td>
+
+        {# Last message #}
+        <td class="py-3 text-xs text-zinc-500 max-w-xs truncate" id="msg-{{ p.user_id }}">
+          {{ job.last_message or '—' }}
+        </td>
+
+        {# Screenshot button #}
+        <td class="py-3 text-center">
+          <button type="button"
+                  title="Ver screenshot"
+                  onclick="openScreenshot('{{ p.user_id }}', '{{ job.screenshot_path }}')"
+                  class="p-1.5 rounded-lg
+                    {% if job.screenshot_path %}text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700{% else %}text-zinc-600 cursor-default{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </button>
+        </td>
+
+        {# Action buttons #}
+        <td class="py-3 text-right">
+          <div class="flex items-center justify-end gap-1.5">
+            {# Open profile #}
+            <button type="button"
+                    title="Abrir perfil no AdsPower"
+                    onclick="openProfile('{{ p.user_id }}')"
+                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </button>
+
+            {% if tab == 'verificar' %}
+            {# Run with Business ID #}
+            <button type="button"
+                    title="Executar com Business ID existente"
+                    onclick="openBmModal('{{ p.user_id }}', '{{ p.name | e }}')"
+                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-violet-900/60 text-zinc-300 hover:text-violet-300 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </button>
+
+            {# Run verification #}
+            <button type="button"
+                    title="Executar verificação"
+                    onclick="runProfile('{{ p.user_id }}')"
+                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-emerald-900/60 text-zinc-300 hover:text-emerald-300 transition-colors
+                      {% if job.status == 'running' %}opacity-50 cursor-not-allowed{% endif %}"
+                    {% if job.status == 'running' %}disabled{% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+            </button>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endmacro %}
+
+{% if error_msg %}
+<div class="rounded-xl border border-red-700 bg-red-950/40 px-4 py-3 mb-4">
+  <div class="text-sm text-red-300">{{ error_msg }}</div>
+</div>
+{% endif %}
+
+{# ── Tab bar ── #}
+<div class="flex items-center gap-2 mb-4">
+  <a href="{{ url_for('dashboard.dashboard', tab='verificar') }}"
+     class="px-5 py-2 rounded-xl font-semibold text-sm transition-colors
+       {% if active_tab == 'verificar' %}bg-indigo-700 text-white{% else %}bg-zinc-800 text-zinc-400 hover:bg-zinc-700{% endif %}">
+    Verificar
+    <span class="ml-1.5 text-xs px-1.5 py-0.5 rounded-lg
+      {% if active_tab == 'verificar' %}bg-indigo-600{% else %}bg-zinc-700{% endif %}">
+      {{ verificar_profiles|length }}
+    </span>
+  </a>
+  <a href="{{ url_for('dashboard.dashboard', tab='verificadas') }}"
+     class="px-5 py-2 rounded-xl font-semibold text-sm transition-colors
+       {% if active_tab == 'verificadas' %}bg-emerald-700 text-white{% else %}bg-zinc-800 text-zinc-400 hover:bg-zinc-700{% endif %}">
+    Verificadas
+    <span class="ml-1.5 text-xs px-1.5 py-0.5 rounded-lg
+      {% if active_tab == 'verificadas' %}bg-emerald-600{% else %}bg-zinc-700{% endif %}">
+      {{ verificadas_profiles|length }}
+    </span>
+  </a>
+
+  {# Refresh button #}
+  <a href="{{ url_for('dashboard.dashboard', tab=active_tab) }}"
+     title="Recarregar perfis do AdsPower"
+     class="ml-auto px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a9 9 0 1 1-3-6.7"/>
+      <path d="M21 3v6h-6"/>
+    </svg>
+  </a>
+</div>
+
+{# ── Verificar tab ── #}
+<div id="tab-verificar" {% if active_tab != 'verificar' %}class="hidden"{% endif %}>
+  <div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4">
+    {% if verificar_profiles %}
+      {{ render_table(verificar_profiles, tab='verificar') }}
+    {% else %}
+      <div class="py-12 text-center text-zinc-500">
+        Nenhum perfil no grupo <b>Verificar</b>.
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{# ── Verificadas tab ── #}
+<div id="tab-verificadas" {% if active_tab != 'verificadas' %}class="hidden"{% endif %}>
+  <div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4">
+    {% if verificadas_profiles %}
+      {{ render_table(verificadas_profiles, tab='verificadas') }}
+    {% else %}
+      <div class="py-12 text-center text-zinc-500">
+        Nenhum perfil no grupo <b>Verificadas</b>.
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{# ── Business ID modal ── #}
+<div id="bmModalBg" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+  <div class="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-950 p-5">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <div class="text-lg font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-violet-400" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          </svg>
+          Business ID Existente
+        </div>
+        <div class="text-xs text-zinc-500 mt-0.5">
+          Informe o ID para pular a criação do Business Manager.
+        </div>
+      </div>
+      <button onclick="closeBmModal()" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
+        Fechar
+      </button>
+    </div>
+
+    <div class="mb-4">
+      <div class="text-xs text-zinc-500 mb-2">Perfil</div>
+      <div id="bmModalProfileName" class="text-sm font-semibold text-zinc-200"></div>
+    </div>
+
+    <div class="mb-4">
+      <label class="text-xs text-zinc-400">Business Manager ID</label>
+      <input id="bmIdInput" type="text" placeholder="Ex: 123456789012345"
+             class="w-full mt-1 px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 outline-none focus:border-zinc-600 text-sm font-mono"
+             oninput="bmIdChanged()">
+      <p class="text-xs text-zinc-600 mt-1">
+        O BM já deve existir. A criação de um novo BM será ignorada.
+      </p>
+    </div>
+
+    <div id="bmResult" class="hidden mb-4 px-4 py-3 rounded-xl border text-sm"></div>
+
+    <div class="flex items-center justify-end gap-3">
+      <button onclick="closeBmModal()"
+              class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
+        Cancelar
+      </button>
+      <button id="bmSubmitBtn" onclick="submitBmRun()"
+              class="px-5 py-2 rounded-xl bg-violet-700 hover:bg-violet-600 text-sm font-semibold">
+        Executar
+      </button>
+    </div>
+  </div>
+</div>
+
+{# ── Screenshot modal ── #}
+<div id="screenshotModalBg" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
+  <div class="w-full max-w-4xl rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div class="text-base font-semibold" id="screenshotModalTitle">Screenshot</div>
+      <button onclick="closeScreenshotModal()"
+              class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
+        Fechar
+      </button>
+    </div>
+    <div id="screenshotContent" class="flex items-center justify-center min-h-48">
+      <span class="text-zinc-500 text-sm">Carregando…</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── util ──────────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// ── Open profile ──────────────────────────────────────────────────────────────
+async function openProfile(profileId) {
+  try {
+    const res = await fetch(`/api/profile/${profileId}/open`, { method: "POST" });
+    const data = await res.json();
+    if (!data.ok) alert("Erro ao abrir perfil: " + (data.error || "?"));
+  } catch(e) {
+    alert("Erro de rede: " + e);
+  }
+}
+
+// ── Run verification ──────────────────────────────────────────────────────────
+async function runProfile(profileId, businessId) {
+  const body = businessId ? { business_id: businessId } : {};
+  try {
+    const res = await fetch(`/api/profile/${profileId}/run`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      alert("Erro ao iniciar: " + (data.error || "?"));
+      return null;
+    }
+    // Start polling this profile's status
+    startPolling(profileId, data.job_id);
+    return data.job_id;
+  } catch(e) {
+    alert("Erro de rede: " + e);
+    return null;
+  }
+}
+
+// ── Status polling ────────────────────────────────────────────────────────────
+const _pollers = {};
+
+function startPolling(profileId, jobId) {
+  if (_pollers[profileId]) clearInterval(_pollers[profileId]);
+
+  // Immediately show "queued" while waiting for the agent to pick it up
+  setStatus(profileId, "queued", "Aguardando agent…", "", null);
+
+  _pollers[profileId] = setInterval(async () => {
+    try {
+      const r = await fetch(`/api/profile/${profileId}/status`);
+      const d = await r.json();
+      setStatus(profileId, d.status, d.last_message, d.screenshot_path, d.steps);
+
+      // Stop polling only when the job reaches a terminal state
+      if (d.status === "success" || d.status === "error") {
+        clearInterval(_pollers[profileId]);
+        delete _pollers[profileId];
+      }
+    } catch {}
+  }, 2000);
+}
+
+function setStatus(profileId, status, message, screenshotPath, steps) {
+  const statusEl = document.getElementById(`status-${profileId}`);
+  const msgEl    = document.getElementById(`msg-${profileId}`);
+
+  if (statusEl) {
+    const badges = {
+      queued:  `<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-900/60 text-blue-300 animate-pulse">Na fila</span>`,
+      running: `<span class="px-2 py-0.5 rounded text-xs font-bold bg-yellow-900/60 text-yellow-300 animate-pulse">Executando</span>`,
+      success: `<span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/60 text-emerald-300">Verificado</span>`,
+      error:   `<span class="px-2 py-0.5 rounded text-xs font-bold bg-red-900/60 text-red-300">Erro</span>`,
+    };
+    statusEl.innerHTML = badges[status] ||
+      `<span class="px-2 py-0.5 rounded text-xs font-bold bg-zinc-700/60 text-zinc-400">Aguardando</span>`;
+  }
+  if (msgEl) msgEl.textContent = message || "—";
+
+  // Update screenshot button if we got a path
+  if (screenshotPath) {
+    const screenshotBtn = document.querySelector(`button[onclick^="openScreenshot('${profileId}'"]`);
+    if (screenshotBtn) {
+      screenshotBtn.className = screenshotBtn.className.replace("text-zinc-600 cursor-default", "text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700");
+      screenshotBtn.setAttribute("onclick", `openScreenshot('${profileId}', '${screenshotPath}')`);
+    }
+  }
+
+  // Update progress bars
+  if (steps) {
+    const stepsEl = document.getElementById(`steps-${profileId}`);
+    if (stepsEl) {
+      const flags = [steps.bm_created, steps.business_info,
+                     steps.domain_verified, steps.waba_created,
+                     steps.verification_done];
+      const bars = stepsEl.querySelectorAll("div > div");
+      flags.forEach((done, i) => {
+        if (bars[i]) bars[i].className = `w-4 h-1.5 rounded-full ${done ? "bg-emerald-500" : "bg-zinc-700"}`;
+      });
+    }
+  }
+}
+
+// Poll any already-running profiles on page load
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[id^='status-']").forEach(el => {
+    if (el.querySelector(".animate-pulse")) {
+      const profileId = el.id.replace("status-", "");
+      startPolling(profileId, null);
+    }
+  });
+});
+
+// ── Business ID modal ─────────────────────────────────────────────────────────
+let _bmProfileId = null;
+
+function openBmModal(profileId, profileName) {
+  _bmProfileId = profileId;
+  document.getElementById("bmModalProfileName").textContent = profileName || profileId;
+  document.getElementById("bmIdInput").value = "";
+  document.getElementById("bmResult").classList.add("hidden");
+  const bg = document.getElementById("bmModalBg");
+  bg.classList.remove("hidden");
+  bg.classList.add("flex");
+  setTimeout(() => document.getElementById("bmIdInput").focus(), 50);
+}
+
+function closeBmModal() {
+  document.getElementById("bmModalBg").classList.add("hidden");
+  document.getElementById("bmModalBg").classList.remove("flex");
+  _bmProfileId = null;
+}
+
+document.getElementById("bmModalBg").addEventListener("click", (e) => {
+  if (e.target.id === "bmModalBg") closeBmModal();
+});
+
+function bmIdChanged() {
+  document.getElementById("bmResult").classList.add("hidden");
+}
+
+async function submitBmRun() {
+  const bmId = document.getElementById("bmIdInput").value.trim();
+  if (!bmId) {
+    alert("Informe o Business Manager ID.");
+    return;
+  }
+
+  const btn = document.getElementById("bmSubmitBtn");
+  btn.disabled = true;
+  btn.textContent = "Iniciando…";
+
+  const resultBox = document.getElementById("bmResult");
+  resultBox.classList.add("hidden");
+
+  try {
+    const jobId = await runProfile(_bmProfileId, bmId);
+    if (jobId) {
+      resultBox.className = "mb-4 px-4 py-3 rounded-xl border text-sm bg-emerald-950/30 border-emerald-800/50 text-emerald-300";
+      resultBox.textContent = "Verificação iniciada! Feche este modal para acompanhar o progresso.";
+      resultBox.classList.remove("hidden");
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Executar";
+  }
+}
+
+// ── Screenshot modal ──────────────────────────────────────────────────────────
+function openScreenshot(profileId, screenshotPath) {
+  if (!screenshotPath) return;
+
+  const bg = document.getElementById("screenshotModalBg");
+  const title = document.getElementById("screenshotModalTitle");
+  const content = document.getElementById("screenshotContent");
+
+  title.textContent = `Screenshot — ${profileId}`;
+  content.innerHTML = `<span class="text-zinc-500 text-sm">Carregando…</span>`;
+
+  bg.classList.remove("hidden");
+  bg.classList.add("flex");
+
+  const img = new Image();
+  img.className = "max-w-full max-h-[75vh] rounded-xl object-contain";
+  img.onload = () => { content.innerHTML = ""; content.appendChild(img); };
+  img.onerror = () => {
+    content.innerHTML = `<span class="text-zinc-500 text-sm">Screenshot não disponível.</span>`;
+  };
+  img.src = `/screenshots/${screenshotPath}`;
+}
+
+function closeScreenshotModal() {
+  const bg = document.getElementById("screenshotModalBg");
+  bg.classList.add("hidden");
+  bg.classList.remove("flex");
+}
+
+document.getElementById("screenshotModalBg").addEventListener("click", (e) => {
+  if (e.target.id === "screenshotModalBg") closeScreenshotModal();
+});
+</script>
+
+{% endblock %}

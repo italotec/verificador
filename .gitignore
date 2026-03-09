@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.spec
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# SQLite database
+instance/
+
+# Environment / secrets
+.env
+*.env
+
+# Debug screenshots
+debug/
+
+# PyArmor obfuscated output
+obf_out/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude workspace
+.claude/
+
+# Logs
+logs/
+
+# Executables
+*.exe
+
+# Screenshots (generated at runtime)
+web_app/static/screenshots/
+
+# OS
+Thumbs.db
+.DS_Store
