@@ -10,7 +10,7 @@ from flask import (
 )
 from flask_login import login_required, current_user
 from .. import db
-from ..models import VerifyJob, ProfileSnapshot, WorkerCommand
+from ..models import VerifyJob, ProfileSnapshot, WorkerCommand, log_event
 
 bp = Blueprint("dashboard", __name__)
 
@@ -192,6 +192,7 @@ def _trigger_run(profile_id: str, business_id: str):
     # Block if already running
     existing = _latest_job(profile_id)
     if existing and existing.status in ("running", "queued"):
+        log_event("warning", "job", f"Run bloqueado: já em andamento", user_id=current_user.id, profile_id=profile_id)
         return jsonify({"ok": False, "error": "Verificação já em andamento para este perfil."}), 409
 
     if Config.USE_WORKER:
@@ -208,6 +209,8 @@ def _trigger_run(profile_id: str, business_id: str):
         )
         db.session.add(job)
         db.session.commit()
+        log_event("info", "job", f"Job criado (VPS mode), business_id='{business_id}'",
+                  user_id=current_user.id, profile_id=profile_id, job_id=job.id)
         push_to_agent(owner_id, {
             "type": "run_job",
             "job": {
@@ -242,9 +245,11 @@ def _trigger_run(profile_id: str, business_id: str):
             from main import _acquire_run_id
             run_id = _acquire_run_id()
         except Exception as e:
+            log_event("error", "job", f"Falha ao obter run_id: {e}", user_id=current_user.id, profile_id=profile_id)
             return jsonify({"ok": False, "error": f"Não foi possível obter run_id do Gerador: {e}"}), 500
 
         if run_id is None:
+            log_event("error", "job", "Gerador não retornou run_id válido", user_id=current_user.id, profile_id=profile_id)
             return jsonify({"ok": False, "error": "Gerador não retornou um run_id válido."}), 500
 
         gerador_data = gerador_data or {}

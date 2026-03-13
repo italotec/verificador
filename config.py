@@ -20,7 +20,7 @@ VERIFICADAS_GROUP_NAME = os.getenv("VERIFICADAS_GROUP_NAME", "Verificadas")
 VERIFICADA_REMARK_MARKER = "---VERIFICADA---"
 
 # Gerador CNPJ Flask app (must be running locally)
-GERADOR_BASE_URL = os.getenv("GERADOR_BASE_URL", "http://127.0.0.1:5000/")
+GERADOR_BASE_URL = os.getenv("GERADOR_BASE_URL", "http://38.247.136.208:5051/")
 GERADOR_API_KEY = os.getenv("GERADOR_API_KEY", "")
 
 # SMS24H credentials

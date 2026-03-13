@@ -10,7 +10,7 @@ from pathlib import Path
 
 from flask import Blueprint, request, jsonify, current_app
 from .. import db
-from ..models import ProfileSnapshot, VerifyJob, WorkerCommand
+from ..models import ProfileSnapshot, VerifyJob, WorkerCommand, log_event
 
 bp = Blueprint("worker", __name__, url_prefix="/worker")
 
@@ -23,6 +23,7 @@ def _require_key(f):
         from ..config import Config
         key = request.headers.get("X-Worker-Key", "")
         if not key or key != Config.WORKER_API_KEY:
+            log_event("warning", "worker", f"Auth falhou: X-Worker-Key inválido de {request.remote_addr}")
             return jsonify({"error": "Unauthorized"}), 401
         return f(*args, **kwargs)
     return decorated
@@ -60,6 +61,7 @@ def push_profiles():
             db.session.delete(old)
 
     db.session.commit()
+    log_event("info", "worker", f"Worker sincronizou {len(profiles)} perfis")
     return jsonify({"ok": True, "count": len(profiles)})
 
 
@@ -111,6 +113,11 @@ def job_done(job_id: int):
     job.status      = "success" if data.get("success") else "error"
     job.last_message = data.get("message", "")
     job.finished_at = datetime.utcnow()
+    log_event(
+        "info" if data.get("success") else "error", "worker",
+        f"Worker job {job_id}: {'sucesso' if data.get('success') else 'falha'}",
+        detail=job.last_message, profile_id=job.profile_id, job_id=job_id,
+    )
 
     # Save screenshot if provided (base64-encoded PNG)
     screenshot_b64 = data.get("screenshot_b64", "")

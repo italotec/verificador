@@ -1,4 +1,5 @@
 import secrets
+import traceback
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -84,3 +85,32 @@ class VerifyJob(db.Model):
     started_at  = db.Column(db.DateTime, nullable=True)
     finished_at = db.Column(db.DateTime, nullable=True)
     created_at  = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+
+
+class AppLog(db.Model):
+    """Persistent application log for admin debugging."""
+    id         = db.Column(db.Integer, primary_key=True)
+    timestamp  = db.Column(db.DateTime, default=datetime.utcnow, nullable=False, index=True)
+    level      = db.Column(db.String(16), default="info", nullable=False)      # info / warning / error
+    category   = db.Column(db.String(32), default="general", nullable=False)   # job / agent / auth / admin / worker
+    user_id    = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    profile_id = db.Column(db.String(64), nullable=True)
+    job_id     = db.Column(db.Integer, nullable=True)
+    message    = db.Column(db.Text, nullable=False)
+    detail     = db.Column(db.Text, nullable=True)
+
+
+def log_event(level: str, category: str, message: str, *,
+              detail: str | None = None, user_id: int | None = None,
+              profile_id: str | None = None, job_id: int | None = None):
+    """Create an AppLog entry. Safe to call from any context."""
+    try:
+        entry = AppLog(
+            level=level, category=category, message=message,
+            detail=detail, user_id=user_id,
+            profile_id=profile_id, job_id=job_id,
+        )
+        db.session.add(entry)
+        db.session.commit()
+    except Exception:
+        db.session.rollback()

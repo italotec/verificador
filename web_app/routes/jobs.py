@@ -12,7 +12,7 @@ from pathlib import Path
 from flask import Blueprint, jsonify, current_app
 from flask_login import login_required
 from .. import db
-from ..models import VerifyJob
+from ..models import VerifyJob, log_event
 
 bp = Blueprint("jobs", __name__, url_prefix="/jobs")
 
@@ -60,6 +60,7 @@ def _job_thread(app, job_id: int, profile: dict, run_id, email_mode: str,
                 job.last_message = "Outro processo já está rodando para este perfil."
                 job.finished_at = datetime.utcnow()
                 db.session.commit()
+                log_event("warning", "job", "Bloqueado: perfil já em execução", profile_id=profile_id, job_id=job_id)
         return
 
     try:
@@ -91,6 +92,10 @@ def _job_thread(app, job_id: int, profile: dict, run_id, email_mode: str,
         except Exception as e:
             success = False
             err_msg = str(e)[:500]
+            import traceback
+            with app.app_context():
+                log_event("error", "job", f"Exceção durante execução: {err_msg}",
+                          detail=traceback.format_exc(), profile_id=profile_id, job_id=job_id)
         else:
             err_msg = ""
 
@@ -121,6 +126,12 @@ def _job_thread(app, job_id: int, profile: dict, run_id, email_mode: str,
                     else (err_msg or "Verificação falhou.")
                 )
                 db.session.commit()
+                log_event(
+                    "info" if success else "error", "job",
+                    f"Job concluído: {'sucesso' if success else 'falha'}",
+                    detail=job.last_message, profile_id=profile_id, job_id=job_id,
+                    user_id=job.user_id,
+                )
 
             if success:
                 _mark_verified(profile_id)

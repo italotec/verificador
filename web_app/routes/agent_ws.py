@@ -28,7 +28,7 @@ from pathlib import Path
 from flask import Blueprint, request, jsonify, current_app
 from flask_login import login_required, current_user
 from .. import db
-from ..models import ProfileSnapshot, VerifyJob, WorkerCommand, User
+from ..models import ProfileSnapshot, VerifyJob, WorkerCommand, User, log_event
 
 bp = Blueprint("agent_ws", __name__, url_prefix="/agent")
 
@@ -122,6 +122,7 @@ def _handle_profiles_push(app, user_id: int, profiles: list):
                 db.session.delete(old)
 
         db.session.commit()
+        log_event("info", "agent", f"{len(profiles)} perfis sincronizados", user_id=user_id)
         print(f"[AGENT WS] user_id={user_id}: {len(profiles)} perfis sincronizados")
 
 
@@ -134,6 +135,7 @@ def _handle_job_start(app, job_id):
             job.status     = "running"
             job.started_at = datetime.utcnow()
             db.session.commit()
+            log_event("info", "job", f"Job iniciado pelo agent", user_id=job.user_id, profile_id=job.profile_id, job_id=job_id)
 
 
 def _handle_job_done(app, msg: dict):
@@ -161,7 +163,14 @@ def _handle_job_done(app, msg: dict):
                 pass
 
         db.session.commit()
-        status_word = "✓ sucesso" if msg.get("success") else "✗ falha"
+        success = msg.get("success")
+        status_word = "✓ sucesso" if success else "✗ falha"
+        log_event(
+            "info" if success else "error", "job",
+            f"Job concluído: {status_word}",
+            detail=msg.get("message", ""),
+            user_id=job.user_id, profile_id=job.profile_id, job_id=job_id,
+        )
         print(f"[AGENT WS] Job {job_id}: {status_word}")
 
 
@@ -185,6 +194,7 @@ def handle_ws(ws):
     """
     user = _auth_user()
     if not user:
+        log_event("warning", "agent", "Conexão WS rejeitada: token inválido")
         ws.close()
         return
 
@@ -213,6 +223,7 @@ def handle_ws(ws):
 
         _agents[user_id] = session
 
+    log_event("info", "agent", f"Agent conectado: '{username}'", user_id=user_id)
     print(f"[AGENT WS] '{username}' (id={user_id}) conectado")
 
     # ── Sender thread ─────────────────────────────────────────────────────────
@@ -274,12 +285,16 @@ def handle_ws(ws):
                 break
             _handle_agent_message(app, user_id, data)
     except Exception as e:
+        with app.app_context():
+            log_event("error", "agent", f"Erro na conexão: '{username}'", detail=str(e), user_id=user_id)
         print(f"[AGENT WS] '{username}': erro na conexão: {e}")
     finally:
         with _registry_lock:
             if _agents.get(user_id) is session:
                 del _agents[user_id]
         session.send_queue.put(None)   # stop sender thread
+        with app.app_context():
+            log_event("info", "agent", f"Agent desconectado: '{username}'", user_id=user_id)
         print(f"[AGENT WS] '{username}' desconectado")
 
 

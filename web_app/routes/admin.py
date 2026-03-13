@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .. import db
-from ..models import User, VerifyJob
+from ..models import User, VerifyJob, AppLog, log_event
 
 bp = Blueprint("admin", __name__, url_prefix="/admin")
 
@@ -63,6 +63,7 @@ def admin_create_user():
     db.session.add(u)
     db.session.commit()
 
+    log_event("info", "admin", f"Usuário criado: '{username}'", user_id=current_user.id)
     flash("Usuário criado com sucesso.", "success")
     return redirect(url_for("admin.admin_users"))
 
@@ -82,6 +83,8 @@ def admin_toggle_ban(user_id: int):
     u.is_banned = not u.is_banned
     db.session.commit()
 
+    action = "banido" if u.is_banned else "desbanido"
+    log_event("warning", "admin", f"Usuário '{u.username}' {action}", user_id=current_user.id)
     flash("Status atualizado.", "success")
     return redirect(url_for("admin.admin_users"))
 
@@ -125,5 +128,57 @@ def admin_reset_password(user_id: int):
 
     u.set_password(new_password)
     db.session.commit()
+    log_event("warning", "admin", f"Senha resetada para '{u.username}'", user_id=current_user.id)
     flash("Senha atualizada.", "success")
     return redirect(url_for("admin.admin_user_detail", user_id=user_id))
+
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+
+@bp.route("/logs", methods=["GET"])
+@login_required
+def admin_logs():
+    q = AppLog.query
+
+    # Filters
+    filter_user = request.args.get("user", "").strip()
+    filter_category = request.args.get("category", "").strip()
+    filter_level = request.args.get("level", "").strip()
+    filter_profile = request.args.get("profile", "").strip()
+
+    if filter_user:
+        u = User.query.filter_by(username=filter_user).first()
+        if u:
+            q = q.filter_by(user_id=u.id)
+        else:
+            q = q.filter_by(user_id=-1)  # no results
+    if filter_category:
+        q = q.filter_by(category=filter_category)
+    if filter_level:
+        q = q.filter_by(level=filter_level)
+    if filter_profile:
+        q = q.filter(AppLog.profile_id.contains(filter_profile))
+
+    logs = q.order_by(AppLog.timestamp.desc()).limit(200).all()
+
+    # Build user map for display
+    user_ids = {l.user_id for l in logs if l.user_id}
+    users_map = {}
+    if user_ids:
+        for u in User.query.filter(User.id.in_(user_ids)).all():
+            users_map[u.id] = u.username
+
+    # All usernames for the filter dropdown
+    all_users = User.query.order_by(User.username).all()
+
+    return render_template(
+        "admin_logs.html",
+        title="Admin • Logs",
+        logs=logs,
+        users_map=users_map,
+        all_users=all_users,
+        filter_user=filter_user,
+        filter_category=filter_category,
+        filter_level=filter_level,
+        filter_profile=filter_profile,
+    )

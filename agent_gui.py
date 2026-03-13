@@ -5,8 +5,8 @@ The user pastes their personal token (from the web app's "Minha Conta" page)
 and clicks Connect.  The VPS address is hardcoded below — change it before
 building the .exe.
 
-Build (after installing PyArmor for obfuscation):
-    pyarmor pack -e "--onefile --windowed --icon=prosperidadelogo.ico --name \"Client Verificador\" --add-data \"services;services\"" agent_gui.py
+Build:
+    pyinstaller --onefile --windowed --icon=prosperidadelogo.ico --name "Client Verificador" --add-data "services;services" --add-data "main.py;." --add-data "config.py;." --add-data ".env;." --add-data "accounts.json;." --add-data "proxies.json;." agent_gui.py
 """
 import asyncio
 import base64
