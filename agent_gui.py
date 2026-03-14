@@ -124,6 +124,8 @@ def _execute_job_sync(job: dict, log, progress=None) -> dict:
 
     try:
         from main import _run_for_profile, _mark_verified, _acquire_run_id
+        import main as _main_mod
+        _main_mod.adspower = _client  # use the auto-detected AdsPower URL
 
         profile      = _client.get_profile(profile_id)
         remark       = profile.get("remark", "")
