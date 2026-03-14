@@ -1,14 +1,19 @@
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+if getattr(sys, "frozen", False):
+    # PyInstaller: .env is extracted to sys._MEIPASS, not os.getcwd()
+    load_dotenv(Path(sys._MEIPASS) / ".env")
+else:
+    load_dotenv(Path(__file__).parent / ".env")
 
 BASE_DIR = Path(__file__).parent
 REPO_DIR = BASE_DIR.parent   # c:\…\Disparos — shared root for all agents
 
 # AdsPower local API
-ADSPOWER_BASE = os.getenv("ADSPOWER_BASE", "http://local.adspower.net:50325")
+ADSPOWER_BASE = os.getenv("ADSPOWER_BASE", "http://local.adspower.net:50365")
 
 # Name of the group in AdsPower that holds profiles waiting to be verified
 VERIFICAR_GROUP_NAME = os.getenv("VERIFICAR_GROUP_NAME", "Verificar")
