@@ -134,8 +134,6 @@ def _execute_job_sync(job: dict) -> dict:
         if run_id is None:
             print(f"[JOB {job_id}] Sem run_id — adquirindo do Gerador…")
             run_id = _acquire_run_id()
-            if run_id is None:
-                raise RuntimeError("Gerador não retornou run_id válido.")
             gerador_data = gerador_data or {}
             gerador_data["run_id"] = run_id
 

@@ -124,32 +124,27 @@ def _pick_account(index: int | None = None) -> dict:
 
 # ── Gerador run acquisition ───────────────────────────────────────────────────
 
-def _acquire_run_id() -> int | None:
+def _acquire_run_id() -> int:
     """
     Ask the Gerador for a run to verify.
     - If the pre-generated bank has an entry, claim it immediately.
     - If the bank is empty, trigger async generation and poll until done.
-    Returns the run_id, or None if acquisition failed.
+    Returns the run_id, or raises on failure.
     """
     print("[GERADOR] Requesting a run…")
-    try:
-        result = gerador.acquire_run()
-        source = result.get("source", "?")
+    result = gerador.acquire_run()
+    source = result.get("source", "?")
 
-        if "run_id" in result:
-            print(f"[GERADOR] Got run {result['run_id']} from {source}")
-            return result["run_id"]
+    if "run_id" in result:
+        print(f"[GERADOR] Got run {result['run_id']} from {source}")
+        return result["run_id"]
 
-        # Bank was empty — generation started in background
-        job_id = result["job_id"]
-        print(f"[GERADOR] Bank empty — generation started (job: {job_id[:8]}…)")
-        run_id = gerador.wait_for_run(job_id)
-        print(f"[GERADOR] Generation complete — run_id: {run_id}")
-        return run_id
-
-    except Exception as e:
-        print(f"[GERADOR] Failed to acquire run: {e}")
-        return None
+    # Bank was empty — generation started in background
+    job_id = result["job_id"]
+    print(f"[GERADOR] Bank empty — generation started (job: {job_id[:8]}…)")
+    run_id = gerador.wait_for_run(job_id)
+    print(f"[GERADOR] Generation complete — run_id: {run_id}")
+    return run_id
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -222,16 +217,14 @@ def _run_for_profile(
         run_data = gerador.get_run(run_id)
         run_data["run_id"] = run_id  # ensure it's in the dict
     except Exception as e:
-        print(f"[VERIFICADOR] Could not fetch run {run_id}: {e}")
-        return False
+        raise RuntimeError(f"Falha ao buscar dados do Gerador (run {run_id}): {e}") from e
 
     # Open browser
     try:
         browser_info = adspower.open_browser(user_id)
         ws = browser_info["ws"]["puppeteer"]
     except Exception as e:
-        print(f"[VERIFICADOR] Could not open browser for {user_id}: {e}")
-        return False
+        raise RuntimeError(f"Falha ao abrir browser AdsPower para {user_id}: {e}") from e
 
     # Credentials
     username = profile.get("username", "")
@@ -264,17 +257,18 @@ def _run_for_profile(
         )
         success = bot.run_verification(username, password, fakey, cookies, business_id=business_id)
     except Exception as e:
-        print(f"[VERIFICADOR] Bot error for {user_id}: {e}")
-        success = False
-    finally:
+        adspower.close_browser(user_id)
+        raise RuntimeError(f"Erro no bot para {user_id}: {e}") from e
+    else:
         adspower.close_browser(user_id)
 
     if success:
         print(f"[VERIFICADOR] ✓ {user_id} verified successfully")
     else:
         print(f"[VERIFICADOR] ✗ {user_id} verification failed")
+        raise RuntimeError(f"Verificação falhou para perfil {user_id} (etapas do Facebook não concluídas)")
 
-    return success
+    return True
 
 
 # ── mode 1 ────────────────────────────────────────────────────────────────────
@@ -353,12 +347,13 @@ def create_and_verify(payload: dict) -> bool:
     }
 
     initial_gerador_data = {"run_id": run_id, "email_mode": email_mode}
-    success = _run_for_profile(profile, run_id, email_mode, gerador_data=initial_gerador_data)
-
-    if success:
+    try:
+        _run_for_profile(profile, run_id, email_mode, gerador_data=initial_gerador_data)
         _mark_verified(profile_id)
-
-    return success
+        return True
+    except RuntimeError as e:
+        print(f"[MODE1] Failed: {e}")
+        return False
 
 
 # ── mode 2 ────────────────────────────────────────────────────────────────────
@@ -409,11 +404,12 @@ def process_verificar_group() -> dict:
         email_mode = gerador_data.get("email_mode", "own")
         business_id = gerador_data.get("business_id", "")
 
-        success = _run_for_profile(profile, run_id, email_mode, business_id=business_id, gerador_data=gerador_data)
-        if success:
+        try:
+            _run_for_profile(profile, run_id, email_mode, business_id=business_id, gerador_data=gerador_data)
             results["success"] += 1
             _mark_verified(profile["user_id"])
-        else:
+        except RuntimeError as e:
+            print(f"[MODE2] Failed {profile['user_id']}: {e}")
             results["failed"] += 1
 
     print(f"\n[MODE2] Done — {results}")

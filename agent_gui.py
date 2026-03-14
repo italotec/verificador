@@ -28,7 +28,23 @@ import websockets.exceptions
 _VPS_WS_BASE = "ws://38.247.136.208:5050"   # e.g. "wss://verificador.seusite.com"
 
 # ── Local config constants (inlined so config.py is not needed in the bundle) ─
-_ADSPOWER_BASE     = "http://local.adspower.net:50325"
+def _detect_adspower() -> str:
+    """Try common AdsPower API base URLs and return the first that responds."""
+    import requests as _req
+    for base in (
+        "http://local.adspower.net:50365",
+        "http://127.0.0.1:50365",
+        "http://local.adspower.net:50325",
+        "http://127.0.0.1:50325",
+    ):
+        try:
+            _req.get(f"{base}/api/v1/status", timeout=2)
+            return base
+        except Exception:
+            continue
+    return "http://local.adspower.net:50325"  # last-resort default
+
+_ADSPOWER_BASE     = _detect_adspower()
 _VERIFICAR_GROUP   = "Verificar"
 _VERIFICADAS_GROUP = "Verificadas"
 _GERADOR_MARKER    = "---GERADOR---"
@@ -89,13 +105,18 @@ def _capture_screenshot_b64(since_epoch: float) -> str:
     return base64.b64encode(latest.read_bytes()).decode()
 
 
-def _execute_job_sync(job: dict, log) -> dict:
+def _execute_job_sync(job: dict, log, progress=None) -> dict:
     """Blocking job execution — called via asyncio.to_thread."""
     job_id      = job["id"]
     profile_id  = job["profile_id"]
     business_id = job.get("business_id", "")
 
-    log(f"[JOB {job_id}] Iniciando para perfil {profile_id}…")
+    def _progress(msg: str):
+        log(f"[JOB {job_id}] {msg}")
+        if progress:
+            progress(msg)
+
+    _progress(f"Iniciando para perfil {profile_id}…")
 
     success        = False
     message        = ""
@@ -111,10 +132,8 @@ def _execute_job_sync(job: dict, log) -> dict:
         email_mode   = gerador_data.get("email_mode", "own") if gerador_data else "own"
 
         if run_id is None:
-            log(f"[JOB {job_id}] Sem run_id — adquirindo do Gerador…")
+            _progress("Adquirindo dados do Gerador…")
             run_id = _acquire_run_id()
-            if run_id is None:
-                raise RuntimeError("Gerador não retornou run_id válido.")
             gerador_data = gerador_data or {}
             gerador_data["run_id"] = run_id
 
@@ -122,8 +141,10 @@ def _execute_job_sync(job: dict, log) -> dict:
             gerador_data = gerador_data or {}
             gerador_data["business_id"] = business_id
 
+        _progress("Abrindo browser AdsPower…")
         start_time = time.time()
 
+        _progress("Executando verificação no Facebook…")
         success = _run_for_profile(
             profile=profile,
             run_id=run_id,
@@ -187,7 +208,13 @@ async def _handle_run_job(msg: dict, outbox: asyncio.Queue, log):
     job    = msg["job"]
     job_id = job["id"]
     await outbox.put(json.dumps({"type": "job_start", "job_id": job_id}))
-    result = await asyncio.to_thread(_execute_job_sync, job, log)
+
+    loop = asyncio.get_event_loop()
+    def progress(message: str):
+        frame = json.dumps({"type": "job_progress", "job_id": job_id, "message": message})
+        loop.call_soon_threadsafe(outbox.put_nowait, frame)
+
+    result = await asyncio.to_thread(_execute_job_sync, job, log, progress)
     await outbox.put(json.dumps(result))
 
 

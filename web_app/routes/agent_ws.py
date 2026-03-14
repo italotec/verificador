@@ -8,6 +8,7 @@ knows exactly which agent belongs to which user.
 Agent → VPS frames:
   {"type": "profiles_push",  "profiles": [...]}
   {"type": "job_start",      "job_id": N}
+  {"type": "job_progress",   "job_id": N, "message": str}
   {"type": "job_done",       "job_id": N, "success": bool, "message": str, "screenshot_b64": str}
   {"type": "command_done",   "cmd_id": N}
   {"type": "ping"}
@@ -96,6 +97,8 @@ def _handle_agent_message(app, user_id: int, data: str):
         _handle_job_start(app, msg.get("job_id"))
     elif msg_type == "job_done":
         _handle_job_done(app, msg)
+    elif msg_type == "job_progress":
+        _handle_job_progress(app, msg.get("job_id"), msg.get("message", ""))
     elif msg_type == "command_done":
         _handle_command_done(app, msg.get("cmd_id"))
     # "ping" → silently ignored
@@ -124,6 +127,16 @@ def _handle_profiles_push(app, user_id: int, profiles: list):
         db.session.commit()
         log_event("info", "agent", f"{len(profiles)} perfis sincronizados", user_id=user_id)
         print(f"[AGENT WS] user_id={user_id}: {len(profiles)} perfis sincronizados")
+
+
+def _handle_job_progress(app, job_id, message: str):
+    if job_id is None:
+        return
+    with app.app_context():
+        job = db.session.get(VerifyJob, job_id)
+        if job:
+            job.last_message = message
+            db.session.commit()
 
 
 def _handle_job_start(app, job_id):
