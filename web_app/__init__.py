@@ -26,6 +26,7 @@ def create_app():
     from .routes.worker import bp as worker_bp
     from .routes.agent_ws import bp as agent_ws_bp, handle_ws
     from .routes.account import bp as account_bp
+    from .routes.profiles import bp as profiles_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
@@ -34,6 +35,7 @@ def create_app():
     app.register_blueprint(worker_bp)   # HTTP worker API (X-Worker-Key auth)
     app.register_blueprint(agent_ws_bp) # agent status + WS
     app.register_blueprint(account_bp)  # user account / token page
+    app.register_blueprint(profiles_bp) # bulk profile creator (admin)
 
     @sock.route("/agent/ws")
     def agent_ws_route(ws):

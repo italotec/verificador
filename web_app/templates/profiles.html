@@ -1,0 +1,484 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-3xl mx-auto space-y-6">
+
+  <div>
+    <h1 class="text-2xl font-bold">Criar Perfis</h1>
+    <p class="text-sm text-zinc-400 mt-1">Criação em massa de perfis no AdsPower.</p>
+  </div>
+
+  {# ── Tab bar ─────────────────────────────────────────────────────────────── #}
+  <div class="flex gap-2 border-b border-zinc-800 pb-0">
+    <button id="tab-manual-btn"
+            onclick="switchTab('manual')"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg border border-b-0 border-zinc-700
+                   bg-zinc-800 text-zinc-100">
+      Manual
+    </button>
+    <button id="tab-file-btn"
+            onclick="switchTab('file')"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg border border-b-0 border-zinc-800
+                   bg-zinc-900 text-zinc-400 hover:text-zinc-200">
+      Arquivo (.txt)
+    </button>
+  </div>
+
+  {# ═══════════════════════════════════════════════════════════════════════════
+     TAB 1 — MANUAL
+  ═══════════════════════════════════════════════════════════════════════════ #}
+  <div id="tab-manual" class="space-y-5">
+
+    {# Group name #}
+    <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+      <label class="block text-sm text-zinc-400 mb-1">Nome do Grupo</label>
+      <input id="manual-group" type="text" placeholder="Ex: Verificar"
+             class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                    focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+      <p class="text-xs text-zinc-500 mt-1">Grupo do AdsPower. Será criado se não existir.</p>
+    </div>
+
+    {# Profile cards container #}
+    <div id="cards-container" class="space-y-4"></div>
+
+    {# Hidden card template (not rendered by Jinja — pure HTML, cloned by JS) #}
+    <template id="card-template">
+      <div class="card bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-semibold text-zinc-300">Perfil <span class="card-num"></span></span>
+          <button type="button" onclick="removeCard(this)"
+                  class="text-zinc-500 hover:text-red-400 text-lg leading-none px-1">×</button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Email *</label>
+            <input data-field="email" type="text" placeholder="email@exemplo.com"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Senha *</label>
+            <input data-field="password" type="text" placeholder="Senha"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Cookies</label>
+            <input data-field="cookies" type="text" placeholder="(opcional)"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">2FA / fakey</label>
+            <input data-field="fakey" type="text" placeholder="(opcional)"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+        </div>
+
+        {# Proxy sub-section #}
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">Proxy</label>
+          <select data-field="proxy_type" onchange="toggleProxy(this)"
+                  class="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                         focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            <option value="none">Nenhum</option>
+            <option value="http">HTTP</option>
+            <option value="socks5">SOCKS5</option>
+          </select>
+        </div>
+
+        <div data-proxy-fields class="hidden grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Host</label>
+            <input data-field="proxy_host" type="text" placeholder="192.168.1.1"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Porta</label>
+            <input data-field="proxy_port" type="text" placeholder="8080"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Usuário</label>
+            <input data-field="proxy_user" type="text" placeholder="(opcional)"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Senha do Proxy</label>
+            <input data-field="proxy_pass" type="text" placeholder="(opcional)"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          </div>
+        </div>
+      </div>
+    </template>
+
+    {# Add card + submit buttons #}
+    <div class="flex gap-3">
+      <button type="button" onclick="addCard()"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm">
+        <span class="text-lg leading-none">+</span> Adicionar Perfil
+      </button>
+      <button type="button" onclick="submitManual()"
+              class="flex-1 py-2 rounded-xl bg-indigo-700 hover:bg-indigo-600 font-semibold text-sm">
+        Criar Perfis
+      </button>
+    </div>
+
+    {# Inline result area #}
+    <div id="manual-result" class="hidden bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-2">
+      <h3 class="text-sm font-semibold text-zinc-300">Resultado</h3>
+      <div id="manual-result-body" class="space-y-1 text-sm"></div>
+    </div>
+
+  </div>{# /tab-manual #}
+
+  {# ═══════════════════════════════════════════════════════════════════════════
+     TAB 2 — ARQUIVO
+  ═══════════════════════════════════════════════════════════════════════════ #}
+  <div id="tab-file" class="hidden space-y-5">
+
+    <form id="file-form" method="POST" action="{{ url_for('profiles.profiles_create_file') }}"
+          class="space-y-5">
+
+      {# Group name #}
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+        <label class="block text-sm text-zinc-400 mb-1">Nome do Grupo</label>
+        <input name="group_name" type="text" placeholder="Ex: Verificar" required
+               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                      focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+        <p class="text-xs text-zinc-500 mt-1">Será criado se não existir.</p>
+      </div>
+
+      {# Accounts file #}
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3">
+        <h2 class="text-sm font-semibold text-zinc-300 uppercase tracking-wider">Contas</h2>
+        <p class="text-xs text-zinc-500">Arquivo .txt — uma conta por linha.</p>
+        <input id="accounts-file-input" type="file" accept=".txt"
+               onchange="onAccountsFileChange(this)"
+               class="text-sm text-zinc-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg
+                      file:border-0 file:text-xs file:font-medium
+                      file:bg-indigo-700 file:text-white hover:file:bg-indigo-600 cursor-pointer" />
+
+        {# Column mapping — revealed after file is read #}
+        <div id="col-mapping-section" class="hidden space-y-3">
+          <p class="text-xs text-zinc-400 font-medium">Mapeie as colunas:</p>
+          <div id="col-mapping-table" class="overflow-x-auto"></div>
+          <input type="hidden" name="col_email"    id="col_email"    value="-1" />
+          <input type="hidden" name="col_password" id="col_password" value="-1" />
+          <input type="hidden" name="col_cookies"  id="col_cookies"  value="-1" />
+          <input type="hidden" name="col_fakey"    id="col_fakey"    value="-1" />
+          <input type="hidden" name="accounts_raw" id="accounts_raw_hidden" />
+        </div>
+      </div>
+
+      {# Proxies file (optional) #}
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3">
+        <h2 class="text-sm font-semibold text-zinc-300 uppercase tracking-wider">
+          Proxies <span class="text-zinc-500 font-normal normal-case">(opcional)</span>
+        </h2>
+        <p class="text-xs text-zinc-500">
+          Arquivo .txt — formato <code class="bg-zinc-800 px-1 rounded">ip:porta:user:pass</code> ou com prefixo
+          <code class="bg-zinc-800 px-1 rounded">http://</code> /
+          <code class="bg-zinc-800 px-1 rounded">socks5://</code>.
+          Se houver menos proxies que contas, serão reutilizados em ciclo.
+        </p>
+        <input id="proxies-file-input" type="file" accept=".txt"
+               onchange="onProxiesFileChange(this)"
+               class="text-sm text-zinc-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg
+                      file:border-0 file:text-xs file:font-medium
+                      file:bg-zinc-700 file:text-white hover:file:bg-zinc-600 cursor-pointer" />
+
+        {# Proxy type — revealed after file is read #}
+        <div id="proxy-type-section" class="hidden space-y-2">
+          <div id="proxy-type-detected"
+               class="hidden text-xs px-2.5 py-1 rounded-full border border-emerald-700/60
+                      bg-emerald-950/40 text-emerald-400 inline-block">
+            Tipo detectado: <span id="proxy-type-detected-label"></span>
+          </div>
+          <div id="proxy-type-ask" class="hidden">
+            <label class="block text-xs text-zinc-400 mb-1">Tipo dos proxies</label>
+            <select name="proxy_type" id="proxy-type-select"
+                    class="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-indigo-600">
+              <option value="http">HTTP</option>
+              <option value="socks5">SOCKS5</option>
+            </select>
+          </div>
+          <input type="hidden" name="proxies_raw" id="proxies_raw_hidden" />
+          <input type="hidden" name="proxy_type"  id="proxy_type_hidden"  value="" />
+        </div>
+      </div>
+
+      <button type="submit"
+              class="w-full py-3 rounded-xl bg-indigo-700 hover:bg-indigo-600 font-semibold text-sm">
+        Criar Perfis
+      </button>
+
+    </form>
+
+  </div>{# /tab-file #}
+
+</div>{# /container #}
+
+<script>
+// ── Tab switching ────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  document.getElementById('tab-manual').classList.toggle('hidden', tab !== 'manual');
+  document.getElementById('tab-file').classList.toggle('hidden', tab !== 'file');
+
+  const active   = 'bg-zinc-800 text-zinc-100 border-zinc-700';
+  const inactive = 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-zinc-200';
+
+  const manualBtn = document.getElementById('tab-manual-btn');
+  const fileBtn   = document.getElementById('tab-file-btn');
+
+  if (tab === 'manual') {
+    manualBtn.className = manualBtn.className.replace(/bg-zinc-900|text-zinc-400|border-zinc-800|hover:text-zinc-200/g, '').trim();
+    manualBtn.classList.add('bg-zinc-800', 'text-zinc-100', 'border-zinc-700');
+    fileBtn.className = fileBtn.className.replace(/bg-zinc-800|text-zinc-100|border-zinc-700/g, '').trim();
+    fileBtn.classList.add('bg-zinc-900', 'text-zinc-400', 'border-zinc-800', 'hover:text-zinc-200');
+  } else {
+    fileBtn.className = fileBtn.className.replace(/bg-zinc-900|text-zinc-400|border-zinc-800|hover:text-zinc-200/g, '').trim();
+    fileBtn.classList.add('bg-zinc-800', 'text-zinc-100', 'border-zinc-700');
+    manualBtn.className = manualBtn.className.replace(/bg-zinc-800|text-zinc-100|border-zinc-700/g, '').trim();
+    manualBtn.classList.add('bg-zinc-900', 'text-zinc-400', 'border-zinc-800', 'hover:text-zinc-200');
+  }
+}
+
+// ── Manual tab — cards ───────────────────────────────────────────────────────
+function addCard() {
+  const tmpl      = document.getElementById('card-template');
+  const clone     = tmpl.content.cloneNode(true);
+  const container = document.getElementById('cards-container');
+  container.appendChild(clone);
+  renumberCards();
+}
+
+function removeCard(btn) {
+  const container = document.getElementById('cards-container');
+  if (container.children.length <= 1) return;
+  btn.closest('.card').remove();
+  renumberCards();
+}
+
+function renumberCards() {
+  document.querySelectorAll('#cards-container .card').forEach((card, i) => {
+    const num = card.querySelector('.card-num');
+    if (num) num.textContent = i + 1;
+  });
+}
+
+function toggleProxy(selectEl) {
+  const card   = selectEl.closest('.card');
+  const fields = card.querySelector('[data-proxy-fields]');
+  const show   = selectEl.value !== 'none';
+  fields.classList.toggle('hidden', !show);
+  if (show) fields.classList.add('grid'); else fields.classList.remove('grid');
+}
+
+function collectCards() {
+  const cards = [];
+  document.querySelectorAll('#cards-container .card').forEach(card => {
+    const f = name => (card.querySelector(`[data-field="${name}"]`) || {}).value || '';
+    cards.push({
+      email:      f('email').trim(),
+      password:   f('password').trim(),
+      cookies:    f('cookies').trim(),
+      fakey:      f('fakey').trim(),
+      proxy_type: f('proxy_type'),
+      proxy_host: f('proxy_host').trim(),
+      proxy_port: f('proxy_port').trim(),
+      proxy_user: f('proxy_user').trim(),
+      proxy_pass: f('proxy_pass').trim(),
+    });
+  });
+  return cards;
+}
+
+async function submitManual() {
+  const group = document.getElementById('manual-group').value.trim();
+  if (!group) { alert('Informe o nome do grupo.'); return; }
+
+  const profiles = collectCards();
+  const valid = profiles.filter(p => p.email && p.password);
+  if (!valid.length) { alert('Adicione pelo menos um perfil com email e senha.'); return; }
+
+  const btn = document.querySelector('[onclick="submitManual()"]');
+  btn.disabled = true;
+  btn.textContent = 'Criando…';
+
+  let resp, data;
+  try {
+    resp = await fetch('{{ url_for("profiles.profiles_create_manual") }}', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ group_name: group, profiles: valid }),
+    });
+    data = await resp.json();
+  } catch (e) {
+    alert('Erro de rede: ' + e);
+    btn.disabled = false;
+    btn.textContent = 'Criar Perfis';
+    return;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Criar Perfis';
+
+  const resultDiv  = document.getElementById('manual-result');
+  const resultBody = document.getElementById('manual-result-body');
+  resultDiv.classList.remove('hidden');
+  resultBody.innerHTML = '';
+
+  (data.created || []).forEach(email => {
+    resultBody.insertAdjacentHTML('beforeend',
+      `<div class="text-emerald-400">✓ ${email}</div>`);
+  });
+  (data.failed || []).forEach(item => {
+    resultBody.insertAdjacentHTML('beforeend',
+      `<div class="text-red-400">✗ ${item}</div>`);
+  });
+}
+
+// ── File tab — accounts ──────────────────────────────────────────────────────
+const FIELD_OPTIONS = [
+  { value: '-1',  label: 'Ignorar' },
+  { value: 'email',    label: 'Email' },
+  { value: 'password', label: 'Senha' },
+  { value: 'cookies',  label: 'Cookies' },
+  { value: 'fakey',    label: '2FA' },
+];
+
+// Default mapping for ?|password|email|?|?|cookies format
+const DEFAULT_MAP = { 1: 'password', 2: 'email', 5: 'cookies' };
+
+function onAccountsFileChange(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    document.getElementById('accounts_raw_hidden').value = text;
+
+    const lines = text.split('\n').filter(l => l.trim());
+    if (!lines.length) return;
+
+    // Detect delimiter (| or ,)
+    const firstLine = lines[0];
+    const cols = firstLine.split('|');
+    const numCols = cols.length;
+
+    // Preview table (first 3 rows)
+    const previewRows = lines.slice(0, 3).map(l => l.split('|'));
+    let html = '<table class="text-xs text-zinc-400 border-collapse w-full mb-3">';
+
+    // Mapping dropdowns row
+    html += '<tr>';
+    for (let c = 0; c < numCols; c++) {
+      const def = DEFAULT_MAP[c] || '-1';
+      html += `<td class="pr-2 pb-2"><select data-col="${c}" onchange="updateColMap()"
+          class="bg-zinc-800 border border-zinc-700 rounded px-1 py-1 text-xs focus:outline-none">`;
+      FIELD_OPTIONS.forEach(opt => {
+        const sel = (opt.value === def || (opt.value === '-1' && def === '-1')) ? 'selected' : '';
+        html += `<option value="${opt.value}" ${sel}>${opt.label}</option>`;
+      });
+      html += '</select></td>';
+    }
+    html += '</tr>';
+
+    // Preview rows
+    previewRows.forEach(row => {
+      html += '<tr>';
+      row.forEach(cell => {
+        const truncated = cell.length > 20 ? cell.slice(0, 20) + '…' : cell;
+        html += `<td class="pr-2 py-0.5 font-mono truncate max-w-[80px]" title="${cell.replace(/"/g,'&quot;')}">${truncated}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</table>';
+
+    const section = document.getElementById('col-mapping-section');
+    document.getElementById('col-mapping-table').innerHTML = html;
+    section.classList.remove('hidden');
+    updateColMap();
+  };
+  reader.readAsText(file);
+}
+
+function updateColMap() {
+  const selects = document.querySelectorAll('#col-mapping-table [data-col]');
+  // Reset
+  ['email','password','cookies','fakey'].forEach(f => {
+    document.getElementById('col_' + f).value = '-1';
+  });
+  selects.forEach(sel => {
+    const field = sel.value;
+    const col   = sel.dataset.col;
+    if (field !== '-1') {
+      const hidden = document.getElementById('col_' + field);
+      if (hidden) hidden.value = col;
+    }
+  });
+}
+
+// ── File tab — proxies ───────────────────────────────────────────────────────
+function detectProxyType(line) {
+  const l = line.trim().toLowerCase();
+  if (l.startsWith('socks5://')) return 'socks5';
+  if (l.startsWith('http://') || l.startsWith('http:')) return 'http';
+  return null;
+}
+
+function onProxiesFileChange(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    document.getElementById('proxies_raw_hidden').value = text;
+
+    const lines = text.split('\n').filter(l => l.trim());
+    const types = lines.map(detectProxyType);
+    const uniqueTypes = [...new Set(types.filter(Boolean))];
+    const allDetected = types.every(t => t !== null);
+    const consistent  = uniqueTypes.length === 1;
+
+    const section      = document.getElementById('proxy-type-section');
+    const detectedDiv  = document.getElementById('proxy-type-detected');
+    const detectedLbl  = document.getElementById('proxy-type-detected-label');
+    const askDiv       = document.getElementById('proxy-type-ask');
+    const hiddenType   = document.getElementById('proxy_type_hidden');
+    const selectEl     = document.getElementById('proxy-type-select');
+
+    section.classList.remove('hidden');
+
+    if (allDetected && consistent) {
+      detectedLbl.textContent = uniqueTypes[0].toUpperCase();
+      detectedDiv.classList.remove('hidden');
+      askDiv.classList.add('hidden');
+      hiddenType.value = uniqueTypes[0];
+      // remove the named select so it doesn't override the hidden input
+      selectEl.removeAttribute('name');
+    } else {
+      detectedDiv.classList.add('hidden');
+      askDiv.classList.remove('hidden');
+      hiddenType.value = '';
+      selectEl.name = 'proxy_type';
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+addCard(); // start with one empty card
+</script>
+
+{% endblock %}

@@ -693,7 +693,7 @@ class FacebookBot:
             _wait(0.5)
 
             # Try well-known button texts
-            for btn_text in ("Criar um portfólio empresarial", "Criar portfólio", "Novo portfólio"):
+            for btn_text in ("Criar um portfólio empresarial", "Crie um portfólio de negócios", "Criar portfólio", "Novo portfólio"):
                 try:
                     btn = page.get_by_role("button", name=btn_text).first
                     if btn.is_visible(timeout=2_000):
@@ -706,7 +706,7 @@ class FacebookBot:
                 break
 
             # Broader has_text search
-            for has_text in ("portfólio empresarial", "portfólio", "novo portfólio"):
+            for has_text in ("portfólio empresarial", "portfólio de negócios", "portfólio", "novo portfólio"):
                 try:
                     btn = page.locator("[role='button'], button").filter(has_text=has_text).first
                     if btn.is_visible(timeout=2_000):
