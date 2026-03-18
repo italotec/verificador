@@ -10,14 +10,6 @@ from flask_login import login_required, current_user
 bp = Blueprint("profiles", __name__, url_prefix="/profiles")
 
 
-def _is_admin():
-    return current_user.is_authenticated and bool(getattr(current_user, "is_admin", False))
-
-
-@bp.before_request
-def guard():
-    if not _is_admin():
-        return redirect(url_for("dashboard.dashboard"))
 
 
 def _get_client():

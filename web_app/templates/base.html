@@ -37,13 +37,14 @@
           <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
              href="{{ url_for('account.account') }}">Minha Conta</a>
 
+          <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
+             href="{{ url_for('profiles.profiles_page') }}">Criar Perfis</a>
+
           {% if current_user.is_admin %}
             <a class="text-sm px-3 py-2 rounded-lg bg-indigo-700 hover:bg-indigo-600"
                href="{{ url_for('admin.admin_users') }}">Admin</a>
             <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
                href="{{ url_for('admin.admin_logs') }}">Logs</a>
-            <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
-               href="{{ url_for('profiles.profiles_page') }}">Criar Perfis</a>
           {% endif %}
 
           <a class="text-sm px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800"
