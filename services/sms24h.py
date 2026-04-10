@@ -83,6 +83,13 @@ class SMS24HService:
         """Cancel an activation (triggers refund on SMS24H side)."""
         self._req({"action": "setStatus", "id": activation_id, "status": "8"})
 
+    def get_balance(self) -> str | None:
+        """Return raw balance string from API or None on error."""
+        resp = self._req({"action": "getBalance"})
+        if resp.startswith("ACCESS_BALANCE:"):
+            return resp.split(":", 1)[1]
+        return None
+
     # ── phone helpers ─────────────────────────────────────────────────────────
 
     @staticmethod

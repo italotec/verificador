@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="gcm37718knv5dgpwgen56le3ilwsat" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Favaris & Leal - Loja de Roupas e Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom subtle fade-in animation */
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-slide-up {
+      animation: fadeSlideUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-rose-300 selection:text-white">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 md:py-5">
+      <a href="#home" class="font-extrabold text-3xl text-rose-600 tracking-wide select-none hover:text-rose-700 transition">Favaris & Leal</a>
+      <ul class="hidden md:flex space-x-12 text-gray-700 font-medium">
+        <li><a href="#colecao" class="hover:text-rose-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-rose-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-rose-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="hover:text-rose-600 transition">Contato</a></li>
+      </ul>
+      <button id="menu-btn" aria-label="Abrir menu" class="md:hidden p-2 focus:outline-none focus:ring-2 focus:ring-rose-600 rounded hover:bg-rose-100">
+        <svg class="w-7 h-7 text-rose-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg border-t border-rose-100">
+      <ul class="flex flex-col px-6 py-4 space-y-4 text-gray-700 font-semibold">
+        <li><a href="#colecao" class="block hover:text-rose-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-rose-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-rose-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="block hover:text-rose-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- HERO -->
+  <section id="home" class="relative bg-gradient-to-tr from-rose-100 to-white min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-24">
+    <div class="max-w-4xl space-y-6 fade-slide-up">
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-rose-700 drop-shadow-sm">Estilo que Transforma</h1>
+      <p class="text-lg md:text-xl text-rose-900/90 max-w-3xl">Descubra a elegância e autenticidade em cada peça da Favaris & Leal. Roupas e acessórios que acompanham seu ritmo, com qualidade e design únicos.</p>
+      <a href="#colecao" class="inline-block bg-rose-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-rose-700 transition">Ver Coleção</a>
+    </div>
+    <picture class="absolute bottom-0 right-0 max-w-xs md:max-w-md opacity-80 select-none pointer-events-none">
+      <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?auto=format&fit=crop&w=400&q=80" alt="Mulher elegante com vestido rosa" class="rounded-xl shadow-lg" loading="lazy" />
+    </picture>
+  </section>
+
+  <!-- COLEÇÃO DE VESTUÁRIO -->
+  <section id="colecao" class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+    <h2 class="text-4xl font-extrabold text-rose-700 mb-8 text-center md:text-left fade-slide-up">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Casaco bege feminino" loading="lazy" class="w-full h-72 object-cover" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-rose-800">Casaco Bege Elegante</h3>
+          <p class="text-rose-600 font-medium">Conforto e estilo para os dias frios.</p>
+          <span class="text-rose-700 font-bold text-lg">R$ 349,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1520975692853-16f23fa1e6f0?auto=format&fit=crop&w=600&q=80" alt="Homem com jaqueta jeans" loading="lazy" class="w-full h-72 object-cover" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-rose-800">Jaqueta Jeans Masculina</h3>
+          <p class="text-rose-600 font-medium">Clássico que nunca sai de moda.</p>
+          <span class="text-rose-700 font-bold text-lg">R$ 299,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1534011546717-0a5f4b6e6b87?auto=format&fit=crop&w=600&q=80" alt="Vestido floral feminino" loading="lazy" class="w-full h-72 object-cover" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-rose-800">Vestido Floral Leve</h3>
+          <p class="text-rose-600 font-medium">Perfeito para ocasiões especiais.</p>
+          <span class="text-rose-700 font-bold text-lg">R$ 259,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" loading="lazy" class="w-full h-72 object-cover" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-rose-800">Camisa Casual Azul</h3>
+          <p class="text-rose-600 font-medium">Versatilidade para o dia a dia.</p>
+          <span class="text-rose-700 font-bold text-lg">R$ 199,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ACESSÓRIOS -->
+  <section id="acessorios" class="bg-rose-50 py-16 px-6 md:px-12">
+    <h2 class="text-4xl font-extrabold text-rose-700 mb-10 text-center md:text-left fade-slide-up">Acessórios Exclusivos</h2>
+    <div class="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-7xl mx-auto">
+      <div class="w-full lg:w-1/2 rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.04] transition-transform duration-300 cursor-pointer relative group">
+        <img src="https://images.unsplash.com/photo-1555529669-0bda2f2a4f7f?auto=format&fit=crop&w=700&q=80" alt="Bolsa de couro marrom" loading="lazy" class="w-full h-96 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-900/90 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 class="text-white text-2xl font-bold">Bolsa de Couro Marrom</h3>
+          <p class="text-rose-200 mt-1 font-medium">Design clássico para todas as ocasiões.</p>
+          <span class="text-rose-300 font-semibold text-lg">R$ 399,90</span>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2 grid grid-cols-2 gap-6">
+        <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.05] transition-transform duration-300 cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno masculino" loading="lazy" class="w-full h-48 object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-900/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <h4 class="text-white font-bold text-lg">Relógio Moderno</h4>
+            <span class="text-rose-300 font-semibold">R$ 499,90</span>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.05] transition-transform duration-300 cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol feminino" loading="lazy" class="w-full h-48 object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-900/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <h4 class="text-white font-bold text-lg">Óculos de Sol</h4>
+            <span class="text-rose-300 font-semibold">R$ 159,90</span>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.05] transition-transform duration-300 cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Chapéu de palha feminino" loading="lazy" class="w-full h-48 object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-900/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <h4 class="text-white font-bold text-lg">Chapéu de Palha</h4>
+            <span class="text-rose-300 font-semibold">R$ 89,90</span>
+          </div>
+        </div>
+        <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.05] transition-transform duration-300 cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Pulseira feminina" loading="lazy" class="w-full h-48 object-cover" />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-900/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <h4 class="text-white font-bold text-lg">Pulseira Delicada</h4>
+            <span class="text-rose-300 font-semibold">R$ 69,90</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NÓS -->
+  <section id="sobre" class="max-w-6xl mx-auto px-6 md:px-12 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="fade-slide-up">
+        <h2 class="text-4xl font-extrabold text-rose-700 mb-6">Sobre a Favaris & Leal</h2>
+        <p class="text-lg text-rose-800 leading-relaxed mb-4">Fundada com a missão de levar moda de qualidade e estilo para todos, Favaris & Leal é mais que uma loja de roupas e acessórios — é um espaço onde autenticidade e elegância se encontram. Nossos designers buscam inspiração na natureza e nas tendências globais para criar coleções que valorizam você.</p>
+        <p class="text-lg text-rose-700 font-semibold italic">"Vestir-se bem é se sentir bem."</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1520975912738-c1e5d74c9f9b?auto=format&fit=crop&w=700&q=80" alt="Equipe Favaris & Leal" loading="lazy" class="rounded-3xl shadow-xl object-cover w-full h-[360px] md:h-[420px]" />
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="bg-white py-16 px-6 md:px-12">
+    <div class="max-w-4xl mx-auto text-center fade-slide-up">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-6">Fale Conosco</h2>
+      <p class="text-rose-800 mb-8 text-lg max-w-xl mx-auto">Tem dúvidas, sugestões ou quer conhecer melhor nossas coleções? Envie uma mensagem e nossa equipe responderá rapidinho!</p>
+      <form action="#" method="POST" class="space-y-6 text-left">
+        <div>
+          <label for="nome" class="block text-rose-700 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full border border-rose-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 transition" placeholder="Seu nome completo" />
+        </div>
+        <div>
+          <label for="email" class="block text-rose-700 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required class="w-full border border-rose-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 transition" placeholder="exemplo@dominio.com" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-rose-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-rose-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-rose-500 transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-rose-600 text-white font-bold px-12 py-3 rounded-lg shadow-lg hover:bg-rose-700 transition">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-rose-900 text-rose-100 px-6 md:px-12 py-12 select-none">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm md:text-base font-semibold leading-relaxed">
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">CNPJ</h3>
+        <p>65.665.536/0001-71</p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Razão Social</h3>
+        <p>FAVARIS &amp; LEAL CONSULTORIA LTDA</p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">E-mail</h3>
+        <p><a href="mailto:VICTORSARTORIO@HOTMAIL.COM" class="hover:underline">VICTORSARTORIO@HOTMAIL.COM</a></p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Telefone</h3>
+        <p><span id="telefone-comercial" class="font-mono">28-999077065</span></p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Logradouro</h3>
+        <p>RUA MAURÍLIO COELHO, 1</p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Bairro</h3>
+        <p>ILHA DA LUZ</p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Município</h3>
+        <p>CACHOEIRO DE ITAPEMIRIM</p>
+      </div>
+      <div>
+        <h3 class="text-rose-400 uppercase mb-2 tracking-wide">Estado</h3>
+        <p>ES</p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-10 border-t border-rose-700 pt-6 flex flex-col sm:flex-row justify-between text-rose-400 text-xs md:text-sm font-normal space-y-4 sm:space-y-0">
+      <p>© 2024 Favaris & Leal. Todos os direitos reservados.</p>
+      <div class="space-x-6">
+        <a href="#" class="hover:text-rose-300 transition">Termos de Uso</a>
+        <a href="#" class="hover:text-rose-300 transition">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

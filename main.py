@@ -46,16 +46,18 @@ from datetime import datetime
 
 import config
 from services.adspower import AdsPowerClient
-from services.sms24h import SMS24HService
-from services.gerador_client import GeradorClient
+from services.sms_factory import get_sms_service
+from services.gerador_facade import GeradorService
 from services.facebook_bot import FacebookBot
 
 
 # ── shared service instances ─────────────────────────────────────────────────
 
 adspower = AdsPowerClient(config.ADSPOWER_BASE)
-gerador = GeradorClient(config.GERADOR_BASE_URL, config.GERADOR_API_KEY)
-sms = SMS24HService(config.SMS24H_API_KEY, config.SMS24H_COUNTRY, config.SMS24H_SERVICE)
+gerador = GeradorService()
+# SMS service is resolved per-job (not at import time) so admin provider changes
+# take effect immediately without restarting the agent.
+# Do NOT cache this at module level.
 
 
 # ── proxy / account loaders ───────────────────────────────────────────────────
@@ -126,24 +128,14 @@ def _pick_account(index: int | None = None) -> dict:
 
 def _acquire_run_id() -> int:
     """
-    Ask the Gerador for a run to verify.
-    - If the pre-generated bank has an entry, claim it immediately.
-    - If the bank is empty, trigger async generation and poll until done.
-    Returns the run_id, or raises on failure.
+    Claim a pre-generated run from the bank, or generate one synchronously.
+    Returns the run_id.
     """
     print("[GERADOR] Requesting a run…")
     result = gerador.acquire_run()
-    source = result.get("source", "?")
-
-    if "run_id" in result:
-        print(f"[GERADOR] Got run {result['run_id']} from {source}")
-        return result["run_id"]
-
-    # Bank was empty — generation started in background
-    job_id = result["job_id"]
-    print(f"[GERADOR] Bank empty — generation started (job: {job_id[:8]}…)")
-    run_id = gerador.wait_for_run(job_id)
-    print(f"[GERADOR] Generation complete — run_id: {run_id}")
+    run_id = result["run_id"]
+    source = result.get("source", "local")
+    print(f"[GERADOR] Got run {run_id} (source: {source})")
     return run_id
 
 
@@ -162,6 +154,34 @@ def _parse_gerador_block(remark: str) -> dict | None:
         return json.loads(tail.strip())
     except Exception:
         return None
+
+
+def _mark_restricted(user_id: str):
+    """
+    When a BM is detected as restricted:
+      1. Append ---RESTRITA--- marker to the remark.
+      2. Move the profile to the 'Restrita' group.
+    """
+    timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        current_remark = adspower.get_profile(user_id).get("remark", "")
+    except Exception as e:
+        print(f"[VERIFICADOR] Could not fetch remark for {user_id}: {e}")
+        current_remark = ""
+
+    new_remark = current_remark.rstrip() + f"\n\n{config.RESTRITA_REMARK_MARKER}\n{timestamp}"
+    try:
+        adspower.update_profile(user_id, remark=new_remark)
+        print(f"[VERIFICADOR] Tagged '{config.RESTRITA_REMARK_MARKER}' on profile {user_id}")
+    except Exception as e:
+        print(f"[VERIFICADOR] Could not tag remark for {user_id}: {e}")
+
+    try:
+        restrita_id = adspower.get_group_id(config.RESTRITA_GROUP_NAME)
+        adspower.move_to_group(user_id, restrita_id)
+        print(f"[VERIFICADOR] Moved {user_id} to '{config.RESTRITA_GROUP_NAME}'")
+    except Exception as e:
+        print(f"[VERIFICADOR] Could not move {user_id} to Restrita: {e}")
 
 
 def _mark_verified(user_id: str):
@@ -201,6 +221,7 @@ def _run_for_profile(
     email_mode: str = "own",
     business_id: str = "",
     gerador_data: dict | None = None,
+    sms_payload: dict | None = None,
 ) -> bool:
     """
     Open the AdsPower browser for *profile*, run the full Facebook verification,
@@ -246,7 +267,7 @@ def _run_for_profile(
             ws_endpoint=ws,
             run_data=run_data,
             gerador=gerador,
-            sms=sms,
+            sms=get_sms_service(sms_payload),
             email_mode=email_mode,
             sms_timeout=config.SMS_WAIT_TIMEOUT,
             sms_max_attempts=config.SMS_MAX_ATTEMPTS,
@@ -255,19 +276,14 @@ def _run_for_profile(
             profile_remark=profile.get("remark", ""),
             gerador_data=gerador_data or {},
         )
-        success = bot.run_verification(username, password, fakey, cookies, business_id=business_id)
+        bot.run_verification(username, password, fakey, cookies, business_id=business_id)
     except Exception as e:
         adspower.close_browser(user_id)
-        raise RuntimeError(f"Erro no bot para {user_id}: {e}") from e
+        raise
     else:
         adspower.close_browser(user_id)
 
-    if success:
-        print(f"[VERIFICADOR] ✓ {user_id} verified successfully")
-    else:
-        print(f"[VERIFICADOR] ✗ {user_id} verification failed")
-        raise RuntimeError(f"Verificação falhou para perfil {user_id} (etapas do Facebook não concluídas)")
-
+    print(f"[VERIFICADOR] ✓ {user_id} verified successfully")
     return True
 
 

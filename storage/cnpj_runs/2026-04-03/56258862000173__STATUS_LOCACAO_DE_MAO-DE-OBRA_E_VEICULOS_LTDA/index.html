@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Moda e Acessórios Contemporâneos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #f5f3ff 0%, #faf8f3 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6b5b95 0%, #8b7ba8 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(107, 91, 149, 0.3);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a969 0%, transparent 100%);
+        }
+        
+        .product-badge {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a969;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f5f3ff 0%, #efe9ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-700 to-amber-600 bg-clip-text text-transparent">
+                        StyleHub
+                    </h1>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-700">Início</a>
+                    <a href="#colecoes" class="nav-link text-sm font-medium text-gray-700">Coleções</a>
+                    <a href="#produtos" class="nav-link text-sm font-medium text-gray-700">Produtos</a>
+                    <a href="#sobre" class="nav-link text-sm font-medium text-gray-700">Sobre</a>
+                    <a href="#contato" class="nav-link text-sm font-medium text-gray-700">Contato</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17l-4 4m0 0l-4-4m4 4V3"></path>
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">3</span>
+                    </button>
+                    <button class="relative">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h12l-2-8M9 21h6m0 0a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">2</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient pt-24 pb-12 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="inline-block text-sm font-semibold text-purple-600 bg-purple-50 px-4 py-2 rounded-full">
+                        Coleção Primavera 2024
+                    </span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                        Estilo que <span class="bg-gradient-to-r from-purple-700 to-amber-600 bg-clip-text text-transparent">Inspira</span> Confiança
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        Descubra uma seleção curada de roupas e acessórios que refletem sua personalidade. Qualidade premium, design contemporâneo e preços acessíveis.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">
+                            Explorar Coleção
+                        </button>
+                        <button class="border-2 border-gray-800 text-gray-800 font-semibold py-3 px-8 rounded-lg hover:bg-gray-50 transition-colors">
+                            Ver Catálogo
+                        </button>
+                    </div>
+                </div>
+                <div class="relative h-96 md:h-full overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Moda Feminina" class="w-full h-full object-cover">
+                    <div class="absolute top-6 right-6 bg-white rounded-full p-4 shadow-lg product-badge">
+                        <span class="text-sm font-bold text-purple-600">-30%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="colecoes" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="section-title">Nossas Coleções</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Cada coleção é pensada para celebrar a individualidade e o estilo pessoal</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Collection Card 1 -->
+                <div class="card-hover group relative overflow-hidden rounded-xl bg-white">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1543163521-9145f931371e?w=500&h=500&fit=crop" alt="Coleção Urbana" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Urbano</h3>
+                        <p class="text-gray-600 text-sm mb-4">Peças versáteis para o dia a dia com estilo</p>
+                        <button class="text-purple-600 font-semibold inline-flex items-center group">
+                            Ver Coleção
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Collection Card 2 -->
+                <div class="card-hover group relative overflow-hidden rounded-xl bg-white">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&h=500&fit=crop" alt="Coleção Elegante" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Elegância</h3>
+                        <p class="text-gray-600 text-sm mb-4">Sofisticação refinada para momentos especiais</p>
+                        <button class="text-purple-600 font-semibold inline-flex items-center group">
+                            Ver Coleção
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Collection Card 3 -->
+                <div class="card-hover group relative overflow-hidden rounded-xl bg-white">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506246213102-37900185ae67?w=500&h=500&fit=crop" alt="Coleção Casual" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Casual Chic</h3>
+                        <p class="text-gray-600 text-sm mb-4">Conforto e estilo para o dia a dia descontraído</p>
+                        <button class="text-purple-600 font-semibold inline-flex items-center group">
+                            Ver Coleção
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="produtos" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-start mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                        <span class="section-title">Produtos em Destaque</span>
+                    </h2>
+                    <p class="text-gray-600 max-w-2xl">Confira os itens mais procurados da temporada</p>
+                </div>
+                <button class="hidden md:block text-purple-600 font-semibold text-sm hover:text-purple-700">
+                    Ver Todos →
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden border border-gray-100">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1539533057440-7bfdd397e69d?w=300&h=300&fit=crop" alt="Jaqueta Jeans" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">NOVO</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-900 mb-1">Jaqueta Jeans Premium</h4>
+                        <p class="text-sm text-gray-500 mb-3">Coleção Urbano</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-gray-900">R$ 189</span>
+                                <span class="text-sm text-gray-400 line-through">R$ 269</span>
+                            </div>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h12l-2-8M9 21h6m0 0a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden border border-gray-100">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop" alt="Bolsa Estruturada" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">-40%</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-900 mb-1">Bolsa Estruturada</h4>
+                        <p class="text-sm text-gray-500 mb-3">Acessórios</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-gray-900">R$ 159</span>
+                                <span class="text-sm text-gray-400 line-through">R$ 265</span>
+                            </div>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h12l-2-8M9 21h6m0 0a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden border border-gray-100">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=300&h=300&fit=crop" alt="Sneaker Branco" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">HOT</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-900 mb-1">Sneaker Contemporâneo</h4>
+                        <p class="text-sm text-gray-500 mb-3">Calçados</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-gray-900">R$ 229</span>
+                                <span class="text-sm text-gray-400 line-through">R$ 329</span>
+                            </div>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h12l-2-8M9 21h6m0 0a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden border border-gray-100">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300&h=300&fit=crop" alt="Óculos de Sol" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">EM ESTOQUE</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-900 mb-1">Óculos Espelhado</h4>
+                        <p class="text-sm text-gray-500 mb-3">Acessórios</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-gray-900">R$ 89</span>
+                                <span class="text-sm text-gray-400 line-through">R$ 149</span>
+                            </div>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h12l-2-8M9 21h6m0 0a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="btn-primary text-white font-semibold py-3 px-10 rounded-lg md:hidden">
+                    Ver Todos os Produtos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-amber-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative h-96 overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1570498676557-ddb494da8df0?w=600&h=600&fit=crop" alt="Sobre StyleHub" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-6">
+                    <span class="inline-block text-sm font-semibold text-purple-600 bg-white px-4 py-2 rounded-full">Sobre Nós</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">
+                        Moda com Propósito
+                    </h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Na StyleHub, acreditamos que a moda é uma forma de expressão pessoal. Desde 2020, nos dedicamos a oferecer roupas e acessórios de qualidade premium, com designs contemporâneos que celebram a individualidade de cada cliente.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Nossa missão é democratizar a moda sustentável, oferecendo peças versáteis que transcendem tendências temporárias e se tornam parte do guarda-roupa atemporal de nossos clientes.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Qualidade</h4>
+                                <p class="text-sm text-gray-600">100% garantida</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Rápido</h4>
+                                <p class="text-sm text-gray-600">Entrega ágil</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Acessível</h4>
+                                <p class="text-sm text-gray-600">Preços justos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Sustentável</h4>
+                                <p class="text-sm text-gray-600">Eco-friendly</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

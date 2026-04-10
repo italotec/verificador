@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Roupas e Acessórios Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        .slide-in {
+            animation: slideInUp 0.6s ease-out;
+        }
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-gray-900">StyleHub</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-purple-600 transition">Início</a>
+                    <a href="#colecao" class="text-gray-700 hover:text-purple-600 transition">Coleção</a>
+                    <a href="#sobre" class="text-gray-700 hover:text-purple-600 transition">Sobre</a>
+                    <a href="#categorias" class="text-gray-700 hover:text-purple-600 transition">Categorias</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-700 hover:text-purple-600 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span class="pulse-dot absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                    <button class="md:hidden p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="bg-gradient-to-r from-slate-50 to-purple-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in">
+                    <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Estilo que <span class="gradient-text">Transforma</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">Descubra nossa coleção exclusiva de roupas e acessórios que combinam qualidade, conforto e elegância para expressar sua personalidade.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                            Explorar Agora
+                        </button>
+                        <button class="border-2 border-gray-800 text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            Saiba Mais
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1595777707802-21b287910991?w=600&q=80" alt="Modelo com estilo" class="rounded-2xl shadow-2xl w-full h-96 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias Destaque -->
+    <section id="categorias" class="bg-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nossas Categorias</h2>
+                <p class="text-lg text-gray-600">Encontre exatamente o que você procura</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Categoria 1 -->
+                <div class="group cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 p-8 hover-lift">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80" alt="Roupas Femininas" class="w-full h-64 object-cover rounded-lg mb-6 group-hover:scale-110 transition duration-300">
+                    <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Roupas Femininas</h3>
+                    <p class="text-gray-600 mb-4">Camisetas, vestidos, calças e muito mais</p>
+                    <span class="text-purple-600 font-semibold flex items-center gap-2">Explorar <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></span>
+                </div>
+                <!-- Categoria 2 -->
+                <div class="group cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-orange-50 to-red-50 p-8 hover-lift">
+                    <img src="https://images.unsplash.com/photo-1552374196-c4e7b4c3823a?w=500&q=80" alt="Roupas Masculinas" class="w-full h-64 object-cover rounded-lg mb-6 group-hover:scale-110 transition duration-300">
+                    <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Roupas Masculinas</h3>
+                    <p class="text-gray-600 mb-4">Camisas, bermudas, jaquetas e shorts</p>
+                    <span class="text-purple-600 font-semibold flex items-center gap-2">Explorar <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></span>
+                </div>
+                <!-- Categoria 3 -->
+                <div class="group cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-pink-50 to-purple-50 p-8 hover-lift">
+                    <img src="https://images.unsplash.com/photo-1460010546934-37fcf0f03da7?w=500&q=80" alt="Acessórios" class="w-full h-64 object-cover rounded-lg mb-6 group-hover:scale-110 transition duration-300">
+                    <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Acessórios</h3>
+                    <p class="text-gray-600 mb-4">Bolsas, cintos, colares e muito mais</p>
+                    <span class="text-purple-600 font-semibold flex items-center gap-2">Explorar <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coleção em Destaque -->
+    <section id="colecao" class="bg-gradient-to-b from-gray-50 to-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-8 items-center mb-16">
+                <div class="md:w-1/2">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Coleção Primavera</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">Conheça nossa coleção mais fresca e vibrante do ano. Cores alegres, tecidos leves e designs inovadores pensados especialmente para a estação.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <span class="inline-block bg-red-100 text-red-800 px-6 py-2 rounded-full font-semibold">Até 40% OFF</span>
+                        <span class="inline-block bg-blue-100 text-blue-800 px-6 py-2 rounded-full font-semibold">Frete Grátis</span>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1567777292407-e6b3bf0a6b4e?w=600&q=80" alt="Coleção Primavera" class="rounded-2xl shadow-2xl w-full h-80 object-cover">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Produto 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&q=80" alt="Camiseta Premium" class="w-full h-64 object-cover">
+                    <div class="p-5">
+                        <h4 class="font-semibold text-gray-900 mb-2">Camiseta Premium</h4>
+                        <p class="text-sm text-gray-600 mb-4">Algodão 100% orgânico</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-gray-900">R$ 89,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-lift">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542272604-787c62d465d1?w=400&q=80" alt="Calça Jeans" class="w-full h-64 object-cover">
+                        <span class="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-30%</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-semibold text-gray-900 mb-2">Calça Jeans Slim</h4>
+                        <p class="text-sm text-gray-600 mb-4">Denim premium comfort</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-2xl font-bold text-gray-900">R$ 119,90</span>
+                                <span class="text-sm text-gray-400 line-through ml-2">R$ 169,90</span>
+                            </div>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1539533057440-7814a3d1e6da?w=400&q=80" alt="Bolsa Elegante" class="w-full h-64 object-cover">
+                    <div class="p-5">
+                        <h4 class="font-semibold text-gray-900 mb-2">Bolsa Elegante</h4>
+                        <p class="text-sm text-gray-600 mb-4">Couro genuíno com alça</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-gray-900">R$ 259,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&q=80" alt="Jaqueta Casual" class="w-full h-64 object-cover">
+                    <div class="p-5">
+                        <h4 class="font-semibold text-gray-900 mb-2">Jaqueta Casual</h4>
+                        <p class="text-sm text-gray-600 mb-4">Tecido microfibra leve</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-gray-900">R$ 199,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="bg-white py-16 md:py-24 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80" alt="Sobre StyleHub" class="rounded-2xl shadow-xl w-full h-96 object-cover">
+                </div>
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Sobre a StyleHub</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        A StyleHub é uma marca de vestuário e acessórios que nasceu com a missão de democratizar o acesso a roupas de qualidade e estilo. Acreditamos que a moda é uma forma de expressão pessoal e deve ser acessível a todos.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Desde 2018, trabalhamos para trazer as últimas tendências mundiais com qualidade Premium e preços justos. Cada peça é selecionada com cuidado para garantir conforto, durabilidade e estilo.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg text-center">
+                            <p class="text-3xl font-bold text-purple-600 mb-2">5M+</p>
+                            <p class="text-sm text-gray-600">Clientes Satisfeitos</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg text-center">
+                            <p class="text-3xl font-bold text-blue-600 mb-2">50+</p>
+                            <p class="text-sm text-gray-600">Tipos de Produtos</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-lg text-center">
+                            <p class="text-3xl font-bold text-orange-600 mb-2">24h</p>
+                            <p class="text-sm text-gray-600">Entrega Rápida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="bg-gradient-to-r from-purple-600 to-pink-600 py-16 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Fique por Dentro das Novidades</h2>
+            <p class="text-lg text-purple-100 mb-8">Receba ofertas exclusivas e dicas de estilo direto no seu e-mail</p>
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Seu e-mail" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300">
+                <button class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                    Inscrever
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Coluna 1 -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <span class="font-display text-xl font-bold text-white">StyleHub</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Moda e estilo acessíveis para todos. Expressar sua personalidade nunca foi tão fácil.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-800 p-3 rounded-lg hover:bg-purple-600 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+                        </a>
+                        <a href="#" class="bg-gray-800 p-3 rounded-lg hover:bg-purple-600 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 002.856-3.915 10 10 0 01-2.856.974 4.98 4.98 0 00-8.86 4.05A14.12 14.12 0 011.671 3.149a4.93 4.93 0 001.523 6.573 4.902 4.902 0 01-2.25-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.935 4.935 0 01-2.224.084 4.928 4.928 0 004.6 3.42A9.9 9.9 0 010 19.54a13.94 13.94 0 007.548 2.212c9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#" class="bg-gray-800 p-3 rounded-lg hover:bg-purple-600 transition">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0m6.066 9.645c.183 3.999-.672 6.977-4.744 7.726-2.216.39-4.165-.885-5.322-2.58-.529.289-1.029.62-1.469 1.007 1.347 2.434 4.542 3.637 7.461 2.254 2.935-1.379 4.953-5.047 4.598-9.407-.19.784-.66 1.59-1.524 2zm-6.066 1.355c-.434 0-.843.156-1.15.438.528-.89 1.289-1.553 2.26-1.9-.41.253-.84.381-1.11.462zm8-5.69c.808-1.582.271-3.891-1.409-4.669-1.68-.778-3.844.146-4.652 1.728-.809 1.582-.27 3.891 1.41 4.669 1.68.778 3.843-.146 4.651-1.728z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna 2 -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-6">Links Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#colecao" class="hover:text-purple-400 transition">Coleção</a></li>
+                        <li><a href="#categorias" class="hover:text-purple-400 transition">Categorias</a></li>
+                        <li><a href="#sobre" class="hover:text-purple-400 transition">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">Ofertas Especiais</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3 -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-6">Suporte</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-purple-400 transition">Contato</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">Rastrear Pedido</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">Devoluções</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition">Guia de Tamanhos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4 - Informações Obrigatórias -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-6">Informações Legais</h3>
+                    <div class="bg-gray-800 p-4 rounded-lg space-y-3 text-sm">
+                        <div>
+                            <p class="text-gray-400 font-semibold">CNPJ:</p>
+                            <p class="text-gray-200">48.096.019/0001-00</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 font-semibold">Razão Social:</p>
+                            <p class="text-gray-200">JNJ PRESTADORA DE SERVICOS LTDA</p>
+                        </div>
+                        <div class="flex flex-col space-y-3 mt-4">
+                            <a href="terms" class="text-purple-400 hover:text-purple-300 transition text-xs font-semibold">TERMOS DE USO</a>
+                            <a href="privacy" class="text-purple-400 hover:text-purple-300 transition text-xs font-semibold">POLÍTICA DE PRIVACIDADE</a>
+                        </div>

@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="mb-6 flex items-center gap-3">
+  <a href="{{ url_for('admin.admin_users') }}"
+     class="text-sm text-zinc-400 hover:text-zinc-200">← Admin</a>
+  <span class="text-zinc-700">/</span>
+  <span class="text-sm font-semibold">Configurações</span>
+</div>
+
+<form method="POST" action="{{ url_for('admin.admin_settings_save') }}">
+  <div class="space-y-6">
+
+    {# ── SMS Provider selector ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-4">Provedor de SMS</h2>
+
+      <div class="flex gap-4 mb-6">
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="SMS_PROVIDER" value="sms24h" class="sr-only peer"
+                 {% if settings.SMS_PROVIDER != 'herosms' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">SMS24H</div>
+            <div class="text-xs text-zinc-400">api.sms24h.org</div>
+            <button type="button" onclick="testBalance('sms24h')"
+                    class="mt-3 text-xs px-2.5 py-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-zinc-200">
+              Checar saldo
+            </button>
+            <span id="balance-sms24h" class="ml-2 text-xs text-zinc-400"></span>
+          </div>
+        </label>
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="SMS_PROVIDER" value="herosms" class="sr-only peer"
+                 {% if settings.SMS_PROVIDER == 'herosms' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">HeroSMS</div>
+            <div class="text-xs text-zinc-400">hero-sms.com</div>
+            <button type="button" onclick="testBalance('herosms')"
+                    class="mt-3 text-xs px-2.5 py-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-zinc-200">
+              Checar saldo
+            </button>
+            <span id="balance-herosms" class="ml-2 text-xs text-zinc-400"></span>
+          </div>
+        </label>
+
+      </div>
+    </div>
+
+    {# ── SMS24H credentials ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-4">SMS24H — Credenciais</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">API Key</label>
+          <input type="text" name="SMS24H_API_KEY" value="{{ settings.SMS24H_API_KEY }}"
+                 placeholder="Chave da API SMS24H"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">País (code)</label>
+          <input type="text" name="SMS24H_COUNTRY" value="{{ settings.SMS24H_COUNTRY }}"
+                 placeholder="73 = Brasil"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">Serviço (code)</label>
+          <input type="text" name="SMS24H_SERVICE" value="{{ settings.SMS24H_SERVICE }}"
+                 placeholder="fb = Facebook"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+      </div>
+    </div>
+
+    {# ── HeroSMS credentials ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-4">HeroSMS — Credenciais</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">API Key</label>
+          <input type="text" name="HEROSMS_API_KEY" value="{{ settings.HEROSMS_API_KEY }}"
+                 placeholder="Chave da API HeroSMS"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">País (code)</label>
+          <input type="text" name="HEROSMS_COUNTRY" value="{{ settings.HEROSMS_COUNTRY }}"
+                 placeholder="73 = Brasil"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">Serviço (code)</label>
+          <input type="text" name="HEROSMS_SERVICE" value="{{ settings.HEROSMS_SERVICE }}"
+                 placeholder="fb = Facebook"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+      </div>
+    </div>
+
+    {# ── AI Provider selector ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-1">Provedor de IA — Gerador CNPJ</h2>
+      <p class="text-xs text-zinc-500 mb-4">Escolha qual API será usada para gerar o HTML da loja.</p>
+
+      <div class="flex gap-4 mb-6">
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="AI_PROVIDER" value="anthropic" class="sr-only peer"
+                 {% if settings.AI_PROVIDER != 'openai' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">Anthropic (Claude)</div>
+            <div class="text-xs text-zinc-400">api.anthropic.com</div>
+          </div>
+        </label>
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="AI_PROVIDER" value="openai" class="sr-only peer"
+                 {% if settings.AI_PROVIDER == 'openai' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">OpenAI (GPT)</div>
+            <div class="text-xs text-zinc-400">api.openai.com</div>
+          </div>
+        </label>
+
+      </div>
+
+      {# Anthropic credentials #}
+      <div class="mb-4">
+        <h3 class="text-sm font-medium text-zinc-300 mb-3">Anthropic — Credenciais</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">API Key</label>
+            <input type="text" name="ANTHROPIC_API_KEY_CNPJ" value="{{ settings.ANTHROPIC_API_KEY_CNPJ }}"
+                   placeholder="sk-ant-..."
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                          focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Modelo</label>
+            <input type="text" name="ANTHROPIC_MODEL_CNPJ" value="{{ settings.ANTHROPIC_MODEL_CNPJ }}"
+                   placeholder="claude-haiku-4-5-20251001"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                          focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+      </div>
+
+      {# OpenAI credentials #}
+      <div>
+        <h3 class="text-sm font-medium text-zinc-300 mb-3">OpenAI — Credenciais</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">API Key</label>
+            <input type="text" name="OPENAI_API_KEY_CNPJ" value="{{ settings.OPENAI_API_KEY_CNPJ }}"
+                   placeholder="sk-proj-..."
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                          focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs text-zinc-400 mb-1">Modelo</label>
+            <input type="text" name="OPENAI_MODEL_CNPJ" value="{{ settings.OPENAI_MODEL_CNPJ }}"
+                   placeholder="gpt-4.1-mini"
+                   class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                          focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit"
+              class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors">
+        Salvar configurações
+      </button>
+    </div>
+
+  </div>
+</form>
+
+<script>
+async function testBalance(provider) {
+  const el = document.getElementById(`balance-${provider}`);
+  el.textContent = "verificando…";
+  try {
+    const res = await fetch("{{ url_for('admin.admin_test_balance') }}", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ provider }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      el.textContent = `Saldo: R$ ${data.balance}`;
+      el.className = "ml-2 text-xs text-emerald-400";
+    } else {
+      el.textContent = data.error || "Erro";
+      el.className = "ml-2 text-xs text-red-400";
+    }
+  } catch(e) {
+    el.textContent = "Erro de rede";
+    el.className = "ml-2 text-xs text-red-400";
+  }
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="5qu6zha5k6y0vauneni6gabt8bmtoa" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>APWS Store - Moda & Acessórios</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+<style>
+  @keyframes floatUp {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-floatUp {
+    animation: floatUp 0.6s ease forwards;
+  }
+  .fade-in-delay-1 { animation-delay: 0.15s; }
+  .fade-in-delay-2 { animation-delay: 0.3s; }
+  .fade-in-delay-3 { animation-delay: 0.45s; }
+  .fade-in-delay-4 { animation-delay: 0.6s; }
+  .fade-in-delay-5 { animation-delay: 0.75s; }
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+</style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 selection:bg-rose-300 selection:text-white">
+
+<header class="sticky top-0 bg-white shadow-md z-50">
+  <nav class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
+    <a href="#" class="text-3xl font-extrabold tracking-tight text-rose-600 select-none animate-floatUp">APWS<span class="text-gray-900">Store</span></a>
+    <ul class="hidden md:flex gap-10 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-rose-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-rose-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-rose-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-rose-600 transition">Contato</a></li>
+      <li><a href="#footer" class="hover:text-rose-600 transition">Legal</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden text-rose-600 focus:outline-none">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="17" x2="21" y2="17"></line></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full top-16 left-0 z-40 animate-floatUp">
+    <ul class="flex flex-col gap-5 p-6 text-gray-700 font-semibold">
+      <li><a href="#colecao" class="block hover:text-rose-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-rose-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-rose-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-rose-600 transition">Contato</a></li>
+      <li><a href="#footer" class="block hover:text-rose-600 transition">Legal</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative min-h-[calc(100vh-64px)] flex flex-col justify-center items-center bg-gradient-to-br from-rose-50 via-rose-100 to-rose-50 px-6 text-center overflow-hidden">
+  <h1 class="text-5xl md:text-6xl font-extrabold max-w-4xl leading-tight text-rose-700 animate-floatUp">Vista seu Estilo, Inspire Confiança</h1>
+  <p class="mt-6 max-w-2xl text-lg md:text-xl text-rose-600 font-semibold animate-floatUp fade-in-delay-1">Moda e acessórios selecionados para você expressar sua personalidade com elegância e conforto.</p>
+  <a href="#colecao" class="mt-12 inline-block bg-rose-600 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-rose-700 transition animate-floatUp fade-in-delay-2">Explorar Coleção</a>
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1470&q=80" alt="Modelo de roupa feminina estilosa" class="pointer-events-none absolute bottom-0 right-0 max-w-[60vw] opacity-40 select-none hidden md:block" />
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+  <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transform transition">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Jaqueta estilosa masculina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Jaqueta Urban</h3>
+        <p class="text-gray-600 mb-4">Jaqueta leve, perfeita para o dia a dia na cidade.</p>
+        <span class="font-bold text-rose-600 text-lg">R$ 299,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transform transition">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Vestido floral feminino" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Vestido Floral</h3>
+        <p class="text-gray-600 mb-4">Vestido leve e fresco com estampa floral vibrante.</p>
+        <span class="font-bold text-rose-600 text-lg">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transform transition">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80" alt="Calça cargo masculina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Calça Cargo</h3>
+        <p class="text-gray-600 mb-4">Conforto e estilo com bolsos funcionais.</p>
+        <span class="font-bold text-rose-600 text-lg">R$ 249,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-rose-50 py-16 px-6 md:px-12">
+  <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center">Acessórios Exclusivos</h2>
+  <div class="flex flex-col md:flex-row max-w-7xl mx-auto gap-10 justify-center">
+    <div class="flex-1 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover-scale transition cursor-pointer">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno" class="w-48 h-48 object-cover rounded-full mb-6" />
+      <h3 class="text-2xl font-semibold text-rose-700 mb-2">Relógio Minimalista</h3>
+      <p class="text-gray-600 text-center mb-4 max-w-xs">Design clean e pulseira em couro legítimo para qualquer ocasião.</p>
+      <span class="font-bold text-rose-600 text-xl">R$ 399,90</span>
+    </div>
+    <div class="flex-1 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover-scale transition cursor-pointer">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro feminina" class="w-48 h-48 object-cover rounded-lg mb-6" />
+      <h3 class="text-2xl font-semibold text-rose-700 mb-2">Bolsa de Couro</h3>
+      <p class="text-gray-600 text-center mb-4 max-w-xs">Elegância e praticidade combinadas para o seu dia a dia.</p>
+      <span class="font-bold text-rose-600 text-xl">R$ 349,90</span>
+    </div>
+    <div class="flex-1 bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover-scale transition cursor-pointer">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="w-48 h-48 object-cover rounded-xl mb-6" />
+      <h3 class="text-2xl font-semibold text-rose-700 mb-2">Óculos de Sol</h3>
+      <p class="text-gray-600 text-center mb-4 max-w-xs">Armação estilosa com lentes de proteção UV.</p>
+      <span class="font-bold text-rose-600 text-xl">R$ 279,90</span>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="max-w-7xl mx-auto px-6 md:px-12 py-20 text-gray-700">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <div>
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-6">Quem Somos</h2>
+      <p class="mb-6 text-lg leading-relaxed">Na APWS Store, acreditamos que a moda é uma forma poderosa de expressão. Desde 2010, trabalhamos para oferecer roupas e acessórios que unem qualidade, conforto e estilo para pessoas que buscam autenticidade no seu dia a dia.</p>
+      <p class="mb-6 text-lg leading-relaxed">Nossa missão é proporcionar uma experiência de compra inspiradora e acessível, com peças cuidadosamente selecionadas e atendimento dedicado.</p>
+      <a href="#contato" class="inline-block mt-4 bg-rose-600 text-white font-semibold px-8 py-3 rounded-full shadow hover:bg-rose-700 transition">Fale Conosco</a>
+    </div>
+    <div class="rounded-xl overflow-hidden shadow-lg">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1520975919199-0c2d3e1c7c8b?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas sorrindo" class="w-full object-cover aspect-[4/3]" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-rose-100 py-20 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-10">
+    <h2 class="text-4xl font-extrabold text-rose-700 mb-10 text-center">Contato</h2>
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-8" action="#" method="POST" novalidate>
+      <label class="flex flex-col">
+        <span class="mb-1 font-semibold text-gray-700">Nome Completo</span>
+        <input type="text" name="nome" required placeholder="Seu nome" class="rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500" />
+      </label>
+      <label class="flex flex-col">
+        <span class="mb-1 font-semibold text-gray-700">E-mail</span>
+        <input type="email" name="email" required placeholder="seu@email.com" class="rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500" />
+      </label>
+      <label class="flex flex-col md:col-span-2">
+        <span class="mb-1 font-semibold text-gray-700">Mensagem</span>
+        <textarea name="mensagem" rows="5" required placeholder="Escreva sua mensagem..." class="rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500 resize-none"></textarea>
+      </label>
+      <button type="submit" class="md:col-span-2 bg-rose-600 text-white font-bold py-4 rounded-full shadow hover:bg-rose-700 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer id="footer" class="bg-gray-900 text-gray-300 py-14 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">CNPJ</h3>
+      <p class="font-mono text-lg select-text">65.151.134/0001-59</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Razão Social</h3>
+      <p class="font-mono text-lg select-text">APWS SOLUCOES LTDA</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">E-mail</h3>
+      <p class="font-mono text-lg select-text">NAOINFORMADO@GMAIL.COM</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Telefone</h3>
+      <p class="font-mono text-lg select-text"><span id="telefone-comercial">64-992354728</span></p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-4 gap-12 text-gray-400 text-sm">
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Logradouro</h3>
+      <p class="select-text">RUA JOSE CARDOZO DA SILVA, 1705</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Bairro</h3>
+      <p class="select-text">CENTRO</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Município</h3>
+      <p class="select-text">CATANDUVAS</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-rose-500 font-semibold uppercase tracking-wide mb-2">Estado</h3>
+      <p class="select-text">SC</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-14 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm font-medium select-none">
+    <p>© 2024 APWS SOLUCOES LTDA. Todos os direitos reservados.</p>
+    <nav class="flex gap-8 mt-4 md:mt-0">
+      <a href="#" class="hover:text-rose-500 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-rose-500 transition">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>

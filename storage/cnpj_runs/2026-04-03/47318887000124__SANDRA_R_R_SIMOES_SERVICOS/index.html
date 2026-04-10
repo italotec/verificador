@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleVibe - Loja de Moda e Acessórios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.7s ease-out;
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="smooth-scroll bg-gradient-to-b from-slate-50 to-gray-100">
+    <!-- HEADER/NAVBAR -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">S</span>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">StyleVibe</span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#novidades" class="text-gray-700 hover:text-purple-600 font-medium transition">Novidades</a>
+                    <a href="#colecoes" class="text-gray-700 hover:text-purple-600 font-medium transition">Coleções</a>
+                    <a href="#acessorios" class="text-gray-700 hover:text-purple-600 font-medium transition">Acessórios</a>
+                    <a href="#sobre" class="text-gray-700 hover:text-purple-600 font-medium transition">Sobre</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-700 hover:text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <button class="relative p-2 text-gray-700 hover:text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-purple-600 rounded-full">3</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left">
+                    <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                        Estilo que <span class="gradient-text">Expressa</span> Você
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Descubra nossa coleção exclusiva de roupas e acessórios que combinam conforto, qualidade e moda contemporânea.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold hover:shadow-2xl transform hover:scale-105 transition">
+                            Explorar Coleção
+                        </button>
+                        <button class="px-8 py-4 border-2 border-gray-800 text-gray-800 rounded-lg font-bold hover:bg-gray-50 transition">
+                            Saiba Mais
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Modelo" class="rounded-2xl shadow-2xl hover-lift">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVIDADES SECTION -->
+    <section id="novidades" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    O Que Tem de <span class="gradient-text">Novo</span>
+                </h2>
+                <p class="text-xl text-gray-600">Nossas peças mais recentes e tendências da moda</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50">
+                    <img src="https://images.unsplash.com/photo-1539533057-317f0b91fbd3?w=500&h=500&fit=crop" alt="Camiseta Premium" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-3">Novo</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Camiseta Premium Minimalista</h3>
+                        <p class="text-gray-600 mb-4">Algodão 100% orgânico com design elegante e sustentável</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold gradient-text">R$ 89,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-rose-50 to-red-50">
+                    <img src="https://images.unsplash.com/photo-1566564692259-1df83e3ae0c0?w=500&h=500&fit=crop" alt="Jaqueta Jeans" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-semibold mb-3">Destaque</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Jaqueta Jeans Vintage</h3>
+                        <p class="text-gray-600 mb-4">Corte clássico com detalhes modernos, perfeita para qualquer ocasião</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold gradient-text">R$ 249,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hover-lift rounded-xl overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c62d465d1?w=500&h=500&fit=crop" alt="Calça Social" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold mb-3">Promoção</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Calça Social Comfort</h3>
+                        <p class="text-gray-600 mb-4">Tecido respirável e flexível para total conforto o dia todo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold gradient-text">R$ 159,90</span>
+                            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700 transition">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLEÇÕES SECTION -->
+    <section id="colecoes" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Nossas <span class="gradient-text">Coleções</span>
+                </h2>
+                <p class="text-xl text-gray-600">Categorias cuidadosamente curadas para seu estilo</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer hover-lift">
+                    <img src="https://images.unsplash.com/photo-1595777707802-4b12f1af7a7f?w=400&h=500&fit=crop" alt="Coleção Feminina" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-end">
+                        <div class="p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Feminina</h3>
+                            <p class="text-sm opacity-90">Estilo, elegância e conforto</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer hover-lift">
+                    <img src="https://images.unsplash.com/photo-1516257309656-ef25e45a37e2?w=400&h=500&fit=crop" alt="Coleção Masculina" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-end">
+                        <div class="p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Masculina</h3>
+                            <p class="text-sm opacity-90">Sofisticação em cada peça</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer hover-lift">
+                    <img src="https://images.unsplash.com/photo-1519238263413-0671bfdd1e6e?w=400&h=500&fit=crop" alt="Coleção Esportiva" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-end">
+                        <div class="p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Esportiva</h3>
+                            <p class="text-sm opacity-90">Performance e estilo unido</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-2xl h-80 cursor-pointer hover-lift">
+                    <img src="https://images.unsplash.com/photo-1515562141207-6811bccd339a?w=400&h=500&fit=crop" alt="Coleção Premium" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300 flex items-end">
+                        <div class="p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                            <p class="text-sm opacity-90">Luxo e exclusividade</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACESSÓRIOS SECTION -->
+    <section id="acessorios" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span class="gradient-text">Acessórios</span> que Completam
+                </h2>
+                <p class="text-xl text-gray-600">O toque final para seu visual perfeito</p>
+            </div>
+            
+            <div class="grid md:grid-cols-5 gap-6 mb-12">
+                <div class="text-center hover-lift p-6 rounded-xl bg-gradient-to-b from-indigo-50 to-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Relógios</h3>
+                    <p class="text-gray-600 text-sm">Elegância no tempo</p>
+                </div>
+                
+                <div class="text-center hover-lift p-6 rounded-xl bg-gradient-to-b from-pink-50 to-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5s-5 2.24-5 5v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6-2c1.66 0 3 1.34 3 3v2H9V6c0-1.66 1.34-3 3-3zm6 16H6V10h12v12zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Bolsas</h3>
+                    <p class="text-gray-600 text-sm">Funcionalidade com estilo</p>
+                </div>
+                
+                <div class="text-center hover-lift p-6 rounded-xl bg-gradient-to-b from-emerald-50 to-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Óculos</h3>
+                    <p class="text-gray-600 text-sm">Proteção com personalidade</p>
+                </div>
+                
+                <div class="text-center hover-lift p-6 rounded-xl bg-gradient-to-b from-amber-50 to-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Cintos</h3>
+                    <p class="text-gray-600 text-sm">Acabamento perfeito</p>
+                </div>
+                
+                <div class="text-center hover-lift p-6 rounded-xl bg-gradient-to-b from-blue-50 to-white">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Joias</h3>
+                    <p class="text-gray-600 text-sm">Brilho e sofisticação</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="rounded-2xl overflow-hidden shadow-lg hover-lift">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=400&fit=crop" alt="Bolsa Premium" class="w-full h-64 object-cover">
+                    <div class="p-8 bg-white">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Bolsa Tote Premium</h3>
+                        <p class="text-gray-600 mb-4">Bolsa versátil em couro genuíno, perfeita para o dia a dia e ocasiões especiais</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-bold gradient-text">R$ 349,90</span>
+                            <button class="px-6 py-3 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rounded-2xl overflow-hidden shadow-lg hover-lift">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=400&fit=crop" alt="Óculos Vintage" class="w-full h-64 object-cover">
+                    <div class="p-8 bg-white">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Óculos de Sol Vintage</h3>
+                        <p class="text-gray-600 mb-4">Estilo retrô com proteção UV 100%, ideal para dias ensolarados com classe</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-bold gradient-text">R$ 199,90</span>
+                            <button class="px-6 py-3 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE SECTION -->
+    <section id="sobre" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-50 via-purple-50 to-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                        Quem Somos <span class="gradient-text">Nós</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Bem-vindo à StyleVibe, sua loja de moda e acessórios com mais de 10 anos de história. Somos apaixonados por moda sustentável, qualidade excepcional e atendimento personalizado.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Nossa missão é oferecer peças que não apenas refletem as tendências globais, mas também celebram a individualidade e personalidade única de cada cliente. Cada item em nossa loja é selecionado com cuidado.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text mb-2">10K+</div>
+                            <p class="text-gray-600">Clientes Felizes</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text mb-2">500+</div>
+                            <p class="text-gray-600">Produtos</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text mb-2">15</div>
+                            <p class="text-gray-600">Anos Atuando</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 animate-fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1441989960855-8c54e8f0

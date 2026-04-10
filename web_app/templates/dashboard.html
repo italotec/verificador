@@ -1,280 +1,289 @@
 {% extends "base.html" %}
 {% block content %}
 
-{# ── Macro: profile table — must be defined before use ── #}
-{% macro render_table(profiles, tab) %}
-<div class="overflow-x-auto">
-  <table class="min-w-full text-sm">
-    <thead class="text-zinc-400">
-      <tr class="border-b border-zinc-800">
-        <th class="text-left py-2 pr-4">Perfil</th>
-        <th class="text-left py-2">Status</th>
-        <th class="text-left py-2">Progresso</th>
-        <th class="text-left py-2">Última msg</th>
-        <th class="text-center py-2">Screenshot</th>
-        <th class="text-right py-2">Ações</th>
-      </tr>
-    </thead>
-    <tbody class="text-zinc-200">
-      {% for p in profiles %}
-      {% set job = p.job %}
-      <tr class="border-b border-zinc-900 group" id="row-{{ p.user_id }}">
-
-        {# Profile name / ID #}
-        <td class="py-3 pr-4">
-          <div class="font-semibold">{{ p.name or p.user_id }}</div>
-          <div class="text-xs text-zinc-500 font-mono">{{ p.user_id }}</div>
-        </td>
-
-        {# Status badge #}
-        <td class="py-3" id="status-{{ p.user_id }}">
-          {% if job.status == 'running' %}
-            <span class="px-2 py-0.5 rounded text-xs font-bold bg-yellow-900/60 text-yellow-300 animate-pulse">
-              Executando
-            </span>
-          {% elif job.status == 'queued' %}
-            <span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-900/60 text-blue-300 animate-pulse">
-              Na fila
-            </span>
-          {% elif job.status == 'success' %}
-            <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/60 text-emerald-300">
-              Verificado
-            </span>
-          {% elif job.status == 'error' %}
-            <span class="px-2 py-0.5 rounded text-xs font-bold bg-red-900/60 text-red-300">
-              Erro
-            </span>
-          {% else %}
-            <span class="px-2 py-0.5 rounded text-xs font-bold bg-zinc-700/60 text-zinc-400">
-              Aguardando
-            </span>
-          {% endif %}
-        </td>
-
-        {# Progress bars — 5 steps #}
-        <td class="py-3" id="steps-{{ p.user_id }}">
-          <div class="flex gap-0.5" title="BM | Info | Domínio | WABA | Verificação">
-            {% set s = p.steps|default({}) %}
-            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('bm_created') else 'bg-zinc-700' }}"></div>
-            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('business_info') else 'bg-zinc-700' }}"></div>
-            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('domain_verified') else 'bg-zinc-700' }}"></div>
-            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('waba_created') else 'bg-zinc-700' }}"></div>
-            <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if s.get('verification_done') else 'bg-zinc-700' }}"></div>
-          </div>
-        </td>
-
-        {# Last message #}
-        <td class="py-3 text-xs text-zinc-500 max-w-xs truncate" id="msg-{{ p.user_id }}">
-          {{ job.last_message or '—' }}
-        </td>
-
-        {# Screenshot button #}
-        <td class="py-3 text-center">
-          <button type="button"
-                  title="Ver screenshot"
-                  onclick="openScreenshot('{{ p.user_id }}', '{{ job.screenshot_path }}')"
-                  class="p-1.5 rounded-lg
-                    {% if job.screenshot_path %}text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700{% else %}text-zinc-600 cursor-default{% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-          </button>
-        </td>
-
-        {# Action buttons #}
-        <td class="py-3 text-right">
-          <div class="flex items-center justify-end gap-1.5">
-            {# Open profile #}
-            <button type="button"
-                    title="Abrir perfil no AdsPower"
-                    onclick="openProfile('{{ p.user_id }}')"
-                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </button>
-
-            {% if tab == 'verificar' %}
-            {# Run with Business ID #}
-            <button type="button"
-                    title="Executar com Business ID existente"
-                    onclick="openBmModal('{{ p.user_id }}', '{{ p.name | e }}')"
-                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-violet-900/60 text-zinc-300 hover:text-violet-300 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2"/>
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
-              </svg>
-            </button>
-
-            {# Run verification #}
-            <button type="button"
-                    title="Executar verificação"
-                    onclick="runProfile('{{ p.user_id }}')"
-                    class="p-1.5 rounded-lg bg-zinc-800 hover:bg-emerald-900/60 text-zinc-300 hover:text-emerald-300 transition-colors
-                      {% if job.status == 'running' %}opacity-50 cursor-not-allowed{% endif %}"
-                    {% if job.status == 'running' %}disabled{% endif %}>
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-              </svg>
-            </button>
-            {% endif %}
-          </div>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{# ── Count Cards ── #}
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 mb-6" id="stats-cards">
+  {% set cards = [
+    ("total",        "Total WABAs",        stats.total,        "bg-zinc-700",    "todos"),
+    ("aguardando",   "Na Fila",            stats.aguardando,   "bg-blue-600",    "aguardando"),
+    ("executando",   "Executando",         stats.executando,   "bg-yellow-500",  "executando"),
+    ("em_revisao",   "Em Revisão",         stats.em_revisao,   "bg-orange-500",  "em_revisao"),
+    ("verificadas",  "Verificadas",        stats.verificadas,  "bg-emerald-500", "verificadas"),
+    ("monitorando",  "Monitorando",        stats.monitorando,  "bg-indigo-500",  "monitorando_limite"),
+    ("250",          "BMs 250",            stats['250'],       "bg-amber-500",   "250"),
+    ("2k",           "BMs 2K",             stats['2k'],        "bg-green-500",   "2k"),
+    ("restrita",     "Restritas",          stats.restrita,     "bg-red-600",     "restrita"),
+    ("desativada",   "Desativadas",        stats.desativada,   "bg-zinc-500",    "desativada"),
+  ] %}
+  {% for key, label, count, color, filter_val in cards %}
+  <a href="{{ url_for('dashboard.dashboard', status=filter_val) }}"
+     class="rounded-xl border border-zinc-800 bg-zinc-900/50 p-3 hover:bg-zinc-800/60 transition-colors cursor-pointer
+            {% if active_filter == filter_val %}ring-2 ring-indigo-500{% endif %}">
+    <div class="flex items-center gap-2 mb-1">
+      <div class="w-2.5 h-2.5 rounded-full {{ color }}"></div>
+      <div class="text-[10px] text-zinc-400 uppercase tracking-wider leading-tight">{{ label }}</div>
+    </div>
+    <div class="text-2xl font-bold text-zinc-100" id="stat-{{ key }}">{{ count }}</div>
+  </a>
+  {% endfor %}
 </div>
-{% endmacro %}
 
-{% if error_msg %}
-<div class="rounded-xl border border-red-700 bg-red-950/40 px-4 py-3 mb-4">
-  <div class="text-sm text-red-300">{{ error_msg }}</div>
+{# ── Filter bar ── #}
+<div class="flex items-center gap-2 mb-4 flex-wrap">
+  {% set filters = [
+    ("todos",              "Todos"),
+    ("aguardando",         "Na Fila"),
+    ("executando",         "Executando"),
+    ("em_revisao",         "Em Revisão"),
+    ("nao_verificou",      "Não Verificou"),
+    ("monitorando_limite", "Monitorando Limite"),
+    ("2k",                 "2K"),
+    ("250",                "250"),
+    ("restrita",           "Restrita"),
+    ("desativada",         "Desativada"),
+    ("erro",               "Erro"),
+  ] %}
+  {% for filter_val, filter_label in filters %}
+  <a href="{{ url_for('dashboard.dashboard', status=filter_val) }}"
+     class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors
+       {% if active_filter == filter_val %}bg-indigo-700 text-white{% else %}bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200{% endif %}">
+    {{ filter_label }}
+  </a>
+  {% endfor %}
+
+  {# Bulk action buttons #}
+  <div class="ml-auto flex items-center gap-2">
+    <button onclick="bulkRun()" id="btn-bulk-run"
+            class="hidden px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white">
+      Executar Selecionados
+    </button>
+    <button onclick="bulkCheck()" id="btn-bulk-check"
+            class="hidden px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-700 hover:bg-indigo-600 text-white">
+      Checar Selecionados
+    </button>
+    <button onclick="location.reload()"
+            title="Recarregar"
+            class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+{# ── WABA Table ── #}
+<div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4">
+  {% if wabas %}
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead class="text-zinc-400">
+        <tr class="border-b border-zinc-800">
+          <th class="text-left py-2 pr-2 w-8">
+            <input type="checkbox" id="select-all" onchange="toggleSelectAll(this)"
+                   class="rounded bg-zinc-800 border-zinc-700">
+          </th>
+          <th class="text-left py-2 pr-4">Profile ID</th>
+          <th class="text-left py-2">Nome WABA</th>
+          <th class="text-left py-2">Status</th>
+          <th class="text-left py-2">Progresso</th>
+          <th class="text-left py-2">Limite</th>
+          <th class="text-left py-2">Última Verificação</th>
+          <th class="text-left py-2">Erro</th>
+          <th class="text-right py-2">Ações</th>
+        </tr>
+      </thead>
+      <tbody class="text-zinc-200">
+        {% for w in wabas %}
+        <tr class="border-b border-zinc-900 group hover:bg-zinc-800/30" id="row-{{ w.id }}">
+          {# Checkbox #}
+          <td class="py-3 pr-2">
+            <input type="checkbox" class="waba-checkbox rounded bg-zinc-800 border-zinc-700"
+                   value="{{ w.id }}" onchange="updateBulkButtons()">
+          </td>
+
+          {# Profile ID #}
+          <td class="py-3 pr-4">
+            <div class="text-xs text-zinc-400 font-mono">{{ w.profile_id or '—' }}</div>
+          </td>
+
+          {# WABA Name #}
+          <td class="py-3">
+            <div class="font-semibold text-sm">{{ w.waba_name or '—' }}</div>
+            {% if w.business_id %}
+            <div class="text-[10px] text-zinc-500 font-mono">BM: {{ w.business_id }}</div>
+            {% endif %}
+          </td>
+
+          {# Status badge #}
+          <td class="py-3" id="status-{{ w.id }}">
+            <span class="px-2 py-0.5 rounded text-xs font-bold text-white
+              {{ status_colors.get(w.status, 'bg-zinc-700') }}">
+              {{ status_labels.get(w.status, w.status) }}
+            </span>
+          </td>
+
+          {# Progress bars — 5 steps #}
+          <td class="py-3">
+            <div class="flex gap-0.5" title="BM | Info | Domínio | WABA | Verificação">
+              <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if w.bm_created else 'bg-zinc-700' }}"></div>
+              <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if w.business_info_done else 'bg-zinc-700' }}"></div>
+              <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if w.domain_done else 'bg-zinc-700' }}"></div>
+              <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if w.waba_created else 'bg-zinc-700' }}"></div>
+              <div class="w-4 h-1.5 rounded-full {{ 'bg-emerald-500' if w.verification_sent else 'bg-zinc-700' }}"></div>
+            </div>
+          </td>
+
+          {# Messaging Limit #}
+          <td class="py-3 text-xs text-zinc-400">
+            {% if w.messaging_limit %}
+              <span class="px-1.5 py-0.5 rounded bg-zinc-800 font-mono">{{ w.messaging_limit }}</span>
+            {% else %}
+              —
+            {% endif %}
+          </td>
+
+          {# Last check #}
+          <td class="py-3 text-xs text-zinc-500">
+            {% if w.last_limit_check %}
+              {{ w.last_limit_check.strftime('%d/%m %H:%M') }}
+            {% else %}
+              —
+            {% endif %}
+          </td>
+
+          {# Error #}
+          <td class="py-3 text-xs text-red-400 max-w-[200px] truncate" title="{{ w.last_error or '' }}">
+            {{ w.last_error[:80] if w.last_error else '—' }}
+          </td>
+
+          {# Action buttons #}
+          <td class="py-3 text-right">
+            <div class="flex items-center justify-end gap-1.5">
+              {# Open profile #}
+              {% if w.profile_id %}
+              <button type="button" title="Abrir perfil no AdsPower"
+                      onclick="openProfile('{{ w.profile_id }}')"
+                      class="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </button>
+              {% endif %}
+
+              {# Run verification #}
+              {% if w.status in ('aguardando', 'erro') %}
+              <button type="button" title="Executar verificação"
+                      onclick="runWaba({{ w.id }})"
+                      class="p-1.5 rounded-lg bg-zinc-800 hover:bg-emerald-900/60 text-zinc-300 hover:text-emerald-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              {% endif %}
+
+              {# Check status #}
+              {% if w.status in ('em_revisao', 'monitorando_limite', 'nao_verificou') %}
+              <button type="button" title="Checar agora"
+                      onclick="checkWaba({{ w.id }})"
+                      class="p-1.5 rounded-lg bg-zinc-800 hover:bg-indigo-900/60 text-zinc-300 hover:text-indigo-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>
+                </svg>
+              </button>
+              {% endif %}
+
+              {# Re-run (for error status) #}
+              {% if w.status == 'erro' %}
+              <button type="button" title="Re-executar"
+                      onclick="runWaba({{ w.id }})"
+                      class="p-1.5 rounded-lg bg-zinc-800 hover:bg-yellow-900/60 text-zinc-300 hover:text-yellow-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>
+                </svg>
+              </button>
+              {% endif %}
+
+              {# Stop (for executando status) #}
+              {% if w.status == 'executando' %}
+              <button type="button" title="Parar execução"
+                      onclick="cancelWaba({{ w.id }})"
+                      class="p-1.5 rounded-lg bg-zinc-800 hover:bg-red-900/60 text-zinc-300 hover:text-red-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                </svg>
+              </button>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# Pagination #}
+  {% if pagination.pages > 1 %}
+  <div class="flex items-center justify-center gap-2 mt-4">
+    {% if pagination.has_prev %}
+    <a href="{{ url_for('dashboard.dashboard', status=active_filter, page=pagination.prev_num) }}"
+       class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs">Anterior</a>
+    {% endif %}
+    <span class="text-xs text-zinc-500">
+      Página {{ pagination.page }} de {{ pagination.pages }} ({{ pagination.total }} WABAs)
+    </span>
+    {% if pagination.has_next %}
+    <a href="{{ url_for('dashboard.dashboard', status=active_filter, page=pagination.next_num) }}"
+       class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs">Próxima</a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="py-12 text-center text-zinc-500">
+    {% if active_filter != 'todos' %}
+      Nenhuma WABA com status <b>{{ status_labels.get(active_filter, active_filter) }}</b>.
+      <a href="{{ url_for('dashboard.dashboard') }}" class="text-indigo-400 hover:underline ml-2">Ver todas</a>
+    {% else %}
+      Nenhuma WABA cadastrada ainda.
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+{# ── Additional stat cards row (Não Verificou + Erro) ── #}
+{% if stats.nao_verificou > 0 or stats.erro > 0 %}
+<div class="grid grid-cols-2 gap-3 mt-4">
+  {% if stats.nao_verificou > 0 %}
+  <a href="{{ url_for('dashboard.dashboard', status='nao_verificou') }}"
+     class="rounded-xl border border-rose-800/40 bg-rose-950/20 p-3 hover:bg-rose-950/40 transition-colors">
+    <div class="flex items-center gap-2 mb-1">
+      <div class="w-2.5 h-2.5 rounded-full bg-rose-400"></div>
+      <div class="text-[10px] text-zinc-400 uppercase tracking-wider">Não Verificou</div>
+    </div>
+    <div class="text-2xl font-bold text-rose-300">{{ stats.nao_verificou }}</div>
+  </a>
+  {% endif %}
+  {% if stats.erro > 0 %}
+  <a href="{{ url_for('dashboard.dashboard', status='erro') }}"
+     class="rounded-xl border border-red-800/40 bg-red-950/20 p-3 hover:bg-red-950/40 transition-colors">
+    <div class="flex items-center gap-2 mb-1">
+      <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+      <div class="text-[10px] text-zinc-400 uppercase tracking-wider">Erros</div>
+    </div>
+    <div class="text-2xl font-bold text-red-300">{{ stats.erro }}</div>
+  </a>
+  {% endif %}
 </div>
 {% endif %}
 
-{# ── Tab bar ── #}
-<div class="flex items-center gap-2 mb-4">
-  <a href="{{ url_for('dashboard.dashboard', tab='verificar') }}"
-     class="px-5 py-2 rounded-xl font-semibold text-sm transition-colors
-       {% if active_tab == 'verificar' %}bg-indigo-700 text-white{% else %}bg-zinc-800 text-zinc-400 hover:bg-zinc-700{% endif %}">
-    Verificar
-    <span class="ml-1.5 text-xs px-1.5 py-0.5 rounded-lg
-      {% if active_tab == 'verificar' %}bg-indigo-600{% else %}bg-zinc-700{% endif %}">
-      {{ verificar_profiles|length }}
-    </span>
-  </a>
-  <a href="{{ url_for('dashboard.dashboard', tab='verificadas') }}"
-     class="px-5 py-2 rounded-xl font-semibold text-sm transition-colors
-       {% if active_tab == 'verificadas' %}bg-emerald-700 text-white{% else %}bg-zinc-800 text-zinc-400 hover:bg-zinc-700{% endif %}">
-    Verificadas
-    <span class="ml-1.5 text-xs px-1.5 py-0.5 rounded-lg
-      {% if active_tab == 'verificadas' %}bg-emerald-600{% else %}bg-zinc-700{% endif %}">
-      {{ verificadas_profiles|length }}
-    </span>
-  </a>
-
-  {# Refresh button #}
-  <a href="{{ url_for('dashboard.dashboard', tab=active_tab) }}"
-     title="Recarregar perfis do AdsPower"
-     class="ml-auto px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12a9 9 0 1 1-3-6.7"/>
-      <path d="M21 3v6h-6"/>
-    </svg>
-  </a>
-</div>
-
-{# ── Verificar tab ── #}
-<div id="tab-verificar" {% if active_tab != 'verificar' %}class="hidden"{% endif %}>
-  <div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4">
-    {% if verificar_profiles %}
-      {{ render_table(verificar_profiles, tab='verificar') }}
-    {% else %}
-      <div class="py-12 text-center text-zinc-500">
-        Nenhum perfil no grupo <b>Verificar</b>.
-      </div>
-    {% endif %}
-  </div>
-</div>
-
-{# ── Verificadas tab ── #}
-<div id="tab-verificadas" {% if active_tab != 'verificadas' %}class="hidden"{% endif %}>
-  <div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4">
-    {% if verificadas_profiles %}
-      {{ render_table(verificadas_profiles, tab='verificadas') }}
-    {% else %}
-      <div class="py-12 text-center text-zinc-500">
-        Nenhum perfil no grupo <b>Verificadas</b>.
-      </div>
-    {% endif %}
-  </div>
-</div>
-
-{# ── Business ID modal ── #}
-<div id="bmModalBg" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
-  <div class="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-950 p-5">
-    <div class="flex items-center justify-between mb-4">
-      <div>
-        <div class="text-lg font-semibold flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-violet-400" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2"/>
-            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-          </svg>
-          Business ID Existente
-        </div>
-        <div class="text-xs text-zinc-500 mt-0.5">
-          Informe o ID para pular a criação do Business Manager.
-        </div>
-      </div>
-      <button onclick="closeBmModal()" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
-        Fechar
-      </button>
-    </div>
-
-    <div class="mb-4">
-      <div class="text-xs text-zinc-500 mb-2">Perfil</div>
-      <div id="bmModalProfileName" class="text-sm font-semibold text-zinc-200"></div>
-    </div>
-
-    <div class="mb-4">
-      <label class="text-xs text-zinc-400">Business Manager ID</label>
-      <input id="bmIdInput" type="text" placeholder="Ex: 123456789012345"
-             class="w-full mt-1 px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 outline-none focus:border-zinc-600 text-sm font-mono"
-             oninput="bmIdChanged()">
-      <p class="text-xs text-zinc-600 mt-1">
-        O BM já deve existir. A criação de um novo BM será ignorada.
-      </p>
-    </div>
-
-    <div id="bmResult" class="hidden mb-4 px-4 py-3 rounded-xl border text-sm"></div>
-
-    <div class="flex items-center justify-end gap-3">
-      <button onclick="closeBmModal()"
-              class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
-        Cancelar
-      </button>
-      <button id="bmSubmitBtn" onclick="submitBmRun()"
-              class="px-5 py-2 rounded-xl bg-violet-700 hover:bg-violet-600 text-sm font-semibold">
-        Executar
-      </button>
-    </div>
-  </div>
-</div>
-
-{# ── Screenshot modal ── #}
-<div id="screenshotModalBg" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
-  <div class="w-full max-w-4xl rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
-    <div class="flex items-center justify-between mb-3">
-      <div class="text-base font-semibold" id="screenshotModalTitle">Screenshot</div>
-      <button onclick="closeScreenshotModal()"
-              class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm">
-        Fechar
-      </button>
-    </div>
-    <div id="screenshotContent" class="flex items-center justify-center min-h-48">
-      <span class="text-zinc-500 text-sm">Carregando…</span>
-    </div>
-  </div>
-</div>
-
 <script>
-// ── util ──────────────────────────────────────────────────────────────────────
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-
 // ── Open profile ──────────────────────────────────────────────────────────────
 async function openProfile(profileId) {
   try {
@@ -286,190 +295,129 @@ async function openProfile(profileId) {
   }
 }
 
-// ── Run verification ──────────────────────────────────────────────────────────
-async function runProfile(profileId, businessId) {
-  const body = businessId ? { business_id: businessId } : {};
+// ── Run WABA verification ────────────────────────────────────────────────────
+const _runningWabaIds = new Set();
+async function runWaba(wabaId) {
+  if (_runningWabaIds.has(wabaId)) return;
+  _runningWabaIds.add(wabaId);
   try {
-    const res = await fetch(`/api/profile/${profileId}/run`, {
+    const res = await fetch(`/api/wabas/${wabaId}/run`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
     });
     const data = await res.json();
     if (!data.ok) {
-      alert("Erro ao iniciar: " + (data.error || "?"));
-      return null;
+      alert("Erro: " + (data.error || "?"));
+      return;
     }
-    // Start polling this profile's status
-    startPolling(profileId, data.job_id);
-    return data.job_id;
+    location.reload();
   } catch(e) {
     alert("Erro de rede: " + e);
-    return null;
+  } finally {
+    _runningWabaIds.delete(wabaId);
   }
 }
 
-// ── Status polling ────────────────────────────────────────────────────────────
-const _pollers = {};
-
-function startPolling(profileId, jobId) {
-  if (_pollers[profileId]) clearInterval(_pollers[profileId]);
-
-  // Immediately show "queued" while waiting for the agent to pick it up
-  setStatus(profileId, "queued", "Aguardando agent…", "", null);
-
-  _pollers[profileId] = setInterval(async () => {
-    try {
-      const r = await fetch(`/api/profile/${profileId}/status`);
-      const d = await r.json();
-      setStatus(profileId, d.status, d.last_message, d.screenshot_path, d.steps);
-
-      // Stop polling only when the job reaches a terminal state
-      if (d.status === "success" || d.status === "error") {
-        clearInterval(_pollers[profileId]);
-        delete _pollers[profileId];
-      }
-    } catch {}
-  }, 2000);
-}
-
-function setStatus(profileId, status, message, screenshotPath, steps) {
-  const statusEl = document.getElementById(`status-${profileId}`);
-  const msgEl    = document.getElementById(`msg-${profileId}`);
-
-  if (statusEl) {
-    const badges = {
-      queued:  `<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-900/60 text-blue-300 animate-pulse">Na fila</span>`,
-      running: `<span class="px-2 py-0.5 rounded text-xs font-bold bg-yellow-900/60 text-yellow-300 animate-pulse">Executando</span>`,
-      success: `<span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/60 text-emerald-300">Verificado</span>`,
-      error:   `<span class="px-2 py-0.5 rounded text-xs font-bold bg-red-900/60 text-red-300">Erro</span>`,
-    };
-    statusEl.innerHTML = badges[status] ||
-      `<span class="px-2 py-0.5 rounded text-xs font-bold bg-zinc-700/60 text-zinc-400">Aguardando</span>`;
-  }
-  if (msgEl) msgEl.textContent = message || "—";
-
-  // Update screenshot button if we got a path
-  if (screenshotPath) {
-    const screenshotBtn = document.querySelector(`button[onclick^="openScreenshot('${profileId}'"]`);
-    if (screenshotBtn) {
-      screenshotBtn.className = screenshotBtn.className.replace("text-zinc-600 cursor-default", "text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700");
-      screenshotBtn.setAttribute("onclick", `openScreenshot('${profileId}', '${screenshotPath}')`);
+// ── Cancel running job ───────────────────────────────────────────────────────
+async function cancelWaba(wabaId) {
+  if (!confirm("Parar a execução deste perfil? O status voltará para Na Fila.")) return;
+  try {
+    const res = await fetch(`/api/wabas/${wabaId}/cancel`, { method: "POST" });
+    const data = await res.json();
+    if (!data.ok) {
+      alert("Erro ao cancelar: " + (data.error || "?"));
+      return;
     }
-  }
-
-  // Update progress bars
-  if (steps) {
-    const stepsEl = document.getElementById(`steps-${profileId}`);
-    if (stepsEl) {
-      const flags = [steps.bm_created, steps.business_info,
-                     steps.domain_verified, steps.waba_created,
-                     steps.verification_done];
-      const bars = stepsEl.querySelectorAll("div > div");
-      flags.forEach((done, i) => {
-        if (bars[i]) bars[i].className = `w-4 h-1.5 rounded-full ${done ? "bg-emerald-500" : "bg-zinc-700"}`;
-      });
-    }
+    location.reload();
+  } catch(e) {
+    alert("Erro de rede: " + e);
   }
 }
 
-// Poll any already-running profiles on page load
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[id^='status-']").forEach(el => {
-    if (el.querySelector(".animate-pulse")) {
-      const profileId = el.id.replace("status-", "");
-      startPolling(profileId, null);
+// ── Check WABA status ────────────────────────────────────────────────────────
+async function checkWaba(wabaId) {
+  try {
+    const res = await fetch(`/api/wabas/${wabaId}/check`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      alert("Erro: " + (data.error || "?"));
+      return;
     }
+    alert(data.message || "Verificação enfileirada!");
+  } catch(e) {
+    alert("Erro de rede: " + e);
+  }
+}
+
+// ── Bulk select ──────────────────────────────────────────────────────────────
+function toggleSelectAll(el) {
+  document.querySelectorAll(".waba-checkbox").forEach(cb => {
+    cb.checked = el.checked;
   });
-});
-
-// ── Business ID modal ─────────────────────────────────────────────────────────
-let _bmProfileId = null;
-
-function openBmModal(profileId, profileName) {
-  _bmProfileId = profileId;
-  document.getElementById("bmModalProfileName").textContent = profileName || profileId;
-  document.getElementById("bmIdInput").value = "";
-  document.getElementById("bmResult").classList.add("hidden");
-  const bg = document.getElementById("bmModalBg");
-  bg.classList.remove("hidden");
-  bg.classList.add("flex");
-  setTimeout(() => document.getElementById("bmIdInput").focus(), 50);
+  updateBulkButtons();
 }
 
-function closeBmModal() {
-  document.getElementById("bmModalBg").classList.add("hidden");
-  document.getElementById("bmModalBg").classList.remove("flex");
-  _bmProfileId = null;
+function updateBulkButtons() {
+  const selected = document.querySelectorAll(".waba-checkbox:checked").length;
+  document.getElementById("btn-bulk-run").classList.toggle("hidden", selected === 0);
+  document.getElementById("btn-bulk-check").classList.toggle("hidden", selected === 0);
 }
 
-document.getElementById("bmModalBg").addEventListener("click", (e) => {
-  if (e.target.id === "bmModalBg") closeBmModal();
-});
-
-function bmIdChanged() {
-  document.getElementById("bmResult").classList.add("hidden");
+function getSelectedIds() {
+  return Array.from(document.querySelectorAll(".waba-checkbox:checked")).map(cb => parseInt(cb.value));
 }
 
-async function submitBmRun() {
-  const bmId = document.getElementById("bmIdInput").value.trim();
-  if (!bmId) {
-    alert("Informe o Business Manager ID.");
+async function bulkRun() {
+  const ids = getSelectedIds();
+  if (!ids.length) return;
+  if (!confirm(`Executar verificação para ${ids.length} WABAs?`)) return;
+
+  const res = await fetch("/api/wabas/bulk/run", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ waba_ids: ids }),
+  });
+  const data = await res.json();
+  alert(`${data.enqueued || 0} verificações enfileiradas!`);
+  location.reload();
+}
+
+async function bulkCheck() {
+  const ids = getSelectedIds();
+  if (!ids.length) return;
+
+  const res = await fetch("/api/wabas/bulk/check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ waba_ids: ids }),
+  });
+  const data = await res.json();
+  if (!data.ok) {
+    alert("Erro: " + (data.error || "?"));
     return;
   }
+  alert(`${data.enqueued || 0} verificações enfileiradas!`);
+}
 
-  const btn = document.getElementById("bmSubmitBtn");
-  btn.disabled = true;
-  btn.textContent = "Iniciando…";
-
-  const resultBox = document.getElementById("bmResult");
-  resultBox.classList.add("hidden");
-
+// ── Auto-refresh stats every 10s ─────────────────────────────────────────────
+setInterval(async () => {
   try {
-    const jobId = await runProfile(_bmProfileId, bmId);
-    if (jobId) {
-      resultBox.className = "mb-4 px-4 py-3 rounded-xl border text-sm bg-emerald-950/30 border-emerald-800/50 text-emerald-300";
-      resultBox.textContent = "Verificação iniciada! Feche este modal para acompanhar o progresso.";
-      resultBox.classList.remove("hidden");
+    const r = await fetch("/api/dashboard/stats");
+    const s = await r.json();
+    const map = {
+      "total": s.total, "aguardando": s.aguardando, "executando": s.executando,
+      "em_revisao": s.em_revisao, "verificadas": s.verificadas, "monitorando": s.monitorando,
+      "250": s["250"], "2k": s["2k"], "restrita": s.restrita, "desativada": s.desativada,
+    };
+    for (const [key, val] of Object.entries(map)) {
+      const el = document.getElementById(`stat-${key}`);
+      if (el) el.textContent = val;
     }
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Executar";
-  }
-}
-
-// ── Screenshot modal ──────────────────────────────────────────────────────────
-function openScreenshot(profileId, screenshotPath) {
-  if (!screenshotPath) return;
-
-  const bg = document.getElementById("screenshotModalBg");
-  const title = document.getElementById("screenshotModalTitle");
-  const content = document.getElementById("screenshotContent");
-
-  title.textContent = `Screenshot — ${profileId}`;
-  content.innerHTML = `<span class="text-zinc-500 text-sm">Carregando…</span>`;
-
-  bg.classList.remove("hidden");
-  bg.classList.add("flex");
-
-  const img = new Image();
-  img.className = "max-w-full max-h-[75vh] rounded-xl object-contain";
-  img.onload = () => { content.innerHTML = ""; content.appendChild(img); };
-  img.onerror = () => {
-    content.innerHTML = `<span class="text-zinc-500 text-sm">Screenshot não disponível.</span>`;
-  };
-  img.src = `/screenshots/${screenshotPath}`;
-}
-
-function closeScreenshotModal() {
-  const bg = document.getElementById("screenshotModalBg");
-  bg.classList.add("hidden");
-  bg.classList.remove("flex");
-}
-
-document.getElementById("screenshotModalBg").addEventListener("click", (e) => {
-  if (e.target.id === "screenshotModalBg") closeScreenshotModal();
-});
+  } catch {}
+}, 10000);
 </script>
 
 {% endblock %}

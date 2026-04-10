@@ -23,11 +23,24 @@ import traceback
 import pyotp
 import requests
 from datetime import datetime
+
+# Claude client — lazily initialised on first LLM call
+_claude_client = None
+
+def _get_claude_client():
+    global _claude_client
+    if _claude_client is None:
+        import anthropic
+        import config as _cfg
+        api_key = _cfg.ANTHROPIC_API_KEY or os.getenv("ANTHROPIC_API_KEY", "")
+        if api_key:
+            _claude_client = anthropic.Anthropic(api_key=api_key)
+    return _claude_client
 from pathlib import Path
 from playwright.sync_api import sync_playwright, Page, BrowserContext
 
 import config
-from services.gerador_client import GeradorClient
+from services.gerador_facade import GeradorService as GeradorClient
 from services.sms24h import SMS24HService
 
 
@@ -35,6 +48,15 @@ from services.sms24h import SMS24HService
 
 def _wait(seconds: float = 1.0):
     time.sleep(seconds)
+
+
+def _log_phone_match(pdf_path: str, phone_fb: str, tel_fmt: str):
+    """Append a line to phone_log.txt next to the PDF for post-run verification."""
+    from pathlib import Path
+    log_file = Path(pdf_path).parent / "phone_log.txt"
+    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with log_file.open("a", encoding="utf-8") as f:
+        f.write(f"[{ts}] wizard={phone_fb} | documento={tel_fmt}\n")
 
 
 def _clear_fill(locator, value: str):
@@ -115,6 +137,85 @@ def _click_with_retry(page: Page, locator_fn, timeout: int = 5000, retries: int 
                 _wait(0.5)
             else:
                 raise
+
+
+# Ordered mapping: (title_contains, subtitle_contains_or_None, step_name)
+# More specific entries (with subtitle) come before general ones (subtitle=None).
+# Matching is case-insensitive substring check on the extracted wizard title/subtitle.
+_WIZARD_TITLE_MAP: list[tuple[str, "str | None", str]] = [
+    # Screen 9 — unique title
+    ("escolha como gostaria de confirmar", None, "method_selection"),
+    # Screen 8 — unique title
+    ("carregar documentos",               None, "document_upload"),
+    # Screen 2 — unique title
+    ("selecionar um país",                None, "country_selection"),
+    # Screens 3 & 4 — same title, disambiguate by subtitle
+    ("selecione o tipo da sua empresa",   "registro",  "registration"),
+    ("selecione o tipo da sua empresa",   None,        "entity_type"),
+    # Screens 5, 6, 7 — all map to add_company_data; handler differentiates internally
+    ("adicionar dados da empresa",        None,        "add_company_data"),
+    # Screen 1 — "Verificar [BUSINESS_NAME]" (prefix match)
+    ("verificar ",                        None,        "start"),
+]
+
+
+def _click_comecar(page: Page) -> bool:
+    """
+    Find and click the 'Começar' intro modal button.
+
+    Facebook renders it as <div role="button" aria-label="Começar"> — not a
+    native <button> — so we skip the is_visible() check (which can give false
+    negatives during rendering) and attempt each selector directly, catching
+    timeout exceptions as "not found".
+
+    Returns True if the button was clicked successfully.
+    """
+    css_selectors = [
+        '[role="button"][aria-label="Começar"]',
+        '[role="button"]:has-text("Começar")',
+        'button:has-text("Começar")',
+    ]
+    for sel in css_selectors:
+        try:
+            page.locator(sel).first.click(timeout=2_000)
+            print(f"[VERIFY] 'Começar' intro modal clicked via selector: {sel}")
+            _wait(2)
+            return True
+        except Exception:
+            continue
+    # Last resort: accessible-name match
+    try:
+        page.get_by_role("button", name="Começar").first.click(timeout=2_000)
+        print("[VERIFY] 'Começar' intro modal clicked via get_by_role")
+        _wait(2)
+        return True
+    except Exception:
+        pass
+    return False
+
+
+# ── custom exception ─────────────────────────────────────────────────────────
+
+class VerificationStepError(RuntimeError):
+    """Raised when a specific verification step fails, carrying step name, page URL, and HTML."""
+    def __init__(self, step: str, reason: str, page_url: str = "", page_html: str = "",
+                 screenshot_path: str = ""):
+        super().__init__(f"[{step}] {reason}")
+        self.step = step
+        self.reason = reason
+        self.page_url = page_url
+        self.page_html = page_html
+        self.screenshot_path = screenshot_path
+
+
+class BmRestrictedException(RuntimeError):
+    """Raised when the Business Manager is detected as restricted/disabled for advertising."""
+    pass
+
+
+class DomainVerificationError(RuntimeError):
+    """Raised when the domain was not verified after clicking 'Verificar domínio'. Non-retryable."""
+    pass
 
 
 # ── main class ────────────────────────────────────────────────────────────────
@@ -199,18 +300,21 @@ class FacebookBot:
         Files are named: debug/<run_id>_<HHMMSS>_<step>_<label>.png
         """
         if not self._debug_screenshots:
-            return
+            return ""
         self._debug_dir.mkdir(parents=True, exist_ok=True)
         self._purge_old_debug_files()
         self._step += 1
         run_id = self.run.get("run_id", "x")
         ts = datetime.now().strftime("%H%M%S")
         name = f"{run_id}_{ts}_{self._step:02d}_{label}.png"
+        path_str = str(self._debug_dir / name)
         try:
-            page.screenshot(path=str(self._debug_dir / name), full_page=True)
+            page.screenshot(path=path_str, full_page=True)
             print(f"[DEBUG] Screenshot → debug/{name}")
+            return path_str
         except Exception as e:
             print(f"[DEBUG] Screenshot failed ({label}): {e}")
+            return ""
 
     def _save_html(self, page: Page, label: str):
         """
@@ -229,6 +333,28 @@ class FacebookBot:
             print(f"[DEBUG] HTML saved → debug/{name}")
         except Exception as e:
             print(f"[DEBUG] HTML save failed ({label}): {e}")
+
+    def _flush_remark(self):
+        """
+        Write the current _gerador_data (including run_id) to the AdsPower
+        profile remark without adding any new step flags.  Call this as early
+        as possible so run_id is persisted even if the session crashes before
+        the first step completes.
+        """
+        if not self._adspower or not self._profile_user_id:
+            return
+        try:
+            marker = config.GERADOR_REMARK_MARKER
+            if marker in self._profile_remark:
+                pre, _, _ = self._profile_remark.partition(marker)
+            else:
+                pre = self._profile_remark.rstrip() + "\n\n"
+            new_remark = f"{pre}{marker}\n{json.dumps(self._gerador_data)}"
+            self._adspower.update_profile(self._profile_user_id, remark=new_remark)
+            self._profile_remark = new_remark
+            print(f"[STEP] run_id={self._gerador_data.get('run_id')} persisted to profile remark")
+        except Exception as e:
+            print(f"[STEP] Could not flush remark: {e}")
 
     def _mark_step_done(self, step: str, value=True):
         """
@@ -318,6 +444,10 @@ class FacebookBot:
             self.business_id = business_id
             print(f"[BOT] Resuming with existing business_id: {business_id}")
 
+        # Persist run_id to the profile remark immediately — before any automation step —
+        # so re-runs reuse the same company data even if the session crashes early.
+        self._flush_remark()
+
         with sync_playwright() as p:
             browser = p.chromium.connect_over_cdp(self.ws)
             ctx: BrowserContext = browser.contexts[0] if browser.contexts else browser.new_context()
@@ -335,7 +465,7 @@ class FacebookBot:
                     self._shot(page, "login_fail")
                     self._save_html(page, "login_fail")
                     print("[BOT] Login failed — aborting")
-                    return False
+                    raise VerificationStepError("login", "Login falhou — credenciais inválidas ou checkpoint do Facebook", page.url, page.content())
                 self._shot(page, "login_ok")
 
                 self._ensure_portuguese(page)
@@ -346,7 +476,7 @@ class FacebookBot:
                         self._shot(page, "portfolio_fail")
                         self._save_html(page, "portfolio_fail")
                         print("[BOT] Could not create Business Portfolio")
-                        return False
+                        raise VerificationStepError("business_portfolio", "Não foi possível criar o Business Portfolio no Meta", page.url, page.content())
                     self._shot(page, "portfolio_ok")
                     self._mark_step_done("business_id", self.business_id)
 
@@ -357,36 +487,72 @@ class FacebookBot:
                 else:
                     print("[BOT] Skipping company details (already done)")
 
-                if not self._gerador_data.get("domain_done"):
+                # Accept both current flag name ("domain_done") and legacy name ("domain_zone")
+                domain_already_done = (
+                    self._gerador_data.get("domain_done") or self._gerador_data.get("domain_zone")
+                )
+                if not domain_already_done:
+                    # Navigate to domains page first so we can check for an existing "Verificado" badge
+                    # before trying to add the domain again.
+                    try:
+                        page.goto(
+                            f"https://business.facebook.com/settings/owned-domains/?business_id={self.business_id}",
+                            wait_until="domcontentloaded", timeout=15_000,
+                        )
+                        _wait(2)
+                        for verified_text in ("Verificado", "Verified"):
+                            try:
+                                if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
+                                    print(f"[BOT] Domain already verified on page ('{verified_text}') — marking done and skipping")
+                                    self._mark_step_done("domain_done")
+                                    domain_already_done = True
+                                    break
+                            except Exception:
+                                pass
+                    except Exception:
+                        pass
+
+                if not domain_already_done:
                     meta_tag = self._add_domain(page)
                     if meta_tag:
                         print(f"[BOT] Injecting meta tag: {meta_tag[:60]}…")
                         self.gerador.inject_meta_tag(self.run["run_id"], meta_tag)
                         _wait(30)  # give DNS / CloudPanel time to propagate
-                        verified = self._verify_domain(page)
-                        self._shot(page, "domain_verified")
-                        if verified:
-                            self._mark_step_done("domain_done")
-                        else:
-                            print("[BOT] Domain verification failed — not marking as done")
+                        try:
+                            verified = self._verify_domain(page)
+                            self._shot(page, "domain_verified")
+                            if verified:
+                                self._mark_step_done("domain_done")
+                        except DomainVerificationError:
+                            self._shot(page, "domain_failed")
+                            raise  # non-retryable — propagate directly
+                        except RuntimeError as e:
+                            self._shot(page, "domain_failed")
+                            return {"success": False, "error": str(e)}
                     else:
                         self._shot(page, "domain_no_metatag")
                         # No meta tag returned — domain may already exist and be verified
                         # from a previous partial run where the remark wasn't saved.
                         # Check the domains settings page for a "Verificado" badge.
                         print("[BOT] No meta tag — checking if domain already verified")
+                        domain_verified_found = False
                         for verified_text in ("Verificado", "Verified"):
                             try:
                                 if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
                                     print(f"[BOT] Domain already verified ('{verified_text}') — marking done")
                                     self._mark_step_done("domain_done")
+                                    domain_verified_found = True
                                     break
                             except Exception:
                                 pass
+                        if not domain_verified_found:
+                            print("[BOT] Domain not verified and no meta tag available — aborting")
+                            return {"success": False, "error": "Domain verification failed: no meta tag returned and Verified badge not found"}
                 else:
-                    print("[BOT] Skipping domain (already done)")
+                    print("[BOT] Skipping domain (already done — domain_done or domain_zone flag set)")
 
-                if not self._gerador_data.get("waba_done"):
+                # Accept both "waba_done" and legacy "waba_created" flag names
+                if not (self._gerador_data.get("waba_done") or self._gerador_data.get("waba_created")):
                     if self._create_waba(page):
                         self._shot(page, "waba_done")
                         self._mark_step_done("waba_done")
@@ -394,12 +560,19 @@ class FacebookBot:
                         self._shot(page, "waba_fail")
                         print("[BOT] WABA creation failed — continuing anyway")
                 else:
-                    print("[BOT] Skipping WABA (already done)")
+                    print("[BOT] Skipping WABA (already done — waba_done or waba_created flag set)")
 
                 result = False
+                _last_verification_error: "VerificationStepError | None" = None
                 for verify_attempt in range(3):
                     try:
                         result = self._run_business_verification(page)
+                    except BmRestrictedException:
+                        raise  # Never retry BM-restricted WABAs — propagate immediately
+                    except VerificationStepError as vse:
+                        print(f"[BOT] Verification attempt {verify_attempt+1} failed at step '{vse.step}': {vse.reason}")
+                        _last_verification_error = vse
+                        result = False
                     except Exception as ve:
                         print(f"[BOT] Verification attempt {verify_attempt+1} crashed: {ve}")
                         if self._debug:
@@ -419,15 +592,30 @@ class FacebookBot:
                             pass
 
                 self._shot(page, "verification_done" if result else "verification_fail")
+                if not result:
+                    if _last_verification_error:
+                        raise _last_verification_error  # preserve specific step/reason
+                    raise VerificationStepError(
+                        "business_verification",
+                        "Wizard de verificação do negócio não concluído após 3 tentativas (nenhum erro específico capturado)",
+                        page.url,
+                        page.content(),
+                    )
                 return result
 
+            except (VerificationStepError, BmRestrictedException, DomainVerificationError):
+                raise  # propagate with type info intact
             except Exception as e:
                 print(f"[BOT] Unexpected error: {e}")
                 self._shot(page, "crash")
                 self._save_html(page, "crash")
                 if self._debug:
                     traceback.print_exc()
-                return False
+                try:
+                    html = page.content()
+                except Exception:
+                    html = ""
+                raise VerificationStepError("unexpected", str(e), page.url, html)
             finally:
                 if self._debug_trace:
                     try:
@@ -642,6 +830,12 @@ class FacebookBot:
             print(f"[NAME] Could not scrape name: {e}")
             return "Admin", "User"
 
+    @staticmethod
+    def _craft_random_email() -> str:
+        import random, string
+        local = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+        return f"{local}@hotmail.com"
+
     def _get_temp_email(self, page: Page) -> str:
         try:
             tp = page.context.new_page()
@@ -664,10 +858,10 @@ class FacebookBot:
         if self.email_mode == "temp":
             email = self._get_temp_email(page)
             if not email:
-                print("[BM] Temp email failed — falling back to login email")
-                email = self._username
+                print("[BM] Temp email failed — falling back to random email")
+                email = self._craft_random_email()
         else:
-            email = self._username  # use the FB login email as the commercial email
+            email = self._craft_random_email()
 
         # Navigate to adsmanager
         page.goto(
@@ -760,8 +954,8 @@ class FacebookBot:
                     break
 
         if not portf_clicked:
-            print("[BM] Could not find portfolio creation button — aborting")
-            return ""
+            print("[BM] Could not find portfolio button on adsmanager — trying business.facebook.com fallback")
+            return self._create_business_portfolio_biz_fallback(page, email)
         _wait(1)
 
         # Business name — razao_social comes in ALL CAPS; FB rejects it, so title-case it
@@ -826,15 +1020,307 @@ class FacebookBot:
                 pass
             break
 
-        # Navigate to business home — FB redirects to a URL containing business_id
-        # e.g. https://business.facebook.com/latest/business_home?business_id=XXXX
-        _wait(5)
-        page.goto("https://business.facebook.com/", wait_until="domcontentloaded", timeout=30_000)
-        _wait(10)
-        url = page.url
-        m = re.search(r"business_id[=\/](\d+)", url)
-        biz_id = m.group(1) if m else ""
-        print(f"[BM] Portfolio created — business_id: {biz_id} (url: {url})")
+        biz_id = self._resolve_business_id_from_select(page)
+        print(f"[BM] Portfolio created — business_id: {biz_id} (url: {page.url})")
+        return biz_id
+
+    def _resolve_business_id_from_select(self, page: Page) -> str:
+        """Navigate to /select and extract business_id for the newly-created BM.
+
+        - Single BM: FB redirects immediately → parse business_id from URL.
+        - Multiple BMs: picker shown → click the entry matching self.run["razao_social"].
+
+        Retries up to 4 times with increasing waits because FB may take several
+        seconds to register the new BM on the backend after form submission.
+        """
+        # Check if we're already on a page with business_id (e.g. post-onboarding)
+        m = re.search(r"business_id[=\/](\d+)", page.url)
+        if m:
+            return m.group(1)
+
+        razao = self.run.get("razao_social", "")
+        razao_norm = razao.lower().strip()
+        razao_title = razao.title().lower()
+
+        for attempt in range(4):
+            wait_secs = 5 + attempt * 5  # 5, 10, 15, 20
+            print(f"[BM] _resolve_business_id attempt {attempt + 1}/4 (wait {wait_secs}s)")
+            _wait(wait_secs)
+
+            page.goto("https://business.facebook.com/select", wait_until="domcontentloaded", timeout=30_000)
+            _wait(3)
+
+            url = page.url
+            m = re.search(r"business_id[=\/](\d+)", url)
+            if m:
+                return m.group(1)
+
+            # Picker page — find the <a> card matching razao_social
+            anchors = page.locator("a[href*='business_id=']").all()
+            if not anchors:
+                # No cards yet — FB hasn't registered the BM, retry
+                continue
+
+            clicked = False
+            for anchor in anchors:
+                try:
+                    text = (anchor.text_content() or "").lower().strip()
+                    if razao_norm and razao_norm in text:
+                        anchor.click()
+                        clicked = True
+                        break
+                except Exception:
+                    pass
+
+            if not clicked:
+                for anchor in anchors:
+                    try:
+                        text = (anchor.text_content() or "").lower().strip()
+                        if razao_title and razao_title in text:
+                            anchor.click()
+                            clicked = True
+                            break
+                    except Exception:
+                        pass
+
+            if not clicked:
+                anchors[-1].click()
+                clicked = True
+
+            if clicked:
+                try:
+                    page.wait_for_url(re.compile(r"business_id"), timeout=15_000)
+                except Exception:
+                    pass
+                _wait(2)
+                m = re.search(r"business_id[=\/](\d+)", page.url)
+                if m:
+                    return m.group(1)
+
+        return ""
+
+    def _create_business_portfolio_biz_fallback(self, page: Page, email: str) -> str:
+        """Fallback BM creation via business.facebook.com when adsmanager path fails."""
+        print("[BM-fallback] Navigating to business.facebook.com")
+        page.goto("https://business.facebook.com", wait_until="domcontentloaded", timeout=60_000)
+        _wait(3)
+        _dismiss_overlays(page)
+
+        # Find and click the portfolio creation button
+        portf_clicked = False
+        for attempt in range(4):
+            _dismiss_overlays(page)
+            _wait(0.5)
+
+            for btn_text in (
+                "Criar um portfólio empresarial",
+                "Crie um portfólio de negócios",
+                "Criar portfólio",
+                "Novo portfólio",
+                "Criar conta",
+            ):
+                try:
+                    btn = page.get_by_role("button", name=btn_text).first
+                    if btn.is_visible(timeout=2_000):
+                        btn.click()
+                        portf_clicked = True
+                        break
+                except Exception:
+                    pass
+            if portf_clicked:
+                break
+
+            for has_text in ("portfólio empresarial", "portfólio de negócios", "portfólio", "novo portfólio"):
+                try:
+                    btn = page.locator("[role='button'], button").filter(has_text=has_text).first
+                    if btn.is_visible(timeout=2_000):
+                        btn.click()
+                        portf_clicked = True
+                        break
+                except Exception:
+                    pass
+            if portf_clicked:
+                break
+
+            llm_text = self._llm_find_action(
+                page,
+                "click the button that creates a new business portfolio or business account. "
+                "If a modal or overlay is blocking, return its dismiss button text first.",
+            )
+            if llm_text:
+                print(f"[BM-fallback] LLM suggests: '{llm_text}'")
+                try:
+                    page.get_by_role("button", name=llm_text).first.click(timeout=5_000)
+                    _wait(1)
+                except Exception:
+                    try:
+                        page.get_by_text(llm_text, exact=False).first.click(timeout=3_000)
+                        _wait(1)
+                    except Exception as e:
+                        print(f"[BM-fallback] Could not click LLM suggestion: {e}")
+
+        if not portf_clicked:
+            print("[BM-fallback] Could not find portfolio creation button — trying /create fallback")
+            return self._create_business_portfolio_biz_create(page, email)
+        _wait(1)
+
+        # Business name (same placeholder as adsmanager form)
+        biz_name = self.run["razao_social"].title()
+        try:
+            _clear_fill(page.get_by_placeholder("Jasper's Market"), biz_name)
+        except Exception as e:
+            print(f"[BM-fallback] Could not fill business name: {e}")
+
+        # Email — no placeholder on this form; try common labels then positional fallback
+        if email:
+            filled = False
+            for label_text in ("Email comercial", "Email", "Endereço de email"):
+                try:
+                    _clear_fill(page.get_by_label(label_text), email)
+                    filled = True
+                    break
+                except Exception:
+                    pass
+            if not filled:
+                # Second visible text input that isn't the business name field
+                try:
+                    for inp in page.locator("input[type='text']").all():
+                        if inp.is_visible(timeout=500):
+                            placeholder = inp.get_attribute("placeholder") or ""
+                            if "Jasper" not in placeholder:
+                                _clear_fill(inp, email)
+                                filled = True
+                                break
+                except Exception as e:
+                    print(f"[BM-fallback] Could not fill email: {e}")
+            _wait(1)
+
+        # Click "Enviar"
+        enviar_clicked = False
+        for attempt in range(3):
+            try:
+                page.get_by_role("button", name="Enviar", exact=True).click(timeout=6_000)
+                enviar_clicked = True
+                break
+            except Exception as e:
+                if attempt < 2:
+                    print(f"[BM-fallback] 'Enviar' not clickable (attempt {attempt+1}) — {e}")
+                    fix = self._llm_fix_form(page)
+                    if fix:
+                        print(f"[BM-fallback] LLM applied fix: {fix}")
+                    _wait(1)
+
+        if not enviar_clicked:
+            print("[BM-fallback] Could not click 'Enviar' — aborting")
+            return ""
+
+        page.wait_for_load_state("domcontentloaded", timeout=60_000)
+        _wait(3)
+
+        # Skip onboarding screens
+        for _ in range(6):
+            try:
+                btn = page.get_by_role("button", name="Pular", exact=True)
+                if btn.is_visible(timeout=2_000):
+                    btn.click()
+                    _wait(1.5)
+                    continue
+            except Exception:
+                pass
+            try:
+                btn = page.get_by_role("button", name="Confirmar")
+                if btn.is_visible(timeout=1_000):
+                    btn.click()
+                    _wait(1.5)
+            except Exception:
+                pass
+            break
+
+        biz_id = self._resolve_business_id_from_select(page)
+        print(f"[BM-fallback] Portfolio created — business_id: {biz_id} (url: {page.url})")
+        return biz_id
+
+    def _create_business_portfolio_biz_create(self, page: Page, email: str) -> str:
+        """Last-resort BM creation via business.facebook.com/create (direct form URL)."""
+        print("[BM-create] Navigating to business.facebook.com/create")
+        page.goto("https://business.facebook.com/create", wait_until="domcontentloaded", timeout=60_000)
+        _wait(3)
+        _dismiss_overlays(page)
+
+        # Business name — same placeholder as adsmanager form
+        biz_name = self.run["razao_social"].title()
+        try:
+            _clear_fill(page.get_by_placeholder("Jasper's Market"), biz_name)
+        except Exception as e:
+            print(f"[BM-create] Could not fill business name: {e}")
+            return ""
+
+        # Email field — no placeholder; fill the second visible text input
+        if email:
+            filled = False
+            for label_text in ("Email comercial", "Email", "Endereço de email"):
+                try:
+                    _clear_fill(page.get_by_label(label_text), email)
+                    filled = True
+                    break
+                except Exception:
+                    pass
+            if not filled:
+                try:
+                    for inp in page.locator("input[type='text'], input[type='email']").all():
+                        if inp.is_visible(timeout=500):
+                            placeholder = inp.get_attribute("placeholder") or ""
+                            if "Jasper" not in placeholder:
+                                _clear_fill(inp, email)
+                                filled = True
+                                break
+                except Exception as e:
+                    print(f"[BM-create] Could not fill email: {e}")
+            _wait(1)
+
+        # Click "Enviar"
+        enviar_clicked = False
+        for attempt in range(3):
+            try:
+                page.get_by_role("button", name="Enviar", exact=True).click(timeout=6_000)
+                enviar_clicked = True
+                break
+            except Exception as e:
+                if attempt < 2:
+                    print(f"[BM-create] 'Enviar' not clickable (attempt {attempt+1}) — {e}")
+                    fix = self._llm_fix_form(page)
+                    if fix:
+                        print(f"[BM-create] LLM applied fix: {fix}")
+                    _wait(1)
+
+        if not enviar_clicked:
+            print("[BM-create] Could not click 'Enviar' — aborting")
+            return ""
+
+        page.wait_for_load_state("domcontentloaded", timeout=60_000)
+        _wait(3)
+
+        # Skip onboarding screens
+        for _ in range(6):
+            try:
+                btn = page.get_by_role("button", name="Pular", exact=True)
+                if btn.is_visible(timeout=2_000):
+                    btn.click()
+                    _wait(1.5)
+                    continue
+            except Exception:
+                pass
+            try:
+                btn = page.get_by_role("button", name="Confirmar")
+                if btn.is_visible(timeout=1_000):
+                    btn.click()
+                    _wait(1.5)
+            except Exception:
+                pass
+            break
+
+        biz_id = self._resolve_business_id_from_select(page)
+        print(f"[BM-create] Portfolio created — business_id: {biz_id} (url: {page.url})")
         return biz_id
 
     # ── stage 4: company details ──────────────────────────────────────────────
@@ -932,6 +1418,78 @@ class FacebookBot:
         _wait(2)
         _dismiss_overlays(page)  # handle "Salvar endereço" popup after save
 
+    def _update_business_phone(self, page: Page, phone_digits: str):
+        """Update Telefone comercial in business_info, then return to the security
+        center and re-enter the verification wizard so the caller can continue."""
+        if not self.business_id or not phone_digits:
+            return
+        try:
+            page.goto(
+                f"https://business.facebook.com/latest/settings/business_info?business_id={self.business_id}",
+                wait_until="domcontentloaded",
+                timeout=60_000,
+            )
+            _wait(2)
+            _dismiss_overlays(page)
+            try:
+                _click_with_retry(
+                    page,
+                    lambda: page.locator("div").filter(
+                        has_text=re.compile(r"^Detalhes da empresaEditar$")
+                    ).get_by_role("button"),
+                    timeout=5_000,
+                )
+            except Exception:
+                _click_with_retry(
+                    page,
+                    lambda: page.locator("button").filter(has_text="Editar").first,
+                    timeout=5_000,
+                )
+            _wait(1)
+            tel = phone_digits if phone_digits.startswith("55") else "55" + phone_digits
+            try:
+                _clear_fill(page.get_by_label("Telefone comercial"), tel)
+            except Exception:
+                pass
+            _click_with_retry(
+                page,
+                lambda: page.get_by_role("button", name="Salvar"),
+                timeout=5_000,
+            )
+            page.wait_for_load_state("domcontentloaded", timeout=60_000)
+            _wait(2)
+            _dismiss_overlays(page)
+            print(f"[VERIFY] Business phone updated to {tel}")
+        except Exception as e:
+            print(f"[VERIFY] _update_business_phone failed: {e}")
+
+        # Navigate back to the security center and re-open the verification wizard
+        # so the caller can continue the wizard flow from where it left off.
+        try:
+            page.goto(
+                f"https://business.facebook.com/settings/security/?business_id={self.business_id}",
+                wait_until="domcontentloaded",
+                timeout=30_000,
+            )
+            _wait(2)
+            _dismiss_overlays(page)
+            # Verification is in progress → FB shows "Continuar"; fresh start → other labels
+            for btn_name in ("Continuar", "Iniciar verificação", "Verificar", "Começar"):
+                try:
+                    btn = page.get_by_role("button", name=btn_name).first
+                    if btn.is_visible(timeout=3_000):
+                        btn.click(timeout=5_000)
+                        _wait(2)
+                        print(f"[VERIFY] Re-entered wizard via '{btn_name}'")
+                        break
+                except Exception:
+                    pass
+            # Handle the "Começar" intro modal if it appears
+            _click_comecar(page)
+            _wait(1)
+        except Exception as e:
+            print(f"[VERIFY] Failed to re-enter wizard after business_info update: {e}")
+
     # ── stage 5: domain ───────────────────────────────────────────────────────
 
     def _add_domain(self, page: Page) -> str:
@@ -964,6 +1522,20 @@ class FacebookBot:
         _wait(2)
         _dismiss_overlays(page)
         self._shot(page, "domain_01_page")
+
+        # Detect BM restriction before doing anything else
+        try:
+            body_t = page.inner_text("body").lower()
+            if "não pode usar este portfólio empresarial para anunciar" in body_t \
+                    or "you can't use this business portfolio to advertise" in body_t:
+                self._shot(page, "bm_restricted")
+                raise BmRestrictedException(
+                    "Business Manager está restrito — portfólio bloqueado para anúncios"
+                )
+        except BmRestrictedException:
+            raise
+        except Exception:
+            pass
 
         # Click "Adicionar" to open the domain creation flow
         try:
@@ -1037,8 +1609,10 @@ class FacebookBot:
             )
             if m:
                 return m.group(0).strip()
-            # Fallback: construct from content= value if visible in the text
-            m2 = re.search(r'content="([a-z0-9]+)"', raw)
+            # Fallback: look for just the content token in visible text.
+            # Must be >= 20 chars to avoid matching unrelated content= attributes
+            # like content="noarchive", content="width", etc.
+            m2 = re.search(r'content="([a-z0-9]{20,})"', raw)
             if m2:
                 return f'<meta name="facebook-domain-verification" content="{m2.group(1)}" />'
             return ""
@@ -1096,41 +1670,43 @@ class FacebookBot:
 
     def _verify_domain(self, page: Page) -> bool:
         """
-        Click 'Verificar domínio' and check that the domain badge becomes 'Verified'.
-        Returns True only if verification succeeds; False otherwise.
+        Click 'Verificar domínio', wait 10 s, reload, then check for the specific
+        'Verified' badge element. Raises RuntimeError if the badge is not found.
         """
         try:
             page.get_by_role("button", name="Verificar domínio").click(timeout=8_000)
         except Exception as e:
-            print(f"[DOMAIN] 'Verificar domínio' button not found: {e}")
-            return False
+            raise RuntimeError(f"[DOMAIN] 'Verificar domínio' button not found: {e}")
 
-        _wait(5)
+        _wait(10)
+
+        try:
+            page.reload(wait_until="domcontentloaded", timeout=15_000)
+            _wait(2)
+        except Exception as e:
+            print(f"[DOMAIN] Page reload failed: {e}")
+
         self._shot(page, "domain_06_after_verify")
 
-        # Look for positive confirmation ("Verificado" in PT-BR, "Verified" in EN)
-        # Use get_by_text with exact=True so "Verificado" does NOT match "Não verificado"
-        for verified_text in ("Verificado", "Verified"):
-            try:
-                loc = page.get_by_text(verified_text, exact=True).first
-                if loc.is_visible(timeout=5_000):
-                    print(f"[DOMAIN] Domain verified! (badge: '{verified_text}')")
-                    return True
-            except Exception:
-                pass
+        # Target the specific inner div Facebook renders inside the verified badge span.
+        # CSS classes taken from the live element observed in the UI.
+        verified_selector = (
+            "div.x1vvvo52.xw23nyj.x63nzvj.x1heor9g.xuxw1ft"
+            ".x6ikm8r.x10wlt62.xlyipyv.x1h4wwuj.x1pd3egz.xeuugli"
+        )
+        try:
+            # Use exact regex to avoid matching "Not Verified" which contains "Verified" as substring
+            loc = page.locator(verified_selector).filter(has_text=re.compile(r'^\s*Verified\s*$')).first
+            if loc.is_visible(timeout=5_000):
+                print("[DOMAIN] Domain verified! (Verified badge found)")
+                return True
+        except Exception:
+            pass
 
-        # If "Não verificado" / "Not Verified" still visible, it failed
-        for fail_text in ("Não verificado", "Not Verified"):
-            try:
-                loc = page.get_by_text(fail_text, exact=True).first
-                if loc.is_visible(timeout=2_000):
-                    print(f"[DOMAIN] Verification failed — badge still: '{fail_text}'")
-                    return False
-            except Exception:
-                pass
-
-        print("[DOMAIN] Could not determine verification status")
-        return False
+        raise DomainVerificationError(
+            "[DOMAIN] Domain was not verified — 'Verified' badge not found after reload. "
+            "Execution stopped."
+        )
 
     # ── stage 6: WhatsApp Business Account ───────────────────────────────────
 
@@ -1253,16 +1829,54 @@ class FacebookBot:
                     btn.click()
                     _wait(1)
                     print(f"[WABA] Modal closed ('{close_label}' button)")
-                    return True
+                    break
             except Exception:
                 pass
+        else:
+            try:
+                page.keyboard.press("Escape")
+                _wait(1)
+                print("[WABA] Modal closed (Escape)")
+            except Exception:
+                pass
+
+        # ── Verify WABA actually exists ──────────────────────────────────────
+        # Navigate back to the WABA settings page and check for a WABA entry.
+        # The old code returned True right after closing the modal without
+        # confirming the WABA was actually created (waba_done bug).
+        _wait(2)
         try:
-            page.keyboard.press("Escape")
-            _wait(1)
-            print("[WABA] Modal closed (Escape)")
-        except Exception:
-            pass
-        return True
+            page.goto(
+                f"https://business.facebook.com/latest/settings/whatsapp_account?business_id={self.business_id}",
+                wait_until="domcontentloaded",
+                timeout=30_000,
+            )
+            _wait(2)
+            self._shot(page, "waba_verify_exists")
+
+            # A WABA row in the table is a gridcell containing a heading element
+            # (the WABA name). This is the most reliable signal regardless of
+            # the account name or language.
+            waba_found = False
+            try:
+                rows = page.locator('[role="gridcell"] [role="heading"]')
+                count = rows.count()
+                if count > 0:
+                    waba_name = rows.first.inner_text(timeout=3_000).strip()
+                    print(f"[WABA] WABA creation confirmed — found {count} account row(s), first: '{waba_name}'")
+                    waba_found = True
+            except Exception:
+                pass
+
+            if not waba_found:
+                self._shot(page, "waba_not_found")
+                print("[WABA] WARNING: WABA not found on settings page after creation — possible failure")
+                return False
+            return True
+        except Exception as e:
+            # If navigation fails, log but don't block — assume creation succeeded
+            print(f"[WABA] Could not verify WABA existence: {e} — assuming success")
+            return True
 
     # ── stage 8: business verification wizard ────────────────────────────────
 
@@ -1294,7 +1908,7 @@ class FacebookBot:
 
         # ── Detect entry button ────────────────────────────────────────────
         entry_button = None
-        for btn_name in ("Iniciar verificação", "Continuar", "Verificar"):
+        for btn_name in ("Iniciar verificação", "Continuar", "Verificar", "Começar"):
             try:
                 btn = page.get_by_role("button", name=btn_name).first
                 if btn.is_visible(timeout=3_000):
@@ -1308,7 +1922,10 @@ class FacebookBot:
             print("[VERIFY] No entry button found — checking if already verified")
             try:
                 body = page.inner_text("body").lower()
-                if "em análise" in body or "verificado" in body:
+                if any(phrase in body for phrase in (
+                    "em análise", "verificado", "analisando suas informações",
+                    "verificando suas informações", "processando seu envio",
+                )):
                     print("[VERIFY] Already verified or in review — skipping")
                     return True
             except Exception:
@@ -1322,6 +1939,17 @@ class FacebookBot:
         _wait(2)
         self._shot(page, "verify_wizard_opened")
 
+        # ── Always dismiss the "Começar" intro modal first ─────────────────
+        # After clicking any entry button (including "Continuar" on resume),
+        # Facebook shows an intro modal with a "Começar" button that MUST be
+        # clicked before the actual wizard step becomes active.
+        # We retry up to 3 times with 2s gaps because the button may render late.
+        _wait(2)  # give the modal time to render
+        for _comecar_attempt in range(3):
+            if _click_comecar(page):
+                break
+            _wait(2)
+
         # ── Detect current step when resuming ──────────────────────────────
         if resume_mode:
             step = self._detect_wizard_step(page)
@@ -1333,6 +1961,77 @@ class FacebookBot:
 
     # ── Wizard step detection ──────────────────────────────────────────────────
 
+    def _extract_wizard_title(self, page: Page) -> tuple[str, str]:
+        """
+        Extract the title and subtitle text from the currently visible wizard dialog.
+
+        Tries the topmost visible [role="dialog"] and looks for:
+          - Title: [role="heading"] or first short span[dir="auto"] (< 120 chars)
+          - Subtitle: second distinct span[dir="auto"] that differs from the title
+
+        Returns (title_lower, subtitle_lower). Both are empty string on failure.
+        All locators use a short timeout so this fails fast when the DOM isn't ready.
+        """
+        try:
+            dialogs = page.locator('[role="dialog"]').all()
+            dialog = None
+            for dlg in reversed(dialogs):  # last = topmost in stacking order
+                try:
+                    if dlg.is_visible(timeout=400):
+                        dialog = dlg
+                        break
+                except Exception:
+                    continue
+            if dialog is None:
+                return "", ""
+
+            # --- Title extraction ---
+            title = ""
+            # Prefer a heading role inside the dialog
+            try:
+                heading = dialog.locator('[role="heading"]').first
+                if heading.is_visible(timeout=800):
+                    title = heading.inner_text(timeout=800).strip()
+            except Exception:
+                pass
+
+            # Fallback: first short span[dir="auto"] (titles are short)
+            if not title:
+                try:
+                    spans = dialog.locator('span[dir="auto"]').all()
+                    for span in spans:
+                        try:
+                            t = span.inner_text(timeout=500).strip()
+                            if t and len(t) < 120:
+                                title = t
+                                break
+                        except Exception:
+                            continue
+                except Exception:
+                    pass
+
+            if not title:
+                return "", ""
+
+            # --- Subtitle extraction ---
+            subtitle = ""
+            try:
+                spans = dialog.locator('span[dir="auto"]').all()
+                for span in spans:
+                    try:
+                        t = span.inner_text(timeout=500).strip()
+                        if t and t != title and len(t) < 120:
+                            subtitle = t
+                            break
+                    except Exception:
+                        continue
+            except Exception:
+                pass
+
+            return title.lower(), subtitle.lower()
+        except Exception:
+            return "", ""
+
     def _detect_wizard_step(self, page: Page) -> str:
         """
         Identify the current wizard step from visible page text.
@@ -1343,19 +2042,56 @@ class FacebookBot:
             add_company_data | document_upload | method_selection |
             phone_entry | otp_entry | complete | unknown
         """
-        # Prefer the dialog text so we get modal content (FB renders wizards in dialogs)
+        # Prefer the dialog text so we get modal content (FB renders wizards in dialogs).
+        # IMPORTANT: FB can stack two dialogs — the background wizard + the Começar intro
+        # modal on top. We scan ALL visible dialogs first and return "start" immediately
+        # if the Começar modal is detected, so we never misread the background content.
+        text = ""
         try:
-            dialog = page.locator('[role="dialog"]').first
-            text = dialog.inner_text(timeout=3_000) if dialog.is_visible(timeout=800) else page.inner_text("body")
+            dialogs = page.locator('[role="dialog"]').all()
+            for dlg in dialogs:
+                try:
+                    if not dlg.is_visible(timeout=400):
+                        continue
+                    dlg_text = dlg.inner_text(timeout=1_500).lower()
+                    # Começar intro modal is uniquely identified by "ações necessárias" + button
+                    if "começar" in dlg_text and ("ações necessárias" in dlg_text or "conexão legítima" in dlg_text):
+                        print("[VERIFY] Step detection: Começar intro modal detected → returning 'start'")
+                        return "start"
+                    if dlg_text and not text:
+                        text = dlg_text  # use first non-empty visible dialog as fallback
+                except Exception:
+                    continue
         except Exception:
+            pass
+
+        # ── Tier 1: Title-based detection ──────────────────────────────────────
+        # Read the wizard modal's title/subtitle spans before falling back to
+        # full-text keyword matching.  Fails fast (short timeouts) so it never
+        # slows down the detection when the title element isn't present.
+        wiz_title, wiz_subtitle = self._extract_wizard_title(page)
+        if wiz_title:
+            for t_pattern, s_pattern, step_name in _WIZARD_TITLE_MAP:
+                if t_pattern not in wiz_title:
+                    continue
+                if s_pattern is not None and s_pattern not in wiz_subtitle:
+                    continue
+                print(f"[VERIFY] Tier 1 title match: title={wiz_title!r}, subtitle={wiz_subtitle!r} → {step_name}")
+                return step_name
+            print(f"[VERIFY] Tier 1: title found ({wiz_title!r}) but no mapping matched — falling to Tier 2")
+
+        if not text:
             try:
                 text = page.inner_text("body")
             except Exception:
                 return "unknown"
 
         t = text.lower()
+        print(f"[VERIFY] Tier 2 keyword detection text (first 500): {t[:500]!r}")
 
-        if any(k in t for k in ("agradecemos", "verificação foi concluída", "em análise")):
+        if any(k in t for k in ("agradecemos", "verificação foi concluída", "em análise",
+                                "analisando suas informações", "verificando suas informações",
+                                "processando seu envio")):
             return "complete"
         # Domain confirmation intermediate screen — has "Avançar" but is NOT complete
         if "domínio abaixo foi verificado" in t or "verifique com o domínio da empresa" in t:
@@ -1385,125 +2121,174 @@ class FacebookBot:
             return "entity_type"
         if "começar" in t:
             return "start"
+        if "selecionar um país" in t or "localização da organização" in t:
+            return "country_selection"
+        if "ajude-nos a confirmar que é você" in t:
+            return "identity_check"
 
-        return self._detect_step_llm(page)
+        print(f"[VERIFY] Keyword matching failed (text len={len(t)}) — falling back to LLM")
+        llm_result = self._detect_step_llm(page)
+        if llm_result != "unknown":
+            return llm_result
+
+        # Both keyword and LLM failed — try MCP as last resort
+        mcp_result = self._mcp_recover(page, "detect wizard step — return exactly one keyword: "
+                                              "start | entity_type | registration | cnpj_input | cnpj_list | "
+                                              "add_company_data | document_upload | method_selection | "
+                                              "phone_entry | otp_entry | complete | country_selection | identity_check | unknown")
+        valid = {
+            "start", "entity_type", "registration", "cnpj_input", "cnpj_list",
+            "add_company_data", "document_upload", "method_selection",
+            "country_selection", "identity_check",
+            "phone_entry", "otp_entry", "complete",
+        }
+        if mcp_result and mcp_result.lower().strip() in valid:
+            return mcp_result.lower().strip()
+        return "unknown"
 
     def _detect_step_llm(self, page: Page) -> str:
         """
-        LLM vision fallback: sends a screenshot to OpenAI GPT-4o-mini and
-        asks which wizard step is visible.  Requires OPENAI_API_KEY in env.
+        LLM vision fallback: sends a screenshot to Claude and asks which
+        wizard step is visible. Requires ANTHROPIC_API_KEY in env.
         """
-        openai_key = os.getenv("OPENAI_API_KEY") or config.OPENAI_API_KEY
-        if not openai_key:
-            print("[VERIFY] No OPENAI_API_KEY — LLM step detection unavailable")
+        client = _get_claude_client()
+        if not client:
+            print("[VERIFY] No ANTHROPIC_API_KEY — LLM step detection unavailable")
             return "unknown"
 
         try:
             img_b64 = base64.b64encode(page.screenshot()).decode()
-            payload = {
-                "model": "gpt-4o-mini",
-                "messages": [{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (
-                                "You are analysing a Facebook Business Verification wizard "
-                                "screenshot (in Portuguese). Identify the current step and "
-                                "reply with ONLY one keyword from this list:\n"
-                                "start, entity_type, registration, cnpj_input, cnpj_list, "
-                                "add_company_data, document_upload, method_selection, "
-                                "phone_entry, otp_entry, complete, unknown\n\n"
-                                "Examples:\n"
-                                "  document_upload  — file upload area visible\n"
-                                "  method_selection — domain/SMS/call radio buttons visible\n"
-                                "  entity_type      — 'Empresa individual' choice visible\n"
-                                "  complete         — 'Processando seu envio', 'Agradecemos o envio', or 'Em análise' text visible\n"
-                                "  start            — intro screen with 'Começar' button listing verification steps\n"
-                            ),
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{img_b64}",
-                                "detail": "low",
-                            },
-                        },
-                    ],
-                }],
-                "max_tokens": 20,
-            }
-            r = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {openai_key}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=30,
+            prompt = (
+                "You are analysing a Facebook Business Verification wizard "
+                "screenshot (in Portuguese). Identify the current step and "
+                "reply with ONLY one keyword from this list:\n"
+                "start, entity_type, registration, cnpj_input, cnpj_list, "
+                "add_company_data, document_upload, method_selection, "
+                "phone_entry, otp_entry, complete, country_selection, identity_check, unknown\n\n"
+                "Examples:\n"
+                "  document_upload   — file upload area visible\n"
+                "  method_selection  — domain/SMS/call radio buttons visible\n"
+                "  entity_type       — 'Empresa individual' choice visible\n"
+                "  complete          — 'Processando seu envio', 'Agradecemos o envio', 'Em análise', 'Analisando suas informações', or 'Verificando suas informações' text visible\n"
+                "  start             — intro screen with 'Começar' button listing verification steps\n"
+                "  country_selection — 'Selecionar um país' dropdown with Brasil selected\n"
+                "  identity_check    — 'Ajude-nos a confirmar que é você' with Avançar button\n"
             )
-            r.raise_for_status()
-            raw = r.json()["choices"][0]["message"]["content"].strip().lower().split()[0]
+            response = client.messages.create(
+                model=config.CLAUDE_FAST_MODEL,
+                max_tokens=20,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": img_b64}},
+                    {"type": "text", "text": prompt},
+                ]}],
+            )
+            raw_text = response.content[0].text.strip().lstrip("`").rstrip("`")
+            print(f"[VERIFY] Claude step raw response: {raw_text!r}")
+            if not raw_text:
+                print("[VERIFY] Claude step response was empty — returning unknown")
+                return "unknown"
+            raw = raw_text.lower().split()[0]
             valid = {
                 "start", "entity_type", "registration", "cnpj_input", "cnpj_list",
                 "add_company_data", "document_upload", "method_selection",
-                "phone_entry", "otp_entry", "complete",
+                "phone_entry", "otp_entry", "complete", "country_selection", "identity_check",
             }
             result = raw if raw in valid else "unknown"
-            print(f"[VERIFY] LLM step detection → {result}")
+            if result == "unknown":
+                print(f"[VERIFY] Claude returned unrecognised step '{raw}' — treating as unknown")
+            print(f"[VERIFY] Claude step detection → {result}")
             return result
         except Exception as e:
-            print(f"[VERIFY] LLM step detection failed: {e}")
+            print(f"[VERIFY] Claude step detection failed: {e}")
             return "unknown"
+
+    def _mcp_recover(self, page: Page, context: str) -> str | None:
+        """
+        Browser Use MCP fallback: when both keyword detection and Claude LLM fail,
+        call the MCP server to inspect the page and figure out what to do.
+
+        Args:
+            context: What we're trying to accomplish (e.g. "detect wizard step",
+                     "find and click verification method option").
+
+        Returns the step name or action taken as a string, or None if MCP is
+        disabled or also fails.
+
+        Enabled when BROWSER_USE_MCP_URL is set in .env / config.
+        """
+        mcp_url = getattr(config, "BROWSER_USE_MCP_URL", "")
+        if not mcp_url:
+            return None
+
+        try:
+            import urllib.request
+            import json as _json
+
+            # Build a minimal page snapshot: screenshot + text + URL
+            img_b64 = base64.b64encode(page.screenshot()).decode()
+            try:
+                page_text = page.inner_text("body")[:2000]
+            except Exception:
+                page_text = ""
+
+            payload = _json.dumps({
+                "context": context,
+                "page_url": page.url,
+                "page_text": page_text,
+                "screenshot_b64": img_b64,
+                "valid_steps": [
+                    "start", "entity_type", "registration", "cnpj_input", "cnpj_list",
+                    "add_company_data", "document_upload", "method_selection",
+                    "phone_entry", "otp_entry", "complete", "unknown",
+                ],
+            }).encode()
+
+            req = urllib.request.Request(
+                mcp_url,
+                data=payload,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                body = _json.loads(resp.read().decode())
+
+            result = body.get("result") or body.get("step") or body.get("action")
+            print(f"[MCP] Recovery result for '{context}': {result!r}")
+            return str(result) if result else None
+        except Exception as e:
+            print(f"[MCP] Recovery failed ({context}): {e}")
+            return None
 
     def _llm_fix_form(self, page: Page) -> str:
         """
-        Ask GPT-4o-mini to look at the current form screenshot and identify
+        Ask Claude to look at the current form screenshot and identify
         which required field is empty or invalid, then attempt to fill it.
 
         Returns a short description of the fix applied, or "" if nothing done.
         """
-        openai_key = os.getenv("OPENAI_API_KEY") or config.OPENAI_API_KEY
-        if not openai_key:
+        client = _get_claude_client()
+        if not client:
             return ""
         try:
             img_b64 = base64.b64encode(page.screenshot()).decode()
-            payload = {
-                "model": "gpt-4o-mini",
-                "messages": [{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (
-                                "This is a Facebook Business Portfolio creation form in Portuguese. "
-                                "The 'Criar' (Create) button is disabled. "
-                                "Look at the form and identify which required field is empty or has an error. "
-                                "Reply with a JSON object like: "
-                                '{"field": "<label name in Portuguese>", "value": "<what to fill>"} '
-                                "or {\"field\": null} if you cannot determine the issue. "
-                                "Only reply with the JSON, nothing else."
-                            ),
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:image/png;base64,{img_b64}", "detail": "low"},
-                        },
-                    ],
-                }],
-                "max_tokens": 80,
-            }
-            r = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {openai_key}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=30,
+            prompt = (
+                "This is a Facebook Business Portfolio creation form in Portuguese. "
+                "The 'Criar' (Create) button is disabled. "
+                "Look at the form and identify which required field is empty or has an error. "
+                "Reply with a JSON object like: "
+                '{"field": "<label name in Portuguese>", "value": "<what to fill>"} '
+                'or {"field": null} if you cannot determine the issue. '
+                "Only reply with the JSON, nothing else."
             )
-            r.raise_for_status()
-            raw = r.json()["choices"][0]["message"]["content"].strip()
+            response = client.messages.create(
+                model=config.CLAUDE_FAST_MODEL,
+                max_tokens=80,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": img_b64}},
+                    {"type": "text", "text": prompt},
+                ]}],
+            )
+            raw = response.content[0].text.strip()
             data = json.loads(raw)
             field = data.get("field")
             value = data.get("value", "")
@@ -1533,60 +2318,46 @@ class FacebookBot:
 
     def _llm_find_action(self, page: Page, goal: str) -> str:
         """
-        Ask GPT-4o-mini to look at the current screenshot and return the exact
+        Ask Claude to look at the current screenshot and return the exact
         visible text of the button/link that achieves *goal*.
 
         Returns the button text string, or "" if LLM can't determine it.
         Use this when selectors fail and the bot doesn't know what to click next.
         """
-        openai_key = os.getenv("OPENAI_API_KEY") or config.OPENAI_API_KEY
-        if not openai_key:
+        client = _get_claude_client()
+        if not client:
             return ""
         try:
             img_b64 = base64.b64encode(page.screenshot()).decode()
-            payload = {
-                "model": "gpt-4o-mini",
-                "messages": [{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (
-                                f"You are helping automate a Facebook Business Manager page in Portuguese.\n"
-                                f"Goal: {goal}\n"
-                                f"Look at the screenshot and return ONLY the exact visible text of the "
-                                f"button or link I should click to achieve this goal. "
-                                f"If there is a modal/dialog blocking the page, return the text of the "
-                                f"button to dismiss it first. "
-                                f"Reply with just the button text, nothing else. "
-                                f"If you cannot determine it, reply with: UNKNOWN"
-                            ),
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {"url": f"data:image/png;base64,{img_b64}", "detail": "low"},
-                        },
-                    ],
-                }],
-                "max_tokens": 30,
-            }
-            r = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {openai_key}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=30,
+            prompt = (
+                f"You are helping automate a Facebook Business Manager page in Portuguese.\n"
+                f"Goal: {goal}\n"
+                f"Look at the screenshot and return ONLY the exact visible text of the "
+                f"button or link I should click to achieve this goal. "
+                f"If there is a modal/dialog blocking the page, return the text of the "
+                f"button to dismiss it first. "
+                f"Reply with just the button text, nothing else. "
+                f"If you cannot determine it, reply with: UNKNOWN"
             )
-            r.raise_for_status()
-            result = r.json()["choices"][0]["message"]["content"].strip()
+            response = client.messages.create(
+                model=config.CLAUDE_FAST_MODEL,
+                max_tokens=30,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": img_b64}},
+                    {"type": "text", "text": prompt},
+                ]}],
+            )
+            result = response.content[0].text.strip()
             if result.upper() == "UNKNOWN" or not result:
                 return ""
-            print(f"[LLM] find_action → '{result}'")
+            # Reject multi-sentence responses — the model should only return the button label
+            if len(result) > 60 or result.count(" ") > 5:
+                print(f"[Claude] find_action → response too long ({len(result)} chars), ignoring: {result[:80]!r}")
+                return ""
+            print(f"[Claude] find_action → '{result}'")
             return result
         except Exception as e:
-            print(f"[LLM] find_action failed: {e}")
+            print(f"[Claude] find_action failed: {e}")
             return ""
 
     def _llm_fill_field(self, page: Page, value: str, goal: str) -> bool:
@@ -1599,54 +2370,33 @@ class FacebookBot:
 
         Returns True if the field was successfully filled, False otherwise.
         """
-        openai_key = os.getenv("OPENAI_API_KEY") or config.OPENAI_API_KEY
-        if not openai_key:
+        client = _get_claude_client()
+        if not client:
             return False
 
         def _ask_identifier() -> str:
             try:
                 img_b64 = base64.b64encode(page.screenshot()).decode()
-                payload = {
-                    "model": "gpt-4o-mini",
-                    "messages": [{
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": (
-                                    f"Look at this Facebook Business Manager page (in Portuguese).\n"
-                                    f"I need to type the value '{value}' into the {goal} input field.\n"
-                                    f"What is the EXACT placeholder text, label text, or nearby visible "
-                                    f"text of the input I should fill?\n"
-                                    f"Reply with ONLY that text, nothing else.\n"
-                                    f"If no such input is visible on screen (e.g. a dialog has not "
-                                    f"opened yet), reply with exactly: NOT_VISIBLE"
-                                ),
-                            },
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": f"data:image/png;base64,{img_b64}",
-                                    "detail": "low",
-                                },
-                            },
-                        ],
-                    }],
-                    "max_tokens": 30,
-                }
-                r = requests.post(
-                    "https://api.openai.com/v1/chat/completions",
-                    headers={
-                        "Authorization": f"Bearer {openai_key}",
-                        "Content-Type": "application/json",
-                    },
-                    json=payload,
-                    timeout=30,
+                prompt = (
+                    f"Look at this Facebook Business Manager page (in Portuguese).\n"
+                    f"I need to type the value '{value}' into the {goal} input field.\n"
+                    f"What is the EXACT placeholder text, label text, or nearby visible "
+                    f"text of the input I should fill?\n"
+                    f"Reply with ONLY that text, nothing else.\n"
+                    f"If no such input is visible on screen (e.g. a dialog has not "
+                    f"opened yet), reply with exactly: NOT_VISIBLE"
                 )
-                r.raise_for_status()
-                return r.json()["choices"][0]["message"]["content"].strip()
+                response = client.messages.create(
+                    model=config.CLAUDE_FAST_MODEL,
+                    max_tokens=30,
+                    messages=[{"role": "user", "content": [
+                        {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": img_b64}},
+                        {"type": "text", "text": prompt},
+                    ]}],
+                )
+                return response.content[0].text.strip()
             except Exception as e:
-                print(f"[LLM] fill_field identifier failed: {e}")
+                print(f"[Claude] fill_field identifier failed: {e}")
                 return ""
 
         def _try_fill(identifier: str) -> bool:
@@ -1701,10 +2451,16 @@ class FacebookBot:
         Stops when it reaches 'document_upload' and delegates to the upload +
         verification method pipeline.
         """
-        PRE_UPLOAD = ["start", "entity_type", "registration", "cnpj_input", "cnpj_list", "add_company_data"]
+        PRE_UPLOAD = ["start", "entity_type", "registration", "cnpj_input", "cnpj_list", "add_company_data",
+                      "country_selection", "identity_check"]
         current = initial_step
 
         for iteration in range(18):  # safety cap (3 add_company_data sub-steps + buffer)
+            # Dismiss the Começar intro modal before acting on any step.
+            # It can appear/reappear at any point and blocks all interactions.
+            if current in ("start", "unknown", "method_selection"):
+                _click_comecar(page)
+
             self._shot(page, f"wiz_{iteration:02d}_{current}")
             print(f"[VERIFY] Wizard step [{iteration}]: {current}")
 
@@ -1729,21 +2485,33 @@ class FacebookBot:
                 return self._complete_verification(page)
 
             handler = {
-                "start":            self._wiz_start,
-                "entity_type":      self._wiz_entity_type,
-                "registration":     self._wiz_registration,
-                "cnpj_input":       self._wiz_cnpj_input,
-                "cnpj_list":        self._wiz_cnpj_list,
-                "add_company_data": self._wiz_add_company_data,
+                "start":             self._wiz_start,
+                "entity_type":       self._wiz_entity_type,
+                "registration":      self._wiz_registration,
+                "cnpj_input":        self._wiz_cnpj_input,
+                "cnpj_list":         self._wiz_cnpj_list,
+                "add_company_data":  self._wiz_add_company_data,
+                "country_selection": self._wiz_advance,
+                "identity_check":    self._wiz_advance,
             }.get(current)
 
             if handler:
                 handler(page)
                 _wait(1.5)
             else:
-                # unknown — nudge with Avançar / Começar
-                print("[VERIFY] Unknown step — nudging with Avançar")
-                for btn_name in ("Avançar", "Começar"):
+                # unknown — try MCP recovery first, then nudge with Avançar / Começar
+                print("[VERIFY] Unknown step — trying MCP recovery")
+                mcp_action = self._mcp_recover(
+                    page,
+                    "The wizard is on an unknown step. Identify what button or element to click "
+                    "to advance to the next step, and return its exact visible text. "
+                    "If you cannot determine what to do, return 'Avançar'."
+                )
+                nudge_buttons = [mcp_action] if mcp_action else []
+                nudge_buttons += ["Avançar", "Começar"]
+                for btn_name in nudge_buttons:
+                    if not btn_name:
+                        continue
                     try:
                         btn = page.get_by_role("button", name=btn_name)
                         if btn.is_visible(timeout=2_000):
@@ -1759,6 +2527,26 @@ class FacebookBot:
         return self._wizard_upload_and_verify(page)
 
     # ── Individual step handlers ───────────────────────────────────────────────
+
+    def _wiz_advance(self, page: Page):
+        """Generic advance step — click Avançar (button or link)."""
+        for selector in (
+            'button:has-text("Avançar")',
+            '[role="button"]:has-text("Avançar")',
+            'a:has-text("Avançar")',
+        ):
+            try:
+                page.locator(selector).first.click(timeout=3_000)
+                _wait(1)
+                return
+            except Exception:
+                pass
+        # Fallback: get_by_role
+        try:
+            page.get_by_role("button", name="Avançar").click(timeout=3_000)
+            _wait(1)
+        except Exception:
+            pass
 
     def _wiz_start(self, page: Page):
         """Wizard intro screen — click Começar or Avançar."""
@@ -1889,24 +2677,39 @@ class FacebookBot:
                 pass
 
         if is_contact and run_id:
-            # Buy virtual SMS number to use as the verification phone
-            activation_id, full_phone = self.sms.buy_number()
-            if activation_id:
-                phone_fb  = SMS24HService.to_facebook_format(full_phone)
-                phone_pdf = SMS24HService.to_pdf_format(full_phone)
-                self._sms_activation_id = activation_id
-                self._sms_phone_fb = phone_fb
-                print(f"[VERIFY] Virtual SMS number acquired: {phone_fb}")
-                # Replace the phone in the wizard form
-                self._fill_contact_phone(page, phone_fb)
-                # Update the PDF so it matches the verification phone
-                try:
-                    self.gerador.change_phone(run_id, phone_pdf)
-                    print(f"[VERIFY] PDF updated with virtual phone")
-                except Exception as e:
-                    print(f"[VERIFY] PDF phone update failed: {e}")
+            if self._sms_activation_id is not None:
+                # Number already bought (e.g. wizard re-entered after business_info update)
+                # — just fill the field with the existing number and move on.
+                print(f"[VERIFY] Reusing existing virtual number: {self._sms_phone_fb}")
+                self._fill_contact_phone(page, self._sms_phone_fb)
             else:
-                print("[VERIFY] Could not buy SMS number at contact step — using existing phone")
+                # Buy virtual SMS number to use as the verification phone
+                activation_id, full_phone = self.sms.buy_number()
+                if activation_id:
+                    phone_fb  = SMS24HService.to_facebook_format(full_phone)
+                    phone_pdf = SMS24HService.to_pdf_format(full_phone)
+                    self._sms_activation_id = activation_id
+                    self._sms_phone_fb = phone_fb
+                    print(f"[VERIFY] Virtual SMS number acquired: {phone_fb}")
+                    # Replace the phone in the wizard form
+                    self._fill_contact_phone(page, phone_fb)
+                    # Update the PDF so it matches the verification phone
+                    try:
+                        tel_fmt, pdf_path = self.gerador.change_phone(run_id, phone_pdf)
+                        # Keep self.run in sync so _validate_pdf_data checks the virtual phone
+                        self.run["telefone_digits"] = re.sub(r"\D", "", tel_fmt)
+                        _log_phone_match(pdf_path, phone_fb, tel_fmt)
+                        print(f"[VERIFY] PDF updated with virtual phone — wizard={phone_fb} documento={tel_fmt}")
+                    except Exception as e:
+                        print(f"[VERIFY] PDF phone update failed: {e}")
+                    # Update website HTML and Facebook business_info with the new phone
+                    try:
+                        self.gerador.change_website_phone(run_id, phone_pdf)
+                    except Exception as e:
+                        print(f"[VERIFY] Website phone update failed: {e}")
+                    self._update_business_phone(page, phone_pdf)
+                else:
+                    print("[VERIFY] Could not buy SMS number at contact step — using existing phone")
         else:
             # Sub-step 1: fill CNPJ if the 'Identificação Fiscal' field is empty
             try:
@@ -2006,10 +2809,19 @@ class FacebookBot:
                     self._sms_phone_fb = phone_fb
                     self._fill_contact_phone(page, phone_fb)
                     try:
-                        self.gerador.change_phone(run_id, phone_pdf)
-                        print(f"[VERIFY] PDF updated with virtual phone {phone_fb}")
+                        tel_fmt, pdf_path = self.gerador.change_phone(run_id, phone_pdf)
+                        # Keep self.run in sync so _validate_pdf_data checks the virtual phone
+                        self.run["telefone_digits"] = re.sub(r"\D", "", tel_fmt)
+                        _log_phone_match(pdf_path, phone_fb, tel_fmt)
+                        print(f"[VERIFY] PDF updated with virtual phone — wizard={phone_fb} documento={tel_fmt}")
                     except Exception as e:
                         print(f"[VERIFY] PDF phone update failed: {e}")
+                    # Update website HTML and Facebook business_info with the new phone
+                    try:
+                        self.gerador.change_website_phone(run_id, phone_pdf)
+                    except Exception as e:
+                        print(f"[VERIFY] Website phone update failed: {e}")
+                    self._update_business_phone(page, phone_pdf)
                     # Re-advance from contact-info back to method-selection
                     try:
                         page.get_by_role("button", name="Avançar").click(timeout=8_000)
@@ -2042,9 +2854,33 @@ class FacebookBot:
         # FB skips directly to phone_entry ("Enviar SMS" visible) — no doc upload needed.
         # When called on a fresh CNPJ-not-found flow, FB shows document_upload.
         _wait(2)
-        next_step = self._detect_wizard_step(page)
+
+        # Dismiss any "Começar" modal that may still be blocking.
+        # If _click_comecar fails and step detection still returns "start",
+        # retry up to 5 times with increasing waits.  If still stuck after
+        # all retries, raise a specific error — never fall through to doc upload
+        # with the Começar modal still present.
+        next_step = "start"
+        for _comecar_attempt in range(5):
+            clicked = _click_comecar(page)
+            _wait(1.5)
+            next_step = self._detect_wizard_step(page)
+            if next_step != "start":
+                break
+            wait_s = 2 + _comecar_attempt  # 2, 3, 4, 5, 6 seconds
+            print(f"[VERIFY] Começar modal still present (attempt {_comecar_attempt + 1}/5, clicked={clicked}) — waiting {wait_s}s")
+            _wait(wait_s)
+
         self._shot(page, f"mf_post_sms_{next_step}")
         print(f"[VERIFY] Post-SMS step: {next_step}")
+
+        if next_step == "start":
+            shot = self._shot(page, "comecar_modal_stuck")
+            raise VerificationStepError(
+                "comecar_modal_stuck",
+                "Modal 'Começar' não foi dispensado após 5 tentativas — não é possível continuar o wizard",
+                page.url, page.content(), screenshot_path=shot or "",
+            )
 
         if next_step == "complete":
             return True
@@ -2099,6 +2935,7 @@ class FacebookBot:
             return False
 
         # ── Document upload step ───────────────────────────────────────────
+        self._validate_pdf_data(pdf_path)
         if not self._wiz_upload_document(page, pdf_path):
             return False
 
@@ -2126,6 +2963,7 @@ class FacebookBot:
           "Escolha como gostaria de confirmar" (phone-only) →
           doc upload → SMS OTP → complete
         """
+        domain_not_verified_count = 0
         for _ in range(10):
             _wait(2)
             step = self._detect_wizard_step(page)
@@ -2136,12 +2974,39 @@ class FacebookBot:
                 return self._complete_verification(page)
 
             if step == "domain_confirmed":
-                # Domain was verified — click Avançar to proceed to next step
+                # Two sub-states share this step name:
+                #  A) "ainda não foi verificado" → button is "Verificar" (triggers check)
+                #  B) domain already verified    → button is "Avançar"
                 try:
-                    page.get_by_role("button", name="Avançar").click(timeout=5_000)
-                    _wait(2)
-                except Exception as e:
-                    print(f"[VERIFY] domain_confirmed Avançar failed: {e}")
+                    body_now = page.inner_text("body").lower()
+                except Exception:
+                    body_now = ""
+                if "ainda não foi verificado" in body_now:
+                    domain_not_verified_count += 1
+                    if domain_not_verified_count >= 3:
+                        # Domain genuinely failing — go back and switch to SMS
+                        print("[VERIFY] Domain stuck unverified after 3 tries — falling back to SMS via Voltar")
+                        try:
+                            page.get_by_role("button", name="Voltar").click(timeout=5_000)
+                            _wait(2)
+                        except Exception:
+                            pass
+                        return self._wizard_method_first(page)
+                    # Trigger the domain ownership check
+                    try:
+                        page.get_by_role("button", name="Verificar").click(timeout=5_000)
+                        print("[VERIFY] domain_confirmed: clicked 'Verificar' to trigger check")
+                        _wait(4)
+                    except Exception as e:
+                        print(f"[VERIFY] domain_confirmed 'Verificar' failed: {e}")
+                else:
+                    # Domain confirmed — advance to next step
+                    try:
+                        page.get_by_role("button", name="Avançar").click(timeout=5_000)
+                        print("[VERIFY] domain_confirmed: clicked 'Avançar'")
+                        _wait(2)
+                    except Exception as e:
+                        print(f"[VERIFY] domain_confirmed Avançar failed: {e}")
                 continue
 
             if step == "method_selection":
@@ -2168,13 +3033,45 @@ class FacebookBot:
             # Direct completion check
             try:
                 body = page.inner_text("body").lower()
-                if "agradecemos" in body or "em análise" in body:
+                if any(phrase in body for phrase in (
+                    "agradecemos", "em análise", "analisando suas informações",
+                    "verificando suas informações", "processando seu envio",
+                )):
                     print("[VERIFY] Completion text found after domain")
                     return True
             except Exception:
                 pass
 
         return self._complete_verification(page)
+
+    def _validate_pdf_data(self, pdf_path: str) -> None:
+        """
+        Extract text from the PDF and assert it contains the expected phone
+        and CNPJ from self.run. Raises RuntimeError with details on mismatch.
+        """
+        import pdfplumber
+
+        expected_phone = re.sub(r"\D", "", self.run.get("telefone_digits", ""))
+        expected_cnpj  = re.sub(r"\D", "", self.run.get("cnpj_digits", ""))
+
+        try:
+            with pdfplumber.open(pdf_path) as pdf:
+                text = "\n".join(p.extract_text() or "" for p in pdf.pages)
+        except Exception as e:
+            raise RuntimeError(f"[PDF] Could not read PDF for validation: {e}")
+
+        pdf_digits = re.sub(r"\D", "", text)
+
+        if expected_phone and expected_phone not in pdf_digits:
+            raise RuntimeError(
+                f"[PDF] Phone mismatch — expected {expected_phone} not found in document. "
+                "The PDF was not updated after the last phone change."
+            )
+        if expected_cnpj and expected_cnpj not in pdf_digits:
+            raise RuntimeError(
+                f"[PDF] CNPJ mismatch — expected {expected_cnpj} not found in document."
+            )
+        print(f"[PDF] Document validated — phone and CNPJ present.")
 
     def _wiz_upload_document(self, page: Page, pdf_path: str) -> bool:
         """
@@ -2197,6 +3094,7 @@ class FacebookBot:
         self._shot(page, "verify_before_doctype")
         self._wiz_select_doc_type(page)
         self._shot(page, "verify_after_doctype")
+        _wait(1.5)  # allow file input to render after doc type selection
 
         self._shot(page, "verify_before_upload")
         if not self._wiz_set_pdf(page, pdf_path):
@@ -2206,9 +3104,15 @@ class FacebookBot:
             if actual in ("method_selection", "phone_entry", "otp_entry", "complete"):
                 print(f"[VERIFY] No file input found but wizard is at '{actual}' — treating upload as done")
                 return True
-            print("[VERIFY] PDF upload failed")
             self._save_html(page, "verify_upload_fail")
-            return False
+            shot_path = self._shot(page, "document_upload_failed")
+            raise VerificationStepError(
+                "document_upload_failed",
+                f"Não foi possível fazer upload do PDF CNPJ — input de arquivo não encontrado ou inacessível (pdf: {pdf_path})",
+                page.url,
+                page.content(),
+                screenshot_path=shot_path or "",
+            )
 
         _wait(1.5)
         self._shot(page, "verify_after_upload")
@@ -2312,7 +3216,8 @@ class FacebookBot:
     def _wiz_set_pdf(self, page: Page, pdf_path: str) -> bool:
         """
         Locate the file input and attach the PDF.
-        Tries label-based, raw input[type=file], and file-chooser event.
+        Tries label-based, raw input[type=file], force-set on hidden inputs,
+        and file-chooser interception (for custom upload buttons).
         """
         # Strategy 1: labelled input
         for label in ("Carregar documentos para", "Selecionar arquivo", "Carregar"):
@@ -2347,77 +3252,125 @@ class FacebookBot:
         except Exception:
             pass
 
+        # Strategy 4: file-chooser interception — Facebook uses a custom upload
+        # button that hides the actual <input type=file>. Clicking the visible
+        # button triggers a file-chooser event which we intercept here.
+        upload_button_candidates = [
+            page.get_by_role("button", name="Selecionar arquivo"),
+            page.get_by_role("button", name="Carregar arquivo"),
+            page.get_by_role("button", name="Escolher arquivo"),
+            page.get_by_role("button", name="Upload file"),
+            page.get_by_role("button", name="Choose file"),
+            page.locator("label").filter(has_text="Selecionar"),
+            page.locator("label").filter(has_text="Carregar"),
+            page.locator('[aria-label*="arquivo"]'),
+            page.locator('[aria-label*="file"]'),
+        ]
+        for btn in upload_button_candidates:
+            try:
+                if not btn.is_visible(timeout=1_000):
+                    continue
+                with page.expect_file_chooser(timeout=5_000) as fc_info:
+                    btn.click()
+                fc_info.value.set_files(pdf_path)
+                print(f"[UPLOAD] File set via file-chooser interception")
+                return True
+            except Exception:
+                continue
+
         return False
 
     def _llm_detect_methods(self, page: Page) -> dict:
         """
-        Screenshot → LLM: ask which verification methods are currently visible.
+        Screenshot → Claude: ask which verification methods are currently visible.
         Returns e.g. {"domain": True, "sms": True, "call": False}.
         Falls back to all-False dict on any error or missing API key.
         """
-        openai_key = os.getenv("OPENAI_API_KEY") or config.OPENAI_API_KEY
-        if not openai_key:
-            return {"domain": False, "sms": False, "call": False}
+        client = _get_claude_client()
+        if not client:
+            print("[VERIFY] No Anthropic client — LLM method detection skipped")
+            return {"domain": False, "sms": False, "call": False, "_no_client": True}
         try:
             img_b64 = base64.b64encode(page.screenshot()).decode()
-            payload = {
-                "model": "gpt-4o-mini",
-                "messages": [{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (
-                                "You are analysing a Facebook Business Verification wizard "
-                                "screenshot (in Portuguese).\n"
-                                "Look at the verification method options visible on screen "
-                                "(radio buttons or list items).\n"
-                                "Reply with ONLY a JSON object with boolean keys, nothing else:\n"
-                                "{\"domain\": <true if a domain/DNS verification option is visible>, "
-                                "\"sms\": <true if an SMS text message option is visible>, "
-                                "\"call\": <true if a phone call option is visible>}"
-                            ),
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{img_b64}",
-                                "detail": "low",
-                            },
-                        },
-                    ],
-                }],
-                "max_tokens": 40,
-            }
-            r = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {openai_key}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=30,
+            prompt = (
+                "You are analysing a Facebook Business Verification wizard "
+                "screenshot (in Portuguese).\n"
+                "Look at the verification method options visible on screen "
+                "(radio buttons or list items).\n"
+                "Reply with ONLY a JSON object with boolean keys, nothing else:\n"
+                '{"domain": <true if a domain/DNS verification option is visible>, '
+                '"sms": <true if an SMS text message option is visible>, '
+                '"call": <true if a phone call option is visible>}'
             )
-            r.raise_for_status()
-            raw = r.json()["choices"][0]["message"]["content"].strip()
+            response = client.messages.create(
+                model=config.CLAUDE_FAST_MODEL,
+                max_tokens=40,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": img_b64}},
+                    {"type": "text", "text": prompt},
+                ]}],
+            )
+            raw = response.content[0].text.strip()
+            print(f"[Claude] detect_methods raw response: {raw!r}")
+            # Strip markdown code fences if Claude wrapped the JSON in ```json ... ```
+            if raw.startswith("```"):
+                raw = raw.split("```")[-2] if "```" in raw[3:] else raw.lstrip("`")
+                raw = raw.lstrip("json").strip()
+            if not raw:
+                print("[Claude] detect_methods: empty response — treating as no methods")
+                return {"domain": False, "sms": False, "call": False}
             result = json.loads(raw)
-            print(f"[LLM] detect_methods → {result}")
+            print(f"[Claude] detect_methods → {result}")
             return {
                 "domain": bool(result.get("domain")),
                 "sms":    bool(result.get("sms")),
                 "call":   bool(result.get("call")),
             }
         except Exception as e:
-            print(f"[LLM] detect_methods failed: {e}")
-            return {"domain": False, "sms": False, "call": False}
+            print(f"[Claude] detect_methods failed: {e}")
+            return {"domain": False, "sms": False, "call": False, "_error": str(e)}
+
+    def _click_method_option(self, page: Page, target: str) -> bool:
+        """
+        Click a verification method radio/option by DOM selectors.
+        Returns True if an element was found and clicked.
+
+        Tries multiple selectors per method so minor DOM changes don't break it.
+        """
+        import re as _re
+        selector_factories = {
+            "domain": [
+                lambda: page.locator('[role="radio"]').filter(has_text=_re.compile(r'domínio', _re.IGNORECASE)).first,
+                lambda: page.get_by_text("Verificação de domínio", exact=False).first,
+            ],
+            "sms": [
+                lambda: page.locator('[role="radio"]').filter(has_text=_re.compile(r'SMS', _re.IGNORECASE)).first,
+                lambda: page.get_by_text("Mensagem de texto", exact=False).first,
+            ],
+            "call": [
+                lambda: page.locator('[role="radio"]').filter(has_text=_re.compile(r'ligação|telefônica', _re.IGNORECASE)).first,
+                lambda: page.get_by_text("Ligação telefônica", exact=False).first,
+            ],
+        }
+        for sel_fn in selector_factories.get(target, []):
+            try:
+                el = sel_fn()
+                if el.is_visible(timeout=2_000):
+                    el.scroll_into_view_if_needed()
+                    el.click()
+                    print(f"[VERIFY] _click_method_option: clicked '{target}' via DOM selector")
+                    return True
+            except Exception:
+                continue
+        return False
 
     def _wiz_select_method(self, page: Page) -> str:
         """
         Wait for the method selection screen to fully load, then select the best
         available verification method (domain > SMS > call) and advance.
 
-        Primary path: LLM vision detects available methods, then guides each click.
-        Fallback (no API key / LLM error): selector-based logic.
+        Primary path: DOM-based selectors — no LLM API calls needed.
+        Fallback: LLM vision when all DOM selectors fail.
 
         Priority rule: domain FIRST, always.  SMS only when domain is not present.
         Returns 'domain', 'sms', or 'call'.
@@ -2431,123 +3384,63 @@ class FacebookBot:
 
         self._shot(page, "method_select_before")
 
-        # ── LLM primary path ───────────────────────────────────────────────
-        methods = self._llm_detect_methods(page)
+        # ── DOM-first: try domain → sms → call ─────────────────────────────
+        target = None
+        for method in ("domain", "sms", "call"):
+            if self._click_method_option(page, method):
+                target = method
+                break
 
-        # Strict priority: domain first, SMS only if domain absent
-        if methods["domain"]:
-            target = "domain"
-            select_goal = "select the domain verification option (radio button or list item)"
-        elif methods["sms"]:
-            target = "sms"
-            select_goal = "select the SMS text message verification option (radio button or list item)"
-        elif methods["call"]:
-            target = "call"
-            select_goal = "select the phone call verification option (radio button or list item)"
-        else:
-            target = None
-            select_goal = ""
+        # ── LLM fallback: only when all DOM selectors failed ───────────────
+        if target is None:
+            print("[VERIFY] DOM selectors found no method option — falling back to LLM")
+            self._shot(page, "method_select_dom_failed")
+            methods = self._llm_detect_methods(page)
+            for method in ("domain", "sms", "call"):
+                if methods.get(method):
+                    goal = {
+                        "domain": "select the domain verification option (radio button or list item)",
+                        "sms":    "select the SMS text message verification option (radio button or list item)",
+                        "call":   "select the phone call verification option (radio button or list item)",
+                    }[method]
+                    option_text = self._llm_find_action(page, goal)
+                    if option_text:
+                        try:
+                            page.get_by_text(option_text, exact=False).first.click(timeout=4_000)
+                            target = method
+                            print(f"[LLM] Clicked method option via LLM: '{option_text}'")
+                            break
+                        except Exception as e:
+                            print(f"[LLM] Could not click '{option_text}': {e}")
 
-        if target:
-            # Step 1: find and click the method option
-            option_text = self._llm_find_action(page, select_goal)
-            clicked_option = False
-            if option_text:
+            # Last resort: first radio
+            if target is None:
                 try:
-                    page.get_by_text(option_text, exact=False).first.click(timeout=4_000)
-                    clicked_option = True
-                    print(f"[LLM] Clicked method option: '{option_text}'")
-                except Exception as e:
-                    print(f"[LLM] Could not click '{option_text}': {e}")
-
-            if not clicked_option:
-                # LLM found no text or click failed — try label-based click as bridge
-                try:
-                    page.get_by_label(option_text or target, exact=False).first.click(timeout=3_000)
-                    clicked_option = True
+                    page.locator('[role="radio"]').first.click(timeout=2_000)
+                    target = "sms"
+                    print("[VERIFY] Last resort: clicked first radio, assuming SMS")
                 except Exception:
                     pass
 
-            _wait(0.5)
-            self._shot(page, f"method_select_after_{target}")
+        _wait(0.5)
+        self._shot(page, f"method_select_after_{target}")
 
-            # Step 2: click Avançar — ask LLM for the button text first
-            advance_text = self._llm_find_action(page, "click the button to advance to the next step (Avançar or similar)")
-            try:
-                if advance_text and advance_text.upper() != "UNKNOWN":
-                    page.get_by_role("button", name=advance_text).click(timeout=5_000)
-                else:
-                    page.get_by_role("button", name="Avançar").click(timeout=5_000)
-            except Exception as e:
-                print(f"[LLM] Avançar click failed ({e}), retrying with fallback selector")
-                try:
-                    page.get_by_role("button", name="Avançar").click(timeout=5_000)
-                except Exception:
-                    pass
-            _wait(1.5)
-
-            # Step 3: some flows show a second confirmation Avançar
-            try:
-                page.get_by_role("button", name="Avançar").click(timeout=2_000)
-                _wait(1.5)
-            except Exception:
-                pass
-
-            self._shot(page, f"method_select_done_{target}")
-            return target
-
-        # ── Selector fallback (no API key or LLM returned all-False) ───────
-        print("[VERIFY] LLM method detection unavailable — using selector fallback")
-
-        # Domain verification (best option)
-        for sel in [
-            lambda: page.locator('[role="radio"]').filter(has_text="domínio").first,
-            lambda: page.get_by_text("Verificação de domínio", exact=False).first,
-        ]:
-            try:
-                el = sel()
-                if el.is_visible(timeout=2_000):
-                    el.scroll_into_view_if_needed()
-                    el.click()
-                    _wait(0.5)
-                    page.get_by_role("button", name="Avançar").click(timeout=5_000)
-                    _wait(1.5)
-                    try:
-                        page.get_by_role("button", name="Avançar").click(timeout=2_000)
-                        _wait(1.5)
-                    except Exception:
-                        pass
-                    return "domain"
-            except Exception:
-                pass
-
-        # SMS (second best)
-        for sel in [
-            lambda: page.locator('[role="radio"]').filter(has_text="SMS").first,
-            lambda: page.get_by_text("Mensagem de texto (SMS)", exact=False).first,
-            lambda: page.get_by_role("radio", name="Mensagem de texto (SMS)"),
-        ]:
-            try:
-                el = sel()
-                if el.is_visible(timeout=2_000):
-                    el.scroll_into_view_if_needed()
-                    el.click()
-                    _wait(0.5)
-                    page.get_by_role("button", name="Avançar").click(timeout=5_000)
-                    _wait(1.5)
-                    return "sms"
-            except Exception:
-                pass
-
-        # Last resort: first radio
+        # ── Click Avançar (DOM — no LLM needed) ────────────────────────────
         try:
-            page.locator('[role="radio"]').first.click(timeout=2_000)
-            _wait(0.5)
             page.get_by_role("button", name="Avançar").click(timeout=5_000)
+        except Exception as e:
+            print(f"[VERIFY] Avançar click failed: {e}")
+        _wait(1.5)
+
+        # Some flows show a second confirmation Avançar
+        try:
+            page.get_by_role("button", name="Avançar").click(timeout=2_000)
             _wait(1.5)
         except Exception:
             pass
-        return "sms"
+
+        self._shot(page, f"method_select_done_{target}")
+        return target or "sms"
 
     # ── SMS retry loop ─────────────────────────────────────────────────────────
 
@@ -2612,14 +3505,24 @@ class FacebookBot:
 
                 # Update PDF with the new phone
                 try:
-                    _, pdf_path = self.gerador.change_phone(run_id, phone_pdf)
-                    print(f"[VERIFY] PDF updated — phone {phone_fb}")
+                    tel_fmt, pdf_path = self.gerador.change_phone(run_id, phone_pdf)
+                    # Keep self.run in sync so _validate_pdf_data checks the virtual phone
+                    self.run["telefone_digits"] = re.sub(r"\D", "", tel_fmt)
+                    _log_phone_match(pdf_path, phone_fb, tel_fmt)
+                    print(f"[VERIFY] PDF updated — wizard={phone_fb} documento={tel_fmt}")
                 except Exception as e:
                     print(f"[VERIFY] PDF update failed: {e}")
                     self.sms.cancel(activation_id)
                     activation_id = None
                     self._sms_activation_id = None
                     continue
+
+                # Update website HTML and Facebook business_info with the new phone
+                try:
+                    self.gerador.change_website_phone(run_id, phone_pdf)
+                except Exception as e:
+                    print(f"[VERIFY] Website phone update failed: {e}")
+                self._update_business_phone(page, phone_pdf)
 
                 # Advance from contact-info to document-upload
                 try:
@@ -2634,6 +3537,7 @@ class FacebookBot:
 
                 # Document-upload: wait for the page to finish rendering
                 self._shot(page, f"sms_{attempt+1}_doc_reupload")
+                self._validate_pdf_data(pdf_path)
                 try:
                     page.locator('input[type="file"]').first.wait_for(
                         state="attached", timeout=10_000
@@ -2773,8 +3677,14 @@ class FacebookBot:
                 self._sms_activation_id = None
 
         print("[VERIFY] All SMS attempts exhausted")
-        self._shot(page, "verification_fail")
-        return False
+        shot_path = self._shot(page, "sms_all_attempts_exhausted")
+        raise VerificationStepError(
+            "sms_otp_exhausted",
+            f"Todos os {self.sms_max_attempts} tentativas de SMS falharam — código OTP não recebido em nenhuma tentativa",
+            page.url,
+            page.content(),
+            screenshot_path=shot_path or "",
+        )
 
     def _complete_verification(self, page: Page) -> bool:
         """
@@ -2789,6 +3699,8 @@ class FacebookBot:
             "Processando seu envio",
             "Agradecemos o envio",
             "Em análise",
+            "Analisando suas informações",
+            "Verificando suas informações",
         )
 
         # Wait up to 35 s for any success indicator

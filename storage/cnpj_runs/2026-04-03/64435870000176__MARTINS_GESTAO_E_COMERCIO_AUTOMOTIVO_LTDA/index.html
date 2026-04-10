@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Moda e Acessórios Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-amber-50 to-orange-50">
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 shadow-lg border-b border-orange-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text hidden sm:inline">StyleHub</span>
+                </div>
+                
+                <div class="hidden md:flex gap-8 items-center">
+                    <a href="#colecoes" class="text-gray-700 hover:text-orange-600 transition font-medium">Coleções</a>
+                    <a href="#categorias" class="text-gray-700 hover:text-orange-600 transition font-medium">Categorias</a>
+                    <a href="#destaques" class="text-gray-700 hover:text-orange-600 transition font-medium">Destaques</a>
+                    <a href="#promocoes" class="text-gray-700 hover:text-orange-600 transition font-medium">Promoções</a>
+                </div>
+                
+                <div class="flex gap-4 items-center">
+                    <button class="relative p-2 text-gray-700 hover:text-orange-600 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <button class="relative p-2 text-gray-700 hover:text-orange-600 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="md:hidden p-2 text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 right-10 w-96 h-96 bg-orange-300 rounded-full mix-blend-multiply filter blur-3xl floating"></div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-amber-300 rounded-full mix-blend-multiply filter blur-3xl floating" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in">
+                    <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+                        <span class="gradient-text">Moda que</span><br>
+                        <span class="text-gray-900">Inspire Confiança</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Descubra nossa seleção exclusiva de roupas e acessórios de alta qualidade. Do casual ao elegante, temos tudo que você precisa para se sentir incrível todos os dias.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-full font-bold text-lg hover-lift shadow-lg">
+                            Explorar Coleção
+                        </button>
+                        <button class="px-8 py-4 border-2 border-orange-500 text-orange-600 rounded-full font-bold text-lg hover:bg-orange-50 transition">
+                            Ver Catálogo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative h-96 md:h-full min-h-96">
+                    <img src="https://images.unsplash.com/photo-1595777707802-52b37b7f8432?w=600&h=600&fit=crop" alt="Modelo de moda" class="w-full h-full object-cover rounded-3xl shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl max-w-xs">
+                        <p class="text-sm text-gray-600 mb-2">⭐ Cliente Satisfeito</p>
+                        <p class="font-bold text-gray-900">"Qualidade e estilo impecáveis!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIAS -->
+    <section id="categorias" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">Categorias Premium</h2>
+                <p class="text-gray-600 text-lg">Encontre exatamente o que procura</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Categoria 1 -->
+                <div class="group relative overflow-hidden rounded-2xl hover-lift">
+                    <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=500&h=500&fit=crop" alt="Roupas Femininas" class="w-full h-80 object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end p-8">
+                        <div>
+                            <h3 class="text-white text-2xl font-bold mb-2">Feminino</h3>
+                            <p class="text-gray-200">Coleção exclusiva para mulheres</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categoria 2 -->
+                <div class="group relative overflow-hidden rounded-2xl hover-lift">
+                    <img src="https://images.unsplash.com/photo-1618886996201-a97a71b8a0fe?w=500&h=500&fit=crop" alt="Roupas Masculinas" class="w-full h-80 object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end p-8">
+                        <div>
+                            <h3 class="text-white text-2xl font-bold mb-2">Masculino</h3>
+                            <p class="text-gray-200">Estilo clássico e moderno</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categoria 3 -->
+                <div class="group relative overflow-hidden rounded-2xl hover-lift">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop" alt="Acessórios" class="w-full h-80 object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end p-8">
+                        <div>
+                            <h3 class="text-white text-2xl font-bold mb-2">Acessórios</h3>
+                            <p class="text-gray-200">Complemente seu visual</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLEÇÕES DESTACADAS -->
+    <section id="colecoes" class="py-20 bg-gradient-to-r from-purple-100 via-pink-100 to-orange-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Coleções em Destaque</h2>
+                <p class="text-gray-700 text-lg">As tendências mais quentes do momento</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Item 1 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover-lift">
+                    <div class="relative overflow-hidden h-64 bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop" alt="Vestido Floral" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">-30%</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Vestido Floral Premium</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tecido 100% algodão orgânico</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-orange-600">R$ 189</span>
+                                <span class="text-gray-400 line-through ml-2">R$ 270</span>
+                            </div>
+                            <button class="p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 1a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover-lift">
+                    <div class="relative overflow-hidden h-64 bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1593515221894-ef8409a8d36e?w=400&h=400&fit=crop" alt="Blazer Elegante" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">Novo</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Blazer Executivo</h3>
+                        <p class="text-gray-600 text-sm mb-4">Corte perfeito e sofisticado</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-orange-600">R$ 299</span>
+                            </div>
+                            <button class="p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 1a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover-lift">
+                    <div class="relative overflow-hidden h-64 bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1506629082632-419aa5bef112?w=400&h=400&fit=crop" alt="Jeans Premium" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">Sale</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Jeans Skinny Fit</h3>
+                        <p class="text-gray-600 text-sm mb-4">Conforto e estilo combinados</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-orange-600">R$ 129</span>
+                                <span class="text-gray-400 line-through ml-2">R$ 180</span>
+                            </div>
+                            <button class="p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 1a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover-lift">
+                    <div class="relative overflow-hidden h-64 bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop" alt="Bolsa de Couro" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold">Premium</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Bolsa Italiana</h3>
+                        <p class="text-gray-600 text-sm mb-4">Couro genuíno importado</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-bold text-orange-600">R$ 449</span>
+                            </div>
+                            <button class="p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 1a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESTAQUES E BENEFÍCIOS -->
+    <section id="destaques" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Por Que Nos Escolher</h2>
+                <p class="text-gray-600 text-lg">Qualidade e serviço que fazem a diferença</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Benefício 1 -->
+                <div class="group p-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl text-center hover-lift border border-blue-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl text-gray-900 mb-3">Qualidade Premium</h3>
+                    <p class="text-gray-600">Selecionamos apenas os melhores materiais e marcas</p>
+                </div>
+                
+                <!-- Benefício 2 -->
+                <div class="group p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl text-center hover-lift border border-green-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl text-gray-900 mb-3">Frete Rápido</h3>
+                    <p class="text-gray-600">Entrega em até 48h para a região</p>
+                </div>
+                
+                <!-- Benefício 3 -->
+                <div class="group p-8 bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl text-center hover-lift border border-pink-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl text-gray-900 mb-3">Melhor Preço</h3>
+                    <p class="text-gray-600">Garantimos os melhores valores do mercado</p>
+                </div>
+                
+                <!-- Benefício 4 -->
+                <div class="group p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl text-center hover-lift border border-amber-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-xl text-gray-900 mb-3">Satisfação 100%</h3>
+                    <p class="text-gray-600">Troca garantida em 30 dias</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section id="promocoes" class="py-20 bg-gradient-to-r from-rose-100 via-purple-100 to-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">🎉 Promoções Imperdíveis</h2>
+                <p class="text-gray-700 text-lg">Descontos especiais para você</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Promoção 1 -->
+                <div class="relative overflow-hidden rounded-3xl bg-white p-8 md:p-12 hover-lift group">
+                    <div class="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Compre 2, Leve 3!</h3>
+                        <p class="text-gray-600 text-lg mb-6">Na compra de 2 camisetas, ganhe a terceira com 50% de desconto</p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-5xl font-black gradient-text">50%</span>
+                            <button class="px-8 py-3 bg-orange-500 text-white rounded-full font-bold hover:bg-orange-600 transition">
+                                Aproveitar →
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">*Válido até 31 de Dezembro</p>
+                    </div>
+                </div>
+                
+                <!-- Promoção 2 -->
+                <div class="relative overflow-hidden rounded-3xl bg-white p-8 md:p-12 hover-lift group">
+                    <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-blue-400 to-cyan-400 rounded-full opacity-20 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frete Grátis</h3>
+                        <p class="text-gray-600 text-lg mb-6">Em pedidos acima de R$ 150, frete grátis para todo o Brasil</p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-5xl font-black text-blue-600">FREE</span>
+                            <button class="px-8 py-3 bg-blue-500 text-white rounded-full font-

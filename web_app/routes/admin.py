@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from .. import db
-from ..models import User, VerifyJob, AppLog, log_event
+from ..models import User, VerifyJob, AppLog, SystemSetting, log_event
 
 bp = Blueprint("admin", __name__, url_prefix="/admin")
 
@@ -182,3 +182,82 @@ def admin_logs():
         filter_level=filter_level,
         filter_profile=filter_profile,
     )
+
+
+# ── System Settings ───────────────────────────────────────────────────────────
+
+@bp.route("/settings", methods=["GET"])
+@login_required
+def admin_settings():
+    import config as verif_config
+
+    current_provider = SystemSetting.get("SMS_PROVIDER", verif_config.SMS_PROVIDER)
+
+    settings = {
+        "SMS_PROVIDER":          current_provider,
+        "SMS24H_API_KEY":        SystemSetting.get("SMS24H_API_KEY",  verif_config.SMS24H_API_KEY),
+        "SMS24H_COUNTRY":        SystemSetting.get("SMS24H_COUNTRY",  verif_config.SMS24H_COUNTRY),
+        "SMS24H_SERVICE":        SystemSetting.get("SMS24H_SERVICE",  verif_config.SMS24H_SERVICE),
+        "HEROSMS_API_KEY":       SystemSetting.get("HEROSMS_API_KEY", verif_config.HEROSMS_API_KEY),
+        "HEROSMS_COUNTRY":       SystemSetting.get("HEROSMS_COUNTRY", verif_config.HEROSMS_COUNTRY),
+        "HEROSMS_SERVICE":       SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE),
+        "AI_PROVIDER":           SystemSetting.get("AI_PROVIDER",           "anthropic"),
+        "ANTHROPIC_API_KEY_CNPJ": SystemSetting.get("ANTHROPIC_API_KEY_CNPJ", verif_config.ANTHROPIC_API_KEY),
+        "ANTHROPIC_MODEL_CNPJ":  SystemSetting.get("ANTHROPIC_MODEL_CNPJ",  verif_config.CLAUDE_FAST_MODEL),
+        "OPENAI_API_KEY_CNPJ":   SystemSetting.get("OPENAI_API_KEY_CNPJ",   verif_config.OPENAI_API_KEY),
+        "OPENAI_MODEL_CNPJ":     SystemSetting.get("OPENAI_MODEL_CNPJ",     getattr(verif_config, "OPENAI_MODEL", "gpt-4.1-mini")),
+    }
+    return render_template("admin_settings.html", title="Admin • Configurações", settings=settings)
+
+
+@bp.route("/settings", methods=["POST"])
+@login_required
+def admin_settings_save():
+    import config as verif_config
+
+    fields = [
+        "SMS_PROVIDER",
+        "SMS24H_API_KEY", "SMS24H_COUNTRY", "SMS24H_SERVICE",
+        "HEROSMS_API_KEY", "HEROSMS_COUNTRY", "HEROSMS_SERVICE",
+        "AI_PROVIDER",
+        "ANTHROPIC_API_KEY_CNPJ", "ANTHROPIC_MODEL_CNPJ",
+        "OPENAI_API_KEY_CNPJ", "OPENAI_MODEL_CNPJ",
+    ]
+    for field in fields:
+        val = (request.form.get(field) or "").strip()
+        if val:
+            SystemSetting.set(field, val)
+
+    log_event("info", "admin", "Configurações de SMS atualizadas", user_id=current_user.id)
+    flash("Configurações salvas com sucesso.", "success")
+    return redirect(url_for("admin.admin_settings"))
+
+
+@bp.route("/settings/test-balance", methods=["POST"])
+@login_required
+def admin_test_balance():
+    """Return the balance for a given provider (AJAX)."""
+    import config as verif_config
+
+    provider = (request.json or {}).get("provider", "sms24h")
+
+    try:
+        if provider == "herosms":
+            from services.herosms import HeroSMSService
+            api_key = SystemSetting.get("HEROSMS_API_KEY", verif_config.HEROSMS_API_KEY)
+            country = SystemSetting.get("HEROSMS_COUNTRY", verif_config.HEROSMS_COUNTRY)
+            service = SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE)
+            svc = HeroSMSService(api_key, country, service)
+        else:
+            from services.sms24h import SMS24HService
+            api_key = SystemSetting.get("SMS24H_API_KEY", verif_config.SMS24H_API_KEY)
+            country = SystemSetting.get("SMS24H_COUNTRY", verif_config.SMS24H_COUNTRY)
+            service = SystemSetting.get("SMS24H_SERVICE", verif_config.SMS24H_SERVICE)
+            svc = SMS24HService(api_key, country, service)
+
+        balance = svc.get_balance()
+        if balance is not None:
+            return jsonify({"ok": True, "balance": balance})
+        return jsonify({"ok": False, "error": "Sem resposta da API (chave inválida?)"})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)})

@@ -25,6 +25,10 @@ import time
 import threading
 from pathlib import Path
 
+# Job-level cancellation flags: job_id → threading.Event
+_cancel_flags: dict[int, threading.Event] = {}
+_cancel_lock = threading.Lock()
+
 import websockets
 import websockets.exceptions
 
@@ -112,18 +116,35 @@ def _execute_job_sync(job: dict) -> dict:
     Execute a verification job synchronously (called from asyncio.to_thread).
     Returns a dict suitable for the job_done WebSocket message.
     """
-    job_id     = job["id"]
-    profile_id = job["profile_id"]
+    job_id      = job["id"]
+    profile_id  = job["profile_id"]
     business_id = job.get("business_id", "")
+    sms_payload = job.get("sms")   # injected by VPS; contains provider + credentials
+
+    # Register a cancel flag for this job
+    cancel_event = threading.Event()
+    with _cancel_lock:
+        _cancel_flags[job_id] = cancel_event
 
     print(f"[JOB {job_id}] Iniciando para perfil {profile_id}…")
 
-    success        = False
-    message        = ""
-    screenshot_b64 = ""
+    success          = False
+    message          = ""
+    screenshot_b64   = ""
+    error_traceback  = ""
+    e                = None
+
+    # Check if already cancelled before we even start
+    if cancel_event.is_set():
+        with _cancel_lock:
+            _cancel_flags.pop(job_id, None)
+        return {"type": "job_cancelled", "job_id": job_id, "success": False,
+                "message": "Cancelado antes de iniciar", "step_name": "", "page_url": "",
+                "page_html": "", "traceback": "", "screenshot_b64": ""}
 
     try:
-        from main import _run_for_profile, _mark_verified, _acquire_run_id
+        from main import _run_for_profile, _mark_verified, _mark_restricted, _acquire_run_id
+        from services.facebook_bot import BmRestrictedException
 
         profile      = _client.get_profile(profile_id)
         remark       = profile.get("remark", "")
@@ -147,6 +168,7 @@ def _execute_job_sync(job: dict) -> dict:
             profile=profile,
             run_id=run_id,
             email_mode=email_mode,
+            sms_payload=sms_payload,
             business_id=business_id,
             gerador_data=gerador_data or {},
         )
@@ -159,9 +181,46 @@ def _execute_job_sync(job: dict) -> dict:
 
         screenshot_b64 = _capture_screenshot_b64(since_epoch=start_time)
 
+    except BmRestrictedException as e:
+        import traceback as _tb
+        message = str(e)
+        error_traceback = _tb.format_exc()
+        print(f"[JOB {job_id}] BM Restrita: {e}")
+        try:
+            from main import _mark_restricted
+            _mark_restricted(profile_id)
+        except Exception as _me:
+            print(f"[JOB {job_id}] Could not mark as restricted: {_me}")
+
     except Exception as e:
+        import traceback as _tb
         message = str(e)[:500]
+        error_traceback = _tb.format_exc()
         print(f"[JOB {job_id}] Exceção: {e}")
+
+    step_name = ""
+    page_url  = ""
+    page_html = ""
+    try:
+        from services.facebook_bot import VerificationStepError as _VSE
+        cause = e if isinstance(e, _VSE) else getattr(e, "__cause__", None)
+        if isinstance(cause, _VSE):
+            step_name = cause.step
+            page_url  = cause.page_url
+            page_html = (cause.page_html or "")[:50000]
+    except Exception:
+        pass
+
+    # Clean up cancel flag
+    with _cancel_lock:
+        _cancel_flags.pop(job_id, None)
+
+    # If cancelled mid-run, report as cancelled so VPS resets status properly
+    if cancel_event.is_set():
+        print(f"[JOB {job_id}] ✗ Cancelado")
+        return {"type": "job_cancelled", "job_id": job_id, "success": False,
+                "message": "Cancelado manualmente", "step_name": "", "page_url": "",
+                "page_html": "", "traceback": "", "screenshot_b64": screenshot_b64}
 
     print(f"[JOB {job_id}] {'✓ Sucesso' if success else '✗ Falha'}")
     return {
@@ -169,6 +228,10 @@ def _execute_job_sync(job: dict) -> dict:
         "job_id":         job_id,
         "success":        success,
         "message":        message,
+        "step_name":      step_name,
+        "page_url":       page_url,
+        "page_html":      page_html,
+        "traceback":      error_traceback if not success else "",
         "screenshot_b64": screenshot_b64,
     }
 
@@ -185,6 +248,21 @@ async def _handle_run_job(msg: dict, outbox: asyncio.Queue):
     # Run blocking job in a thread; result goes back through outbox
     result = await asyncio.to_thread(_execute_job_sync, job)
     await outbox.put(json.dumps(result))
+
+
+async def _handle_cancel_job(msg: dict, outbox: asyncio.Queue):
+    job_id = msg.get("job_id")
+    if job_id is None:
+        return
+    with _cancel_lock:
+        flag = _cancel_flags.get(job_id)
+    if flag:
+        flag.set()
+        print(f"[JOB {job_id}] Cancel flag set — job will stop at next checkpoint")
+    else:
+        # Job not running locally — just acknowledge to VPS
+        await outbox.put(json.dumps({"type": "job_cancelled", "job_id": job_id,
+                                     "success": False, "message": "Cancelado (job não ativo)"}))
 
 
 async def _handle_open_browser(msg: dict, outbox: asyncio.Queue):
@@ -211,6 +289,8 @@ async def _receiver(ws, outbox: asyncio.Queue):
 
         if msg_type == "run_job":
             asyncio.create_task(_handle_run_job(msg, outbox))
+        elif msg_type == "cancel_job":
+            asyncio.create_task(_handle_cancel_job(msg, outbox))
         elif msg_type == "open_browser":
             asyncio.create_task(_handle_open_browser(msg, outbox))
         elif msg_type == "sync_request":

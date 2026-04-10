@@ -45,6 +45,13 @@
                href="{{ url_for('admin.admin_users') }}">Admin</a>
             <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
                href="{{ url_for('admin.admin_logs') }}">Logs</a>
+            <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
+               href="{{ url_for('admin.admin_settings') }}">Configurações</a>
+            <a class="text-sm px-3 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 relative"
+               href="{{ url_for('errors.error_list') }}">
+              Erros
+              <span id="error-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-500 text-[10px] font-bold flex items-center justify-center text-white"></span>
+            </a>
           {% endif %}
 
           <a class="text-sm px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800"
@@ -71,6 +78,28 @@
   </div>
 
   <script>
+  // ── Error badge polling ───────────────────────────────────────────────────
+  (function () {
+    const badge = document.getElementById("error-badge");
+    if (!badge) return;
+    async function checkErrors() {
+      try {
+        const r = await fetch("/errors/unresolved-count");
+        const d = await r.json();
+        if (d.count > 0) {
+          badge.textContent = d.count > 9 ? "9+" : d.count;
+          badge.classList.remove("hidden");
+          badge.classList.add("flex");
+        } else {
+          badge.classList.add("hidden");
+          badge.classList.remove("flex");
+        }
+      } catch {}
+    }
+    checkErrors();
+    setInterval(checkErrors, 30000);
+  })();
+
   // ── Agent status polling ──────────────────────────────────────────────────
   (function () {
     const pill = document.getElementById("agent-status-pill");

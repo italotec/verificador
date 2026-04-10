@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBE Fashion - Roupas e Acessórios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-item {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .collection-img {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collection-img img {
+            transition: transform 0.5s ease;
+        }
+        
+        .collection-img:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-badge {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- HEADER & NAVIGATION -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg heading-serif">V</span>
+                    </div>
+                    <span class="hidden sm:inline text-2xl font-bold heading-serif text-gray-800">VIBE</span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#colecoes" class="nav-item text-gray-700 hover:text-purple-600">Coleções</a>
+                    <a href="#produtos" class="nav-item text-gray-700 hover:text-purple-600">Produtos</a>
+                    <a href="#sobre" class="nav-item text-gray-700 hover:text-purple-600">Sobre</a>
+                    <a href="#contato" class="nav-item text-gray-700 hover:text-purple-600">Contato</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative text-gray-700 hover:text-purple-600 transition">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    <button class="relative text-gray-700 hover:text-purple-600 transition">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="relative text-gray-700 hover:text-purple-600 transition">
+                        <i class="fas fa-shopping-bag text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </button>
+                    <button class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-gradient py-20 md:py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="z-10">
+                    <div class="inline-block mb-6 category-badge px-4 py-2 rounded-full text-sm font-semibold">
+                        ✨ Nova Coleção
+                    </div>
+                    <h1 class="heading-serif text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+                        Estilo que <span class="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Vibra</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mb-8 max-w-xl">
+                        Descubra nossa coleção exclusiva de roupas e acessórios que combinam conforto, elegância e tendência. Seja você mesmo, com estilo.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                            Explorar Agora
+                        </button>
+                        <button class="border-2 border-gray-800 text-gray-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 hover:text-white transition">
+                            Ver Catálogo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative h-96 md:h-full floating-animation">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Modelo em roupa elegante" class="w-full h-full object-cover rounded-2xl shadow-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLECTIONS SECTION -->
+    <section id="colecoes" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-serif text-4xl md:text-5xl text-gray-900 mb-4">Nossas Coleções</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Cada coleção conta uma história de estilo, qualidade e inovação</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Collection Card 1 -->
+                <div class="group cursor-pointer">
+                    <div class="collection-img h-96 mb-6 rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556821552-5f37541c96a0?w=500&h=500&fit=crop" alt="Coleção Primavera" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="heading-serif text-2xl text-gray-900 mb-2">Primavera 2024</h3>
+                    <p class="text-gray-600 mb-4">Cores vibrantes e tecidos leves para a estação mais alegre do ano</p>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-pink-500 transition flex items-center gap-2">
+                        Explorar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Collection Card 2 -->
+                <div class="group cursor-pointer">
+                    <div class="collection-img h-96 mb-6 rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1490481651971-73413a7aeed9?w=500&h=500&fit=crop" alt="Coleção Casual" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="heading-serif text-2xl text-gray-900 mb-2">Casual Chic</h3>
+                    <p class="text-gray-600 mb-4">Conforto e elegância para o dia a dia sem abrir mão do estilo</p>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-pink-500 transition flex items-center gap-2">
+                        Explorar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Collection Card 3 -->
+                <div class="group cursor-pointer">
+                    <div class="collection-img h-96 mb-6 rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1539533057352-76335e8ae0f7?w=500&h=500&fit=crop" alt="Coleção Acessórios" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="heading-serif text-2xl text-gray-900 mb-2">Acessórios Premium</h3>
+                    <p class="text-gray-600 mb-4">Detalhes que fazem toda a diferença e completam seu visual</p>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-pink-500 transition flex items-center gap-2">
+                        Explorar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="produtos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-serif text-4xl md:text-5xl text-gray-900 mb-4">Produtos em Destaque</h2>
+                <p class="text-gray-600 text-lg">Selecionamos os melhores para você</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=400&fit=crop" alt="Jaqueta Jeans Premium" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-20%</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-purple-600 text-xs font-semibold mb-2">JAQUETA</p>
+                        <h3 class="text-gray-900 font-bold mb-2">Jaqueta Jeans Premium</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star-half text-xs"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(234)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-400 line-through text-sm">R$ 299,00</span>
+                                <p class="text-purple-600 font-bold text-xl">R$ 239,20</p>
+                            </div>
+                            <button class="btn-primary text-white p-3 rounded-lg transition">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1488749807830-63789f68bb65?w=300&h=400&fit=crop" alt="Vestido Fluido" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">NOVO</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-purple-600 text-xs font-semibold mb-2">VESTIDO</p>
+                        <h3 class="text-gray-900 font-bold mb-2">Vestido Fluido Floral</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(189)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-purple-600 font-bold text-xl">R$ 189,90</p>
+                            <button class="btn-primary text-white p-3 rounded-lg transition">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300&h=400&fit=crop" alt="Óculos de Sol" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-15%</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-purple-600 text-xs font-semibold mb-2">ACESSÓRIO</p>
+                        <h3 class="text-gray-900 font-bold mb-2">Óculos de Sol Retrô</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star-half text-xs"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(156)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-400 line-through text-sm">R$ 129,00</span>
+                                <p class="text-purple-600 font-bold text-xl">R$ 109,65</p>
+                            </div>
+                            <button class="btn-primary text-white p-3 rounded-lg transition">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative h-64 overflow-hidden bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1491556359901-8022df4466f9?w=300&h=400&fit=crop" alt="Bolsa Estruturada" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">NOVO</div>
+                    </div>
+                    <div class="p-5">
+                        <p class="text-purple-600 text-xs font-semibold mb-2">BOLSA</p>
+                        <h3 class="text-gray-900 font-bold mb-2">Bolsa Estruturada Luxo</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                                <i class="fas fa-star text-xs"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(342)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-purple-600 font-bold text-xl">R$ 349,90</p>
+                            <button class="btn-primary text-white p-3 rounded-lg transition">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="btn-primary text-white px-10 py-3 rounded-lg font-semibold">
+                    Ver Todos os Produtos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="sobre" class="py-20 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop" alt="Sobre VIBE Fashion" class="rounded-xl shadow-xl">
+                </div>
+                
+                <div>
+                    <div class="inline-block mb-4 category-badge px-4 py-2 rounded-full text-sm font-semibold">
+                        Sobre Nós
+                    </div>
+                    <h2 class="heading-serif text-4xl text-gray-900 mb-6">Moda que <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Inspira</span></h2>
+                    <p class="text-gray-600 text-lg mb-6">
+                        A VIBE Fashion nasceu da paixão por estilo e inovação. Acreditamos que cada pessoa merece roupas e acessórios que expressem sua personalidade única.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8">
+                        Com mais de 10 anos no mercado, trabalhamos com os melhores fornecedores para garantir qualidade, sustentabilidade e tendência em cada peça que oferecemos.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="text-center p-4 bg-white rounded-lg shadow-md">
+                            <p class="text-3xl font-bold text-purple-600">50K+</p>
+                            <p class="text-gray-600 text-sm">Clientes Felizes</p>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-md">
+                            <p class="text-3xl font-bold text-pink-500">1000+</p>
+                            <p class="text-gray-600 text-sm">Produtos</p>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-md">
+                            <p class="text-3xl font-bold text-purple-600">10+</p>
+                            <p class="text-gray-600 text-sm">Anos</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                        Conhecer Mais
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-serif text-4xl md:text-5xl text-gray-900 mb-4">O que Nossos Clientes Dizem</h2>
+                <p class="text-gray-600 text-lg">Depoimentos de quem veste VIBE</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 rounded-xl">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">
+                        "Adorei a qualidade das roupas e o atendimento foi impecável. Voltarei com certeza!"
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <p class="font-bold text-gray-900">Maria Silva</p>
+                            <p class="text-gray-600 text-sm">São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-xl">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">
+                        "Entrega rápida, embalagem linda e os produtos são exatamente como aparecem no site."
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <p class="font-bold text-gray-900">João Santos</p>
+                            <p class="text-gray-600 text-sm">Rio de Janeiro, RJ</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-xl">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">
+                        "Melhor loja que já comprei. Produtos incríveis, preços justos e equipe super atenciosa."
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop" alt="Cliente" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <p class="font-bold text-gray-900">Ana Costa</p>
+                            <p class="text-gray-600 text-sm">Belo Horizonte, MG</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contato" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="heading-serif text-4xl md:text-5xl text-gray-900 mb-4">Fale Conosco</h2>
+                <p class="text-gray-600 text-lg">Estamos sempre prontos para ajudar</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marker-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Localização</h3>
+                    <p class="text-gray-600">Avenida Pedro Abrantes, 553<br>Centro - Malacacheta, MG</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Telefone</h3>
+                    <p class="text-gray-600">(33) 99122-4923<br>Seg-Sex: 9h às 18h</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-white text-2xl"></i>

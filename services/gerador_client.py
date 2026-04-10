@@ -1,8 +1,16 @@
 """
-Client for the Gerador CNPJ internal API.
-Provides run data, PDF download, phone change, meta-tag injection,
-and run acquisition (claim from pre-generated bank or trigger async generation).
+DEPRECATED — do not use.
+Replaced by services/gerador_facade.py (GeradorService) which calls
+services/cnpj_pipeline.py directly without any HTTP round-trips.
+
+This file is kept only for git history reference.
 """
+import warnings
+warnings.warn(
+    "GeradorClient is deprecated. Use GeradorService from services.gerador_facade instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 import os
 import tempfile
 import time

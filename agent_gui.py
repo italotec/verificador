@@ -49,6 +49,18 @@ _VERIFICAR_GROUP   = "Verificar"
 _VERIFICADAS_GROUP = "Verificadas"
 _GERADOR_MARKER    = "---GERADOR---"
 
+# Semaphore: at most MAX_CONCURRENT_PROFILES jobs run simultaneously.
+# Read from .env / environment; default 5.
+import os as _os
+_MAX_CONCURRENT = int(_os.getenv("MAX_CONCURRENT_PROFILES", "5"))
+_job_semaphore: asyncio.Semaphore | None = None   # initialised in connect_loop
+
+def _get_semaphore() -> asyncio.Semaphore:
+    global _job_semaphore
+    if _job_semaphore is None:
+        _job_semaphore = asyncio.Semaphore(_MAX_CONCURRENT)
+    return _job_semaphore
+
 # Debug screenshots directory — relative to the .exe location when frozen,
 # or the project root when running from source.
 if getattr(sys, "frozen", False):
@@ -118,12 +130,15 @@ def _execute_job_sync(job: dict, log, progress=None) -> dict:
 
     _progress(f"Iniciando para perfil {profile_id}…")
 
-    success        = False
-    message        = ""
-    screenshot_b64 = ""
+    success          = False
+    message          = ""
+    screenshot_b64   = ""
+    error_traceback  = ""
+    e                = None
 
     try:
-        from main import _run_for_profile, _mark_verified, _acquire_run_id
+        from main import _run_for_profile, _mark_verified, _mark_restricted, _acquire_run_id
+        from services.facebook_bot import BmRestrictedException
         import main as _main_mod
         _main_mod.adspower = _client  # use the auto-detected AdsPower URL
 
@@ -163,9 +178,35 @@ def _execute_job_sync(job: dict, log, progress=None) -> dict:
 
         screenshot_b64 = _capture_screenshot_b64(since_epoch=start_time)
 
+    except BmRestrictedException as e:
+        import traceback as _tb
+        message = str(e)
+        error_traceback = _tb.format_exc()
+        log(f"[JOB {job_id}] BM Restrita: {e}")
+        try:
+            _mark_restricted(profile_id)
+        except Exception as _me:
+            log(f"[JOB {job_id}] Could not mark as restricted: {_me}")
+
     except Exception as e:
+        import traceback as _tb
         message = str(e)[:500]
+        error_traceback = _tb.format_exc()
         log(f"[JOB {job_id}] Exceção: {e}")
+
+    step_name = ""
+    page_url  = ""
+    page_html = ""
+    # Extract step info from VerificationStepError if available
+    try:
+        from services.facebook_bot import VerificationStepError as _VSE
+        cause = e if isinstance(e, _VSE) else getattr(e, "__cause__", None)
+        if isinstance(cause, _VSE):
+            step_name = cause.step
+            page_url  = cause.page_url
+            page_html = (cause.page_html or "")[:50000]
+    except Exception:
+        pass
 
     log(f"[JOB {job_id}] {'✓ Sucesso' if success else '✗ Falha'}")
     return {
@@ -173,6 +214,10 @@ def _execute_job_sync(job: dict, log, progress=None) -> dict:
         "job_id":         job_id,
         "success":        success,
         "message":        message,
+        "step_name":      step_name,
+        "page_url":       page_url,
+        "page_html":      page_html,
+        "traceback":      error_traceback if not success else "",
         "screenshot_b64": screenshot_b64,
     }
 
@@ -209,15 +254,21 @@ async def _sync_profiles(outbox: asyncio.Queue, log):
 async def _handle_run_job(msg: dict, outbox: asyncio.Queue, log):
     job    = msg["job"]
     job_id = job["id"]
-    await outbox.put(json.dumps({"type": "job_start", "job_id": job_id}))
 
-    loop = asyncio.get_event_loop()
-    def progress(message: str):
-        frame = json.dumps({"type": "job_progress", "job_id": job_id, "message": message})
-        loop.call_soon_threadsafe(outbox.put_nowait, frame)
+    sem = _get_semaphore()
+    if sem.locked():
+        log(f"[JOB {job_id}] Aguardando slot (máx {_MAX_CONCURRENT} simultâneos)…")
 
-    result = await asyncio.to_thread(_execute_job_sync, job, log, progress)
-    await outbox.put(json.dumps(result))
+    async with sem:
+        await outbox.put(json.dumps({"type": "job_start", "job_id": job_id}))
+
+        loop = asyncio.get_event_loop()
+        def progress(message: str):
+            frame = json.dumps({"type": "job_progress", "job_id": job_id, "message": message})
+            loop.call_soon_threadsafe(outbox.put_nowait, frame)
+
+        result = await asyncio.to_thread(_execute_job_sync, job, log, progress)
+        await outbox.put(json.dumps(result))
 
 
 async def _handle_open_browser(msg: dict, outbox: asyncio.Queue, log):
@@ -267,7 +318,10 @@ async def _periodic_sync(outbox: asyncio.Queue, log, stop: asyncio.Event):
 
 
 async def connect_loop(ws_url: str, log, on_status, stop: asyncio.Event):
+    global _job_semaphore
     while not stop.is_set():
+        # Fresh semaphore each connection so counts don't leak across reconnects
+        _job_semaphore = asyncio.Semaphore(_MAX_CONCURRENT)
         try:
             log("[AGENT] Conectando…")
             on_status("connecting")

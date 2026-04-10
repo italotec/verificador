@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loja de Roupas & Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards;
+    }
+    .fade-in-up.delay-1 {
+      animation-delay: 0.2s;
+    }
+    .fade-in-up.delay-2 {
+      animation-delay: 0.4s;
+    }
+    .fade-in-up.delay-3 {
+      animation-delay: 0.6s;
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-cyan-300 selection:text-cyan-900">
+
+  <!-- HEADER / NAVBAR -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+      <a href="#" class="text-cyan-700 text-2xl font-extrabold tracking-wide hover:text-cyan-900 transition">VESTIARIA</a>
+      <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+        <li><a href="#colecao" class="hover:text-cyan-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-cyan-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-cyan-600 transition">Sobre Nós</a></li>
+        <li><a href="#depoimentos" class="hover:text-cyan-600 transition">Depoimentos</a></li>
+        <li><a href="#contato" class="hover:text-cyan-600 transition">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="menu-btn" class="md:hidden focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded">
+        <svg class="w-7 h-7 text-cyan-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <ul class="flex flex-col px-6 py-4 space-y-3 font-semibold text-gray-700">
+        <li><a href="#colecao" class="block hover:text-cyan-700">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-cyan-700">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-cyan-700">Sobre Nós</a></li>
+        <li><a href="#depoimentos" class="block hover:text-cyan-700">Depoimentos</a></li>
+        <li><a href="#contato" class="block hover:text-cyan-700">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- HERO -->
+  <section class="relative bg-gradient-to-tr from-cyan-100 to-white min-h-[80vh] flex items-center justify-center px-6 text-center">
+    <div class="max-w-4xl fade-in-up">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-800 leading-tight drop-shadow-[1px_1px_2px_rgba(0,0,0,0.1)]">
+        Vista Seu Estilo com Elegância & Conforto
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-cyan-700 font-medium max-w-3xl mx-auto drop-shadow-[0_0_2px_rgba(0,0,0,0.05)]">
+        Explore as últimas tendências em vestuário e acessórios selecionados para você.
+      </p>
+      <a href="#colecao" class="inline-block mt-10 px-10 py-4 bg-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:bg-cyan-700 transition-transform active:scale-95 focus:outline-none focus:ring-4 focus:ring-cyan-300">Ver Coleção</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80" alt="Modelo com roupas modernas" class="absolute bottom-0 right-0 w-48 md:w-96 rounded-tl-3xl shadow-lg hidden sm:block select-none pointer-events-none" loading="lazy" />
+  </section>
+
+  <!-- SEÇÃO COLEÇÃO (ROUPAS) -->
+  <section id="colecao" class="container mx-auto px-6 py-16">
+    <h2 class="text-3xl font-extrabold text-cyan-800 mb-8 drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">Coleção de Roupas</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino azul" class="w-full h-72 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-xl text-cyan-700 mb-2">Vestido Azul Serenity</h3>
+          <p class="text-gray-600 mb-3">Conforto e elegância para todas as ocasiões.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full text-sm">R$ 199,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a1c?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina preta" class="w-full h-72 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-xl text-cyan-700 mb-2">Jaqueta Urban Black</h3>
+          <p class="text-gray-600 mb-3">Estilo moderno com proteção para dias frios.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full text-sm">R$ 349,00</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-xl text-cyan-700 mb-2">Calça Jeans Skinny</h3>
+          <p class="text-gray-600 mb-3">Versatilidade e conforto para o dia a dia.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full text-sm">R$ 159,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SEÇÃO ACESSÓRIOS -->
+  <section id="acessorios" class="bg-cyan-50 py-16 px-6">
+    <div class="container mx-auto max-w-7xl">
+      <h2 class="text-3xl font-extrabold text-cyan-800 mb-8 text-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">Acessórios</h2>
+      <div class="flex flex-col md:flex-row md:justify-around gap-10 max-w-5xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Relógio masculino" class="w-40 h-40 object-cover rounded-full mb-4 group-hover:scale-105 transition-transform" loading="lazy" />
+          <h3 class="text-xl font-semibold text-cyan-700 mb-1">Relógio Elegance</h3>
+          <p class="text-gray-600 mb-3 text-center">Design clássico com detalhes modernos.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-4 py-1 rounded-full text-sm">R$ 499,00</span>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1520975911585-9f895a07f60d?auto=format&fit=crop&w=400&q=80" alt="Bolsa feminina" class="w-40 h-40 object-cover rounded-2xl mb-4 group-hover:scale-105 transition-transform" loading="lazy" />
+          <h3 class="text-xl font-semibold text-cyan-700 mb-1">Bolsa Tote Lux</h3>
+          <p class="text-gray-600 mb-3 text-center">Prática e estilosa para todas as ocasiões.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-4 py-1 rounded-full text-sm">R$ 279,90</span>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" class="w-40 h-40 object-cover rounded-full mb-4 group-hover:scale-105 transition-transform" loading="lazy" />
+          <h3 class="text-xl font-semibold text-cyan-700 mb-1">Óculos Solar Classic</h3>
+          <p class="text-gray-600 mb-3 text-center">Proteção e estilo em um só acessório.</p>
+          <span class="inline-block bg-cyan-100 text-cyan-800 font-semibold px-4 py-1 rounded-full text-sm">R$ 199,00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO SOBRE NÓS -->
+  <section id="sobre" class="container mx-auto px-6 py-16 max-w-6xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="fade-in-up delay-1">
+        <h2 class="text-3xl font-extrabold text-cyan-800 mb-6">Sobre a Vestiaria</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">Somos apaixonados por moda que traduz conforto e autenticidade. Desde 2010, oferecemos uma curadoria cuidadosamente selecionada de roupas e acessórios que acompanham o seu ritmo, estilo e personalidade.</p>
+        <p class="text-gray-700 leading-relaxed">Nosso compromisso é proporcionar uma experiência de compra agradável, com produtos de qualidade e atendimento dedicado para que você sempre se sinta confiante e elegante.</p>
+      </div>
+      <div class="fade-in-up delay-2 rounded-xl overflow-hidden shadow-lg">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas" class="w-full h-80 object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DEPOIMENTOS -->
+  <section id="depoimentos" class="bg-cyan-50 py-16 px-6">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-3xl font-extrabold text-cyan-800 mb-12 text-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">Depoimentos</h2>
+      <div class="space-y-10">
+        <blockquote class="bg-white rounded-xl p-8 shadow-md relative group hover:shadow-xl transition-shadow cursor-default">
+          <p class="text-gray-700 italic leading-relaxed mb-6">"A qualidade das peças é incrível, e o atendimento faz toda a diferença. Sempre encontro algo que combina comigo!"</p>
+          <footer class="flex items-center space-x-4">
+            <img class="w-14 h-14 rounded-full object-cover" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=80&q=80" alt="Cliente Depoimento 1" loading="lazy" />
+            <div>
+              <p class="font-semibold text-cyan-700">Mariana Costa</p>
+              <p class="text-gray-500 text-sm">Cliente fiel</p>
+            </div>
+          </footer>
+          <span class="absolute -top-4 left-8 text-cyan-200 text-7xl select-none pointer-events-none">“</span>
+        </blockquote>
+        <blockquote class="bg-white rounded-xl p-8 shadow-md relative group hover:shadow-xl transition-shadow cursor-default">
+          <p class="text-gray-700 italic leading-relaxed mb-6">"Encontrei acessórios únicos que realmente elevam meu visual diário. Recomendo para quem busca estilo com autenticidade."</p>
+          <footer class="flex items-center space-x-4">
+            <img class="w-14 h-14 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="Cliente Depoimento 2" loading="lazy" />
+            <div>
+              <p class="font-semibold text-cyan-700">Lucas Almeida</p>
+              <p class="text-gray-500 text-sm">Cliente satisfeito</p>
+            </div>
+          </footer>
+          <span class="absolute -top-4 left-8 text-cyan-200 text-7xl select-none pointer-events-none">“</span>
+        </blockquote>
+        <blockquote class="bg-white rounded-xl p-8 shadow-md relative group hover:shadow-xl transition-shadow cursor-default">
+          <p class="text-gray-700 italic leading-relaxed mb-6">"A experiência de compra online é super intuitiva e rápida, e a entrega sempre foi pontual. Amei os produtos!"</p>
+          <footer class="flex items-center space-x-4">
+            <img class="w-14 h-14 rounded-full object-cover" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=80&q=80" alt="Cliente Depoimento 3" loading="lazy" />
+            <div>
+              <p class="font-semibold text-cyan-700">Fernanda Silva</p>
+              <p class="text-gray-500 text-sm">Cliente online</p>
+            </div>
+          </footer>
+          <span class="absolute -top-4 left-8 text-cyan-200 text-7xl select-none pointer-events-none">“</span>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO CONTATO -->
+  <section id="contato" class="container mx-auto px-6 py-16 max-w-4xl">
+    <h2 class="text-3xl font-extrabold text-cyan-800 mb-8 text-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.05)]">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-xl shadow-lg p-8 space-y-6">
+      <div>
+        <label for="nome" class="block font-semibold text-gray-700 mb-1">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-500 transition" />
+      </div>
+      <div>
+        <label for="email" class="block font-semibold text-gray-700 mb-1">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="exemplo@dominio.com" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-500 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block font-semibold text-gray-700 mb-1">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem..." class="w-full border border-gray-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-500 transition"></textarea>
+      </div>
+      <button type="submit" class="bg-cyan-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-cyan-700 transition-transform active:scale-95 focus:outline-none focus:ring-4 focus:ring-cyan-300 w-full md:w-auto">Enviar</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-cyan-900 text-cyan-100 py-12 px-6">
+    <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-cyan-700 pb-2">Informações Legais</h3>
+        <p class="mb-2"><span class="font-semibold">CNPJ:</span> 58.087.907/0001-10</p>
+        <p class="mb-2"><span class="font-semibold">Razão Social:</span> P1 CONSULTORIA ECONOMICA LTDA.</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-cyan-700 pb-2">Contato</h3>
+        <p class="mb-2"><span class="font-semibold">E-mail:</span> AFONSO@ASSECON.NET.BR</p>
+        <p class="mb-2"><span class="font-semibold">Telefone:</span> 32-32714122</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-cyan-700 pb-2">Endereço</h3>
+        <p class="mb-2"><span class="font-semibold">Logradouro:</span> RUA CORONEL SOUZA, 111</p>
+        <p class="mb-2"><span class="font-semibold">Bairro:</span> CENTRO</p>
+        <p class="mb-2"><span class="font-semibold">Município:</span> BICAS</p>
+        <p><span class="font-semibold">Estado:</span> MG</p>
+      </div>
+    </div>
+    <div class="mt-10 border-t border-cyan-800 pt-6 text-center text-cyan-300 text-xs select-none">
+      <a href="#" class="hover:text-cyan-100 mx-3 transition">Termos de Uso</a> |
+      <a href="#" class="hover:text-cyan-100 mx-3 transition">Política de Privacidade</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAP Santos | Loja de Roupas e Acessórios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fadeInUp {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-indigo-300 selection:text-indigo-900">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 bg-white shadow-md z-50">
+    <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="font-extrabold text-3xl text-indigo-600 tracking-tight hover:text-indigo-800 transition">MAP Santos</a>
+      <ul class="hidden md:flex gap-8 text-gray-700 font-semibold">
+        <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#depoimentos" class="hover:text-indigo-600 transition">Depoimentos</a></li>
+        <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-800 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="md:hidden bg-white shadow-lg max-h-0 overflow-hidden transition-max-height duration-300">
+      <ul class="flex flex-col gap-4 p-6 text-gray-700 font-semibold border-t border-gray-200">
+        <li><a href="#colecao" class="block hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#depoimentos" class="block hover:text-indigo-600 transition">Depoimentos</a></li>
+        <li><a href="#contato" class="block hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    const btnMenu = document.getElementById('btn-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    btnMenu.addEventListener('click', () => {
+      if (mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== "0px") {
+        mobileMenu.style.maxHeight = "0";
+      } else {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+      }
+    });
+  </script>
+
+  <!-- HERO -->
+  <section id="home" class="relative bg-gradient-to-tr from-indigo-100 via-indigo-50 to-white min-h-[80vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="space-y-6 fadeInUp" style="animation-delay: 0.3s;">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-700 leading-tight max-w-xl">Vista-se com estilo, viva com atitude.</h1>
+        <p class="text-lg text-indigo-600 max-w-md">Conheça nossa coleção exclusiva de roupas e acessórios que combinam conforto e modernidade para todas as ocasiões.</p>
+        <a href="#colecao" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition shadow-indigo-300 hover:shadow-indigo-500">Ver Coleção</a>
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg fadeInUp" style="animation-delay: 0.5s;">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Moda Urbana" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105" />
+      </div>
+    </div>
+  </section>
+
+  <!-- COLEÇÃO DE VESTUÁRIO -->
+  <section id="colecao" class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-10 text-center tracking-wide fadeInUp" style="animation-delay: 0.2s;">Coleção de Vestuário</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <article class="bg-indigo-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition shadow-indigo-200 fadeInUp" style="animation-delay: 0.3s;">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Blusa Feminina" class="w-full h-64 object-cover object-top" />
+          <div class="p-5">
+            <h3 class="font-semibold text-indigo-800 text-lg mb-1">Blusa Feminina Floral</h3>
+            <p class="text-indigo-600 text-sm mb-3">Leve e fresca, perfeita para o dia a dia.</p>
+            <span class="text-indigo-900 font-bold text-xl">R$ 129,90</span>
+          </div>
+        </article>
+        <article class="bg-indigo-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition shadow-indigo-200 fadeInUp" style="animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Jaqueta Masculina" class="w-full h-64 object-cover object-center" />
+          <div class="p-5">
+            <h3 class="font-semibold text-indigo-800 text-lg mb-1">Jaqueta Masculina Jeans</h3>
+            <p class="text-indigo-600 text-sm mb-3">Estilo clássico e durabilidade para você.</p>
+            <span class="text-indigo-900 font-bold text-xl">R$ 249,90</span>
+          </div>
+        </article>
+        <article class="bg-indigo-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition shadow-indigo-200 fadeInUp" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1520975698393-8c9c9e4e07f3?auto=format&fit=crop&w=600&q=80" alt="Vestido de Verão" class="w-full h-64 object-cover object-top" />
+          <div class="p-5">
+            <h3 class="font-semibold text-indigo-800 text-lg mb-1">Vestido Estampado</h3>
+            <p class="text-indigo-600 text-sm mb-3">Leveza e elegância para dias ensolarados.</p>
+            <span class="text-indigo-900 font-bold text-xl">R$ 179,90</span>
+          </div>
+        </article>
+        <article class="bg-indigo-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition shadow-indigo-200 fadeInUp" style="animation-delay: 0.6s;">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Calça Casual" class="w-full h-64 object-cover object-center" />
+          <div class="p-5">
+            <h3 class="font-semibold text-indigo-800 text-lg mb-1">Calça Casual Masculina</h3>
+            <p class="text-indigo-600 text-sm mb-3">Conforto e versatilidade para o seu dia.</p>
+            <span class="text-indigo-900 font-bold text-xl">R$ 139,90</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACESSÓRIOS -->
+  <section id="acessorios" class="bg-indigo-50 py-20">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide fadeInUp" style="animation-delay: 0.2s;">Acessórios Exclusivos</h2>
+      <div class="flex flex-col md:flex-row md:justify-center md:gap-12 gap-10">
+        <div class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition fadeInUp" style="animation-delay: 0.3s;">
+          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="Relógio Moderno" class="rounded-xl mb-6 w-full h-64 object-cover object-center" />
+          <h3 class="text-indigo-800 font-semibold text-xl mb-2">Relógio Moderno</h3>
+          <p class="text-indigo-600 mb-4">Design minimalista que combina com qualquer look.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 299,90</span>
+        </div>
+        <div class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition fadeInUp" style="animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1475180091185-7ecb9f1a6f2a?auto=format&fit=crop&w=600&q=80" alt="Bolsa de Couro" class="rounded-xl mb-6 w-full h-64 object-cover object-center" />
+          <h3 class="text-indigo-800 font-semibold text-xl mb-2">Bolsa de Couro</h3>
+          <p class="text-indigo-600 mb-4">Elegância e praticidade para o seu dia a dia.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 399,90</span>
+        </div>
+        <div class="flex-1 bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition fadeInUp" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Óculos de Sol" class="rounded-xl mb-6 w-full h-64 object-cover object-center" />
+          <h3 class="text-indigo-800 font-semibold text-xl mb-2">Óculos de Sol</h3>
+          <p class="text-indigo-600 mb-4">Proteção UV com estilo e conforto.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 189,90</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NÓS -->
+  <section id="sobre" class="py-20 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl text-center fadeInUp" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-8 tracking-wide">Por que escolher a MAP Santos?</h2>
+      <p class="text-indigo-600 text-lg max-w-3xl mx-auto leading-relaxed mb-10">Somos apaixonados por moda que une conforto, qualidade e inovação. Cada peça é pensada para valorizar seu estilo único, com materiais sustentáveis e design contemporâneo. Nossa missão é vestir você para os momentos mais especiais, todos os dias.</p>
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="Equipe MAP Santos" class="mx-auto rounded-3xl shadow-lg max-w-full h-auto object-cover object-center" />
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="bg-indigo-50 py-20">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide fadeInUp" style="animation-delay: 0.2s;">O que nossos clientes dizem</h2>
+      <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+        <blockquote class="bg-white p-8 rounded-2xl shadow-md border-l-8 border-indigo-500 relative fadeInUp" style="animation-delay: 0.3s;">
+          <p class="text-indigo-700 italic mb-6">"A qualidade das roupas é incrível! Me sinto confiante e confortável em todas as peças que comprei."</p>
+          <footer class="text-indigo-900 font-semibold">Ana Beatriz, 28 anos</footer>
+        </blockquote>
+        <blockquote class="bg-white p-8 rounded-2xl shadow-md border-l-8 border-indigo-500 relative fadeInUp" style="animation-delay: 0.4s;">
+          <p class="text-indigo-700 italic mb-6">"O atendimento foi super atencioso e as entregas sempre rápidas. Recomendo muito a MAP Santos."</p>
+          <footer class="text-indigo-900 font-semibold">Lucas Pereira, 34 anos</footer>
+        </blockquote>
+        <blockquote class="bg-white p-8 rounded-2xl shadow-md border-l-8 border-indigo-500 relative fadeInUp" style="animation-delay: 0.5s;">
+          <p class="text-indigo-700 italic mb-6">"Os acessórios são lindos e duráveis. Uso todos os dias e sempre recebo elogios."</p>
+          <footer class="text-indigo-900 font-semibold">Mariana Souza, 25 anos</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="py-20 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl fadeInUp" style="animation-delay: 0.3s;">
+      <h2 class="text-3xl text-indigo-700 font-extrabold mb-8 text-center tracking-wide">Fale Conosco</h2>
+      <form action="#" method="POST" class="bg-indigo-50 rounded-3xl p-10 shadow-lg">
+        <div class="mb-6">
+          <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full rounded-lg border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full rounded-lg border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+        <div class="mb-6">
+          <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem" class="w-full rounded-lg border border-indigo-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition shadow-indigo-300 hover:shadow-indigo-500">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-indigo-900 text-indigo-100 py-14">
+    <div class="container mx-auto px-6 max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div class="space-y-3">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-3">Informações Legais</h3>
+        <p><span class="font-semibold">CNPJ:</span> 65.454.820/0001-07</p>
+        <p><span class="font-semibold">Razão Social:</span> MAP SANTOS LTDA</p>
+      </div>
+      <div class="space-y-3">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-3">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> <a href="mailto:MARI.PEREIRASANTOS19@GMAIL.COM" class="underline hover:text-indigo-300">MARI.PEREIRASANTOS19@GMAIL.COM</a></p>
+        <p><span class="font-semibold">Telefone:</span> <a href="tel:+5562983222870" class="underline hover:text-indigo-300">62-983222870</a></p>
+      </div>
+      <div class="space-y-3">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-3">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> RUA FRANCISCO XAVIER DE OLIVEIRA, 69</p>
+        <p><span class="font-semibold">Bairro:</span> AEROPORTO</p>
+      </div>
+      <div class="space-y-3">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-3">Localização</h3>
+        <p><span class="font-semibold">Município:</span> CAMPOS BELOS</p>
+        <p><span class="font-semibold">Estado:</span> GO</p>
+      </div>
+    </div>
+    <div class="mt-10 border-t border-indigo-700 pt-6 text-center text-indigo-300 text-sm flex flex-col sm:flex-row justify-center gap-6 select-none">
+      <a href="#" class="hover:text-indigo-100 transition font-semibold">Termos de Uso</a>
+      <span>|</span>
+      <a href="#" class="hover:text-indigo-100 transition font-semibold">Política de Privacidade</a>
+    </div>
+  </footer>
+
+</body>
+</html>

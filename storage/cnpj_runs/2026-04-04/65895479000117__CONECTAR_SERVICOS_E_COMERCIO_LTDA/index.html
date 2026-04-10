@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Conectar Store - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+  }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto flex items-center justify-between p-5 md:px-10">
+    <a href="#home" class="text-3xl font-extrabold text-indigo-600 tracking-wide select-none">Conectar<span class="text-rose-500">Store</span></a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+      <li><a href="#collections" class="hover:text-indigo-600 transition">Coleções</a></li>
+      <li><a href="#acessories" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#about" class="hover:text-indigo-600 transition">Sobre Nós</a></li>
+      <li><a href="#contact" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-toggle" aria-label="Abrir menu" class="md:hidden focus:outline-none text-indigo-600 hover:text-indigo-800">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+    <ul class="flex flex-col p-4 space-y-3 font-semibold text-gray-700">
+      <li><a href="#home" class="block hover:text-indigo-600 transition">Início</a></li>
+      <li><a href="#collections" class="block hover:text-indigo-600 transition">Coleções</a></li>
+      <li><a href="#acessories" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#about" class="block hover:text-indigo-600 transition">Sobre Nós</a></li>
+      <li><a href="#contact" class="block hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative bg-gradient-to-r from-indigo-50 via-rose-50 to-indigo-50 min-h-[85vh] flex items-center">
+  <div class="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center gap-10">
+    <div class="max-w-xl fade-up" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 leading-tight">Estilo que Conecta<br><span class="text-rose-500">Moda e Acessórios</span></h1>
+      <p class="mt-6 text-lg text-gray-600 font-light">Descubra as últimas tendências em vestuário e acessórios para todos os estilos. Qualidade, conforto e design modernos para você se destacar.</p>
+      <a href="#collections" class="inline-block mt-8 px-8 py-3 bg-rose-500 text-white font-semibold rounded-lg shadow-md hover:bg-rose-600 transition shadow-rose-300">Confira Nossas Coleções</a>
+    </div>
+    <div class="w-full max-w-lg rounded-xl overflow-hidden shadow-lg fade-up" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Mulher vestindo roupa moderna" class="w-full h-auto object-cover" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="collections" class="container mx-auto px-6 md:px-12 py-16 max-w-7xl">
+  <h2 class="text-center text-4xl font-extrabold text-indigo-700 mb-12 fade-up" style="animation-delay: 0.2s;">Coleções de Vestuário</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-up" style="animation-delay: 0.3s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Looks casuais femininos" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Casual Feminino</h3>
+        <p class="text-gray-600 text-sm">Conforto e estilo para o dia a dia, com peças versáteis e modernas.</p>
+        <a href="#" class="mt-4 inline-block text-rose-500 font-semibold hover:underline">Ver coleção</a>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-up" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1535914254981-b5012eebbd15?auto=format&fit=crop&w=800&q=80" alt="Moda masculina" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Moda Masculina</h3>
+        <p class="text-gray-600 text-sm">Estilo contemporâneo para homens que valorizam elegância e conforto.</p>
+        <a href="#" class="mt-4 inline-block text-rose-500 font-semibold hover:underline">Ver coleção</a>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-up" style="animation-delay: 0.5s;">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Moda infantil" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Infantil</h3>
+        <p class="text-gray-600 text-sm">Pequenos estilosos com roupas confortáveis e cheias de vida.</p>
+        <a href="#" class="mt-4 inline-block text-rose-500 font-semibold hover:underline">Ver coleção</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessories" class="bg-indigo-50 py-16">
+  <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+    <h2 class="text-center text-4xl font-extrabold text-indigo-700 mb-12 fade-up" style="animation-delay: 0.2s;">Acessórios Exclusivos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg transition-shadow fade-up" style="animation-delay: 0.3s;">
+        <img src="https://images.unsplash.com/photo-1465188035480-2bfa6b2fe8a9?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" class="w-32 h-32 object-cover rounded-full mb-4" loading="lazy" />
+        <h3 class="font-semibold text-indigo-600 mb-1">Óculos de Sol</h3>
+        <p class="text-gray-600 text-sm">Modelos modernos para proteger e valorizar seu olhar.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg transition-shadow fade-up" style="animation-delay: 0.4s;">
+        <img src="https://images.unsplash.com/photo-1503342452485-86c1d7dce7b4?auto=format&fit=crop&w=400&q=80" alt="Relógio elegante" class="w-32 h-32 object-cover rounded-full mb-4" loading="lazy" />
+        <h3 class="font-semibold text-indigo-600 mb-1">Relógios</h3>
+        <p class="text-gray-600 text-sm">Design sofisticado para marcar seu tempo com estilo.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg transition-shadow fade-up" style="animation-delay: 0.5s;">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=400&q=80" alt="Bolsas femininas" class="w-32 h-32 object-cover rounded-full mb-4" loading="lazy" />
+        <h3 class="font-semibold text-indigo-600 mb-1">Bolsas</h3>
+        <p class="text-gray-600 text-sm">Praticidade e elegância para todas as ocasiões.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-lg transition-shadow fade-up" style="animation-delay: 0.6s;">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Chapéu estiloso" class="w-32 h-32 object-cover rounded-full mb-4" loading="lazy" />
+        <h3 class="font-semibold text-indigo-600 mb-1">Chapéus</h3>
+        <p class="text-gray-600 text-sm">Toque final para seu look com proteção e charme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="container mx-auto px-6 md:px-12 py-16 max-w-5xl flex flex-col md:flex-row items-center gap-12">
+  <div class="md:w-1/2 fade-up" style="animation-delay: 0.3s;">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Quem Somos</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">Na Conectar Store, unimos paixão por moda e compromisso com qualidade para oferecer o melhor em vestuário e acessórios. Cada peça é selecionada para garantir conforto, modernidade e acessibilidade, conectando você ao seu estilo único.</p>
+    <p class="text-gray-700 leading-relaxed">Estamos presentes para todas as ocasiões, do casual ao sofisticado, sempre trazendo novidades e tendências para que você se sinta confiante e elegante.</p>
+  </div>
+  <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lg fade-up" style="animation-delay: 0.5s;">
+    <img src="https://images.unsplash.com/photo-1520975699814-7d9a019f8e1e?auto=format&fit=crop&w=700&q=80" alt="Equipe de loja de roupas" class="w-full h-auto object-cover" loading="lazy" />
+  </div>
+</section>
+
+<section id="contact" class="bg-rose-50 py-16">
+  <div class="container mx-auto px-6 md:px-12 max-w-3xl">
+    <h2 class="text-4xl font-extrabold text-rose-600 mb-8 text-center fade-up" style="animation-delay: 0.2s;">Fale Conosco</h2>
+    <form class="bg-white rounded-xl shadow-xl p-8 space-y-6 fade-up" style="animation-delay: 0.4s;" action="#" method="POST" novalidate>
+      <div>
+        <label for="name" class="block text-gray-700 font-semibold mb-1">Nome</label>
+        <input type="text" id="name" name="name" required placeholder="Seu nome" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400" />
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-1">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400" />
+      </div>
+      <div>
+        <label for="message" class="block text-gray-700 font-semibold mb-1">Mensagem</label>
+        <textarea id="message" name="message" rows="4" required placeholder="Escreva sua mensagem" class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-rose-400"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-rose-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-rose-600 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-300 py-14 px-6 md:px-12">
+  <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <h3 class="text-indigo-400 text-xl font-semibold mb-4 select-none">Conectar Serviços e Comércio Ltda</h3>
+      <p><span class="font-semibold">CNPJ:</span> 65.895.479/0001-17</p>
+      <p><span class="font-semibold">Razão Social:</span> CONECTAR SERVICOS E COMERCIO LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 text-xl font-semibold mb-4 select-none">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:stelascontadora@gmail.com" class="hover:underline text-rose-400">stelascontadora@gmail.com</a></p>
+      <p><span class="font-semibold">Telefone:</span> <a href="tel:+5531991590532" class="hover:underline text-rose-400">31-991590532</a></p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 text-xl font-semibold mb-4 select-none">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> Rua Doutor Roscio, 116</p>
+      <p><span class="font-semibold">Bairro:</span> Nossa Senhora da Abadia</p>
+      <p><span class="font-semibold">Município:</span> MARTINHO CAMPOS</p>
+      <p><span class="font-semibold">Estado:</span> MG</p>
+    </div>
+  </div>
+  <div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm select-none">
+    <p>© 2024 Conectar Store. Todos os direitos reservados.</p>
+    <div class="space-x-6 mt-3 md:mt-0">
+      <a href="#" class="hover:text-rose-400 transition font-medium">Termos de Uso</a>
+      <a href="#" class="hover:text-rose-400 transition font-medium">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

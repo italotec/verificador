@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Leal Moda - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="bg-white shadow sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-3xl font-extrabold text-indigo-600 tracking-wide hover:text-indigo-500 transition-colors">LEAL MODA</a>
+    <ul class="hidden md:flex gap-10 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="menu-btn" class="md:hidden text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="17" x2="21" y2="17" /></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-indigo-50 border-t border-indigo-200">
+    <ul class="flex flex-col gap-4 p-6 font-semibold text-indigo-700">
+      <li><a href="#home" class="block hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="block hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-50 min-h-[80vh] flex flex-col justify-center items-center px-6 text-center overflow-hidden">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 mb-4 max-w-4xl fade-in" style="animation-delay: 0.2s;">Moda que Transforma Seu Estilo</h1>
+  <p class="text-indigo-600 max-w-2xl text-lg md:text-xl mb-10 fade-in" style="animation-delay: 0.4s;">Roupas e acessórios selecionados para você expressar sua personalidade com elegância e conforto.</p>
+  <a href="#colecao" class="inline-block bg-indigo-600 hover:bg-indigo-700 transition-colors text-white font-semibold rounded-full px-8 py-3 shadow-lg shadow-indigo-300/30 fade-in" style="animation-delay: 0.6s;">Descubra a Coleção</a>
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80" alt="Mulher estilosa com roupas da moda" class="absolute top-0 right-0 opacity-30 w-64 md:w-96 -translate-y-10 md:-translate-y-20 pointer-events-none select-none" />
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center tracking-wide">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Casaco feminino cinza" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Casaco Cinza Moderno</h3>
+        <p class="text-gray-600 mb-4">Conforto e estilo para os dias frios com corte perfeito.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 299,00</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Camisa branca masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Camisa Branca Clássica</h3>
+        <p class="text-gray-600 mb-4">Versátil e elegante para qualquer ocasião.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 149,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1520975691426-0f5a4ed9f6a3?auto=format&fit=crop&w=600&q=80" alt="Vestido longo estampado" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Longo Estampado</h3>
+        <p class="text-gray-600 mb-4">Leveza e fluidez para momentos especiais.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 279,50</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1503342452485-86b7f5e4f0e3?auto=format&fit=crop&w=600&q=80" alt="Jaqueta de couro preta" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Jaqueta de Couro Preta</h3>
+        <p class="text-gray-600 mb-4">Visual ousado e atemporal para qualquer estação.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 499,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1520975691426-0f5a4ed9f6a3?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Jeans Skinny</h3>
+        <p class="text-gray-600 mb-4">Modelagem moderna que valoriza o corpo.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 189,00</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1530845641523-64d2558e9a6f?auto=format&fit=crop&w=600&q=80" alt="Blusa de malha bege" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Blusa de Malha Bege</h3>
+        <p class="text-gray-600 mb-4">Conforto e suavidade para o dia a dia.</p>
+        <span class="block font-bold text-indigo-600 text-lg">R$ 109,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16 px-6">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center tracking-wide">Acessórios Exclusivos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div class="group bg-white rounded-3xl shadow-md overflow-hidden cursor-pointer hover:shadow-indigo-400 transition-shadow border border-transparent hover:border-indigo-300">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno prata" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Relógio Moderno Prata</h3>
+          <p class="text-gray-600 mb-3">Design elegante para acompanhar seu ritmo.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 349,99</span>
+        </div>
+      </div>
+      <div class="group bg-white rounded-3xl shadow-md overflow-hidden cursor-pointer hover:shadow-indigo-400 transition-shadow border border-transparent hover:border-indigo-300">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina caramelo" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Bolsa Feminina Caramelo</h3>
+          <p class="text-gray-600 mb-3">Prática, sofisticada e espaçosa.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 279,50</span>
+        </div>
+      </div>
+      <div class="group bg-white rounded-3xl shadow-md overflow-hidden cursor-pointer hover:shadow-indigo-400 transition-shadow border border-transparent hover:border-indigo-300">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol escuro" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Óculos de Sol Escuro</h3>
+          <p class="text-gray-600 mb-3">Proteção e estilo para todos os dias.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 149,90</span>
+        </div>
+      </div>
+      <div class="group bg-white rounded-3xl shadow-md overflow-hidden cursor-pointer hover:shadow-indigo-400 transition-shadow border border-transparent hover:border-indigo-300">
+        <img src="https://images.unsplash.com/photo-1520975691426-0f5a4ed9f6a3?auto=format&fit=crop&w=600&q=80" alt="Chapéu de palha estiloso" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Chapéu de Palha Estiloso</h3>
+          <p class="text-gray-600 mb-3">Toque final para looks de verão.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 99,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 py-20 max-w-6xl">
+  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+    <div class="md:w-1/2 fade-in" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 tracking-wide">Sobre a Leal Moda</h2>
+      <p class="text-gray-700 text-lg leading-relaxed mb-6">Somos uma loja dedicada a oferecer roupas e acessórios de alta qualidade, pensados para quem quer se destacar com estilo e autenticidade. Nossa missão é transformar o seu guarda-roupa com peças que combinam conforto, elegância e tendências atuais.</p>
+      <p class="text-gray-700 text-lg leading-relaxed">Com atendimento personalizado e compromisso com a sustentabilidade, buscamos sempre proporcionar a melhor experiência para nossos clientes, respeitando o meio ambiente e valorizando a moda consciente.</p>
+    </div>
+    <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lg fade-in" style="animation-delay: 0.5s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas" class="w-full h-auto object-cover" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-50 py-16 px-6">
+  <div class="container mx-auto max-w-4xl">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center tracking-wide">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10 max-w-2xl mx-auto">
+      <div class="mb-6">
+        <label for="nome" class="block text-indigo-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="mensagem" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui" class="w-full border border-indigo-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 transition-colors text-white font-bold py-4 rounded-full shadow-lg shadow-indigo-300/40">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-12 px-6">
+  <div class="container mx-auto max-w-6xl flex flex-col md:flex-row md:justify-between md:items-center gap-10 md:gap-0">
+    <div class="space-y-1 text-sm md:text-base">
+      <p><span class="font-semibold">CNPJ:</span> 37.815.857/0001-70</p>
+      <p><span class="font-semibold">Razão Social:</span> LEAL EMPREENDIMENTOS EM CONSTRUCAO CIVIL LTDA</p>
+      <p><span class="font-semibold">E-mail:</span> HELDERCATEC@YAHOO.COM.BR</p>
+      <p><span class="font-semibold">Telefone:</span> 77-991230997</p>
+    </div>
+    <div class="space-y-1 text-sm md:text-base">
+      <p><span class="font-semibold">Logradouro:</span> PRACA ANANIAS DE MATOS, 27</p>
+      <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> URANDI</p>
+      <p><span class="font-semibold">Estado:</span> BA</p>
+    </div>
+  </div>
+  <div class="mt-8 border-t border-indigo-700 pt-6 text-center text-indigo-300 text-sm flex flex-col md:flex-row md:justify-center md:gap-8 gap-4 select-none">
+    <a href="#" class="hover:text-indigo-100 transition-colors font-semibold">Termos de Uso</a>
+    <a href="#" class="hover:text-indigo-100 transition-colors font-semibold">Política de Privacidade</a>
+  </div>
+  <p class="mt-6 text-center text-indigo-400 text-xs select-none">© 2024 Leal Moda - Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

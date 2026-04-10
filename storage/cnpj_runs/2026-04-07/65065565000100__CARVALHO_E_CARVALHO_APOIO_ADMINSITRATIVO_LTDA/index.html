@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carvalho Store - Moda e Acessórios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-cyan-300 selection:text-cyan-900">
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-sm shadow-md z-50">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-3xl font-extrabold text-cyan-600 tracking-tight hover:text-cyan-700 transition">Carvalho Store</a>
+      <ul class="hidden md:flex gap-10 font-medium text-gray-700">
+        <li><a href="#colecao" class="hover:text-cyan-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-cyan-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-cyan-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="hover:text-cyan-600 transition">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="menu-btn" class="md:hidden text-cyan-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="md:hidden bg-white shadow-lg border-t border-gray-200 overflow-hidden max-h-0 transition-max-height duration-300">
+      <ul class="flex flex-col px-6 py-4 space-y-5 font-semibold text-gray-700">
+        <li><a href="#colecao" class="block hover:text-cyan-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-cyan-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-cyan-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="block hover:text-cyan-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative pt-24 md:pt-32 pb-20 bg-gradient-to-tr from-cyan-50 via-white to-cyan-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+      <div class="max-w-xl animate-fadeInUp">
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-cyan-700 tracking-wide drop-shadow-sm mb-6">Viva seu estilo com <span class="text-cyan-500">Carvalho Store</span></h1>
+        <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">Roupas e acessórios que combinam com você. Qualidade, conforto e modernidade para todas as ocasiões.</p>
+        <a href="#colecao" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg px-8 py-4 shadow-lg transition shadow-cyan-400/50 focus:ring-4 ring-cyan-300">Explore a Coleção</a>
+      </div>
+      <div class="w-full md:w-1/2 rounded-lg shadow-2xl overflow-hidden animate-fadeInUp" style="animation-delay: 0.3s;">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupa moderna" class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Coleção de Roupas -->
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-cyan-700 mb-10 text-center tracking-tight drop-shadow-sm">Coleção Exclusiva de Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-cyan-400/30 transition-shadow">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Jaqueta feminina estilosa" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-cyan-600 mb-2">Jaqueta Urbana</h3>
+          <p class="text-gray-600 text-sm mb-3">A jaqueta perfeita para seu look casual e urbano.</p>
+          <span class="font-bold text-cyan-700 text-lg">R$ 289,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-cyan-400/30 transition-shadow">
+        <img src="https://images.unsplash.com/photo-1520975699733-9d5d2f3a4b9d?auto=format&fit=crop&w=600&q=80" alt="Camiseta branca casual" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-cyan-600 mb-2">Camiseta Básica</h3>
+          <p class="text-gray-600 text-sm mb-3">Conforto e simplicidade para o dia a dia.</p>
+          <span class="font-bold text-cyan-700 text-lg">R$ 89,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-cyan-400/30 transition-shadow">
+        <img src="https://images.unsplash.com/photo-1521334884684-8a3f20404b8a?auto=format&fit=crop&w=600&q=80" alt="Vestido longo floral" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-cyan-600 mb-2">Vestido Floral</h3>
+          <p class="text-gray-600 text-sm mb-3">Estilo romântico e elegante para ocasiões especiais.</p>
+          <span class="font-bold text-cyan-700 text-lg">R$ 349,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-cyan-400/30 transition-shadow">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-cyan-600 mb-2">Calça Jeans</h3>
+          <p class="text-gray-600 text-sm mb-3">Modelo clássico com corte moderno para todo tipo de look.</p>
+          <span class="font-bold text-cyan-700 text-lg">R$ 219,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" class="bg-cyan-50 py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-cyan-700 mb-12 text-center tracking-wide drop-shadow-sm">Acessórios que Transformam</h2>
+      <div class="flex flex-col md:flex-row gap-12 justify-center items-center">
+        <div class="max-w-sm flex flex-col items-center text-center bg-white rounded-3xl shadow-xl p-8 hover:shadow-cyan-400/40 transition-shadow animate-fadeInUp">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Relógio sofisticado" class="w-32 h-32 object-cover rounded-full mb-6 drop-shadow-lg" loading="lazy" />
+          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">Relógios</h3>
+          <p class="text-gray-700">Elegância no pulso que combina com qualquer estilo.</p>
+        </div>
+        <div class="max-w-sm flex flex-col items-center text-center bg-white rounded-3xl shadow-xl p-8 hover:shadow-cyan-400/40 transition-shadow animate-fadeInUp" style="animation-delay: 0.15s;">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol moderno" class="w-32 h-32 object-cover rounded-full mb-6 drop-shadow-lg" loading="lazy" />
+          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">Óculos de Sol</h3>
+          <p class="text-gray-700">Proteção e estilo para os dias ensolarados.</p>
+        </div>
+        <div class="max-w-sm flex flex-col items-center text-center bg-white rounded-3xl shadow-xl p-8 hover:shadow-cyan-400/40 transition-shadow animate-fadeInUp" style="animation-delay: 0.3s;">
+          <img src="https://images.unsplash.com/photo-1512436991641-0b8f2a2c7d39?auto=format&fit=crop&w=400&q=80" alt="Bolsa feminina elegante" class="w-32 h-32 object-cover rounded-full mb-6 drop-shadow-lg" loading="lazy" />
+          <h3 class="text-2xl font-semibold text-cyan-600 mb-2">Bolsas</h3>
+          <p class="text-gray-700">Acabamento premium para seu look do dia a dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="animate-fadeInUp">
+        <h2 class="text-4xl font-extrabold text-cyan-700 mb-6 tracking-tight">Nossa História</h2>
+        <p class="text-gray-700 leading-relaxed mb-6">Fundada em 2010, a Carvalho Store nasceu do desejo de unir moda acessível com qualidade e sustentabilidade. Nosso compromisso é entregar peças que valorizem a individualidade de cada cliente, com tecidos premium e design contemporâneo.</p>
+        <p class="text-gray-700 leading-relaxed mb-8">Além de oferecer roupas e acessórios, investimos em práticas conscientes para minimizar o impacto ambiental e apoiar comunidades locais.</p>
+        <a href="#contato" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg px-8 py-4 shadow-md transition focus:ring-4 ring-cyan-300">Fale Conosco</a>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-2xl animate-fadeInUp" style="animation-delay: 0.3s;">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09c2e?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas" class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="bg-cyan-50 py-20 px-6">
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-12 animate-fadeInUp">
+      <h2 class="text-4xl font-bold text-cyan-700 mb-10 text-center tracking-wide">Contato</h2>
+      <form action="#" method="POST" class="space-y-8">
+        <div>
+          <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="Seu nome completo" />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="seuemail@exemplo.com" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" placeholder="Escreva sua mensagem aqui"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg px-10 py-4 shadow-md transition focus:ring-4 ring-cyan-300">Enviar Mensagem</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-cyan-900 text-cyan-200 py-14 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-sm leading-relaxed select-text">
+      <div>
+        <h3 class="font-semibold text-lg mb-3 border-b border-cyan-700 pb-2">Informações Legais</h3>
+        <p><span class="font-semibold">CNPJ:</span> 65.065.565/0001-00</p>
+        <p><span class="font-semibold">Razão Social:</span> CARVALHO E CARVALHO APOIO ADMINSITRATIVO LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-3 border-b border-cyan-700 pb-2">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> <a href="mailto:CELETIVO@GMAIL.COM" class="underline hover:text-cyan-400">CELETIVO@GMAIL.COM</a></p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="font-mono">18-33513546</span></p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-3 border-b border-cyan-700 pb-2">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> RUA GEREMIAS DE MATTOS, 465</p>
+        <p><span class="font-semibold">Bairro:</span> VILA VOLGA</p>
+        <p><span class="font-semibold">Município:</span> PALMITAL</p>
+        <p><span class="font-semibold">Estado:</span> SP</p>
+      </div>
+      <div class="flex flex-col justify-between">
+        <h3 class="font-semibold text-lg mb-3 border-b border-cyan-700 pb-2">Links Úteis</h3>
+        <nav class="flex flex-col gap-3">
+          <a href="#" class="hover:text-cyan-400 underline">Termos de Uso</a>
+          <a href="#" class="hover:text-cyan-400 underline">Política de Privacidade</a>
+        </nav>
+      </div>
+    </div>
+    <div class="text-center mt-12 text-xs text-cyan-400 font-light select-none">© 2024 Carvalho Store. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      if (!menuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+        menuOpen = true;
+      } else {
+        mobileMenu.style.maxHeight = "0";
+        menuOpen = false;
+      }
+    });
+    // Close mobile menu on link click
+    [...mobileMenu.querySelectorAll('a')].forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.maxHeight = "0";
+        menuOpen = false;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3021 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API protocol for working with HEROSMS",
+    "description": "Do you use software for registrations? HeroSMS is compatible with former SMS-Activate partners\n\n1. Choose any software that includes SMS-Activate among its SMS reception services.\n2. Select SMS-Activate as the service for receiving SMS.\n3. Replace the host from https://api.sms-activate.ae to https://hero-sms.com in your software settings.\n4. Enter the API key from your HeroSMS account (request it on our website).\n\nIf you face any difficulties, contact our tech support, please. We will deal with everything.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/stubs/handler_api.php",
+      "description": "SMS-Activate API-compatible server"
+    }
+  ],
+  "paths": {
+    "?action=getBalance": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request account balance",
+        "description": "Returns the current balance in the format `ACCESS_BALANCE:<amount>`",
+        "operationId": "getBalance",
+        "responses": {
+          "200": {
+            "description": "Balance request result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "successfulBalanceExample": {
+                    "$ref": "#/components/examples/successfulBalanceExample"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/methodNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getNumber": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request a number",
+        "description": "Requests a phone number for the specified service and country. Returns a string like `ACCESS_NUMBER:<activation_id>:<number>`",
+        "operationId": "getNumber",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSARequiredCountry"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalOperator"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalMaxPrice"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalFixedPrice"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalRef"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalPhoneException"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Number request result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "successfulNumberExample": {
+                    "$ref": "#/components/examples/successfulNumberExample"
+                  },
+                  "numbersNotFoundExample": {
+                    "$ref": "#/components/examples/numbersNotFoundExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/getNumberBadRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/methodNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getNumberV2": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request number V2",
+        "description": "Similar to getNumber, but returns more activation information (JSON object)",
+        "operationId": "getNumberV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSARequiredCountry"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalOperator"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalMaxPrice"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalFixedPrice"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalRef"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalPhoneException"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of number request (V2)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "successfulNumberv2Example": {
+                    "$ref": "#/components/examples/successfulNumberv2Example"
+                  },
+                  "numbersNotFoundExample": {
+                    "$ref": "#/components/examples/numbersNotFoundExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/getNumberBadRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/methodNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=setStatus": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Change activation status",
+        "description": "Activation lifecycle management.\nPossible statuses:\n- 3 — request resending of SMS\n- 6 — complete activation (code received and confirmed)\n- 8 — cancel activation (return money)",
+        "operationId": "setStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          },
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationStatus"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of status change",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "successfulRetryGetExample": {
+                    "$ref": "#/components/examples/successfulRetryGetExample"
+                  },
+                  "successfulAccessActivationExample": {
+                    "$ref": "#/components/examples/successfulAccessActivationExample"
+                  },
+                  "successfulAccessCancelExample": {
+                    "$ref": "#/components/examples/successfulAccessCancelExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/activationCancelConflictResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getStatus": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get the activation status",
+        "description": "Returns the current activation status in text form (STATUS_WAIT_CODE, STATUS_OK, etc.) + code if available",
+        "operationId": "getStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current activation status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "successfulWaitCodeExample": {
+                    "$ref": "#/components/examples/successfulWaitCodeExample"
+                  },
+                  "successfulWaitRetryExample": {
+                    "$ref": "#/components/examples/successfulWaitRetryExample"
+                  },
+                  "successfulWaitResendExample": {
+                    "$ref": "#/components/examples/successfulWaitResendExample"
+                  },
+                  "successfulCancelExample": {
+                    "$ref": "#/components/examples/successfulCancelExample"
+                  },
+                  "successfulOKExample": {
+                    "$ref": "#/components/examples/successfulOKExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getStatusV2": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get V2 activation status",
+        "description": "Returns the activation status in a structured form (JSON)",
+        "operationId": "getStatusV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current activation status (V2)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivationStatusV2"
+                },
+                "examples": {
+                  "correctActivationStatusExample": {
+                    "$ref": "#/components/examples/successfulActivationV2Example"
+                  },
+                  "successfulCancelExample": {
+                    "summary": "Activation canceled",
+                    "value": "STATUS_CANCEL"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getActiveActivations": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get a list of active activations",
+        "description": "Returns a list of active activations",
+        "operationId": "getActiveActivations",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Offset (default 0)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Entry limit (max. 100)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of receiving active activations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveActivations"
+                },
+                "examples": {
+                  "activationsSuccessfulExample": {
+                    "$ref": "#/components/examples/activationsSuccessfulExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/methodNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getHistory": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get the activation history",
+        "description": "Returns activation history",
+        "operationId": "getHistory",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start of period (Unix Timestamp)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End of period (Unix Timestamp)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset (default 0)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Entry limit (max. 100)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of receiving activation history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivationsHistory"
+                },
+                "examples": {
+                  "successfulActivationsHistoryExample": {
+                    "$ref": "#/components/examples/successfulActivationsHistoryExample"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/methodNotFoundResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/unprocessableEntityResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=reactivate": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request number reactivation",
+        "description": "Requests successfully used phone number",
+        "operationId": "reactivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Number reactivation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/successfulNumberv2Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/reactivationForbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=reactivationPrice": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request reactivation cost for number",
+        "description": "Requests reactivation cost for number",
+        "operationId": "reactivationPrice",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reactivation fee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reactivationPriceResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/reactivationForbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getCountries": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request list of countries",
+        "description": "Returns a list of countries",
+        "operationId": "getCountries",
+        "responses": {
+          "200": {
+            "description": "Result of request for list of countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Country"
+                },
+                "examples": {
+                  "successGetCountriesExample": {
+                    "$ref": "#/components/examples/successGetCountriesExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getServicesList": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request a list of services",
+        "description": "Returns a list of services",
+        "operationId": "getServicesList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCountry"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalLang"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of request for list of services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                },
+                "examples": {
+                  "successGetServicesListExample": {
+                    "$ref": "#/components/examples/successGetServicesListExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getOperators": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request available operators",
+        "description": "Returns a list of operators",
+        "operationId": "getOperators",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCountry"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of request for a list of operators",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Operators"
+                },
+                "examples": {
+                  "successfulGetOperatorsExample": {
+                    "$ref": "#/components/examples/successfulGetOperatorsExample"
+                  },
+                  "operatorsNotFoundExample": {
+                    "$ref": "#/components/examples/operatorsNotFoundExample"
+                  },
+                  "sqlServerErrorExample": {
+                    "$ref": "#/components/examples/sqlServerErrorExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getPrices": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get current prices",
+        "description": "Returns prices and quantity of available numbers by country and service",
+        "operationId": "getPrices",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSAOptionalService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCountry"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of obtaining current prices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PricesByCountry"
+                },
+                "examples": {
+                  "successGetPrices": {
+                    "$ref": "#/components/examples/successGetPrices"
+                  },
+                  "incorrectServiceExample": {
+                    "$ref": "#/components/examples/incorrectServiceExample"
+                  },
+                  "incorrectCountryExample": {
+                    "$ref": "#/components/examples/incorrectCountryExample"
+                  },
+                  "badActionExample": {
+                    "$ref": "#/components/examples/badActionExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getTopCountriesByService": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get top countries by service",
+        "description": "Returns the top countries by service with the number of available numbers. If the service is not specified - top for all services",
+        "operationId": "getTopCountriesByService",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSAOptionalService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalFreePrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of obtaining the top countries by service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopCountriesByService"
+                },
+                "examples": {
+                  "topCountriesAllServicesExample": {
+                    "$ref": "#/components/examples/topCountriesAllServicesExample"
+                  },
+                  "topCountriesOneServiceExample": {
+                    "$ref": "#/components/examples/topCountriesOneServiceExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getTopCountriesByServiceRank": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get top countries by service based on user rank",
+        "description": "Returns the top countries by service taking into account the user's rank",
+        "operationId": "getTopCountriesByServiceRank",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSAOptionalService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalFreePrice"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of obtaining the top countries by service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopCountriesByService"
+                },
+                "examples": {
+                  "topCountriesAllServicesExample": {
+                    "$ref": "#/components/examples/topCountriesAllServicesExample"
+                  },
+                  "topCountriesOneServiceExample": {
+                    "$ref": "#/components/examples/topCountriesOneServiceExample"
+                  },
+                  "missingKeyExample": {
+                    "$ref": "#/components/examples/missingKeyExample"
+                  },
+                  "incorrectKeyExample": {
+                    "$ref": "#/components/examples/incorrectKeyExample"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=serviceCountRent": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get current prices and rental quantities",
+        "description": "Returns prices and quantity of available numbers for the selected service for rental",
+        "operationId": "serviceCountRent",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCountry"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalOperator"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCurrency"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of getting current prices and rental quantities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentCountByService"
+                },
+                "examples": {
+                  "successServiceCountRent": {
+                    "$ref": "#/components/examples/successServiceCountRent"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/rentParamsBadRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getRentNumber": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Request number for rental",
+        "description": "Requests a phone number for the specified service and country for a given period.",
+        "operationId": "getRentNumber",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredService"
+          },
+          {
+            "$ref": "#/components/parameters/qpSARequiredCountry"
+          },
+          {
+            "$ref": "#/components/parameters/qpSARequiredDuration"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalOperator"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalCurrency"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalRef"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Number rental request result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/successfulNumberv2Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/rentParamsBadRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "402": {
+            "$ref": "#/components/responses/paymentRequiredResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/noNumbersResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=getAllSms": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Get all SMS for the specified activation",
+        "description": "Requests all SMS for the specified activation.",
+        "operationId": "getAllSms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalSize"
+          },
+          {
+            "$ref": "#/components/parameters/qpSAOptionalPage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of all OTP requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/OtpListResponse"
+                    },
+                    "meta": {
+                      "schema": "ResponseMeta",
+                      "description": "Response metadata",
+                      "properties": {
+                        "total": {
+                          "description": "Total number of records",
+                          "type": "integer",
+                          "example": 42
+                        },
+                        "service": {
+                          "description": "Service code",
+                          "type": "string",
+                          "example": "full"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/activationNotActiveResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=finishActivation": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Complete work with activation",
+        "operationId": "finishActivation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/activationFinishConflictResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "?action=cancelActivation": {
+      "get": {
+        "tags": [
+          "SMS-Activate"
+        ],
+        "summary": "Cancel activation purchase",
+        "operationId": "cancelActivation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/qpSARequiredActivationID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequestResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbiddenResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/activationNotFoundResponse"
+          },
+          "409": {
+            "$ref": "#/components/responses/activationCancelConflictResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/SAServerErrorResponse"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CountryId": {
+        "description": "Country ID",
+        "type": "integer",
+        "maximum": 999,
+        "minimum": 0,
+        "example": 2
+      },
+      "CountryName": {
+        "description": "Country name according to selected language",
+        "type": "string",
+        "examples": {
+          "Казахстан": {
+            "summary": null
+          },
+          "Kazakhstan": {
+            "summary": null
+          },
+          "哈萨克斯坦": {
+            "summary": null
+          }
+        }
+      },
+      "ServiceId": {
+        "description": "Service code",
+        "type": "string",
+        "maxLength": 4,
+        "minLength": 2,
+        "example": "tg"
+      },
+      "OperatorId": {
+        "description": "Operator code",
+        "type": "string",
+        "default": "any",
+        "example": "axis"
+      },
+      "MaxPrice": {
+        "description": "Maximum activation cost",
+        "type": "number",
+        "format": "float",
+        "example": 0.4321
+      },
+      "ActivationId": {
+        "description": "Activation ID",
+        "type": "string",
+        "example": "123456"
+      },
+      "Currency": {
+        "description": "ISO currency code",
+        "type": "integer",
+        "default": 840,
+        "enum": [
+          840,
+          978,
+          156
+        ],
+        "example": 840
+      },
+      "SMSText": {
+        "description": "SMS Text",
+        "type": [
+          "string",
+          "null"
+        ],
+        "example": "Your code is 12345"
+      },
+      "SMSCode": {
+        "description": "SMS Code",
+        "type": [
+          "string",
+          "null"
+        ],
+        "example": "12345"
+      },
+      "dateISO8601": {
+        "description": "Date in ISO 8601 format",
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-12-16T10:30:00.000000Z"
+      },
+      "dateRFC3339": {
+        "description": "Date in RFC3339 format",
+        "type": "string",
+        "format": "date-time",
+        "example": "2026-02-19T10:37:46+00:00"
+      },
+      "ActivationStatusV2": {
+        "properties": {
+          "verificationType": {
+            "type": "integer",
+            "example": 2
+          },
+          "sms": {
+            "properties": {
+              "dateTime": {
+                "type": "string",
+                "format": "date-time",
+                "example": "0000-00-00 00:00:00"
+              },
+              "code": {
+                "type": "string",
+                "example": "code"
+              },
+              "text": {
+                "type": "string",
+                "example": "sms text"
+              }
+            },
+            "type": "object"
+          },
+          "call": {
+            "properties": {
+              "from": {
+                "type": "string",
+                "example": "phone"
+              },
+              "text": {
+                "type": "string",
+                "example": "voice text"
+              },
+              "code": {
+                "type": "string",
+                "example": "12345"
+              },
+              "dateTime": {
+                "type": "string",
+                "format": "date-time",
+                "example": "0000-00-00 00:00:00"
+              },
+              "url": {
+                "type": "string",
+                "example": "voice file url"
+              },
+              "parsingCount": {
+                "type": "integer",
+                "example": 1
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "ActiveActivation": {
+        "properties": {
+          "activationId": {
+            "$ref": "#/components/schemas/ActivationId"
+          },
+          "serviceCode": {
+            "$ref": "#/components/schemas/ServiceId"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "79********1"
+          },
+          "activationCost": {
+            "type": "number",
+            "example": 12.5
+          },
+          "activationStatus": {
+            "type": "string",
+            "example": "4"
+          },
+          "smsCode": {
+            "$ref": "#/components/schemas/SMSCode"
+          },
+          "smsText": {
+            "$ref": "#/components/schemas/SMSText"
+          },
+          "activationTime": {
+            "$ref": "#/components/schemas/dateISO8601"
+          },
+          "discount": {
+            "type": "string",
+            "example": "0.00"
+          },
+          "repeated": {
+            "type": "string",
+            "example": "0"
+          },
+          "countryCode": {
+            "$ref": "#/components/schemas/CountryId"
+          },
+          "countryName": {
+            "type": "string",
+            "example": "Kazakhstan"
+          },
+          "canGetAnotherSms": {
+            "type": "string",
+            "example": "1"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          }
+        },
+        "type": "object"
+      },
+      "ActiveActivations": {
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActiveActivation"
+            },
+            "minItems": 0
+          }
+        },
+        "type": "object"
+      },
+      "ActivationsHistory": {
+        "type": "array",
+        "items": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "635468024"
+            },
+            "date": {
+              "type": "string",
+              "format": "date-time",
+              "example": "0000-00-00 00:00:00"
+            },
+            "phone": {
+              "type": "string",
+              "example": "7*********0"
+            },
+            "sms": {
+              "type": "string",
+              "example": "Your code is ****"
+            },
+            "cost": {
+              "type": "number",
+              "example": 0
+            },
+            "status": {
+              "type": "string",
+              "example": "4"
+            },
+            "currency": {
+              "$ref": "#/components/schemas/Currency"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "TopCountriesOneService": {
+        "properties": {
+          "physicalTotalCount": {
+            "type": "integer",
+            "example": 9405
+          },
+          "physicalCountForDefaultPrice": {
+            "type": "integer",
+            "example": 4066
+          },
+          "physicalPriceMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "example": 0.018
+            }
+          },
+          "retail_price": {
+            "type": "number",
+            "example": 0.2
+          },
+          "country": {
+            "type": "integer",
+            "example": 6
+          },
+          "price": {
+            "type": "number",
+            "example": 0.045
+          },
+          "count": {
+            "type": "integer",
+            "example": 4528
+          }
+        },
+        "type": "object"
+      },
+      "TopCountriesAllServices": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/TopCountriesOneService"
+        }
+      },
+      "TopCountriesByService": {
+        "type": "object",
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/TopCountriesAllServices"
+            },
+            {
+              "$ref": "#/components/schemas/TopCountriesOneService"
+            }
+          ]
+        }
+      },
+      "PricesByCountry": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "properties": {
+              "cost": {
+                "type": "number",
+                "example": 0.5
+              },
+              "count": {
+                "type": "integer",
+                "example": 10
+              },
+              "physicalCount": {
+                "type": "integer",
+                "example": 10
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      "RentCountByService": {
+        "type": "object",
+        "additionalProperties": {
+          "description": "Country (key — numeric identifier)",
+          "type": "object",
+          "pattern": "^[0-9]+$",
+          "additionalProperties": {
+            "description": "Duration (key - numeric identifier)",
+            "required": [
+              "count",
+              "price"
+            ],
+            "properties": {
+              "price": {
+                "description": "Rental cost",
+                "type": "number",
+                "example": 0.5432
+              },
+              "count": {
+                "description": "Number of available rooms",
+                "type": "integer",
+                "example": 10
+              }
+            },
+            "type": "object",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      },
+      "Country": {
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/CountryId"
+          },
+          "rus": {
+            "description": "Country name in Russian",
+            "type": "string",
+            "example": "Казахстан"
+          },
+          "eng": {
+            "description": "Country name in English",
+            "type": "string",
+            "example": "Kazakhstan"
+          },
+          "chn": {
+            "description": "Country name in Chinese",
+            "type": "string",
+            "example": "Kazakhstan"
+          },
+          "visible": {
+            "description": "1 - available, 0 - unavailable",
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "example": 1
+          },
+          "retry": {
+            "description": "1 - available, 0 - unavailable",
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "example": 1
+          }
+        },
+        "type": "object"
+      },
+      "Service": {
+        "properties": {
+          "code": {
+            "description": "Service ID",
+            "type": "string",
+            "example": "aoo"
+          },
+          "name": {
+            "description": "Service name",
+            "type": "string",
+            "example": "Pegasus Airlines"
+          }
+        },
+        "type": "object"
+      },
+      "Operators": {
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "countryOperators": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "type": "object"
+      },
+      "AccountBannedInfo": {
+        "required": [
+          "scope",
+          "banned_until",
+          "retry_after_seconds"
+        ],
+        "properties": {
+          "scope": {
+            "description": "Block scope: all or specific position",
+            "type": "string",
+            "enum": [
+              "global",
+              "specific"
+            ]
+          },
+          "banned_until": {
+            "description": "Ban end Unix Timestamp",
+            "type": "integer"
+          },
+          "retry_after_seconds": {
+            "description": "Seconds until request can be retried",
+            "type": "integer"
+          },
+          "readable_date": {
+            "$ref": "#/components/schemas/dateRFC3339"
+          }
+        },
+        "type": "object"
+      },
+      "successfulNumberv2Response": {
+        "properties": {
+          "activationId": {
+            "$ref": "#/components/schemas/ActivationId"
+          },
+          "phoneNumber": {
+            "description": "Phone number without + sign",
+            "type": "string",
+            "example": "79991234567"
+          },
+          "activationCost": {
+            "description": "Activation cost",
+            "type": "number",
+            "format": "float",
+            "example": 15.5
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "countryCode": {
+            "$ref": "#/components/schemas/CountryId"
+          },
+          "countryPhoneCode": {
+            "description": "Country phone code",
+            "type": "number",
+            "example": 62
+          },
+          "canGetAnotherSms": {
+            "description": "Resend SMS",
+            "type": "boolean",
+            "example": true
+          },
+          "activationTime": {
+            "$ref": "#/components/schemas/dateRFC3339",
+            "description": "Start date and time"
+          },
+          "activationEndTime": {
+            "$ref": "#/components/schemas/dateRFC3339",
+            "description": "Expiration date and time"
+          },
+          "activationOperator": {
+            "description": "Mobile carrier",
+            "type": "string",
+            "example": "tele2"
+          }
+        },
+        "type": "object",
+        "examples": {
+          "successfulNumberv2Example": {
+            "$ref": "#/components/examples/successfulNumberv2Example"
+          }
+        }
+      },
+      "reactivationPriceResponse": {
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "required": [
+              "price"
+            ],
+            "properties": {
+              "price": {
+                "type": "number",
+                "format": "float",
+                "example": 1.4522
+              },
+              "currency": {
+                "$ref": "#/components/schemas/Currency"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object",
+        "examples": {
+          "success": {
+            "$ref": "#/components/examples/successfulReactivationPriceExample"
+          }
+        }
+      },
+      "OtpListResponse": {
+        "description": "Array of messages. May be empty.",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OtpItem"
+        },
+        "minItems": 0,
+        "examples": {
+          "successfulOtpListExample": {
+            "$ref": "#/components/examples/successfulOtpListExample"
+          }
+        }
+      },
+      "OtpItem": {
+        "required": [
+          "id",
+          "phoneFrom",
+          "service",
+          "date",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID otp",
+            "type": "string",
+            "example": "3416693217"
+          },
+          "phoneFrom": {
+            "description": "OTP source",
+            "type": "string",
+            "example": "Telegram"
+          },
+          "code": {
+            "$ref": "#/components/schemas/SMSCode"
+          },
+          "text": {
+            "$ref": "#/components/schemas/SMSText"
+          },
+          "service": {
+            "$ref": "#/components/schemas/ServiceId"
+          },
+          "date": {
+            "$ref": "#/components/schemas/dateRFC3339",
+            "description": "Date of creation"
+          },
+          "type": {
+            "description": "OTP type",
+            "type": "string",
+            "enum": [
+              "sms",
+              "call"
+            ],
+            "example": "sms"
+          }
+        },
+        "type": "object"
+      },
+      "BaseErrorResponse": {
+        "description": "Basic error response structure",
+        "required": [
+          "title",
+          "details"
+        ],
+        "properties": {
+          "title": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "details": {
+            "description": "Error details",
+            "type": "string"
+          },
+          "info": {
+            "description": "Extended information",
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "type": "object"
+      }
+    },
+    "responses": {
+      "SAServerErrorResponse": {
+        "description": "Internal service error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "SAServerErrorExample": {
+                "$ref": "#/components/examples/SAServerErrorExample"
+              }
+            }
+          }
+        }
+      },
+      "methodNotFoundResponse": {
+        "description": "Method not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "methodNotFoundExample": {
+                "$ref": "#/components/examples/methodNotFoundExample"
+              }
+            }
+          }
+        }
+      },
+      "activationNotFoundResponse": {
+        "description": "Activation not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "activationNotFoundExample": {
+                "$ref": "#/components/examples/activationNotFoundExample"
+              },
+              "methodNotFoundExample": {
+                "$ref": "#/components/examples/methodNotFoundExample"
+              }
+            }
+          }
+        }
+      },
+      "unauthorizedResponse": {
+        "description": "Invalid API key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "unauthorizedExample": {
+                "$ref": "#/components/examples/unauthorizedExample"
+              }
+            }
+          }
+        }
+      },
+      "rentParamsBadRequestResponse": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "badDurationExample": {
+                "$ref": "#/components/examples/badDurationExample"
+              },
+              "wrongCountryIdExample": {
+                "$ref": "#/components/examples/wrongCountryIdExample"
+              },
+              "wrongServiceExample": {
+                "$ref": "#/components/examples/wrongServiceExample"
+              },
+              "wrongCurrencyExample": {
+                "$ref": "#/components/examples/wrongCurrencyExample"
+              }
+            }
+          }
+        }
+      },
+      "reactivationForbiddenResponse": {
+        "description": "Access denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "serviceUnavailable": {
+                "$ref": "#/components/examples/serviceUnavailableExample"
+              },
+              "simOffline": {
+                "$ref": "#/components/examples/simOfflineExample"
+              }
+            }
+          }
+        }
+      },
+      "badRequestResponse": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "activationCanceledExample": {
+                "$ref": "#/components/examples/activationCanceledExample"
+              },
+              "activationRefundedExample": {
+                "$ref": "#/components/examples/activationRefundedExample"
+              },
+              "activationFinishedExample": {
+                "$ref": "#/components/examples/activationFinishedExample"
+              },
+              "badStatusExampleJson": {
+                "$ref": "#/components/examples/badStatusExampleJson"
+              }
+            }
+          }
+        }
+      },
+      "getNumberBadRequestResponse": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "wrongMaxPriceExampleJson": {
+                "$ref": "#/components/examples/wrongMaxPriceExampleJson"
+              }
+            }
+          }
+        }
+      },
+      "unprocessableEntityResponse": {
+        "description": "Invalid request parameters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "unprocessableEntityExample": {
+                "$ref": "#/components/examples/unprocessableEntityExample"
+              }
+            }
+          }
+        }
+      },
+      "forbiddenResponse": {
+        "description": "Access denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "threadsReachedExample": {
+                "$ref": "#/components/examples/threadsReachedExample"
+              },
+              "serviceRestrictedExample": {
+                "$ref": "#/components/examples/serviceRestrictedExample"
+              },
+              "globalBanExample": {
+                "$ref": "#/components/examples/globalBanExample"
+              },
+              "specificBanExample": {
+                "$ref": "#/components/examples/specificBanExample"
+              },
+              "inactiveAccountExample": {
+                "$ref": "#/components/examples/inactiveAccountExample"
+              }
+            }
+          }
+        }
+      },
+      "paymentRequiredResponse": {
+        "description": "Insufficient funds",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "paymentRequiredExample": {
+                "$ref": "#/components/examples/paymentRequiredExample"
+              }
+            }
+          }
+        }
+      },
+      "noNumbersResponse": {
+        "description": "No numbers available for sale",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "noNumbersExample": {
+                "$ref": "#/components/examples/noNumbersExample"
+              }
+            }
+          }
+        }
+      },
+      "activationNotActiveResponse": {
+        "description": "Activation inactive. Action impossible",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "activationNotActiveExample": {
+                "$ref": "#/components/examples/activationNotActiveExample"
+              }
+            }
+          }
+        }
+      },
+      "activationFinishConflictResponse": {
+        "description": "Cannot complete activation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "activationNewOtpReceivedExample": {
+                "$ref": "#/components/examples/activationNewOtpReceivedExample"
+              },
+              "activationNotActiveExample": {
+                "$ref": "#/components/examples/activationNotActiveExample"
+              }
+            }
+          }
+        }
+      },
+      "activationCancelConflictResponse": {
+        "description": "Cannot cancel activation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BaseErrorResponse"
+            },
+            "examples": {
+              "activationNewOtpReceivedExample": {
+                "$ref": "#/components/examples/activationNewOtpReceivedExample"
+              },
+              "freeCancellationExpiredExample": {
+                "$ref": "#/components/examples/freeCancellationExpiredExample"
+              },
+              "activationOtpReceivedExample": {
+                "$ref": "#/components/examples/activationOtpReceivedExample"
+              },
+              "activationNotActiveExample": {
+                "$ref": "#/components/examples/activationNotActiveExample"
+              },
+              "earlyCancellationExample": {
+                "$ref": "#/components/examples/earlyCancellationExample"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "qpSARequiredService": {
+        "name": "service",
+        "in": "query",
+        "description": "[Service ID](https://hero-sms.com/stubs/handler_api.php?action=getServicesList)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "tg"
+      },
+      "qpSAOptionalService": {
+        "name": "service",
+        "in": "query",
+        "description": "[Service ID](https://hero-sms.com/stubs/handler_api.php?action=getServicesList)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "tg"
+      },
+      "qpSARequiredCountry": {
+        "name": "country",
+        "in": "query",
+        "description": "[Country ID](https://hero-sms.com/stubs/handler_api.php?action=getCountries)",
+        "required": true,
+        "schema": {
+          "type": "number"
+        },
+        "example": 2
+      },
+      "qpSAOptionalCountry": {
+        "name": "country",
+        "in": "query",
+        "description": "[Country ID](https://hero-sms.com/stubs/handler_api.php?action=getCountries)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": 2
+      },
+      "qpSAOptionalFreePrice": {
+        "name": "freePrice",
+        "in": "query",
+        "description": "Use FreePrice ",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": true
+      },
+      "qpSAOptionalLang": {
+        "name": "lang",
+        "in": "query",
+        "description": "Language ID",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "en",
+          "enum": [
+            "en",
+            "cn",
+            "es",
+            "pt",
+            "de"
+          ]
+        },
+        "example": "en"
+      },
+      "qpSAOptionalOperator": {
+        "name": "operator",
+        "in": "query",
+        "description": "[List](https://hero-sms.com/stubs/handler_api.php?action=getOperators) of desired telecom operators (separated by commas without spaces)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "tele2,beeline"
+      },
+      "qpSARequiredDuration": {
+        "name": "duration",
+        "in": "query",
+        "description": "Rental time in hours",
+        "required": true,
+        "schema": {
+          "type": "number"
+        },
+        "example": 2
+      },
+      "qpSAOptionalCurrency": {
+        "name": "currency",
+        "in": "query",
+        "description": "Display currency",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "default": 840,
+          "enum": [
+            643,
+            840,
+            978,
+            156
+          ]
+        },
+        "example": 840
+      },
+      "qpSAOptionalSize": {
+        "name": "size",
+        "in": "query",
+        "description": "Size of the page containing data",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "qpSAOptionalPage": {
+        "name": "page",
+        "in": "query",
+        "description": "Number of the page containing data",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "qpSAOptionalMaxPrice": {
+        "name": "maxPrice",
+        "in": "query",
+        "description": "Maximum price",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": 2
+      },
+      "qpSAOptionalFixedPrice": {
+        "name": "fixedPrice",
+        "in": "query",
+        "description": "Purchasing strictly at the specified maxPrice. Use with the maxPrice parameter.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "true"
+      },
+      "qpSAOptionalRef": {
+        "name": "ref",
+        "in": "query",
+        "description": "Referral identifier",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "123456789"
+      },
+      "qpSAOptionalPhoneException": {
+        "name": "phoneException",
+        "in": "query",
+        "description": "Excluding prefixes. You will not be issued numbers with the specified prefixes. Maximum 20 prefixes.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "7934,7900"
+      },
+      "qpSARequiredActivationID": {
+        "name": "id",
+        "in": "query",
+        "description": "Activation ID",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        },
+        "example": 123456789
+      },
+      "qpSARequiredActivationStatus": {
+        "name": "status",
+        "in": "query",
+        "description": "Activation status",
+        "required": true,
+        "schema": {
+          "default": 1,
+          "oneOf": [
+            {
+              "description": "SMS sent",
+              "type": "number",
+              "enum": [
+                1
+              ]
+            },
+            {
+              "description": "Request code",
+              "type": "number",
+              "enum": [
+                3
+              ]
+            },
+            {
+              "description": "Complete activation",
+              "type": "number",
+              "enum": [
+                6
+              ]
+            },
+            {
+              "description": "Cancel activation",
+              "type": "number",
+              "enum": [
+                8
+              ]
+            }
+          ]
+        },
+        "example": 1
+      }
+    },
+    "examples": {
+      "badActionExample": {
+        "summary": "Incorrect action specified",
+        "value": "BAD_ACTION"
+      },
+      "sqlServerErrorExample": {
+        "summary": "Server error",
+        "value": "ERROR_SQL"
+      },
+      "bannedExample": {
+        "summary": "The user is blocked until the specified date",
+        "value": "BANNED:'YYYY-m-d H-i-s'"
+      },
+      "channelsLimitExample": {
+        "summary": "Account blocked",
+        "value": "CHANNELS_LIMIT"
+      },
+      "missingKeyExample": {
+        "summary": "There is no API key",
+        "value": "NO_KEY"
+      },
+      "incorrectKeyExample": {
+        "summary": "Incorrect API key",
+        "value": "BAD_KEY"
+      },
+      "badStatusExample": {
+        "summary": "Incorrect status",
+        "value": "BAD_STATUS"
+      },
+      "numbersNotFoundExample": {
+        "summary": "Numbers not found",
+        "value": "NO_NUMBERS"
+      },
+      "badServiceExample": {
+        "summary": "Incorrect service specified",
+        "value": "BAD_SERVICE"
+      },
+      "wrongMaxPriceExample": {
+        "summary": "The specified maximum value is less than acceptable. The answer indicates the minimum price",
+        "value": "WRONG_MAX_PRICE:0.025"
+      },
+      "wrongMaxPriceExampleJson": {
+        "summary": "The specified maximum value is less than acceptable. The answer indicates the minimum price",
+        "value": {
+          "title": "WRONG_MAX_PRICE",
+          "details": "The maximum price is less than the permitted price",
+          "info": {
+            "min": 0.1234
+          }
+        }
+      },
+      "wrongActivationIdExample": {
+        "summary": "Activation ID is incorrect",
+        "value": "WRONG_ACTIVATION_ID"
+      },
+      "badStatusExampleJson": {
+        "summary": "Incorrect status",
+        "value": {
+          "title": "BAD_STATUS",
+          "details": "Wrong status code"
+        }
+      },
+      "unprocessableEntityExample": {
+        "summary": "Invalid request",
+        "value": {
+          "title": "UNPROCESSABLE_ENTITY",
+          "details": "Validation failed",
+          "info": {
+            "field": "service",
+            "code": "REQUIRED",
+            "message": "Param 'service' is required."
+          }
+        }
+      },
+      "wrongCountryIdExample": {
+        "summary": "Invalid country ID",
+        "value": {
+          "title": "WRONG_COUNTRY",
+          "details": ""
+        }
+      },
+      "wrongServiceExample": {
+        "summary": "Service name incorrect",
+        "value": {
+          "title": "WRONG_SERVICE",
+          "details": "Unsupported service"
+        }
+      },
+      "wrongCurrencyExample": {
+        "summary": "Unsupported currency",
+        "value": {
+          "title": "WRONG_CURRENCY",
+          "details": "Unsupported Currency"
+        }
+      },
+      "globalBanExample": {
+        "summary": "Global temporary block",
+        "value": {
+          "title": "BANNED",
+          "details": "Your account is temporarily suspended from making any purchases.",
+          "info": {
+            "scope": "global",
+            "banned_until": 1739448000,
+            "retry_after_seconds": 3600,
+            "readable_date": "2026-02-13T12:00:00+00:00"
+          }
+        }
+      },
+      "specificBanExample": {
+        "summary": "Temporary block on transmitted position",
+        "value": {
+          "title": "BANNED",
+          "details": "Account temporarily suspended for this specific country/service pair.",
+          "info": {
+            "scope": "specific",
+            "banned_until": 1739448000,
+            "retry_after_seconds": 3600,
+            "readable_date": "2026-02-20T15:00:00+00:00"
+          }
+        }
+      },
+      "successfulAccessReadyExample": {
+        "summary": "Number availability confirmed",
+        "value": "ACCESS_READY"
+      },
+      "successfulRetryGetExample": {
+        "summary": "Waiting for a new SMS",
+        "value": "ACCESS_RETRY_GET"
+      },
+      "successfulAccessActivationExample": {
+        "summary": "Service is successfully activated",
+        "value": "ACCESS_ACTIVATION"
+      },
+      "successfulAccessCancelExample": {
+        "summary": "Activation canceled",
+        "value": "ACCESS_CANCEL"
+      },
+      "earlyCancelDeniedExample": {
+        "summary": "You can't cancel a number within the first 2 minutes",
+        "value": "EARLY_CANCEL_DENIED"
+      },
+      "noActivationExample": {
+        "summary": "Activation ID doesn't exist",
+        "value": "NO_ACTIVATION"
+      },
+      "successfulWaitCodeExample": {
+        "summary": "Waiting for an SMS",
+        "value": "STATUS_WAIT_CODE"
+      },
+      "successfulWaitRetryExample": {
+        "summary": "Waiting for the code clarification",
+        "value": "STATUS_WAIT_RETRY:Код"
+      },
+      "successfulWaitResendExample": {
+        "summary": "Waiting for SMS to be resent",
+        "value": "STATUS_WAIT_RESEND"
+      },
+      "successfulCancelExample": {
+        "summary": "Activation canceled",
+        "value": "STATUS_CANCEL"
+      },
+      "successfulOKExample": {
+        "summary": "Code received",
+        "value": "STATUS_OK:Код"
+      },
+      "incorrectServiceExample": {
+        "summary": "Service entered incorrectly",
+        "value": {
+          "status": "false",
+          "msg": "service is incorrect"
+        }
+      },
+      "incorrectCountryExample": {
+        "summary": "Country entered incorrectly",
+        "value": {
+          "status": "false",
+          "msg": "country is incorrect"
+        }
+      },
+      "successfulBalanceExample": {
+        "summary": "Balance received successfully",
+        "value": "ACCESS_BALANCE:100.5"
+      },
+      "successfulNumberExample": {
+        "summary": "Number received successfully",
+        "value": "ACCESS_NUMBER:123456789:7*********0"
+      },
+      "successfulNumberv2Example": {
+        "summary": "Number received successfully",
+        "value": {
+          "activationId": "635468024",
+          "phoneNumber": "79584******",
+          "activationCost": 12.5,
+          "currency": 840,
+          "countryCode": 6,
+          "countryPhoneCode": 62,
+          "canGetAnotherSms": true,
+          "activationTime": "2026-02-18T16:11:33+00:00",
+          "activationEndTime": "2026-02-18T18:11:23+00:00",
+          "activationOperator": "any"
+        }
+      },
+      "successfulReactivationPriceExample": {
+        "summary": "Cost received successfully",
+        "value": {
+          "data": {
+            "price": 0.1234
+          }
+        }
+      },
+      "successfulActivationV2Example": {
+        "summary": "Activation status received successfully",
+        "value": {
+          "verificationType": 2,
+          "sms": {
+            "dateTime": "0000-00-00 00:00:00",
+            "code": "code",
+            "text": "sms text"
+          },
+          "call": {
+            "from": "phone",
+            "text": "voice text",
+            "code": "12345",
+            "dateTime": "0000-00-00 00:00:00",
+            "url": "voice file url",
+            "parsingCount": 1
+          }
+        }
+      },
+      "activationsSuccessfulExample": {
+        "summary": "Activation list received successfully",
+        "value": {
+          "status": "success",
+          "data": [
+            {
+              "activationId": "635468021",
+              "serviceCode": "vk",
+              "phoneNumber": "79********1",
+              "activationCost": 12.5,
+              "activationStatus": "4",
+              "smsCode": "12345",
+              "smsText": "Your code is 12345",
+              "activationTime": "2022-06-01 16:59:16",
+              "discount": "0.00",
+              "repeated": "0",
+              "countryCode": "2",
+              "countryName": "Kazakhstan",
+              "canGetAnotherSms": "1",
+              "currency": 840
+            }
+          ]
+        }
+      },
+      "successfulActivationsHistoryExample": {
+        "summary": "Activation history successfully received",
+        "value": [
+          {
+            "id": "635468024",
+            "date": "0000-00-00 00:00:00",
+            "phone": "7*********0",
+            "sms": "Your code is ****",
+            "cost": 0,
+            "status": "4",
+            "currency": 840
+          }
+        ]
+      },
+      "successGetPrices": {
+        "summary": "Current prices successfully received",
+        "value": [
+          {
+            "baa": {
+              "cost": 0.08,
+              "count": 25370,
+              "physicalCount": 14528
+            }
+          }
+        ]
+      },
+      "topCountriesAllServicesExample": {
+        "summary": "Top countries by service without specifying parameters successfully obtained",
+        "value": [
+          {
+            "ig": [
+              {
+                "physicalTotalCount": 7933,
+                "physicalCountForDefaultPrice": 5198,
+                "physicalPriceMap": {
+                  "0.04": 24,
+                  "0.0415": 439,
+                  "0.0419": 3229
+                },
+                "retail_price": 0.2,
+                "country": 6,
+                "price": 0.045,
+                "count": 5477
+              }
+            ]
+          }
+        ]
+      },
+      "topCountriesOneServiceExample": {
+        "summary": "Top countries by service indicating the \"service\" parameter was successfully received",
+        "value": [
+          {
+            "physicalTotalCount": 7933,
+            "physicalCountForDefaultPrice": 5198,
+            "physicalPriceMap": {
+              "0.04": 24,
+              "0.0415": 439,
+              "0.0419": 3229
+            },
+            "retail_price": 0.2,
+            "country": 6,
+            "price": 0.045,
+            "count": 5477
+          }
+        ]
+      },
+      "successServiceCountRent": {
+        "summary": "Current prices and rental quantities successfully received",
+        "value": {
+          "6": {
+            "2": {
+              "price": 0.18,
+              "count": 25370
+            },
+            "12": {
+              "price": 0.4568,
+              "count": 400
+            },
+            "48": {
+              "price": 0.8575,
+              "count": 4523
+            }
+          }
+        }
+      },
+      "successGetCountriesExample": {
+        "summary": "List of countries",
+        "value": [
+          {
+            "id": 2,
+            "rus": "Казахстан",
+            "eng": "Kazakhstan",
+            "chn": "哈萨克斯坦",
+            "visible": 1,
+            "retry": 1
+          }
+        ]
+      },
+      "successGetServicesListExample": {
+        "summary": "List of services",
+        "value": {
+          "status": "success",
+          "services": [
+            {
+              "code": "aoo",
+              "name": "Pegasus Airlines"
+            }
+          ]
+        }
+      },
+      "successfulGetOperatorsExample": {
+        "summary": "List of operators",
+        "value": {
+          "status": "success",
+          "countryOperators": {
+            "175": [
+              "optus",
+              "vodafone",
+              "telstra",
+              "lebara"
+            ]
+          }
+        }
+      },
+      "operatorsNotFoundExample": {
+        "summary": "Operators not found",
+        "value": "OPERATORS_NOT_FOUND"
+      },
+      "successfulRentNumberExample": {
+        "summary": "Rental number successfully received",
+        "value": {
+          "id": "635468024",
+          "phoneNumber": "79584******",
+          "сost": 1.5333,
+          "currency": 840,
+          "lockCancelTime": 120,
+          "endDate": "2022-06-01T22:00:58+30:00",
+          "operator": "mtt"
+        }
+      },
+      "successfulOtpListExample": {
+        "summary": "Otp list received successfully",
+        "value": {
+          "data": [
+            {
+              "id": "3416693217",
+              "phoneFrom": "Telegram",
+              "code": "123456",
+              "text": "Telegram code 123456",
+              "service": "tg",
+              "date": "2026-02-16T12:36:59+03:00",
+              "type": "sms"
+            },
+            {
+              "id": "3416693218",
+              "phoneFrom": "213421421431",
+              "service": "tg",
+              "date": "2026-02-16T12:36:59+03:00",
+              "type": "call"
+            }
+          ]
+        }
+      },
+      "badDurationExample": {
+        "summary": "Invalid rental time",
+        "value": {
+          "title": "BAD_DURATION",
+          "details": "Duration must be integer.",
+          "info": {
+            "min": 2,
+            "max": 720,
+            "intraday": [
+              2,
+              4,
+              12
+            ],
+            "byDays": 24
+          }
+        }
+      },
+      "serviceUnavailableExample": {
+        "summary": "Service unavailable",
+        "value": {
+          "title": "SERVICE_NOT_AVAILABLE",
+          "details": "Service not available for sale. Contact the technical support."
+        }
+      },
+      "simOfflineExample": {
+        "summary": "Number no longer available",
+        "value": {
+          "title": "SIM_OFFLINE",
+          "details": "Sim offline."
+        }
+      },
+      "threadsReachedExample": {
+        "summary": "Thread limit",
+        "value": {
+          "title": "CHANNELS_LIMIT",
+          "details": "You have reached the maximum number of concurrent threads (purchases) allowed for your account. Contact the technical support.",
+          "info": {
+            "current_threads": 0,
+            "max_allowed": -1
+          }
+        }
+      },
+      "serviceRestrictedExample": {
+        "summary": "Position not available for sale",
+        "value": {
+          "title": "SERVICE_NOT_AVAILABLE",
+          "details": "Service not available for sale. Contact the technical support."
+        }
+      },
+      "inactiveAccountExample": {
+        "summary": "Account verification required",
+        "value": {
+          "title": "ACCOUNT_INACTIVE",
+          "details": "Activate your account"
+        }
+      },
+      "activationFinishedExample": {
+        "summary": "Activation completed",
+        "value": {
+          "title": "FINISHED",
+          "details": "Activation finished."
+        }
+      },
+      "activationRefundedExample": {
+        "summary": "Funds for activation returned",
+        "value": {
+          "title": "REFUNDED",
+          "details": "Activation blocked. Funds refunded."
+        }
+      },
+      "activationCanceledExample": {
+        "summary": "Activation cancelled. Funds returned to you.",
+        "value": {
+          "title": "CANCELED",
+          "details": "Activation canceled."
+        }
+      },
+      "freeCancellationExpiredExample": {
+        "summary": "Cannot cancel activation",
+        "value": {
+          "title": "FREE_CANCELLATION_EXPIRED",
+          "details": "Cannot terminate activation - time limit exceeded (20 minutes)"
+        }
+      },
+      "earlyCancellationExample": {
+        "summary": "Cannot cancel activation",
+        "value": {
+          "title": "EARLY_CANCEL_DENIED",
+          "details": "Activation cannot be cancelled at this time. Minimum activation period must pass.",
+          "info": {
+            "minActivationTime": 120
+          }
+        }
+      },
+      "activationOtpReceivedExample": {
+        "summary": "Cannot cancel activation - received otp",
+        "value": {
+          "title": "OTP_RECEIVED",
+          "details": "Cannot terminate activation - OTP has been received on this number"
+        }
+      },
+      "paymentRequiredExample": {
+        "summary": "Insufficient funds",
+        "value": {
+          "title": "NO_BALANCE",
+          "details": "Payment Required"
+        }
+      },
+      "noNumbersExample": {
+        "summary": "No numbers available for sale",
+        "value": {
+          "title": "NO_NUMBERS",
+          "details": "Numbers Gone. Try Later"
+        }
+      },
+      "activationNotActiveExample": {
+        "summary": "Activation inactive",
+        "value": {
+          "title": "ACTIVATION_NOT_ACTIVE",
+          "details": "Activation is terminated/refunded and Otp cannot be retrieved"
+        }
+      },
+      "SAServerErrorExample": {
+        "summary": "Internal service error",
+        "value": {
+          "title": "SERVER_ERROR",
+          "details": "Server Gone"
+        }
+      },
+      "methodNotFoundExample": {
+        "summary": "Method not found",
+        "value": {
+          "title": "BAD_ACTION",
+          "details": "Method Not Found"
+        }
+      },
+      "activationNotFoundExample": {
+        "summary": "Activation not found",
+        "value": {
+          "title": "NOT_FOUND",
+          "details": "Activation Not Found"
+        }
+      },
+      "unauthorizedExample": {
+        "summary": "Invalid API key",
+        "value": {
+          "title": "BAD_KEY",
+          "details": "Unauthorized"
+        }
+      },
+      "activationNewOtpReceivedExample": {
+        "summary": "Cannot complete activation - OTP received",
+        "value": {
+          "title": "NEW_OTP_RECEIVED",
+          "details": "Otp was received on this number. Please confirm termination.",
+          "info": {
+            "data": [
+              {
+                "id": "3416693217",
+                "phoneFrom": "Telegram",
+                "code": "123456",
+                "text": "Telegram code 123456",
+                "service": "tg",
+                "date": "2026-02-16T12:36:59+03:00",
+                "type": "sms"
+              },
+              {
+                "id": "3416693218",
+                "phoneFrom": "213421421431",
+                "service": "tg",
+                "date": "2026-02-16T12:36:59+03:00",
+                "type": "call"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "query"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SMS-Activate",
+      "description": "API compatible with SMS-Activate"
+    },
+    {
+      "name": "Webhooks",
+      "description": "\n##### Real-time event notification mechanism.\nAfter a purchase of the number, there is no need to repeatedly request activation status to receive incoming SMS messages.\nThe service sends SMS content to the specified HTTPS URLs using the POST method.\n\nUp to 3 webhook URLs can be supported simultaneously.\nURLs are specified in the accounts personal information.\nEach webhook call is performed independently for each specified URL.\n- Method: POST\n- Content-Type: application/json\n- Response timeout: 3 seconds\n- If there is no response with code 200, the call is considered unsuccessful:\n    - Number of retries - 7 times at least\n    - Delay between retries - 20–30 seconds\n    - Total duration of attempts - 3 minutes at least\n\nIt is strongly recommended to respond with a 200 code even if the SMS has already been processed on the recipient's side.\n\n##### Source IP addresses of webhook requests\nTo ensure correct performance, add the following IP addresses to the whitelist:\n- ```84.32.223.53```\n- ```185.138.88.87```\n"
+    }
+  ],
+  "webhooks": {
+    "sms-incoming": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Webhook: incoming SMS",
+        "description": "The event is sent upon reception of an incoming SMS to the number linked to the active activation",
+        "operationId": "smsIncoming",
+        "requestBody": {
+          "description": "JSON with a data about the received SMS",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "activationId",
+                  "service",
+                  "text",
+                  "country",
+                  "receivedAt"
+                ],
+                "properties": {
+                  "activationId": {
+                    "$ref": "#/components/schemas/ActivationId"
+                  },
+                  "service": {
+                    "$ref": "#/components/schemas/ServiceId"
+                  },
+                  "text": {
+                    "$ref": "#/components/schemas/SMSText"
+                  },
+                  "code": {
+                    "$ref": "#/components/schemas/SMSCode"
+                  },
+                  "country": {
+                    "$ref": "#/components/schemas/CountryId"
+                  },
+                  "receivedAt": {
+                    "$ref": "#/components/schemas/dateISO8601",
+                    "description": "SMS arrival time"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook successfully received (recommended response)"
+          },
+          "default": {
+            "description": "Webhook is not accepted, up to 7 retries"
+          }
+        }
+      }
+    }
+  }
+}
