@@ -52,6 +52,11 @@ _GERADOR_MARKER    = "---GERADOR---"
 # Semaphore: at most MAX_CONCURRENT_PROFILES jobs run simultaneously.
 # Read from .env / environment; default 5.
 import os as _os
+# Expose VPS connection info to main._make_gerador() so it returns
+# GeradorRemoteClient instead of trying to open a local SQLite DB.
+_vps_http = _VPS_WS_BASE.replace("wss://", "https://").replace("ws://", "http://")
+_os.environ.setdefault("VPS_URL", _vps_http)
+_os.environ.setdefault("WORKER_API_KEY", _os.getenv("WORKER_API_KEY", "change-this-secret-key"))
 _MAX_CONCURRENT = int(_os.getenv("MAX_CONCURRENT_PROFILES", "5"))
 _job_semaphore: asyncio.Semaphore | None = None   # initialised in connect_loop
 
