@@ -15,7 +15,9 @@ class Config:
     _use_sqlite = os.getenv("USE_SQLITE", "0").strip() in ("1", "true", "yes")
     if _use_sqlite:
         (BASE_DIR / 'instance').mkdir(parents=True, exist_ok=True)
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{BASE_DIR / 'instance' / 'verificador.db'}"
+        # Use forward slashes (as_posix) to avoid Windows backslash issues in SQLite URIs
+        _db_path = (BASE_DIR / 'instance' / 'verificador.db').as_posix()
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{_db_path}"
     else:
         SQLALCHEMY_DATABASE_URI = os.getenv(
             "DATABASE_URL",

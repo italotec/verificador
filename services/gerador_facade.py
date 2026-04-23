@@ -11,12 +11,21 @@ Usage (replaces GeradorClient instantiation):
     from services.gerador_facade import GeradorService
     gerador = GeradorService()
 """
+import threading
 from contextlib import contextmanager
+
+_flask_app = None
+_flask_app_lock = threading.Lock()
 
 
 def _get_flask_app():
-    from web_app import create_app
-    return create_app()
+    global _flask_app
+    if _flask_app is None:
+        with _flask_app_lock:
+            if _flask_app is None:
+                from web_app import create_app
+                _flask_app = create_app()
+    return _flask_app
 
 
 @contextmanager
