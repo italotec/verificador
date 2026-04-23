@@ -44,17 +44,30 @@ import random
 import sys
 from datetime import datetime
 
+import os
+
 import config
 from services.adspower import AdsPowerClient
 from services.sms_factory import get_sms_service
-from services.gerador_facade import GeradorService
 from services.facebook_bot import FacebookBot
 
 
 # ── shared service instances ─────────────────────────────────────────────────
 
 adspower = AdsPowerClient(config.ADSPOWER_BASE)
-gerador = GeradorService()
+
+
+def _make_gerador():
+    vps_url = os.getenv("VPS_URL")
+    worker_key = os.getenv("WORKER_API_KEY")
+    if vps_url and worker_key:
+        from services.gerador_remote_client import GeradorRemoteClient
+        return GeradorRemoteClient(vps_url, worker_key)
+    from services.gerador_facade import GeradorService
+    return GeradorService()
+
+
+gerador = _make_gerador()
 # SMS service is resolved per-job (not at import time) so admin provider changes
 # take effect immediately without restarting the agent.
 # Do NOT cache this at module level.

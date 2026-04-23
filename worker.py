@@ -237,6 +237,11 @@ def main():
         print("ERRO: Informe --key SUA_CHAVE_SECRETA")
         sys.exit(1)
 
+    import os
+    # Expose to child imports (main.py uses these to pick GeradorRemoteClient)
+    os.environ.setdefault("VPS_URL", args.vps)
+    os.environ.setdefault("WORKER_API_KEY", args.key)
+
     VPS_URL = args.vps.rstrip("/")
     HEADERS = {"X-Worker-Key": args.key, "Content-Type": "application/json"}
 

@@ -394,6 +394,10 @@ def main():
         print("ERRO: Informe --key SUA_CHAVE_SECRETA")
         sys.exit(1)
 
+    # Expose to child imports (main.py uses these to pick GeradorRemoteClient)
+    os.environ.setdefault("VPS_URL", args.vps)
+    os.environ.setdefault("WORKER_API_KEY", args.key)
+
     print(f"[AGENT] VPS: {args.vps}")
     print(f"[AGENT] Sync a cada {args.sync_interval}s")
     print(f"[AGENT] AdsPower: {verif_config.ADSPOWER_BASE}")

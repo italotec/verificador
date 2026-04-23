@@ -8,7 +8,7 @@ from datetime import datetime
 from functools import wraps
 from pathlib import Path
 
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, send_file
 from .. import db
 from ..models import (ProfileSnapshot, VerifyJob, WabaRecord, WorkerCommand,
                       delete_waba_cascade, log_event)
@@ -172,3 +172,82 @@ def command_done(cmd_id: int):
     cmd.status = "done"
     db.session.commit()
     return jsonify({"ok": True})
+
+
+# ── Gerador proxy (agent has no DB access — calls VPS on its behalf) ──────────
+
+@bp.route("/gerador/runs/<int:run_id>", methods=["GET"])
+@_require_key
+def gerador_get_run(run_id: int):
+    from services.cnpj_pipeline import get_run_data
+    try:
+        return jsonify(get_run_data(run_id))
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 404
+
+
+@bp.route("/gerador/runs/<int:run_id>/pdf", methods=["GET"])
+@_require_key
+def gerador_get_pdf(run_id: int):
+    from services.cnpj_pipeline import download_pdf
+    try:
+        pdf_path = download_pdf(run_id)
+        return send_file(pdf_path, mimetype="application/pdf", as_attachment=False)
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 404
+
+
+@bp.route("/gerador/runs/<int:run_id>/change-phone", methods=["POST"])
+@_require_key
+def gerador_change_phone(run_id: int):
+    from services.cnpj_pipeline import change_phone
+    data = request.get_json(force=True) or {}
+    phone = data.get("phone", "")
+    if not phone:
+        return jsonify({"error": "phone required"}), 400
+    try:
+        phone_formatted, _pdf_path = change_phone(run_id, phone)
+        return jsonify({"success": True, "phone_formatted": phone_formatted})
+    except RuntimeError as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@bp.route("/gerador/runs/<int:run_id>/change-website-phone", methods=["POST"])
+@_require_key
+def gerador_change_website_phone(run_id: int):
+    from services.cnpj_pipeline import change_website_phone
+    data = request.get_json(force=True) or {}
+    phone = data.get("phone", "")
+    if not phone:
+        return jsonify({"error": "phone required"}), 400
+    try:
+        ok = change_website_phone(run_id, phone)
+        return jsonify({"success": ok})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@bp.route("/gerador/runs/<int:run_id>/inject-meta-tag", methods=["POST"])
+@_require_key
+def gerador_inject_meta_tag(run_id: int):
+    from services.cnpj_pipeline import inject_meta_tag
+    data = request.get_json(force=True) or {}
+    meta_tag = data.get("meta_tag", "")
+    if not meta_tag:
+        return jsonify({"error": "meta_tag required"}), 400
+    try:
+        ok = inject_meta_tag(run_id, meta_tag)
+        return jsonify({"success": ok})
+    except RuntimeError as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@bp.route("/gerador/acquire-run", methods=["POST"])
+@_require_key
+def gerador_acquire_run():
+    from services.cnpj_pipeline import acquire_run
+    try:
+        run_id = acquire_run()
+        return jsonify({"run_id": run_id, "source": "remote"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
