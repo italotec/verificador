@@ -14,6 +14,7 @@ class Config:
     # Falls back to SQLite for quick local dev if USE_SQLITE=1.
     _use_sqlite = os.getenv("USE_SQLITE", "0").strip() in ("1", "true", "yes")
     if _use_sqlite:
+        (BASE_DIR / 'instance').mkdir(parents=True, exist_ok=True)
         SQLALCHEMY_DATABASE_URI = f"sqlite:///{BASE_DIR / 'instance' / 'verificador.db'}"
     else:
         SQLALCHEMY_DATABASE_URI = os.getenv(
