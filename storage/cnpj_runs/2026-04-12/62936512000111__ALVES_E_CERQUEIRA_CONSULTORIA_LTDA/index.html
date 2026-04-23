@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="l42soqn0g1wkee6yj40sq1pql1jj9a" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Caatinga Viva - Moda & Acessórios</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+<style>
+  @keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+</style>
+</head>
+<body class="bg-gradient-to-b from-white via-rose-50 to-white text-gray-900 font-['Inter',sans-serif]">
+
+<header class="bg-white fixed w-full z-30 shadow-md">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center md:py-5">
+    <a href="#" class="text-3xl font-extrabold tracking-tight text-rose-600 hover:text-rose-700 transition">Caatinga Viva</a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-rose-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-rose-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-rose-600 transition">Sobre Nós</a></li>
+      <li><a href="#depoimentos" class="hover:text-rose-600 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="hover:text-rose-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden text-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-400">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+    </button>
+  </nav>
+  <div id="menu" class="md:hidden fixed top-0 left-0 w-full h-screen bg-white bg-opacity-95 backdrop-blur-sm transform -translate-x-full transition-transform duration-300 ease-in-out z-40">
+    <nav class="flex flex-col mt-28 space-y-10 text-center font-bold text-rose-600 text-xl">
+      <a href="#colecao" class="hover:text-rose-700 transition" onclick="toggleMenu()">Coleção</a>
+      <a href="#acessorios" class="hover:text-rose-700 transition" onclick="toggleMenu()">Acessórios</a>
+      <a href="#sobre" class="hover:text-rose-700 transition" onclick="toggleMenu()">Sobre Nós</a>
+      <a href="#depoimentos" class="hover:text-rose-700 transition" onclick="toggleMenu()">Depoimentos</a>
+      <a href="#contato" class="hover:text-rose-700 transition" onclick="toggleMenu()">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pt-24">
+
+  <!-- Seção 1: Hero com imagem grande e chamada -->
+  <section id="hero" class="relative bg-gradient-to-tr from-rose-100 via-rose-50 to-amber-50 min-h-[90vh] flex items-center justify-center px-6">
+    <picture class="absolute inset-0 -z-10 overflow-hidden rounded-b-[70px] shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1470&q=80" alt="Modelos usando roupas modernas" class="w-full h-full object-cover brightness-90" />
+    </picture>
+    <div class="max-w-4xl text-center md:text-left animate-fadeInUp">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-rose-700 drop-shadow-lg leading-tight">Vista o seu melhor estilo</h1>
+      <p class="mt-4 text-lg md:text-xl max-w-xl text-rose-900/90 font-medium drop-shadow-sm">Moda e acessórios exclusivos para expressar sua personalidade com elegância e conforto.</p>
+      <a href="#colecao" class="inline-block mt-10 px-10 py-3 bg-rose-600 hover:bg-rose-700 transition rounded-full text-white font-semibold shadow-lg shadow-rose-400/50 drop-shadow-md">Ver Coleção</a>
+    </div>
+  </section>
+
+  <!-- Seção 2: Coleção de roupas - grid assimétrico -->
+  <section id="colecao" class="py-20 px-6 bg-white max-w-7xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center md:text-left tracking-tight">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 auto-rows-[300px]">
+      <div class="md:row-span-2 rounded-xl overflow-hidden shadow-lg hover:scale-[1.03] transition-transform cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd52?auto=format&fit=crop&w=800&q=80" alt="Casaco moderno rosa" class="w-full h-full object-cover object-center" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-[1.03] transition-transform cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=700&q=80" alt="Camisa branca casual" class="w-full h-full object-cover object-center" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-[1.03] transition-transform cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="Calça jeans azul" class="w-full h-full object-cover object-center" />
+      </div>
+      <div class="md:row-span-2 rounded-xl overflow-hidden shadow-lg hover:scale-[1.03] transition-transform cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Vestido floral elegante" class="w-full h-full object-cover object-center" />
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-lg hover:scale-[1.03] transition-transform cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1542068829-1a7d2ff1e3b1?auto=format&fit=crop&w=700&q=80" alt="Blusa casual azul clara" class="w-full h-full object-cover object-center" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3: Acessórios destacados com cards -->
+  <section id="acessorios" class="bg-rose-50 py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center md:text-left tracking-tight">Acessórios Exclusivos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <article class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro marrom" class="w-36 h-36 object-cover rounded-full mb-6 shadow-md" />
+          <h3 class="font-semibold text-rose-700 text-xl mb-2">Bolsa de Couro</h3>
+          <p class="text-gray-600 text-sm">Design atemporal, perfeita para qualquer ocasião.</p>
+        </article>
+        <article class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80" alt="Relógio elegante masculino" class="w-36 h-36 object-cover rounded-full mb-6 shadow-md" />
+          <h3 class="font-semibold text-rose-700 text-xl mb-2">Relógio Minimalista</h3>
+          <p class="text-gray-600 text-sm">Combina com seu estilo e rotina.</p>
+        </article>
+        <article class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol moderno" class="w-36 h-36 object-cover rounded-full mb-6 shadow-md" />
+          <h3 class="font-semibold text-rose-700 text-xl mb-2">Óculos de Sol</h3>
+          <p class="text-gray-600 text-sm">Proteção com estilo para todos os dias.</p>
+        </article>
+        <article class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Chapéu de palha estiloso" class="w-36 h-36 object-cover rounded-full mb-6 shadow-md" />
+          <h3 class="font-semibold text-rose-700 text-xl mb-2">Chapéu de Palha</h3>
+          <p class="text-gray-600 text-sm">Toque rústico para seu visual de verão.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 4: Sobre Nós com texto e foto -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-16">
+    <div class="md:w-1/2 animate-fadeInUp">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-6 tracking-tight">Quem Somos</h2>
+      <p class="text-gray-700 text-lg leading-relaxed">A Caatinga Viva nasceu da paixão por moda que respeita a cultura e natureza do Nordeste. Unimos design moderno e compromisso sustentável para vestir você com autenticidade e consciência. Nossos produtos são cuidadosamente selecionados, trazendo o melhor do vestuário e acessórios para um estilo único e cheio de vida.</p>
+      <p class="mt-4 text-gray-700 text-lg leading-relaxed">Venha fazer parte dessa história e descubra como a moda pode ser uma extensão da sua personalidade, sem abrir mão do conforto e da qualidade.</p>
+    </div>
+    <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-2xl animate-fadeInUp" style="animation-delay: 0.15s;">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas casual" class="w-full h-full object-cover object-center rounded-3xl" />
+    </div>
+  </section>
+
+  <!-- Seção 5: Depoimentos com slider horizontal simples -->
+  <section id="depoimentos" class="bg-white py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center tracking-tight">O que nossos clientes dizem</h2>
+      <div class="flex space-x-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-2">
+        <blockquote class="flex-shrink-0 w-80 bg-rose-50 rounded-3xl p-8 shadow-lg snap-center hover:scale-105 transition-transform cursor-default">
+          <p class="text-gray-700 italic mb-6">"A coleção tem peças incríveis, o caimento das roupas é perfeito e os acessórios completam qualquer look. Atendimento nota 10!"</p>
+          <footer class="flex items-center space-x-4">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente Ana" class="w-12 h-12 rounded-full object-cover" />
+            <div>
+              <p class="font-semibold text-rose-700">Ana Clara</p>
+              <p class="text-sm text-gray-500">São Paulo, SP</p>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="flex-shrink-0 w-80 bg-rose-50 rounded-3xl p-8 shadow-lg snap-center hover:scale-105 transition-transform cursor-default">
+          <p class="text-gray-700 italic mb-6">"Os acessórios são lindos e de ótima qualidade. O site é fácil de navegar e a entrega foi super rápida."</p>
+          <footer class="flex items-center space-x-4">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Cliente Pedro" class="w-12 h-12 rounded-full object-cover" />
+            <div>
+              <p class="font-semibold text-rose-700">Pedro Henrique</p>
+              <p class="text-sm text-gray-500">Salvador, BA</p>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="flex-shrink-0 w-80 bg-rose-50 rounded-3xl p-8 shadow-lg snap-center hover:scale-105 transition-transform cursor-default">
+          <p class="text-gray-700 italic mb-6">"Adoro a proposta sustentável da loja, além das roupas serem lindas e confortáveis. Recomendo para todos."</p>
+          <footer class="flex items-center space-x-4">
+            <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Cliente Mariana" class="w-12 h-12 rounded-full object-cover" />
+            <div>
+              <p class="font-semibold text-rose-700">Mariana Silva</p>
+              <p class="text-sm text-gray-500">Recife, PE</p>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 6: Contato com formulário simples -->
+  <section id="contato" class="bg-rose-50 py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center mb-12">
+      <h2 class="text-4xl font-extrabold text-rose-700 tracking-tight">Fale Conosco</h2>
+      <p class="mt-3 text-gray-700 text-lg">Dúvidas, sugestões ou pedidos? Estamos prontos para atender você.</p>
+    </div>
+    <form class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-10 grid gap-6" action="#" method="POST" novalidate>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" name="nome" placeholder="Nome completo" required class="border border-rose-300 rounded-xl px-4 py-3 text-gray-700 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition" />
+        <input type="email" name="email" placeholder="E-mail" required class="border border-rose-300 rounded-xl px-4 py-3 text-gray-700 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition" />
+      </div>
+      <input type="tel" name="telefone" placeholder="Telefone (opcional)" class="border border-rose-300 rounded-xl px-4 py-3 text-gray-700 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition" />
+      <textarea name="mensagem" rows="5" placeholder="Sua mensagem" required class="border border-rose-300 rounded-xl px-4 py-3 text-gray-700 placeholder-rose-300 resize-none focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition"></textarea>
+      <button type="submit" class="bg-rose-600 hover:bg-rose-700 transition text-white font-bold py-3 rounded-xl shadow-lg shadow-rose-400/50">Enviar Mensagem</button>
+    </form>
+  </section>
+
+</main>
+
+<footer class="bg-rose-900 text-rose-100 py-12 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
+    <div class="space-y-2 text-sm md:text-base">
+      <p><strong>CNPJ:</strong> 62.936.512/0001-11</p>
+      <p><strong>Razão Social:</strong> ALVES E CERQUEIRA CONSULTORIA LTDA</p>
+    </div>
+    <div class="space-y-2 text-sm md:text-base">
+      <p><strong>E-mail:</strong> CAATINGAVIVACONSULTORIA@GMAIL.COM</p>
+      <p><strong>Telefone:</strong> <span id="telefone-comercial" class="font-mono">(16) 98253-0434</span></p>
+    </div>
+    <div class="space-y-2 text-sm md:text-base">
+      <p><strong>Logradouro:</strong> DISTRITO POVOADO COCA COLA, 6</p>
+      <p><strong>Bairro:</strong> ZONA RURAL</p>
+      <p><strong>Município:</strong> SANTA TERESINHA</p>
+      <p><strong>Estado:</strong> BA</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-rose-800 pt-6 text-center text-rose-400 text-sm md:text-base flex flex-col md:flex-row justify-center gap-8">
+    <a href="#" class="underline hover:text-rose-200 transition">Termos de Uso</a>
+    <a href="#" class="underline hover:text-rose-200 transition">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+
+  function toggleMenu() {
+    if (menu.classList.contains('-translate-x-full')) {
+      menu.classList.remove('-translate-x-full');
+      menu.classList.add('translate-x-0');
+      menuBtn.setAttribute('aria-label', 'Fechar menu');
+    } else {
+      menu.classList.add('-translate-x-full');
+      menu.classList.remove('translate-x-0');
+      menuBtn.setAttribute('aria-label', 'Abrir menu');
+    }
+  }
+
+  menuBtn.addEventListener('click', toggleMenu);
+
+  // Close menu on link click handled inline
+</script>
+
+</body>
+</html>

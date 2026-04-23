@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Titan Store - Moda & Acessórios</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-primary {
+      @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl;
+    }
+    .fade-in {
+      animation: fadeInUp 0.9s ease forwards;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-purple-300 selection:text-purple-900">
+
+<header id="top" class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
+  <nav class="container mx-auto flex items-center justify-between p-4 md:py-5 md:px-8">
+    <a href="#top" class="text-3xl font-extrabold text-gradient bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+      Titan Store
+    </a>
+    <ul class="hidden md:flex gap-8 text-gray-700 font-semibold tracking-wide">
+      <li><a href="#colecao" class="hover:text-purple-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-purple-600 transition">Acessórios</a></li>
+      <li><a href="#ofertas" class="hover:text-purple-600 transition">Ofertas</a></li>
+      <li><a href="#sobre" class="hover:text-purple-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-purple-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-gray-700 hover:text-purple-600 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="17" x2="21" y2="17" /></svg>
+    </button>
+  </nav>
+  <div id="menu-mobile" class="md:hidden fixed inset-0 bg-white bg-opacity-95 backdrop-blur-md transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+    <nav class="flex flex-col h-full p-8 space-y-10">
+      <button aria-label="Fechar menu" id="btn-close" class="self-end text-gray-700 hover:text-purple-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <a href="#colecao" class="text-2xl font-semibold text-purple-700 hover:text-purple-900" onclick="closeMenu()">Coleção</a>
+      <a href="#acessorios" class="text-2xl font-semibold text-purple-700 hover:text-purple-900" onclick="closeMenu()">Acessórios</a>
+      <a href="#ofertas" class="text-2xl font-semibold text-purple-700 hover:text-purple-900" onclick="closeMenu()">Ofertas</a>
+      <a href="#sobre" class="text-2xl font-semibold text-purple-700 hover:text-purple-900" onclick="closeMenu()">Sobre Nós</a>
+      <a href="#contato" class="text-2xl font-semibold text-purple-700 hover:text-purple-900" onclick="closeMenu()">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="relative">
+  <!-- Hero -->
+  <section aria-label="Banner principal" class="relative pt-20 pb-16 md:pt-32 md:pb-28 bg-gradient-to-tr from-indigo-50 to-pink-50 overflow-hidden">
+    <div class="container mx-auto px-6 md:px-8 flex flex-col-reverse md:flex-row items-center gap-12">
+      <div class="max-w-lg fade-in" style="animation-delay: 0.2s;">
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700">
+          Vista Seu Estilo<br />Com Confiança
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-700 font-light leading-relaxed">
+          Descubra nossa coleção exclusiva de roupas e acessórios modernos, pensados para você que ama conforto e estilo.
+        </p>
+        <a href="#colecao" class="inline-block mt-8 btn-primary px-8 py-3 shadow-lg">
+          Explore Agora
+        </a>
+      </div>
+      <div class="relative max-w-lg w-full rounded-3xl shadow-xl overflow-hidden fade-in" style="animation-delay: 0.4s;">
+        <img
+          src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"
+          alt="Mulher vestindo roupa estilosa ao ar livre"
+          loading="lazy"
+          class="w-full h-auto object-cover"
+          />
+        <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/90 to-transparent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coleção Destaque -->
+  <section id="colecao" aria-label="Coleção de roupas" class="container mx-auto px-6 md:px-8 py-16 md:py-24">
+    <h2 class="text-4xl font-bold text-gray-900 mb-12 text-center tracking-wide fade-in" style="animation-delay: 0.1s;">
+      Coleção Primavera & Verão 2024
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <article tabindex="0" class="bg-white rounded-xl shadow-lg overflow-hidden group transform transition-transform hover:scale-105 fade-in" style="animation-delay: 0.3s;">
+        <img
+          src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80"
+          alt="Homem com camiseta branca casual"
+          loading="lazy"
+          class="w-full aspect-[4/5] object-cover"
+        />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Camiseta Básica Branca</h3>
+          <p class="mt-1 text-gray-600 font-light">100% algodão, toque macio e confortável para o dia a dia.</p>
+          <p class="mt-3 font-bold text-lg text-indigo-700">R$ 79,90</p>
+        </div>
+      </article>
+      <article tabindex="0" class="bg-white rounded-xl shadow-lg overflow-hidden group transform transition-transform hover:scale-105 fade-in" style="animation-delay: 0.5s;">
+        <img
+          src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80"
+          alt="Mulher com vestido floral"
+          loading="lazy"
+          class="w-full aspect-[4/5] object-cover"
+        />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Vestido Floral Midi</h3>
+          <p class="mt-1 text-gray-600 font-light">Leve e elegante, perfeito para ocasiões especiais ou passeio casual.</p>
+          <p class="mt-3 font-bold text-lg text-indigo-700">R$ 189,90</p>
+        </div>
+      </article>
+      <article tabindex="0" class="bg-white rounded-xl shadow-lg overflow-hidden group transform transition-transform hover:scale-105 fade-in" style="animation-delay: 0.7s;">
+        <img
+          src="https://images.unsplash.com/photo-1530845641428-0b5d0b0c7f3a?auto=format&fit=crop&w=600&q=80"
+          alt="Homem com jaqueta jeans"
+          loading="lazy"
+          class="w-full aspect-[4/5] object-cover"
+        />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Jaqueta Jeans Vintage</h3>
+          <p class="mt-1 text-gray-600 font-light">Estilo retrô e corte moderno, para compor looks urbanos.</p>
+          <p class="mt-3 font-bold text-lg text-indigo-700">R$ 249,90</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" aria-label="Acessórios" class="bg-gradient-to-b from-pink-50 via-purple-50 to-indigo-50 py-16 md:py-24">
+    <div class="container mx-auto px-6 md:px-8 max-w-6xl">
+      <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-wide fade-in" style="animation-delay: 0.1s;">
+        Acessórios Exclusivos
+      </h2>
+      <div class="flex flex-col sm:flex-row justify-center gap-12 md:gap-20 fade-in" style="animation-delay: 0.3s;">
+        <div class="flex-1 max-w-xs mx-auto bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            alt="Relógio moderno masculino"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Relógio Minimalista</h3>
+            <p class="mt-2 text-gray-600 font-light">Design clean para acompanhar seu estilo todos os dias.</p>
+            <p class="mt-4 font-bold text-lg text-indigo-700">R$ 349,90</p>
+          </div>
+        </div>
+        <div class="flex-1 max-w-xs mx-auto bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img
+            src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80"
+            alt="Óculos de sol feminino"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Óculos de Sol Retro</h3>
+            <p class="mt-2 text-gray-600 font-light">Proteção UV com estilo vintage que nunca sai de moda.</p>
+            <p class="mt-4 font-bold text-lg text-indigo-700">R$ 199,90</p>
+          </div>
+        </div>
+        <div class="flex-1 max-w-xs mx-auto bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+          <img
+            src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+            alt="Bolsa feminina elegante"
+            loading="lazy"
+            class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-semibold text-purple-700 group-hover:text-pink-600 transition-colors">Bolsa Tiracolo Chic</h3>
+            <p class="mt-2 text-gray-600 font-light">Compacta, prática e cheia de charme para seu dia a dia.</p>
+            <p class="mt-4 font-bold text-lg text-indigo-700">R$ 279,90</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas Especiais -->
+  <section id="ofertas" aria-label="Ofertas especiais" class="container mx-auto px-6 md:px-8 py-16 md:py-24">
+    <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-wide fade-in" style="animation-delay: 0.1s;">
+      Ofertas Imperdíveis
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-5xl mx-auto">
+      <div class="relative rounded-3xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="animation-delay: 0.3s;">
+        <img
+          src="https://images.unsplash.com/photo-1530845641428-0b5d0b0c7f3a?auto=format&fit=crop&w=700&q=80"
+          alt="Jaqueta jeans vintage"
+          loading="lazy"
+          class="w-full h-[360px] object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
+          <h3 class="text-3xl font-bold text-white drop-shadow-lg">Jaqueta Jeans Vintage</h3>
+          <p class="text-lg text-gray-200 mt-1 drop-shadow-md">De R$ 249,90 por <span class="line-through">R$ 199,90</span></p>
+          <button class="mt-4 btn-primary px-6 py-2 w-max shadow-lg hover:scale-110 transition-transform">
+            Comprar Agora
+          </button>
+        </div>
+      </div>
+      <div class="relative rounded-3xl overflow-hidden shadow-lg group cursor-pointer fade-in" style="animation-delay: 0.5s;">
+        <img
+          src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=80"
+          alt="Mulher com vestido floral"
+          loading="lazy"
+          class="w-full h-[360px] object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8">
+          <h3 class="text-3xl font-bold text-white drop-shadow-lg">Vestido Floral Midi</h3>
+          <p class="text-lg text-gray-200 mt-1 drop-shadow-md">De R$ 189,90 por <span class="line-through">R$ 149,90</span></p>
+          <button class="mt-4 btn-primary px-6 py-2 w-max shadow-lg hover:scale-110 transition-transform">
+            Comprar Agora
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" aria-label="Sobre a empresa" class="bg-white py-16 md:py-24">
+    <div class="container mx-auto px-6 md:px-8 max-w-5xl flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2 fade-in" style="animation-delay: 0.2s;">
+        <img
+          src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80"
+          alt="Equipe da loja de roupas"
+          loading="lazy"
+          class="rounded-3xl shadow-xl w-full object-cover aspect-[4/3]"
+        />
+      </div>
+      <div class="md:w-1/2 fade-in" style="animation-delay: 0.4s;">
+        <h2 class="text-4xl font-bold text-gray-900 mb-6 tracking-wide">Nossa História</h2>
+        <p class="text-gray-700 font-light leading-relaxed mb-4">
+          Na Titan Store, unimos paixão por moda e compromisso com a qualidade para oferecer peças que traduzem autenticidade e conforto. Desde 2010, acompanhamamos tendências globais, adaptando-as para o estilo brasileiro.
+        </p>
+        <p class="text-gray-700 font-light leading-relaxed">
+          Acreditamos que vestir-se bem é uma forma de expressão, e cada detalhe importa para garantir a melhor experiência aos nossos clientes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" aria-label="Contato" class="bg-gradient-to-tr from-indigo-50 via-purple-50 to-pink-50 py-16 md:py-24">
+    <div class="container mx-auto px-6 md:px-8 max-w-4xl fade-in" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-bold text-center text-gray-900 mb-10 tracking-wide">Fale Conosco</h2>
+      <form action="#" method="POST" class="bg-white rounded-3xl shadow-xl p-10 max-w-3xl mx-auto space-y-6">
+        <div>
+          <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+          <input id="nome" name="nome" type="text" required placeholder="Seu nome completo"
+            class="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+          <input id="email" name="email" type="email" required placeholder="seu@email.com"
+            class="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..."
+            class="w-full rounded-lg border border-gray-300 p-3 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full py-3 shadow-lg hover:scale-105 transition-transform font-semibold text-lg">
+          Enviar Mensagem
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-gray-900 text-gray-300 py-12 px-6 md:px-12 select-text">
+  <div class="container mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm md:text-base leading-relaxed">
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">CNPJ</h3>
+      <p>58.301.903/0001-92</p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Razão Social</h3>
+      <p>TITAN CONSULTORIA ESTRATEGICA LIMITADA</p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">E-mail</h3>
+      <p><a href="mailto:TITANNCONSULL@GMAIL.COM" class="hover:text-pink-500 transition">TITANNCONSULL@GMAIL.COM</a></p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Telefone</h3>
+      <p><span id="telefone-comercial" class="font-mono text-lg">75-992237016</span></p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Logradouro</h3>
+      <p>AVENIDA JOSE SAMPAIO, 27</p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Bairro</h3>
+      <p>CENTRO</p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Município</h3>
+      <p>SOUTO SOARES</p>
+    </div>
+    <div>
+      <h3 class="text-purple-400 font-semibold mb-3 uppercase tracking-wide">Estado</h3>
+      <p>BA</p>
+    </div>
+  </div>
+  <div class="container mx-auto max-w-6xl mt-10 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between text-center text-sm text-gray-500 select-text">
+    <p>© 2024 Titan Store. Todos os direitos reservados.</p>
+    <div class="flex gap-6 justify-center md:justify-end mt-3 md:mt-0">
+      <a href="#" class="hover:text-pink-500 transition" aria-label="Termos de Uso">Termos de Uso</a>
+      <a href="#" class="hover:text-pink-500 transition" aria-label="Política de Privacidade">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  const btnClose = document.getElementById('btn-close');
+
+  btnMenu.addEventListener('click', () => {
+    menuMobile.style.transform = 'translateX(0%)';
+    document.body.style.overflow = 'hidden';
+  });
+
+  btnClose.addEventListener('click', closeMenu);
+
+  function closeMenu() {
+    menuMobile.style.transform = 'translateX(100%)';
+    document.body.style.overflow = '';
+  }
+
+  // Close menu when clicking a link (for mobile)
+  document.querySelectorAll('#menu-mobile a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+</body>
+</html>

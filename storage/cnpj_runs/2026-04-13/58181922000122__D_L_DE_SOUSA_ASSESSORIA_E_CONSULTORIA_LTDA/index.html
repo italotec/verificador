@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="xqpjo8w4gp8o7sfh21u8sm614hl4hf" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VesteAcess - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  nav a {
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #4F46E5;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+    color: white;
+    transition: background-position 0.5s ease;
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+  }
+  .btn-primary:hover {
+    background-position: 100% 0%;
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(1rem);
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fade-up.animate {
+    animation-name: fadeUp;
+    animation-duration: 0.8s;
+  }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900 selection:bg-indigo-300 selection:text-indigo-900">
+
+<header class="sticky top-0 z-30 bg-white shadow-md">
+  <nav class="container mx-auto flex flex-wrap items-center justify-between p-4 md:px-8" aria-label="Main navigation">
+    <a href="#home" class="text-indigo-700 font-extrabold text-2xl tracking-tight hover:text-indigo-900">VesteAcess</a>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" aria-expanded="false" aria-controls="menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+        viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div id="menu" class="hidden md:flex md:items-center md:gap-8 w-full md:w-auto mt-4 md:mt-0" role="menu">
+      <a href="#home" class="block py-2 px-1 text-indigo-700 font-semibold hover:text-indigo-900" role="menuitem" tabindex="0">Início</a>
+      <a href="#vestuario" class="block py-2 px-1 text-gray-700 hover:text-indigo-700" role="menuitem" tabindex="0">Vestuário</a>
+      <a href="#acessorios" class="block py-2 px-1 text-gray-700 hover:text-indigo-700" role="menuitem" tabindex="0">Acessórios</a>
+      <a href="#sobre" class="block py-2 px-1 text-gray-700 hover:text-indigo-700" role="menuitem" tabindex="0">Sobre Nós</a>
+      <a href="#contato" class="btn-primary inline-block py-2 px-5 rounded-md font-semibold shadow-lg hover:shadow-indigo-500/60">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<main class="max-w-screen-xl mx-auto">
+
+<section id="home" class="relative bg-gradient-to-br from-indigo-100 via-white to-indigo-50 min-h-[70vh] flex flex-col justify-center px-6 md:px-12 text-center md:text-left">
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+    <div class="space-y-6 fade-up animate" style="animation-delay: 0.2s">
+      <h1 class="text-5xl font-extrabold leading-tight tracking-tight text-indigo-800 drop-shadow-md max-w-xl">Moda e acessórios que transformam seu estilo</h1>
+      <p class="text-xl text-indigo-600 max-w-lg">Descubra nossa coleção exclusiva de roupas elegantes e acessórios modernos, feitos para você se destacar com conforto e autenticidade.</p>
+      <a href="#vestuario" class="btn-primary inline-block py-3 px-8 rounded-lg text-lg font-semibold shadow-md hover:shadow-indigo-600/80">Ver Produtos</a>
+    </div>
+    <div class="fade-up animate" style="animation-delay: 0.4s">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Modelo com roupa estilosa" loading="lazy" class="rounded-xl shadow-lg mx-auto md:mx-0 max-w-full h-auto" />
+    </div>
+  </div>
+</section>
+
+<section id="vestuario" class="py-16 px-6 md:px-12 bg-white">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-indigo-800 text-4xl font-extrabold mb-8 text-center md:text-left">Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <article class="bg-indigo-50 rounded-xl shadow-md overflow-hidden group hover:shadow-indigo-300 transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Camisa branca casual" loading="lazy" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-900">Camisa Casual Branca</h3>
+          <p class="mt-2 text-indigo-700 font-medium">R$129,90</p>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-xl shadow-md overflow-hidden group hover:shadow-indigo-300 transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans estilizada" loading="lazy" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-900">Jaqueta Jeans Premium</h3>
+          <p class="mt-2 text-indigo-700 font-medium">R$249,90</p>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-xl shadow-md overflow-hidden group hover:shadow-indigo-300 transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1520975695081-1f4e8f2e7a4a?auto=format&fit=crop&w=600&q=80" alt="Calça chino bege" loading="lazy" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-900">Calça Chino Bege</h3>
+          <p class="mt-2 text-indigo-700 font-medium">R$179,90</p>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-xl shadow-md overflow-hidden group hover:shadow-indigo-300 transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=600&q=80" alt="Vestido floral leve" loading="lazy" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-900">Vestido Floral Leve</h3>
+          <p class="mt-2 text-indigo-700 font-medium">R$199,90</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="acessorios" class="py-16 px-6 md:px-12 bg-indigo-50">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-indigo-900 text-4xl font-extrabold mb-10 text-center md:text-left">Acessórios</h2>
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 justify-center lg:justify-start">
+      <div class="flex-1 max-w-sm bg-white rounded-3xl p-6 shadow-lg hover:shadow-indigo-400 transition-shadow duration-400 group">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Relógio sofisticado" loading="lazy" class="rounded-2xl w-full h-72 object-cover object-center mb-5 group-hover:scale-105 transition-transform duration-300" />
+        <h3 class="text-indigo-900 font-bold text-xl mb-1">Relógio Sofisticado</h3>
+        <p class="text-indigo-700 font-semibold">R$399,90</p>
+      </div>
+      <div class="flex-1 max-w-sm bg-white rounded-3xl p-6 shadow-lg hover:shadow-indigo-400 transition-shadow duration-400 group">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" loading="lazy" class="rounded-2xl w-full h-72 object-cover object-center mb-5 group-hover:scale-105 transition-transform duration-300" />
+        <h3 class="text-indigo-900 font-bold text-xl mb-1">Óculos de Sol Moderno</h3>
+        <p class="text-indigo-700 font-semibold">R$249,90</p>
+      </div>
+      <div class="flex-1 max-w-sm bg-white rounded-3xl p-6 shadow-lg hover:shadow-indigo-400 transition-shadow duration-400 group">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro marrom" loading="lazy" class="rounded-2xl w-full h-72 object-cover object-center mb-5 group-hover:scale-105 transition-transform duration-300" />
+        <h3 class="text-indigo-900 font-bold text-xl mb-1">Bolsa de Couro Marrom</h3>
+        <p class="text-indigo-700 font-semibold">R$329,90</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="py-16 px-6 md:px-12 bg-white">
+  <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 fade-up animate" style="animation-delay: 0.2s">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja trabalhando" loading="lazy" class="rounded-3xl shadow-lg w-full object-cover h-[320px]" />
+    </div>
+    <div class="md:w-1/2 space-y-6 fade-up animate" style="animation-delay: 0.4s">
+      <h2 class="text-indigo-800 text-4xl font-extrabold mb-4">Quem Somos</h2>
+      <p class="text-indigo-700 leading-relaxed text-lg">Na VesteAcess, unimos paixão por moda e atenção aos detalhes para oferecer roupas e acessórios que realmente fazem a diferença no seu dia a dia. Nossa equipe dedica-se a selecionar cada peça com cuidado, prezando por qualidade, conforto e estilo contemporâneo.</p>
+      <p class="text-indigo-700 leading-relaxed text-lg">Seja para um look casual, elegante ou para aquele evento especial, estamos aqui para ajudar você a expressar sua personalidade através da moda.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="py-16 px-6 md:px-12 bg-indigo-50">
+  <div class="container mx-auto max-w-4xl bg-white rounded-3xl shadow-lg p-10">
+    <h2 class="text-indigo-900 text-4xl font-extrabold mb-8 text-center">Fale Conosco</h2>
+    <form action="#" method="POST" class="space-y-6" novalidate>
+      <div>
+        <label for="nome" class="block text-indigo-900 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" class="w-full border border-indigo-300 rounded-lg px-4 py-3 text-indigo-700 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500" />
+      </div>
+      <div>
+        <label for="email" class="block text-indigo-900 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-lg px-4 py-3 text-indigo-700 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-indigo-900 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-lg px-4 py-3 text-indigo-700 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 resize-none"></textarea>
+      </div>
+      <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold text-xl shadow-lg hover:shadow-indigo-600/80 transition-shadow">Enviar</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6 md:px-12 select-none">
+  <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div class="space-y-3">
+      <h3 class="text-xl font-extrabold border-b border-indigo-700 pb-2">Informações Legais</h3>
+      <p><span class="font-semibold">CNPJ:</span> 58.181.922/0001-22</p>
+      <p><span class="font-semibold">Razão Social:</span> D L DE SOUSA ASSESSORIA E CONSULTORIA LTDA</p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="text-xl font-extrabold border-b border-indigo-700 pb-2">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:DANIELENGENHO@GMAIL.COM" class="underline hover:text-indigo-300">DANIELENGENHO@GMAIL.COM</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="font-semibold">(11) 93011-6649</span></p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="text-xl font-extrabold border-b border-indigo-700 pb-2">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> RUA ANTONIO VITORINO DE CARVALHO, 297</p>
+      <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> VERMELHO NOVO</p>
+      <p><span class="font-semibold">Estado:</span> MG</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-indigo-700 pt-6 text-center text-indigo-400 text-sm flex flex-col sm:flex-row justify-center gap-4">
+    <a href="#" class="hover:text-indigo-300 transition-colors">Termos de Uso</a>
+    <span aria-hidden="true">&bull;</span>
+    <a href="#" class="hover:text-indigo-300 transition-colors">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  // Toggle mobile menu
+  const btnMenu = document.getElementById('btn-menu');
+  const menu = document.getElementById('menu');
+  btnMenu.addEventListener('click', () => {
+    const expanded = btnMenu.getAttribute('aria-expanded') === 'true' || false;
+    btnMenu.setAttribute('aria-expanded', !expanded);
+    menu.classList.toggle('hidden');
+  });
+
+  // Animate fade-up elements on scroll
+  function animateFadeUp() {
+    const fadeElements = document.querySelectorAll('.fade-up:not(.animate)');
+    const windowBottom = window.innerHeight + window.scrollY;
+    fadeElements.forEach(el => {
+      if (el.offsetTop + 100 < windowBottom) {
+        el.classList.add('animate');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateFadeUp);
+  window.addEventListener('load', animateFadeUp);
+</script>
+
+</body>
+</html>

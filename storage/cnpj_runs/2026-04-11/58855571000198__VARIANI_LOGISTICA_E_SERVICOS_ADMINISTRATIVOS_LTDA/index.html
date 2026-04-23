@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variani Store - Roupas & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Subtle fade-up animation on scroll */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+    <a href="#home" class="text-3xl font-semibold text-indigo-600 tracking-wide hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" aria-label="Variani Store Home">VARIANI</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-600">
+      <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+      <li><a href="#vestuario" class="hover:text-indigo-600 transition">Vestuário</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+    <ul class="flex flex-col px-6 py-4 space-y-4 font-semibold text-indigo-600">
+      <li><a href="#home" class="block hover:text-indigo-700">Início</a></li>
+      <li><a href="#vestuario" class="block hover:text-indigo-700">Vestuário</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-700">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-700">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-700">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="relative overflow-hidden">
+
+  <!-- Home / Hero -->
+  <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-indigo-50 to-indigo-100 px-6 md:px-20 py-20">
+    <div class="md:w-1/2 max-w-lg fade-up" data-fade>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-700 leading-tight mb-6">Moda que inspira seu estilo</h1>
+      <p class="text-lg md:text-xl text-indigo-600 mb-8">Descubra roupas e acessórios exclusivos para você sentir-se único em cada ocasião.</p>
+      <a href="#vestuario" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition">Confira as Coleções</a>
+    </div>
+    <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80" alt="Mulher estilosa com roupa moderna" class="rounded-3xl shadow-xl max-w-full h-auto object-cover" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- Vestuário -->
+  <section id="vestuario" class="bg-white py-20 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto text-center mb-14 fade-up" data-fade>
+      <h2 class="text-4xl font-bold text-indigo-700 mb-3">Vestuário</h2>
+      <p class="text-indigo-600 max-w-3xl mx-auto text-lg">Peças que unem conforto, qualidade e design moderno para todas as ocasiões.</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto fade-up" data-fade>
+      <article class="bg-indigo-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Camisa Casual Slim</h3>
+          <p class="text-indigo-700 mb-4">Confeccionada em algodão orgânico, perfeita para o dia a dia.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino elegante" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Midi Floral</h3>
+          <p class="text-indigo-700 mb-4">Leve e fluido, ideal para eventos e passeios.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 189,90</span>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans masculina" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Jeans Vintage</h3>
+          <p class="text-indigo-700 mb-4">Com lavagem especial para um visual autêntico.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 249,90</span>
+        </div>
+      </article>
+      <article class="bg-indigo-50 rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a5d?auto=format&fit=crop&w=600&q=80" alt="Calça feminina jeans" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Calça Jeans Skinny</h3>
+          <p class="text-indigo-700 mb-4">Modelagem anatômica que valoriza a silhueta.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 159,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" class="bg-indigo-50 py-20 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto text-center mb-14 fade-up" data-fade>
+      <h2 class="text-4xl font-bold text-indigo-700 mb-3">Acessórios</h2>
+      <p class="text-indigo-700 max-w-3xl mx-auto text-lg">Detalhes que fazem toda a diferença no seu visual.</p>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto fade-up" data-fade>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino elegante" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Relógio de Couro</h3>
+          <p class="text-indigo-700 mb-4">Design minimalista com pulseira em couro legítimo.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 349,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina de couro" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Bolsa Crossbody</h3>
+          <p class="text-indigo-700 mb-4">Compacta e elegante para o dia a dia.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 279,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1542068824-99b1a2c7a418?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol redondo" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Óculos de Sol Redondo</h3>
+          <p class="text-indigo-700 mb-4">Lentes UV400 com armação metálica vintage.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 149,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1542838687-5a2f2f6e9e81?auto=format&fit=crop&w=600&q=80" alt="Chapéu panamá feminino" class="w-full h-56 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Chapéu Panamá</h3>
+          <p class="text-indigo-700 mb-4">Leve e estiloso, ideal para o verão.</p>
+          <span class="font-bold text-indigo-900 text-lg">R$ 119,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" class="bg-white py-20 px-6 md:px-20">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 items-center fade-up" data-fade>
+      <div>
+        <h2 class="text-4xl font-bold text-indigo-700 mb-6">Sobre a Variani Store</h2>
+        <p class="text-indigo-700 text-lg mb-4 leading-relaxed">Somos uma loja apaixonada por moda, dedicada a oferecer peças que aliam estilo, conforto e qualidade. Nosso compromisso é proporcionar uma experiência única de compra, com atendimento personalizado e produtos cuidadosamente selecionados para você.</p>
+        <p class="text-indigo-700 text-lg leading-relaxed">Da escolha dos tecidos à curadoria dos acessórios, cada detalhe é pensado para que você expresse sua personalidade com autenticidade e confiança.</p>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-xl">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=80" alt="Equipe da Variani Store trabalhando" loading="lazy" class="w-full h-auto object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="bg-indigo-50 py-20 px-6 md:px-20">
+    <div class="max-w-3xl mx-auto text-center mb-12 fade-up" data-fade>
+      <h2 class="text-4xl font-bold text-indigo-700 mb-3">Fale Conosco</h2>
+      <p class="text-indigo-700 text-lg">Quer saber mais? Entre em contato conosco! Estamos prontos para ajudar você a encontrar o look perfeito.</p>
+    </div>
+    <form action="#" method="POST" class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-8 fade-up" data-fade>
+      <div class="mb-6">
+        <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"></textarea>
+      </div>
+      <button type="submit" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition">Enviar</button>
+    </form>
+  </section>
+
+</main>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6 md:px-20">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-12">
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">CNPJ</h3>
+      <p class="text-sm select-text">58.855.571/0001-98</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Razão Social</h3>
+      <p class="text-sm select-text">VARIANI LOGISTICA E SERVICOS ADMINISTRATIVOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">E-mail</h3>
+      <a href="mailto:VARIANITRANSPORTES@GMAIL.COM" class="block text-sm hover:underline select-text">VARIANITRANSPORTES@GMAIL.COM</a>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Telefone</h3>
+      <p class="text-sm select-text"><span id="telefone-comercial">54-996954784</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Logradouro</h3>
+      <p class="text-sm select-text">RUA VITORINO MONTEIRO, 288</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Bairro</h3>
+      <p class="text-sm select-text">CENTRO</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Município</h3>
+      <p class="text-sm select-text">CASCA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2 border-b border-indigo-700 pb-1">Estado</h3>
+      <p class="text-sm select-text">RS</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 border-t border-indigo-800 pt-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+    <p class="text-sm text-indigo-300 select-text">&copy; 2024 Variani Store. Todos os direitos reservados.</p>
+    <nav class="flex space-x-8 text-indigo-300 text-sm font-semibold" aria-label="Links de políticas">
+      <a href="#" class="hover:text-indigo-100 focus:outline-none focus:underline">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-100 focus:outline-none focus:underline">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Fade-up animation on scroll
+  const fadeEls = document.querySelectorAll('[data-fade]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

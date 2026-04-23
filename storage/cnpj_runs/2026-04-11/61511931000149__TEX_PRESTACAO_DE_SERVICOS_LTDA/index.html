@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RBR Store - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Subtle fade-in animation for sections */
+  section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+  }
+  section:nth-child(1) {animation-delay: 0.1s;}
+  section:nth-child(2) {animation-delay: 0.3s;}
+  section:nth-child(3) {animation-delay: 0.5s;}
+  section:nth-child(4) {animation-delay: 0.7s;}
+  section:nth-child(5) {animation-delay: 0.9s;}
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Custom scrollbar for desktop */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f3f4f6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #6b7280;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-pink-300 selection:text-white">
+
+<header class="bg-white fixed w-full z-30 shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-3xl font-extrabold text-pink-600 hover:text-pink-700 transition">RBR Store</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+      <li><a href="#home" class="hover:text-pink-600 transition">Home</a></li>
+      <li><a href="#colecao" class="hover:text-pink-600 transition">Coleção</a></li>
+      <li><a href="#novidades" class="hover:text-pink-600 transition">Novidades</a></li>
+      <li><a href="#acessorios" class="hover:text-pink-600 transition">Acessórios</a></li>
+      <li><a href="#contato" class="hover:text-pink-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden flex items-center text-pink-600 hover:text-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" /></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 hidden">
+    <ul class="flex flex-col py-4 space-y-3 px-6 font-semibold text-gray-700">
+      <li><a href="#home" class="block hover:text-pink-600 transition">Home</a></li>
+      <li><a href="#colecao" class="block hover:text-pink-600 transition">Coleção</a></li>
+      <li><a href="#novidades" class="block hover:text-pink-600 transition">Novidades</a></li>
+      <li><a href="#acessorios" class="block hover:text-pink-600 transition">Acessórios</a></li>
+      <li><a href="#contato" class="block hover:text-pink-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="pt-20">
+
+  <section id="home" class="relative bg-gradient-to-r from-pink-100 via-white to-pink-100 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center gap-12">
+      <div class="max-w-lg text-center md:text-left">
+        <h1 class="text-5xl font-extrabold text-pink-700 mb-4 leading-tight drop-shadow-md">Moda que Inspira Seu Estilo</h1>
+        <p class="text-lg text-pink-900/80 mb-8 font-medium">Descubra roupas e acessórios exclusivos para todas as ocasiões. Qualidade, conforto e tendências em um só lugar.</p>
+        <a href="#colecao" class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-pink-300">Confira a Coleção</a>
+      </div>
+      <div class="flex-1 overflow-hidden rounded-3xl shadow-xl animate-[float_6s_ease-in-out_infinite]">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Modelo com roupa feminina elegante" loading="lazy" class="w-full object-cover aspect-[4/5] rounded-3xl" />
+      </div>
+    </div>
+  </section>
+
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-extrabold text-pink-700 mb-12 text-center relative before:absolute before:-bottom-3 before:left-1/2 before:-translate-x-1/2 before:w-24 before:h-1 before:rounded-full before:bg-pink-300">Coleção Primavera/Verão</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Vestido floral primavera" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-pink-700 mb-2">Vestido Floral</h3>
+          <p class="text-gray-600 mb-4">Leveza e charme para os dias ensolarados com estampa floral exclusiva.</p>
+          <span class="block text-pink-600 font-bold text-lg">R$ 189,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" alt="Camisa masculina casual" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-pink-700 mb-2">Camisa Casual</h3>
+          <p class="text-gray-600 mb-4">Conforto e estilo para o dia a dia com tecido leve e design moderno.</p>
+          <span class="block text-pink-600 font-bold text-lg">R$ 149,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Shorts jeans feminino" loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-pink-700 mb-2">Shorts Jeans</h3>
+          <p class="text-gray-600 mb-4">Peça-chave para looks despojados e confortáveis em dias quentes.</p>
+          <span class="block text-pink-600 font-bold text-lg">R$ 129,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="novidades" class="bg-white py-20 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1 overflow-hidden rounded-3xl shadow-lg">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Mulher usando jaqueta estilosa" loading="lazy" class="w-full object-cover aspect-[4/5] rounded-3xl" />
+      </div>
+      <div class="flex-1 max-w-lg">
+        <h2 class="text-4xl font-extrabold text-pink-700 mb-6">Novidades Chegando</h2>
+        <p class="text-gray-700 mb-6 leading-relaxed">Fique à frente da moda com nossas últimas novidades em roupas e acessórios para todas as estações. Peças selecionadas com atenção aos detalhes e tendências internacionais.</p>
+        <a href="#acessorios" class="inline-block px-8 py-4 bg-pink-600 text-white font-semibold rounded-lg shadow-md hover:bg-pink-700 transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300">Veja os Acessórios</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="acessorios" class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-extrabold text-pink-700 mb-12 text-center relative before:absolute before:-bottom-3 before:left-1/2 before:-translate-x-1/2 before:w-24 before:h-1 before:rounded-full before:bg-pink-300">Acessórios Exclusivos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 group">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno" loading="lazy" class="w-32 h-32 object-cover rounded-full mb-4 group-hover:scale-110 transition-transform duration-500" />
+        <h3 class="text-xl font-semibold text-pink-700 mb-2">Relógio Minimalista</h3>
+        <p class="text-gray-600 mb-4">Design clean e elegante para acompanhar seu dia com estilo.</p>
+        <span class="text-pink-600 font-bold text-lg">R$ 259,90</span>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 group">
+        <img src="https://images.unsplash.com/photo-1516728778615-2d590ea1856f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" loading="lazy" class="w-32 h-32 object-cover rounded-full mb-4 group-hover:scale-110 transition-transform duration-500" />
+        <h3 class="text-xl font-semibold text-pink-700 mb-2">Óculos de Sol</h3>
+        <p class="text-gray-600 mb-4">Proteção UV com design moderno, perfeito para qualquer look.</p>
+        <span class="text-pink-600 font-bold text-lg">R$ 179,90</span>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 group">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro feminina" loading="lazy" class="w-32 h-32 object-cover rounded-full mb-4 group-hover:scale-110 transition-transform duration-500" />
+        <h3 class="text-xl font-semibold text-pink-700 mb-2">Bolsa de Couro</h3>
+        <p class="text-gray-600 mb-4">Sofisticação e praticidade para acompanhar você em todos os momentos.</p>
+        <span class="text-pink-600 font-bold text-lg">R$ 349,90</span>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 group">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Chapéu de palha" loading="lazy" class="w-32 h-32 object-cover rounded-full mb-4 group-hover:scale-110 transition-transform duration-500" />
+        <h3 class="text-xl font-semibold text-pink-700 mb-2">Chapéu de Palha</h3>
+        <p class="text-gray-600 mb-4">Ideal para proteger do sol com charme e estilo praiano.</p>
+        <span class="text-pink-600 font-bold text-lg">R$ 99,90</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="bg-gradient-to-r from-pink-50 to-white py-20 px-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-10">
+      <h2 class="text-4xl font-extrabold text-pink-700 mb-8 text-center">Fale Conosco</h2>
+      <form action="#" method="POST" class="space-y-6" novalidate>
+        <div>
+          <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-600 transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-600 transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..." required class="w-full px-5 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-600 transition"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 rounded-lg shadow-lg transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-pink-900 text-pink-200 py-12 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm leading-relaxed select-none">
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">CNPJ</h3>
+      <p>61.511.931/0001-49</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Razão Social</h3>
+      <p>TEX PRESTACAO DE SERVICOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">E-mail</h3>
+      <p>ATENDIMENTO@RBR.CNT.BR</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Telefone</h3>
+      <p><span id="telefone-comercial">51-30562104</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Logradouro</h3>
+      <p>RUA PADRE BENJAMIN COPETTI, 724</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Bairro</h3>
+      <p>COPETTI</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Município</h3>
+      <p>SOBRADINHO</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-pink-300 mb-2 uppercase tracking-wide">Estado</h3>
+      <p>RS</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 border-t border-pink-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-pink-400 text-xs select-text">
+    <p>© 2024 RBR Store. Todos os direitos reservados.</p>
+    <div class="flex space-x-6 mt-4 sm:mt-0">
+      <a href="#" class="hover:text-pink-200 transition font-semibold uppercase tracking-wide">Termos de Uso</a>
+      <a href="#" class="hover:text-pink-200 transition font-semibold uppercase tracking-wide">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LEVY Clothing & Accessories</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 1.2s ease forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to {opacity: 1;}
+        }
+        .btn-glow {
+            transition: box-shadow 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 10px rgb(34 197 94 / 0.6), 0 0 20px rgb(34 197 94 / 0.4);
+        }
+        .nav-underline:hover {
+            background: linear-gradient(to right, #22c55e 0%, #a7f3d0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-green-300 selection:text-gray-900">
+
+<header class="fixed w-full bg-white/90 backdrop-blur-sm shadow-md z-50">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 md:px-8">
+        <a href="#home" class="font-extrabold text-2xl text-green-600 tracking-wide nav-underline transition duration-300 select-none">LEVY</a>
+        <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+            <li><a href="#colecao" class="hover:text-green-600 transition">Coleção</a></li>
+            <li><a href="#acessorios" class="hover:text-green-600 transition">Acessórios</a></li>
+            <li><a href="#sobre" class="hover:text-green-600 transition">Sobre Nós</a></li>
+            <li><a href="#depoimentos" class="hover:text-green-600 transition">Depoimentos</a></li>
+            <li><a href="#contato" class="hover:text-green-600 transition">Contato</a></li>
+        </ul>
+        <button id="btn-menu" aria-label="Menu" class="md:hidden p-2 rounded-md text-gray-700 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+            </svg>
+        </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white/95 shadow-md">
+        <ul class="flex flex-col p-4 space-y-2 font-semibold text-gray-700">
+            <li><a href="#colecao" class="block py-2 px-3 rounded hover:bg-green-50 hover:text-green-600 transition">Coleção</a></li>
+            <li><a href="#acessorios" class="block py-2 px-3 rounded hover:bg-green-50 hover:text-green-600 transition">Acessórios</a></li>
+            <li><a href="#sobre" class="block py-2 px-3 rounded hover:bg-green-50 hover:text-green-600 transition">Sobre Nós</a></li>
+            <li><a href="#depoimentos" class="block py-2 px-3 rounded hover:bg-green-50 hover:text-green-600 transition">Depoimentos</a></li>
+            <li><a href="#contato" class="block py-2 px-3 rounded hover:bg-green-50 hover:text-green-600 transition">Contato</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="pt-20">
+
+    <!-- Seção 1: Hero com destaque e chamada -->
+    <section id="home" class="relative bg-gradient-to-r from-green-100 via-green-50 to-white min-h-[90vh] flex flex-col justify-center px-6 md:px-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in space-y-6 max-w-xl">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-green-700 leading-tight">Estilo & Sustentabilidade <br /> na Sua Roupa</h1>
+                <p class="text-lg md:text-xl text-gray-700/90">Descubra a coleção exclusiva de vestuário e acessórios que unem design moderno e consciência ecológica.</p>
+                <a href="#colecao" class="btn-glow inline-block bg-green-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-green-700 transition">Ver Coleção</a>
+            </div>
+            <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-green-100">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Mulher vestindo roupa moderna" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105" loading="lazy" />
+            </div>
+        </div>
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-green-400" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m7-7H5"/></svg>
+        </div>
+    </section>
+
+    <!-- Seção 2: Coleção de Vestuário -->
+    <section id="colecao" class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+        <h2 class="text-4xl font-extrabold text-green-700 mb-8 text-center">Coleção de Vestuário</h2>
+        <p class="max-w-3xl mx-auto text-center text-gray-700/90 mb-12 leading-relaxed">Peças que combinam conforto, qualidade e estilo para todas as ocasiões. Explore e encontre seu look perfeito.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <article class="group rounded-xl overflow-hidden shadow-lg bg-white ring-1 ring-green-50 hover:ring-green-300 transition">
+                <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Blusa casual feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg text-green-800 mb-2">Blusa Casual</h3>
+                    <p class="text-gray-600 text-sm mb-4">Confeccionada com algodão orgânico, perfeita para o dia a dia.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-green-600 text-xl">R$149,90</span>
+                        <a href="#" class="text-green-700 font-semibold hover:underline" aria-label="Comprar Blusa Casual">Comprar</a>
+                    </div>
+                </div>
+            </article>
+            <article class="group rounded-xl overflow-hidden shadow-lg bg-white ring-1 ring-green-50 hover:ring-green-300 transition">
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina preta" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg text-green-800 mb-2">Jaqueta Urbana</h3>
+                    <p class="text-gray-600 text-sm mb-4">Design moderno com tecido resistente à água e vento.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-green-600 text-xl">R$399,90</span>
+                        <a href="#" class="text-green-700 font-semibold hover:underline" aria-label="Comprar Jaqueta Urbana">Comprar</a>
+                    </div>
+                </div>
+            </article>
+            <article class="group rounded-xl overflow-hidden shadow-lg bg-white ring-1 ring-green-50 hover:ring-green-300 transition">
+                <img src="https://images.unsplash.com/photo-1530845641463-51c6d03e3a71?auto=format&fit=crop&w=600&q=80" alt="Vestido elegante feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg text-green-800 mb-2">Vestido Elegante</h3>
+                    <p class="text-gray-600 text-sm mb-4">Ideal para eventos especiais, tecido leve e caimento perfeito.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-green-600 text-xl">R$289,90</span>
+                        <a href="#" class="text-green-700 font-semibold hover:underline" aria-label="Comprar Vestido Elegante">Comprar</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Seção 3: Acessórios Exclusivos -->
+    <section id="acessorios" class="bg-green-50 py-20 px-6 md:px-16">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 max-w-lg fade-in">
+                <h2 class="text-4xl font-extrabold text-green-700 mb-6">Acessórios Exclusivos</h2>
+                <p class="text-gray-700/90 mb-6 leading-relaxed">Complete seu visual com acessórios que traduzem personalidade e elegância, com materiais de alta qualidade e design diferenciado.</p>
+                <a href="#" class="btn-glow inline-block bg-green-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-green-700 transition">Ver Acessórios</a>
+            </div>
+            <div class="flex-1 grid grid-cols-2 gap-6">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno" loading="lazy" class="rounded-xl shadow-md object-cover hover:scale-105 transition-transform duration-500 cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" loading="lazy" class="rounded-xl shadow-md object-cover hover:scale-105 transition-transform duration-500 cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro" loading="lazy" class="rounded-xl shadow-md object-cover hover:scale-105 transition-transform duration-500 cursor-pointer" />
+                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Colar delicado" loading="lazy" class="rounded-xl shadow-md object-cover hover:scale-105 transition-transform duration-500 cursor-pointer" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 4: Sobre Nós -->
+    <section id="sobre" class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in space-y-6 max-w-xl">
+                <h2 class="text-4xl font-extrabold text-green-700">Quem Somos</h2>
+                <p class="text-gray-700 leading-relaxed text-lg">Na LEVY, acreditamos que moda e responsabilidade caminham juntas. Utilizamos materiais sustentáveis e processos éticos para criar peças que fazem bem para você e para o planeta.</p>
+                <p class="text-gray-600">Desde 2015, nossa missão é oferecer roupas e acessórios que inspirem confiança e autenticidade, com um toque moderno e atemporal.</p>
+                <a href="#contato" class="btn-glow inline-block bg-green-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-green-700 transition">Fale Conosco</a>
+            </div>
+            <div class="rounded-3xl overflow-hidden shadow-lg ring-1 ring-green-100">
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Equipe de moda sustentável" class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" loading="lazy" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 5: Depoimentos -->
+    <section id="depoimentos" class="bg-white py-20 px-6 md:px-16">
+        <h2 class="text-4xl font-extrabold text-green-700 mb-12 text-center">Depoimentos</h2>
+        <div class="max-w-6xl mx-auto grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+            <blockquote class="p-6 bg-green-50 rounded-xl shadow-md border-l-4 border-green-400 flex flex-col justify-between">
+                <p class="text-gray-800 italic mb-4">"Comprei um vestido da LEVY e fiquei encantada com o caimento e a qualidade. Além disso, saber que a produção é sustentável me faz usar com muito orgulho."</p>
+                <footer class="text-green-700 font-semibold">Mariana S.</footer>
+            </blockquote>
+            <blockquote class="p-6 bg-green-50 rounded-xl shadow-md border-l-4 border-green-400 flex flex-col justify-between">
+                <p class="text-gray-800 italic mb-4">"A jaqueta urbana é minha peça favorita para o inverno. Estilo e conforto aliados em uma só roupa. Recomendo para todos!"</p>
+                <footer class="text-green-700 font-semibold">Felipe M.</footer>
+            </blockquote>
+            <blockquote class="p-6 bg-green-50 rounded-xl shadow-md border-l-4 border-green-400 flex flex-col justify-between">
+                <p class="text-gray-800 italic mb-4">"Os acessórios têm um design único e qualidade incrível. Sempre recebo elogios quando uso os produtos da LEVY."</p>
+                <footer class="text-green-700 font-semibold">Ana Clara T.</footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Seção 6: Contato -->
+    <section id="contato" class="max-w-7xl mx-auto px-6 md:px-12 py-16 bg-green-50 rounded-3xl shadow-lg mx-6 md:mx-auto my-16">
+        <h2 class="text-4xl font-extrabold text-green-700 mb-8 text-center">Entre em Contato</h2>
+        <form action="#" method="POST" class="max-w-3xl mx-auto space-y-6" novalidate>
+            <div>
+                <label for="nome" class="block text-green-800 font-semibold mb-2">Nome</label>
+                <input type="text" id="nome" name="nome" required class="w-full rounded-md border border-green-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent" placeholder="Seu nome completo" />
+            </div>
+            <div>
+                <label for="email" class="block text-green-800 font-semibold mb-2">E-mail</label>
+                <input type="email" id="email" name="email" required class="w-full rounded-md border border-green-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent" placeholder="seu@email.com" />
+            </div>
+            <div>
+                <label for="mensagem" class="block text-green-800 font-semibold mb-2">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="5" required class="w-full rounded-md border border-green-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent" placeholder="Escreva sua mensagem aqui"></textarea>
+            </div>
+            <button type="submit" class="btn-glow w-full md:w-auto bg-green-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-green-700 transition">Enviar Mensagem</button>
+        </form>
+    </section>
+</main>
+
+<footer class="bg-gray-900 text-gray-300 py-14 px-6 md:px-16 select-text">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-sm md:text-base">
+        <div>
+            <h3 class="font-semibold text-green-400 mb-3">Dados Cadastrais</h3>
+            <p><span class="font-semibold">CNPJ:</span> 65.491.620/0001-16</p>
+            <p><span class="font-semibold">Razão Social:</span> LEVY COWORKING LTDA</p>
+        </div>
+        <div>
+            <h3 class="font-semibold text-green-400 mb-3">Contato</h3>
+            <p><span class="font-semibold">E-mail:</span> GERENCIA.GRUPOREFORCEL@GMAIL.COM</p>
+            <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="select-all">61-30435810</span></p>
+        </div>
+        <div>
+            <h3 class="font-semibold text-green-400 mb-3">Endereço</h3>
+            <p><span class="font-semibold">Logradouro:</span> RUA RUA AMYR TEIXEIRA SANTOS, 64</p>
+            <p><span class="font-semibold">Bairro:</span> FONSECA ALMEIDA</p>
+        </div>
+        <div>
+            <h3 class="font-semibold text-green-400 mb-3">Localização</h3>
+            <p><span class="font-semibold">Município:</span> COMENDADOR LEVY GASPARIAN</p>
+            <p><span class="font-semibold">Estado:</span> RJ</p>
+        </div>
+    </div>
+    <div class="mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm font-light space-y-4 md:space-y-0">
+        <p>© 2024 LEVY COWORKING LTDA. Todos os direitos reservados.</p>
+        <nav class="flex space-x-6">
+            <a href="#" class="hover:text-green-400 transition" aria-label="Termos de Uso">Termos de Uso</a>
+            <a href="#" class="hover:text-green-400 transition" aria-label="Política de Privacidade">Política de Privacidade</a>
+        </nav>
+    </div>
+</footer>
+
+<script>
+    const btnMenu = document.getElementById('btn-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    btnMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
+</body>
+</html>

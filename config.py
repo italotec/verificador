@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).parent
 REPO_DIR = BASE_DIR.parent   # c:\…\Disparos — shared root for all agents
 
 # AdsPower local API
-ADSPOWER_BASE = os.getenv("ADSPOWER_BASE", "http://local.adspower.net:50365")
+ADSPOWER_BASE = os.getenv("ADSPOWER_BASE", "http://local.adspower.net:50325")
 
 # Name of the group in AdsPower that holds profiles waiting to be verified
 VERIFICAR_GROUP_NAME = os.getenv("VERIFICAR_GROUP_NAME", "Verificar")
@@ -53,7 +53,7 @@ CLOUDPANEL_VPS_USER = os.getenv("CLOUDPANEL_VPS_USER", "")
 CLOUDPANEL_VPS_PASS = os.getenv("CLOUDPANEL_VPS_PASS", "")
 CLOUDPANEL_SITE_PASS = os.getenv("CLOUDPANEL_SITE_PASS", "")
 CLOUDPANEL_PHP_VERSION = os.getenv("CLOUDPANEL_PHP_VERSION", "8.3")
-CLOUDPANEL_DOMAINS = os.getenv("CLOUDPANEL_DOMAINS", "juninzadarlk.com").split(",")
+CLOUDPANEL_DOMAINS = os.getenv("CLOUDPANEL_DOMAINS", "tropadapv.com").split(",")
 
 # Spaceship DNS API
 SPACESHIP_API_KEY = os.getenv("SPACESHIP_API_KEY", "")
@@ -74,6 +74,7 @@ SMS_MAX_ATTEMPTS = int(os.getenv("SMS_MAX_ATTEMPTS", "5"))
 HEROSMS_API_KEY = os.getenv("HEROSMS_API_KEY", "")
 HEROSMS_COUNTRY = os.getenv("HEROSMS_COUNTRY", "73")   # 73 = Brazil
 HEROSMS_SERVICE = os.getenv("HEROSMS_SERVICE", "fb")   # fb = Facebook verification
+HEROSMS_MAX_PRICE = os.getenv("HEROSMS_MAX_PRICE", "") # max price per number (USD)
 
 # Default SMS provider when no DB setting exists: "sms24h" or "herosms"
 SMS_PROVIDER = os.getenv("SMS_PROVIDER", "sms24h")

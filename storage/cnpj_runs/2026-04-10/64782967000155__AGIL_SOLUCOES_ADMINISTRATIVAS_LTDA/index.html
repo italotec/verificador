@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="x5mwjg0veydbjyem0yurnv7souw1so" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loja Vogue - Moda e Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fefefe;
+      color: #2c2c2c;
+    }
+    .fade-in-bottom {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .nav-link:hover {
+      color: #ef4444;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #f43f5e, #fb7185);
+      transition: background-position 0.4s ease;
+      background-size: 200% 100%;
+      background-position: left;
+    }
+    .btn-primary:hover {
+      background-position: right;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between p-5 md:px-10">
+      <a href="#" class="text-3xl font-extrabold tracking-wide text-gradient bg-gradient-to-r from-pink-600 to-rose-500 select-none">Vogue</a>
+      <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+        <li><a href="#home" class="nav-link hover:text-rose-500 transition">Home</a></li>
+        <li><a href="#colecao" class="nav-link hover:text-rose-500 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="nav-link hover:text-rose-500 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="nav-link hover:text-rose-500 transition">Sobre</a></li>
+        <li><a href="#contato" class="nav-link hover:text-rose-500 transition">Contato</a></li>
+      </ul>
+      <button id="menu-btn" aria-label="Abrir menu" class="md:hidden focus:outline-none">
+        <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+      <ul class="flex flex-col py-4 space-y-4 text-center font-semibold text-gray-700">
+        <li><a href="#home" class="block px-4 hover:text-rose-500 transition">Home</a></li>
+        <li><a href="#colecao" class="block px-4 hover:text-rose-500 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="block px-4 hover:text-rose-500 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block px-4 hover:text-rose-500 transition">Sobre</a></li>
+        <li><a href="#contato" class="block px-4 hover:text-rose-500 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- HERO -->
+    <section id="home" class="relative bg-gradient-to-tr from-rose-50 to-pink-50 overflow-hidden">
+      <div class="container mx-auto flex flex-col-reverse md:flex-row items-center px-6 md:px-12 py-20 md:py-32 gap-10 md:gap-16">
+        <div class="max-w-xl fade-in-bottom" style="animation-delay: 0.3s;">
+          <h1 class="text-5xl md:text-6xl font-extrabold text-rose-600 leading-tight mb-6">Moda que transforma seu estilo</h1>
+          <p class="text-rose-700/90 text-lg md:text-xl mb-8">Descubra as últimas tendências em vestuário e acessórios para todas as ocasiões. Conforto e elegância em um só lugar.</p>
+          <a href="#colecao" class="inline-block btn-primary text-white font-semibold px-8 py-4 rounded-lg shadow-lg select-none">Confira a Coleção</a>
+        </div>
+        <div class="w-full max-w-lg md:max-w-xl rounded-xl overflow-hidden shadow-2xl fade-in-bottom" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa vestindo roupa moderna" class="w-full h-auto object-cover" loading="lazy" />
+        </div>
+      </div>
+      <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 120L1440 0V120H0Z"/></svg>
+    </section>
+
+    <!-- COLEÇÃO DE VESTUÁRIO -->
+    <section id="colecao" class="bg-white py-20 px-6 md:px-12 container mx-auto">
+      <h2 class="text-4xl font-extrabold text-rose-600 mb-12 text-center fade-in-bottom" style="animation-delay: 0.3s;">Coleção Exclusiva de Vestuário</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <article class="rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino vermelho" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5 bg-rose-50">
+            <h3 class="text-xl font-semibold text-rose-700 mb-2">Vestido Vermelho Luxo</h3>
+            <p class="text-rose-600 font-medium">Elegância para eventos especiais com tecido leve e corte moderno.</p>
+          </div>
+        </article>
+        <article class="rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a4b?auto=format&fit=crop&w=600&q=80" alt="Homem com jaqueta moderna" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5 bg-rose-50">
+            <h3 class="text-xl font-semibold text-rose-700 mb-2">Jaqueta Urbana Masculina</h3>
+            <p class="text-rose-600 font-medium">Estilo casual com toque contemporâneo para o dia a dia.</p>
+          </div>
+        </article>
+        <article class="rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.6s;">
+          <img src="https://images.unsplash.com/photo-1520975913615-1f8c28a5f7f9?auto=format&fit=crop&w=600&q=80" alt="Short feminino jeans" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5 bg-rose-50">
+            <h3 class="text-xl font-semibold text-rose-700 mb-2">Short Jeans Clássico</h3>
+            <p class="text-rose-600 font-medium">Versátil e confortável para looks casuais e descontraídos.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACESSÓRIOS -->
+    <section id="acessorios" class="bg-rose-50 py-20 px-6 md:px-12 container mx-auto">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-12 text-center fade-in-bottom" style="animation-delay: 0.3s;">Acessórios que Complementam</h2>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+        <div class="max-w-xs rounded-lg shadow-lg bg-white overflow-hidden hover:shadow-rose-400 hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina bege" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5">
+            <h3 class="text-xl text-rose-700 font-semibold mb-2">Bolsa Feminina Bege</h3>
+            <p class="text-rose-600 font-medium">Design elegante e espaço ideal para o seu dia a dia.</p>
+          </div>
+        </div>
+        <div class="max-w-xs rounded-lg shadow-lg bg-white overflow-hidden hover:shadow-rose-400 hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino moderno" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5">
+            <h3 class="text-xl text-rose-700 font-semibold mb-2">Relógio Masculino Moderno</h3>
+            <p class="text-rose-600 font-medium">Precisão e estilo para complementar seu visual.</p>
+          </div>
+        </div>
+        <div class="max-w-xs rounded-lg shadow-lg bg-white overflow-hidden hover:shadow-rose-400 hover:scale-105 transform transition duration-300 cursor-pointer fade-in-bottom" style="animation-delay: 0.6s;">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol feminino" class="w-full h-72 object-cover" loading="lazy"/>
+          <div class="p-5">
+            <h3 class="text-xl text-rose-700 font-semibold mb-2">Óculos de Sol Feminino</h3>
+            <p class="text-rose-600 font-medium">Proteção UV com design sofisticado e trendy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="bg-white py-20 px-6 md:px-12 container mx-auto max-w-5xl text-center fade-in-bottom" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-extrabold text-rose-600 mb-8">Nossa História</h2>
+      <p class="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
+        Fundada em 2010, a Vogue é uma loja dedicada a oferecer o melhor da moda em vestuário e acessórios para homens e mulheres que buscam qualidade, conforto e estilo. Acreditamos no poder da moda para expressar sua identidade e elevar sua confiança. Nosso time seleciona cuidadosamente cada produto para garantir que você encontre peças exclusivas e atemporais.
+      </p>
+      <div class="mt-10">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Equipe de moda trabalhando" class="mx-auto rounded-xl shadow-lg max-w-full h-auto" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="bg-rose-50 py-20 px-6 md:px-12 container mx-auto max-w-4xl rounded-xl shadow-lg fade-in-bottom" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-extrabold text-rose-700 mb-8 text-center">Fale Conosco</h2>
+      <form action="#" class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto space-y-6">
+        <div>
+          <label for="nome" class="block font-semibold text-rose-700 mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full border border-rose-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-rose-400" placeholder="Seu nome completo" />
+        </div>
+        <div>
+          <label for="email" class="block font-semibold text-rose-700 mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required class="w-full border border-rose-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-rose-400" placeholder="seu@email.com" />
+        </div>
+        <div>
+          <label for="mensagem" class="block font-semibold text-rose-700 mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" required class="w-full border border-rose-300 rounded-md p-3 resize-none focus:outline-none focus:ring-2 focus:ring-rose-400" placeholder="Digite sua mensagem aqui..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary text-white font-semibold w-full py-3 rounded-lg shadow-lg select-none hover:shadow-rose-600 transition">Enviar Mensagem</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-rose-900 text-rose-100 py-12 px-6 md:px-12 select-text">
+    <div class="container mx-auto max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-rose-700 pb-2">Empresa</h3>
+        <p><span class="font-semibold">Razão Social:</span><br> AGIL SOLUCOES ADMINISTRATIVAS LTDA</p>
+        <p class="mt-4"><span class="font-semibold">CNPJ:</span><br> 64.782.967/0001-55</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-rose-700 pb-2">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span><br> CONTATO.CNBC@GMAIL.COM</p>
+        <p class="mt-4"><span class="font-semibold">Telefone:</span><br> <span id="telefone-comercial">(47) 99620-5433</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-rose-700 pb-2">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span><br> RUA OSTERNO, 660</p>
+        <p class="mt-4"><span class="font-semibold">Bairro:</span><br> COQUEIRINHO</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-rose-700 pb-2">Localização</h3>
+        <p><span class="font-semibold">Município:</span><br> MARCO</p>
+        <p class="mt-4"><span class="font-semibold">Estado:</span><br> CE</p>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-rose-700 pt-6 text-center text-sm text-rose-300 flex flex-col sm:flex-row justify-center gap-6 select-none">
+      <a href="#" class="hover:text-rose-100 transition underline">Termos de Uso</a>
+      <a href="#" class="hover:text-rose-100 transition underline">Política de Privacidade</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

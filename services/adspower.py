@@ -122,6 +122,10 @@ class AdsPowerClient:
         """Move profile to group_id (use '0' to remove from all groups)."""
         self.update_profile(user_id, group_id=str(group_id))
 
+    def delete_profile(self, user_id: str) -> None:
+        """Permanently delete a profile from AdsPower."""
+        self._post("/api/v1/user/delete", {"user_ids": [user_id]})
+
     # ── browser ───────────────────────────────────────────────────────────────
 
     def open_browser(self, user_id: str, headless: bool = False) -> dict:

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Previdencia Facil - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.02); }
+  }
+  .animate-pulse-subtle {
+    animation: pulse-subtle 4s ease-in-out infinite;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0f4f8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #a3bffa;
+    border-radius: 10px;
+    border: 2px solid #f0f4f8;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-900 font-sans leading-relaxed scroll-smooth selection:bg-sky-300 selection:text-white">
+
+<header class="sticky top-0 bg-white shadow-md z-50">
+  <nav class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-20">
+    <a href="#home" class="font-extrabold text-3xl text-sky-600 tracking-wide select-none hover:text-sky-700 transition-colors">PREVIDENCIA FACIL</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+      <li><a href="#home" class="hover:text-sky-600 transition-colors">Home</a></li>
+      <li><a href="#vestuario" class="hover:text-sky-600 transition-colors">Vestuário</a></li>
+      <li><a href="#acessorios" class="hover:text-sky-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-sky-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-sky-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-sky-500 rounded">
+      <svg class="w-7 h-7 text-sky-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12h18M3 6h18M3 18h18"></path>
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md border-t border-gray-200">
+    <ul class="flex flex-col px-6 py-4 space-y-3 font-semibold text-gray-700">
+      <li><a href="#home" class="block hover:text-sky-600 transition-colors">Home</a></li>
+      <li><a href="#vestuario" class="block hover:text-sky-600 transition-colors">Vestuário</a></li>
+      <li><a href="#acessorios" class="block hover:text-sky-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-sky-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-sky-600 transition-colors">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative bg-gradient-to-r from-sky-100 via-white to-sky-100 min-h-[90vh] flex items-center justify-center px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div class="space-y-6 md:pr-10">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-sky-700 leading-tight drop-shadow-md animate-pulse-subtle">Moda que inspira seu dia a dia</h1>
+      <p class="text-lg md:text-xl text-gray-700 max-w-lg">Descubra as últimas tendências em vestuário e acessórios com qualidade, conforto e estilo para todas as ocasiões.</p>
+      <a href="#vestuario" class="inline-block mt-4 px-8 py-3 bg-sky-600 text-white font-semibold rounded-lg shadow-lg hover:bg-sky-700 transition-colors focus:outline-none focus:ring-4 focus:ring-sky-300">Comprar Agora</a>
+    </div>
+    <div class="rounded-xl overflow-hidden shadow-lg animate-pulse-subtle" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Moda feminina moderna" class="w-full object-cover aspect-[4/5]" />
+    </div>
+  </div>
+</section>
+
+<section id="vestuario" class="bg-white py-16 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-28">
+  <h2 class="text-4xl font-bold text-sky-700 text-center mb-12 tracking-wide">Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <article class="group rounded-xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5 bg-white">
+        <h3 class="text-xl font-semibold text-gray-800 mb-1">Camisa Casual Masculina</h3>
+        <p class="text-gray-600 mb-3">Conforto e estilo para o dia a dia com tecido leve e respirável.</p>
+        <span class="text-sky-600 font-bold text-lg">R$ 129,90</span>
+      </div>
+    </article>
+    <article class="group rounded-xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino floral" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5 bg-white">
+        <h3 class="text-xl font-semibold text-gray-800 mb-1">Vestido Floral Feminino</h3>
+        <p class="text-gray-600 mb-3">Leve e delicado, perfeito para dias ensolarados e ocasiões especiais.</p>
+        <span class="text-sky-600 font-bold text-lg">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="group rounded-xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1590080877777-9f5e3440f2bb?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans unissex" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5 bg-white">
+        <h3 class="text-xl font-semibold text-gray-800 mb-1">Jaqueta Jeans Unissex</h3>
+        <p class="text-gray-600 mb-3">Clássica e versátil, ideal para todas as estações.</p>
+        <span class="text-sky-600 font-bold text-lg">R$ 249,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-sky-50 py-16 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-28">
+  <h2 class="text-4xl font-extrabold text-sky-700 text-center mb-12 tracking-wider">Acessórios</h2>
+  <div class="flex flex-wrap justify-center gap-10">
+    <div class="w-72 bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+      <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="Relógio de pulso elegante" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Relógio de Pulso Elegante</h3>
+        <p class="text-gray-600 mb-4">Design moderno com pulseira em couro legítimo.</p>
+        <span class="text-sky-600 font-bold text-xl">R$ 349,90</span>
+      </div>
+    </div>
+    <div class="w-72 bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+      <img src="https://images.unsplash.com/photo-1520975698894-2c1d6c67b8b8?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol estiloso" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Óculos de Sol Estiloso</h3>
+        <p class="text-gray-600 mb-4">Proteção UV com armação leve e resistente.</p>
+        <span class="text-sky-600 font-bold text-xl">R$ 199,90</span>
+      </div>
+    </div>
+    <div class="w-72 bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow cursor-pointer group">
+      <img src="https://images.unsplash.com/photo-1533227268428-f9ed0706f1a7?auto=format&fit=crop&w=600&q=80" alt="Bolsa transversal feminina" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Bolsa Transversal Feminina</h3>
+        <p class="text-gray-600 mb-4">Compacta e prática, com acabamento premium.</p>
+        <span class="text-sky-600 font-bold text-xl">R$ 279,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-white py-16 px-6 md:px-12 max-w-5xl mx-auto scroll-mt-28">
+  <h2 class="text-4xl font-extrabold text-sky-700 text-center mb-10 tracking-wide">Sobre Nós</h2>
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+    <div class="flex-1 rounded-lg overflow-hidden shadow-lg max-w-md mx-auto md:mx-0">
+      <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a6d?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja Previdencia Facil" class="w-full object-cover aspect-[4/3]" />
+    </div>
+    <div class="flex-1 text-gray-700 text-lg space-y-6">
+      <p>Na Previdencia Facil, acreditamos que a moda é uma forma poderosa de expressão pessoal. Nossa missão é oferecer roupas e acessórios que combinam qualidade, conforto e design contemporâneo para todos os estilos e ocasiões.</p>
+      <p>Com uma equipe apaixonada e dedicada, selecionamos cuidadosamente cada peça para garantir a satisfação dos nossos clientes, sempre atentos às tendências globais e ao respeito ao meio ambiente.</p>
+      <p>Venha fazer parte da nossa comunidade e descubra como vestir-se bem pode transformar seu dia!</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-sky-50 py-16 px-6 md:px-12 max-w-4xl mx-auto scroll-mt-28 rounded-3xl shadow-lg border border-sky-200">
+  <h2 class="text-4xl font-bold text-sky-700 text-center mb-10 tracking-wide">Fale Conosco</h2>
+  <form action="#" method="POST" class="space-y-8">
+    <div>
+      <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+      <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 transition" />
+    </div>
+    <div>
+      <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+      <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 transition" />
+    </div>
+    <div>
+      <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-y focus:outline-none focus:ring-2 focus:ring-sky-400 transition"></textarea>
+    </div>
+    <button type="submit" class="w-full bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 transition-colors">Enviar Mensagem</button>
+  </form>
+</section>
+
+<footer class="bg-gray-900 text-gray-300 py-12 px-6 md:px-12 mt-20 select-none">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Informações Legais</h3>
+      <ul class="space-y-1 text-sm leading-relaxed">
+        <li><span class="font-semibold">CNPJ:</span> 43.650.049/0001-00</li>
+        <li><span class="font-semibold">Razão Social:</span> PREVIDENCIA FACIL LTDA</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Contato</h3>
+      <ul class="space-y-1 text-sm leading-relaxed">
+        <li><span class="font-semibold">E-mail:</span> IEDALOPES@HOTMAIL.COM</li>
+        <li><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">77-999619323</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Endereço</h3>
+      <ul class="space-y-1 text-sm leading-relaxed">
+        <li><span class="font-semibold">Logradouro:</span> PRACA CARMERINDO JOSE PEREIRA, 410</li>
+        <li><span class="font-semibold">Bairro:</span> CENTRO</li>
+        <li><span class="font-semibold">Município:</span> OLIVEIRA DOS BREJINHOS</li>
+        <li><span class="font-semibold">Estado:</span> BA</li>
+      </ul>
+    </div>
+    <div class="flex flex-col justify-between">
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-3">Links Úteis</h3>
+        <ul class="space-y-2 text-sm leading-relaxed">
+          <li><a href="#" class="hover:text-sky-400 transition-colors underline decoration-sky-600 decoration-2">Termos de Uso</a></li>
+          <li><a href="#" class="hover:text-sky-400 transition-colors underline decoration-sky-600 decoration-2">Política de Privacidade</a></li>
+        </ul>
+      </div>
+      <p class="mt-6 text-xs text-gray-500 select-text">© 2024 Previdencia Facil LTDA. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  btnMenu.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.remove('hidden');
+      btnMenu.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu.classList.add('hidden');
+      btnMenu.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>

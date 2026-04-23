@@ -25,7 +25,7 @@ import websockets.exceptions
 # Use your domain (recommended) or IP.
 # ws://  → plain HTTP server
 # wss:// → HTTPS / TLS server (recommended for production)
-_VPS_WS_BASE = "ws://38.247.136.208:5050"   # e.g. "wss://verificador.seusite.com"
+_VPS_WS_BASE = "wss://verificador.verifywaba.store"   # routed via nginx (port 443 TLS)
 
 # ── Local config constants (inlined so config.py is not needed in the bundle) ─
 def _detect_adspower() -> str:

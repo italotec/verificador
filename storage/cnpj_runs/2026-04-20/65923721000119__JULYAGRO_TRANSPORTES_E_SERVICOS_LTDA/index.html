@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="pahebuybcnbqsxrz45c9jiijdauydp" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Julyagro Moda & Acessórios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-floatUp {
+      animation: floatUp 4s ease-in-out infinite;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-amber-300 selection:text-amber-900">
+
+  <!-- Header/Nav -->
+  <header class="sticky top-0 z-50 bg-white shadow-md backdrop-blur-sm bg-opacity-80">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-3xl font-extrabold text-amber-600 tracking-wide hover:text-amber-700 transition-colors select-none">JULYAGRO</a>
+      <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+        <li><a href="#colecao" class="hover:text-amber-600 transition-colors">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-amber-600 transition-colors">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-amber-600 transition-colors">Sobre</a></li>
+        <li><a href="#depoimentos" class="hover:text-amber-600 transition-colors">Depoimentos</a></li>
+        <li><a href="#contato" class="hover:text-amber-600 transition-colors">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="btn-menu" class="md:hidden focus:outline-amber-600 group">
+        <svg class="w-7 h-7 text-amber-600 group-hover:text-amber-700 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+    <div id="menu-mobile" class="md:hidden bg-white shadow-inner hidden">
+      <ul class="flex flex-col text-center font-semibold space-y-6 py-6 text-gray-700">
+        <li><a href="#colecao" class="block hover:text-amber-600">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-amber-600">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-amber-600">Sobre</a></li>
+        <li><a href="#depoimentos" class="block hover:text-amber-600">Depoimentos</a></li>
+        <li><a href="#contato" class="block hover:text-amber-600">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    const btnMenu = document.getElementById('btn-menu');
+    const menuMobile = document.getElementById('menu-mobile');
+    btnMenu.addEventListener('click', () => {
+      menuMobile.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-r from-amber-100 via-amber-50 to-white overflow-hidden min-h-[90vh] flex items-center">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="max-w-xl text-center md:text-left space-y-6">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-amber-700 leading-tight drop-shadow-lg">Sua Moda, Seu Estilo</h1>
+        <p class="text-lg md:text-xl text-amber-900/80 font-medium tracking-wide">Descubra roupas e acessórios que inspiram confiança, conforto e elegância para todas as ocasiões.</p>
+        <a href="#colecao" class="inline-block bg-amber-600 text-white px-8 py-3 rounded-full shadow-lg font-semibold hover:bg-amber-700 transition-colors tracking-wide select-none">Conheça a Coleção</a>
+      </div>
+      <div class="flex-1 max-w-lg relative animate-floatUp">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupas modernas" class="rounded-3xl shadow-2xl object-cover w-full h-[420px] md:h-[500px]"/>
+        <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-amber-300 rounded-full opacity-30 blur-3xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coleção de Roupas -->
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center tracking-wide">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-amber-400 transition-shadow cursor-pointer">
+        <img loading="lazy" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Camisa casual masculina" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-amber-700 mb-2">Camisa Casual</h3>
+          <p class="text-gray-600 mb-4">Conforto e estilo para o dia a dia, tecido leve e toque suave.</p>
+          <span class="font-bold text-amber-600 text-lg">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-amber-400 transition-shadow cursor-pointer">
+        <img loading="lazy" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Vestido feminino elegante" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-amber-700 mb-2">Vestido Elegante</h3>
+          <p class="text-gray-600 mb-4">Design sofisticado para ocasiões especiais, tecido fluido e leve.</p>
+          <span class="font-bold text-amber-600 text-lg">R$ 239,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-amber-400 transition-shadow cursor-pointer">
+        <img loading="lazy" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1520975914306-0d2e0c53b6f4?auto=format&fit=crop&w=800&q=80" alt="Jaqueta masculina preta" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-amber-700 mb-2">Jaqueta Moderna</h3>
+          <p class="text-gray-600 mb-4">Versátil e estilosa, ideal para o frio com toque contemporâneo.</p>
+          <span class="font-bold text-amber-600 text-lg">R$ 299,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" class="bg-gradient-to-tr from-amber-50 via-amber-100 to-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center tracking-wide">Acessórios que Completam</h2>
+      <div class="flex overflow-x-auto space-x-8 scrollbar-hide py-3">
+        <article class="min-w-[260px] bg-white rounded-2xl shadow-lg flex-shrink-0 group hover:shadow-amber-400 transition-shadow cursor-pointer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino" class="w-full h-60 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="font-semibold text-amber-700 mb-1 text-lg">Relógio Clássico</h3>
+            <p class="text-gray-600 text-sm mb-3">Elegância atemporal para o seu pulso.</p>
+            <span class="font-bold text-amber-600 text-base">R$ 179,90</span>
+          </div>
+        </article>
+        <article class="min-w-[260px] bg-white rounded-2xl shadow-lg flex-shrink-0 group hover:shadow-amber-400 transition-shadow cursor-pointer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro feminina" class="w-full h-60 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="font-semibold text-amber-700 mb-1 text-lg">Bolsa de Couro</h3>
+            <p class="text-gray-600 text-sm mb-3">Design moderno e acabamento premium.</p>
+            <span class="font-bold text-amber-600 text-base">R$ 249,90</span>
+          </div>
+        </article>
+        <article class="min-w-[260px] bg-white rounded-2xl shadow-lg flex-shrink-0 group hover:shadow-amber-400 transition-shadow cursor-pointer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Chapéu de palha" class="w-full h-60 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="font-semibold text-amber-700 mb-1 text-lg">Chapéu de Palha</h3>
+            <p class="text-gray-600 text-sm mb-3">Perfeito para dias ensolarados com estilo.</p>
+            <span class="font-bold text-amber-600 text-base">R$ 89,90</span>
+          </div>
+        </article>
+        <article class="min-w-[260px] bg-white rounded-2xl shadow-lg flex-shrink-0 group hover:shadow-amber-400 transition-shadow cursor-pointer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol" class="w-full h-60 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="font-semibold text-amber-700 mb-1 text-lg">Óculos de Sol</h3>
+            <p class="text-gray-600 text-sm mb-3">Proteção com design moderno e arrojado.</p>
+            <span class="font-bold text-amber-600 text-base">R$ 159,90</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-12">
+    <div class="flex-1 order-2 md:order-1">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-6 tracking-wide">Sobre a JULYAGRO</h2>
+      <p class="text-gray-700 text-lg leading-relaxed mb-6">Desde 2010, a JULYAGRO TRANSPORTES E SERVICOS LTDA oferece uma experiência única em moda, unindo qualidade, sustentabilidade e tendências para vestir quem busca autenticidade e conforto em cada peça.</p>
+      <p class="text-gray-700 text-lg leading-relaxed">Nosso compromisso é proporcionar roupas e acessórios que valorizem a personalidade e o estilo de vida de nossos clientes, com atenção especial aos detalhes e atendimento dedicado.</p>
+    </div>
+    <div class="flex-1 order-1 md:order-2 rounded-3xl overflow-hidden shadow-2xl">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Equipe de moda trabalhando" class="object-cover w-full h-full max-h-[400px]" />
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos" class="bg-amber-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center tracking-wide">Depoimentos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <blockquote class="bg-white rounded-2xl p-8 shadow-md hover:shadow-amber-300 transition-shadow cursor-default flex flex-col h-full">
+          <p class="text-gray-700 text-lg leading-relaxed mb-6 italic">"A qualidade das roupas da JULYAGRO é incrível! Sempre encontro peças confortáveis e estilosas que me acompanham no dia a dia."</p>
+          <footer class="mt-auto text-amber-700 font-semibold">- Renata S.</footer>
+        </blockquote>
+        <blockquote class="bg-white rounded-2xl p-8 shadow-md hover:shadow-amber-300 transition-shadow cursor-default flex flex-col h-full">
+          <p class="text-gray-700 text-lg leading-relaxed mb-6 italic">"Os acessórios são simplesmente perfeitos. O cuidado com os detalhes faz toda a diferença. Recomendo para quem busca estilo e autenticidade."</p>
+          <footer class="mt-auto text-amber-700 font-semibold">- João P.</footer>
+        </blockquote>
+        <blockquote class="bg-white rounded-2xl p-8 shadow-md hover:shadow-amber-300 transition-shadow cursor-default flex flex-col h-full">
+          <p class="text-gray-700 text-lg leading-relaxed mb-6 italic">"Excelente atendimento e entrega rápida. A JULYAGRO conquistou minha confiança com produtos que superam expectativas."</p>
+          <footer class="mt-auto text-amber-700 font-semibold">- Camila M.</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="max-w-7xl mx-auto px-6 py-20 bg-white rounded-t-3xl shadow-inner">
+    <h2 class="text-4xl font-extrabold text-amber-700 mb-10 text-center tracking-wide">Fale Conosco</h2>
+    <form action="#" method="POST" class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="flex flex-col">
+        <label for="nome" class="mb-2 font-semibold text-gray-700">Nome</label>
+        <input type="text" id="nome" name="nome" required class="rounded-lg border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400 transition" placeholder="Seu nome completo" />
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="mb-2 font-semibold text-gray-700">E-mail</label>
+        <input type="email" id="email" name="email" required class="rounded-lg border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400 transition" placeholder="seuemail@exemplo.com" />
+      </div>
+      <div class="md:col-span-2 flex flex-col">
+        <label for="mensagem" class="mb-2 font-semibold text-gray-700">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required class="rounded-lg border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400 transition resize-none" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <div class="md:col-span-2 text-center">
+        <button type="submit" class="bg-amber-600 text-white font-semibold px-12 py-4 rounded-full shadow-lg hover:bg-amber-700 transition-colors select-none">Enviar Mensagem</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-amber-900 text-amber-100 py-14 mt-20 select-text">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div>
+        <h3 class="font-extrabold text-lg mb-3 tracking-wide">Identificação</h3>
+        <p><span class="font-semibold">CNPJ:</span> 65.923.721/0001-19</p>
+        <p><span class="font-semibold">Razão Social:</span> JULYAGRO TRANSPORTES E SERVICOS LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-extrabold text-lg mb-3 tracking-wide">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> <a href="mailto:LUANAWOSNIAK@GMAIL.COM" class="hover:underline">LUANAWOSNIAK@GMAIL.COM</a></p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="font-normal">47-996267841</span></p>
+      </div>
+      <div>
+        <h3 class="font-extrabold text-lg mb-3 tracking-wide">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> RUA SANTA CATARINA, S/N</p>
+        <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      </div>
+      <div>
+        <h3 class="font-extrabold text-lg mb-3 tracking-wide">Localização</h3>
+        <p><span class="font-semibold">Município:</span> ASCURRA</p>
+        <p><span class="font-semibold">Estado:</span> SC</p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-12 border-t border-amber-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-amber-300 font-light tracking-wide select-text">
+      <p>© 2024 JULYAGRO TRANSPORTES E SERVICOS LTDA. Todos os direitos reservados.</p>
+      <nav class="space-x-6 mt-4 md:mt-0">
+        <a href="#" class="hover:underline">Termos de Uso</a>
+        <a href="#" class="hover:underline">Política de Privacidade</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

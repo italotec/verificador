@@ -25,6 +25,8 @@ def _sqlite_migrate(db):
         ("verify_job", "scheduled_at",    "DATETIME"),
         # profile_snapshot new columns
         ("profile_snapshot", "user_id",   "INTEGER"),
+        # waba_record proxy
+        ("waba_record", "proxy_port",     "INTEGER"),
         # system_setting is created via db.create_all() — no ALTER needed
     ]
     for table, column, col_type in migrations:

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="5g4042s2hlwdpz6sreyd0837ab0dk2" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alisson Store - Moda e Acessórios</title>
+<link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  nav a:hover {
+    color: #7c3aed;
+  }
+  button:hover {
+    background-color: #7c3aed;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+<header class="sticky top-0 bg-white shadow-md z-50">
+  <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+    <a href="#" class="text-3xl font-extrabold text-purple-700 tracking-wide select-none" aria-label="Alisson Store Logo">Alisson<span class="text-indigo-600">Store</span></a>
+    <ul class="hidden md:flex space-x-10 text-gray-600 font-semibold">
+      <li><a href="#colecao" class="hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition-colors">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden bg-white border-t border-gray-200 md:hidden">
+    <ul class="flex flex-col p-4 space-y-3 text-gray-700 font-semibold">
+      <li><a href="#colecao" class="block px-2 py-2 rounded hover:bg-indigo-50 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="block px-2 py-2 rounded hover:bg-indigo-50 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block px-2 py-2 rounded hover:bg-indigo-50 transition">Sobre</a></li>
+      <li><a href="#contato" class="block px-2 py-2 rounded hover:bg-indigo-50 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative bg-indigo-100 overflow-hidden">
+  <div class="container mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center gap-10">
+    <div class="md:w-1/2 fade-in" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl font-extrabold text-indigo-700 leading-tight mb-6 max-w-xl drop-shadow-md">Vista-se com personalidade. Explore nossa coleção exclusiva de roupas e acessórios.</h1>
+      <p class="text-indigo-900 mb-8 font-medium max-w-md">Peças atemporais, design moderno e conforto garantido para você brilhar em qualquer ocasião.</p>
+      <a href="#colecao" class="inline-block bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-indigo-800 transition">Ver Coleção</a>
+    </div>
+    <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-2xl fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupa moderna" class="w-full object-cover aspect-[4/5]" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-indigo-800 mb-12 text-center drop-shadow-sm">Coleção Destaque</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Camisa branca casual" class="w-full h-80 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Camisa Casual Branca</h3>
+        <p class="text-gray-600 mb-4">Tecido leve e respirável, perfeito para o dia a dia.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 129,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow">
+      <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09d5b?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-80 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Jeans Skinny</h3>
+        <p class="text-gray-600 mb-4">Modelagem que valoriza o corpo com conforto e estilo.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 199,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow">
+      <img src="https://images.unsplash.com/photo-1503342452485-86a2c0e2a405?auto=format&fit=crop&w=600&q=80" alt="Jaqueta de couro preta" class="w-full h-80 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Jaqueta de Couro</h3>
+        <p class="text-gray-600 mb-4">Clássica e versátil para noites mais frescas.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 349,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-indigo-400 transition-shadow">
+      <img src="https://images.unsplash.com/photo-1520975698519-cf3df0c0d5e3?auto=format&fit=crop&w=600&q=80" alt="Vestido floral casual" class="w-full h-80 object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Floral</h3>
+        <p class="text-gray-600 mb-4">Leve e fluido, ideal para dias ensolarados.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 179,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-indigo-800 mb-12 text-center drop-shadow-sm">Acessórios que completam seu look</h2>
+    <div class="flex flex-col md:flex-row md:justify-center md:space-x-12 space-y-12 md:space-y-0">
+      <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-indigo-300 transition-shadow fade-in" style="animation-delay: 0.2s;">
+        <img src="https://images.unsplash.com/photo-1536305030460-c7d33c6b6a6c?auto=format&fit=crop&w=600&q=80" alt="Relógio de pulso elegante" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Relógio Elegante</h3>
+          <p class="text-gray-600 mb-4">Design minimalista com pulseira em couro legítimo.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 299,90</span>
+        </div>
+      </div>
+      <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-indigo-300 transition-shadow fade-in" style="animation-delay: 0.4s;">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina em couro" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Bolsa de Couro</h3>
+          <p class="text-gray-600 mb-4">Compacta, prática e com acabamento premium.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 259,90</span>
+        </div>
+      </div>
+      <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-indigo-300 transition-shadow fade-in" style="animation-delay: 0.6s;">
+        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Óculos de Sol</h3>
+          <p class="text-gray-600 mb-4">Lentes polarizadas e armação leve para conforto total.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 189,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 py-16">
+  <div class="flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 fade-in" style="animation-delay: 0.3s;">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja de roupas" class="rounded-3xl shadow-xl object-cover w-full h-[400px]" loading="lazy" />
+    </div>
+    <div class="md:w-1/2">
+      <h2 class="text-4xl font-extrabold text-indigo-800 mb-6 drop-shadow-md">Nossa História</h2>
+      <p class="text-gray-700 leading-relaxed mb-6 text-justify max-w-lg">Fundada com paixão pela moda e pelo estilo único, a Alisson Store nasceu para oferecer a você peças que unam conforto, qualidade e tendências atuais. Nosso compromisso é vestir pessoas que buscam se expressar através da roupa e acessórios cuidadosamente selecionados.</p>
+      <p class="text-gray-700 leading-relaxed max-w-lg">Cada coleção é pensada para trazer versatilidade, durabilidade e aquele toque especial que transforma qualquer look. Venha fazer parte da nossa família e descubra o que é vestir confiança.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-100 py-16">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <h2 class="text-4xl font-extrabold text-indigo-900 mb-10 text-center drop-shadow-sm">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10 space-y-6 fade-in" style="animation-delay: 0.2s;">
+      <div>
+        <label for="nome" class="block text-indigo-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" placeholder="Seu nome completo" />
+      </div>
+      <div>
+        <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" placeholder="seu@email.com" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-800 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100">
+  <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="space-y-3">
+      <h3 class="text-xl font-bold border-b border-indigo-600 pb-2 mb-3">Dados da Empresa</h3>
+      <p><strong>CNPJ:</strong> 62.491.400/0001-02</p>
+      <p><strong>Razão Social:</strong> ALISSON THIAGO NEVES BERNARDES</p>
+      <p><strong>E-mail:</strong> <a href="mailto:ALISSON.NEVES1986@GMAIL.COM" class="underline hover:text-indigo-400">ALISSON.NEVES1986@GMAIL.COM</a></p>
+      <p><strong>Telefone:</strong> <span id="telefone-comercial" class="font-semibold">(11) 97011-2051</span></p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="text-xl font-bold border-b border-indigo-600 pb-2 mb-3">Endereço</h3>
+      <p><strong>Logradouro:</strong> RUA VARGINHA, 294</p>
+      <p><strong>Bairro:</strong> CENTRO</p>
+      <p><strong>Município:</strong> COQUEIRAL</p>
+      <p><strong>Estado:</strong> MG</p>
+    </div>
+    <div class="flex flex-col justify-between">
+      <h3 class="text-xl font-bold border-b border-indigo-600 pb-2 mb-6">Informações Legais</h3>
+      <nav class="flex flex-col space-y-3 text-indigo-300 font-semibold">
+        <a href="#" class="hover:text-indigo-400 transition">Termos de Uso</a>
+        <a href="#" class="hover:text-indigo-400 transition">Política de Privacidade</a>
+      </nav>
+      <p class="mt-10 text-sm text-indigo-400 select-none">&copy; 2024 Alisson Store. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

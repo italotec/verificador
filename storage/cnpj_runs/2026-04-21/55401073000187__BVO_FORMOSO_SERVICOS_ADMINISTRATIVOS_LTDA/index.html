@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>B.V.O Formoso - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.9s forwards;
+  }
+  .fade-in-delay-1 {
+    animation-delay: 0.2s;
+  }
+  .fade-in-delay-2 {
+    animation-delay: 0.4s;
+  }
+  .fade-in-delay-3 {
+    animation-delay: 0.6s;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  .btn-hover:hover {
+    background-color: #2563eb;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  .underline-hover:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-12">
+    <a href="#home" class="text-2xl font-extrabold text-indigo-600 tracking-wide select-none">B.V.O Formoso</a>
+    <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition-colors duration-300">Início</a></li>
+      <li><a href="#colecao" class="hover:text-indigo-600 transition-colors duration-300">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition-colors duration-300">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition-colors duration-300">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition-colors duration-300">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded">
+      <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </nav>
+  <div id="menu" class="hidden md:hidden bg-white shadow-md">
+    <ul class="flex flex-col px-6 py-4 space-y-3 text-gray-700 font-semibold">
+      <li><a href="#home" class="block hover:text-indigo-600 transition-colors duration-300">Início</a></li>
+      <li><a href="#colecao" class="block hover:text-indigo-600 transition-colors duration-300">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-600 transition-colors duration-300">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-600 transition-colors duration-300">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-600 transition-colors duration-300">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+  menuBtn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+<main class="select-none">
+  <!-- Seção 1: Hero -->
+  <section id="home" class="relative bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-50 min-h-[85vh] flex items-center justify-center px-6 md:px-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div class="fade-in fade-in-delay-1 max-w-lg text-center md:text-left">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-700 leading-tight mb-4">Sua Moda, Seu Estilo</h1>
+        <p class="text-indigo-600 text-lg md:text-xl mb-8">Descubra as últimas tendências em vestuário e acessórios. Qualidade e elegância para todas as ocasiões.</p>
+        <a href="#colecao" class="inline-block px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg btn-hover transition">Ver Coleção</a>
+      </div>
+      <div class="fade-in fade-in-delay-2 w-full max-w-xl overflow-hidden rounded-lg shadow-2xl ring-1 ring-indigo-200">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Moda feminina moderna" class="w-full h-auto object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+      </div>
+    </div>
+    <div aria-hidden="true" class="absolute top-0 right-0 w-64 h-64 bg-indigo-100 rounded-full opacity-40 blur-3xl -translate-x-20 -translate-y-20 pointer-events-none"></div>
+    <div aria-hidden="true" class="absolute bottom-0 left-0 w-72 h-72 bg-indigo-200 rounded-full opacity-30 blur-3xl translate-x-24 translate-y-24 pointer-events-none"></div>
+  </section>
+
+  <!-- Seção 2: Coleção de Vestuário -->
+  <section id="colecao" class="py-20 px-6 md:px-12 bg-white max-w-7xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-indigo-700 mb-12 text-center md:text-left tracking-tight fade-in fade-in-delay-1">Coleção Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <article class="fade-in fade-in-delay-2 rounded-lg shadow-lg overflow-hidden bg-indigo-50 hover:shadow-indigo-300 transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido casual feminino" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Casual</h3>
+          <p class="text-indigo-700 mb-4">Conforto e estilo em um vestido versátil para o dia a dia.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 149,90</span>
+        </div>
+      </article>
+      <article class="fade-in fade-in-delay-3 rounded-lg shadow-lg overflow-hidden bg-indigo-50 hover:shadow-indigo-300 transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina moderna" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Masculina</h3>
+          <p class="text-indigo-700 mb-4">Estilo urbano com tecido de alta qualidade e conforto térmico.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 299,90</span>
+        </div>
+      </article>
+      <article class="fade-in rounded-lg shadow-lg overflow-hidden bg-indigo-50 hover:shadow-indigo-300 transition-shadow cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Camisa feminina estampada" class="w-full h-72 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Camisa Estampada</h3>
+          <p class="text-indigo-700 mb-4">Leve e fresca, perfeita para eventos casuais e trabalho.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 129,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Seção 3: Acessórios -->
+  <section id="acessorios" class="py-20 px-6 md:px-12 bg-indigo-50 max-w-7xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-indigo-900 mb-12 text-center md:text-left tracking-tight fade-in fade-in-delay-1">Acessórios Exclusivos</h2>
+    <div class="flex flex-col md:flex-row md:space-x-12 space-y-12 md:space-y-0 justify-center items-center">
+      <figure class="fade-in fade-in-delay-2 max-w-xs rounded-lg shadow-lg bg-white ring-1 ring-indigo-200 hover:shadow-indigo-400 transition-shadow cursor-pointer overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio sofisticado" class="w-full h-64 object-cover" loading="lazy" />
+        <figcaption class="p-6">
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">Relógio Sofisticado</h3>
+          <p class="text-indigo-700 mb-3">Design elegante para momentos especiais e uso diário.</p>
+          <span class="font-bold text-indigo-800 text-base">R$ 499,90</span>
+        </figcaption>
+      </figure>
+      <figure class="fade-in fade-in-delay-3 max-w-xs rounded-lg shadow-lg bg-white ring-1 ring-indigo-200 hover:shadow-indigo-400 transition-shadow cursor-pointer overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina de couro" class="w-full h-64 object-cover" loading="lazy" />
+        <figcaption class="p-6">
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">Bolsa de Couro</h3>
+          <p class="text-indigo-700 mb-3">Compacta, elegante e feita para durar.</p>
+          <span class="font-bold text-indigo-800 text-base">R$ 359,90</span>
+        </figcaption>
+      </figure>
+      <figure class="fade-in max-w-xs rounded-lg shadow-lg bg-white ring-1 ring-indigo-200 hover:shadow-indigo-400 transition-shadow cursor-pointer overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="w-full h-64 object-cover" loading="lazy" />
+        <figcaption class="p-6">
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">Óculos de Sol</h3>
+          <p class="text-indigo-700 mb-3">Proteção UV com design arrojado e confortável.</p>
+          <span class="font-bold text-indigo-800 text-base">R$ 189,90</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Seção 4: Sobre Nós -->
+  <section id="sobre" class="py-20 px-6 md:px-12 max-w-7xl mx-auto bg-white rounded-lg shadow-lg relative overflow-hidden">
+    <h2 class="text-3xl font-extrabold text-indigo-700 mb-12 text-center tracking-tight fade-in fade-in-delay-1">Nossa História</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="fade-in fade-in-delay-2 text-indigo-800 leading-relaxed text-lg">
+        <p>Fundada para oferecer moda de qualidade com autenticidade e respeito ao estilo individual, a B.V.O Formoso é referência em vestuário e acessórios em Formoso, MG.</p>
+        <p class="mt-6">Nosso compromisso é conectar você às tendências globais, com peças selecionadas para realçar sua personalidade e conforto.</p>
+        <p class="mt-6 font-semibold text-indigo-600">Venha fazer parte da nossa família de clientes satisfeitos!</p>
+      </div>
+      <div class="fade-in fade-in-delay-3 rounded-lg overflow-hidden shadow-lg ring-1 ring-indigo-200">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a75?auto=format&fit=crop&w=700&q=80" alt="Equipe loja de roupas" class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+    </div>
+    <div aria-hidden="true" class="absolute -top-16 -right-16 w-52 h-52 bg-indigo-100 rounded-full opacity-30 blur-2xl pointer-events-none"></div>
+    <div aria-hidden="true" class="absolute -bottom-20 -left-20 w-72 h-72 bg-indigo-200 rounded-full opacity-20 blur-3xl pointer-events-none"></div>
+  </section>
+
+  <!-- Seção 5: Contato -->
+  <section id="contato" class="py-20 px-6 md:px-12 bg-indigo-50 max-w-7xl mx-auto rounded-lg shadow-lg mt-20">
+    <h2 class="text-3xl font-extrabold text-indigo-900 mb-12 text-center tracking-tight fade-in fade-in-delay-1">Fale Conosco</h2>
+    <form action="#" method="POST" class="max-w-3xl mx-auto fade-in fade-in-delay-2 bg-white p-10 rounded-xl shadow-xl ring-1 ring-indigo-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full rounded-md border border-indigo-300 px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Seu nome completo" />
+        </div>
+        <div>
+          <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required class="w-full rounded-md border border-indigo-300 px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="seu@email.com" />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="assunto" class="block text-indigo-800 font-semibold mb-2">Assunto</label>
+        <input type="text" id="assunto" name="assunto" required class="w-full rounded-md border border-indigo-300 px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Motivo do contato" />
+      </div>
+      <div class="mb-6">
+        <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required class="w-full rounded-md border border-indigo-300 px-4 py-3 text-indigo-900 placeholder-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="px-10 py-3 bg-indigo-700 text-white font-bold rounded-lg shadow-lg btn-hover transition">Enviar Mensagem</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6 md:px-12 select-text">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-1">Identificação</h3>
+      <p><span class="font-semibold">CNPJ:</span> 55.401.073/0001-87</p>
+      <p class="mt-1"><span class="font-semibold">Razão Social:</span><br />B.V.O FORMOSO SERVICOS ADMINISTRATIVOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-1">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span><br /><a href="mailto:DPSUPERMERCADOSOLIVEIRA10@GMAIL.COM" class="underline-hover hover:text-indigo-300">DPSUPERMERCADOSOLIVEIRA10@GMAIL.COM</a></p>
+      <p class="mt-1"><span class="font-semibold">Telefone:</span><br /><span id="telefone-comercial" class="font-mono text-indigo-200">38-999601151</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-1">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span><br />CHACARA BARREIRO, 9999</p>
+      <p class="mt-1"><span class="font-semibold">Bairro:</span><br />AREA RURAL</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-1">Localização</h3>
+      <p><span class="font-semibold">Município:</span><br />FORMOSO</p>
+      <p class="mt-1"><span class="font-semibold">Estado:</span><br />MG</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 border-t border-indigo-700 pt-6 flex flex-col md:flex-row justify-between items-center text-indigo-300 text-sm font-semibold space-y-4 md:space-y-0">
+    <span>© 2024 B.V.O Formoso. Todos os direitos reservados.</span>
+    <div class="flex space-x-6">
+      <a href="#" class="hover:text-indigo-400 underline-hover">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-400 underline-hover">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

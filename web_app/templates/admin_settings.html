@@ -81,7 +81,7 @@
     {# ── HeroSMS credentials ── #}
     <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
       <h2 class="text-base font-semibold mb-4">HeroSMS — Credenciais</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
           <label class="block text-xs text-zinc-400 mb-1">API Key</label>
           <input type="text" name="HEROSMS_API_KEY" value="{{ settings.HEROSMS_API_KEY }}"
@@ -100,6 +100,13 @@
           <label class="block text-xs text-zinc-400 mb-1">Serviço (code)</label>
           <input type="text" name="HEROSMS_SERVICE" value="{{ settings.HEROSMS_SERVICE }}"
                  placeholder="fb = Facebook"
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
+                        focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs text-zinc-400 mb-1">Preço Máximo (USD)</label>
+          <input type="text" name="HEROSMS_MAX_PRICE" value="{{ settings.HEROSMS_MAX_PRICE }}"
+                 placeholder="ex: 0.50 (vazio = sem limite)"
                  class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100
                         focus:outline-none focus:border-indigo-500">
         </div>

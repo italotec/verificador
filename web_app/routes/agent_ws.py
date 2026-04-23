@@ -110,7 +110,7 @@ def _handle_agent_message(app, user_id: int, data: str):
 
 
 def _handle_profiles_push(app, user_id: int, profiles: list):
-    from ..models import WabaRecord, WABA_STATUS_AGUARDANDO, WABA_STATUS_EM_REVISAO
+    from ..models import WabaRecord, WABA_STATUS_AGUARDANDO, WABA_STATUS_EM_REVISAO, delete_waba_cascade
     with app.app_context():
         incoming_ids = {p["profile_id"] for p in profiles}
 
@@ -140,10 +140,16 @@ def _handle_profiles_push(app, user_id: int, profiles: list):
                 db.session.add(waba)
                 new_wabas += 1
 
-        # Remove this user's profiles that are no longer in AdsPower
-        for old in ProfileSnapshot.query.filter_by(user_id=user_id).all():
-            if old.profile_id not in incoming_ids:
-                db.session.delete(old)
+        # Remove profiles no longer in AdsPower — delete WabaRecords first, then snapshots
+        stale_ids = [old.profile_id for old in ProfileSnapshot.query.filter_by(user_id=user_id).all()
+                     if old.profile_id not in incoming_ids]
+        if stale_ids:
+            for waba in WabaRecord.query.filter(WabaRecord.profile_id.in_(stale_ids)).all():
+                delete_waba_cascade(waba)
+            for pid in stale_ids:
+                snap = db.session.get(ProfileSnapshot, pid)
+                if snap:
+                    db.session.delete(snap)
 
         db.session.commit()
         log_event("info", "agent", f"{len(profiles)} perfis sincronizados, {new_wabas} WABAs criadas", user_id=user_id)
@@ -296,10 +302,11 @@ def _sms_payload() -> dict:
 
     if provider == "herosms":
         return {
-            "provider": "herosms",
-            "api_key":  SystemSetting.get("HEROSMS_API_KEY", verif_config.HEROSMS_API_KEY),
-            "country":  SystemSetting.get("HEROSMS_COUNTRY", verif_config.HEROSMS_COUNTRY),
-            "service":  SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE),
+            "provider":  "herosms",
+            "api_key":   SystemSetting.get("HEROSMS_API_KEY", verif_config.HEROSMS_API_KEY),
+            "country":   SystemSetting.get("HEROSMS_COUNTRY", verif_config.HEROSMS_COUNTRY),
+            "service":   SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE),
+            "max_price": SystemSetting.get("HEROSMS_MAX_PRICE", verif_config.HEROSMS_MAX_PRICE),
         }
     else:
         return {

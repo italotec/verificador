@@ -20,11 +20,14 @@ def get_sms_service(sms_payload: dict | None = None):
     import config as app_config
 
     # Prefer the payload injected by the VPS into the job message
+    max_price = ""
+
     if sms_payload and sms_payload.get("provider"):
         provider = sms_payload["provider"]
         api_key  = sms_payload.get("api_key", "")
         country  = sms_payload.get("country", "73")
         service  = sms_payload.get("service", "fb")
+        max_price = sms_payload.get("max_price", "")
         print(f"[SMS_FACTORY] Using provider from job payload: {provider}")
     else:
         settings = _read_all_settings()
@@ -34,6 +37,7 @@ def get_sms_service(sms_payload: dict | None = None):
             api_key = settings.get("HEROSMS_API_KEY") or app_config.HEROSMS_API_KEY
             country = settings.get("HEROSMS_COUNTRY") or app_config.HEROSMS_COUNTRY
             service = settings.get("HEROSMS_SERVICE") or app_config.HEROSMS_SERVICE
+            max_price = settings.get("HEROSMS_MAX_PRICE") or app_config.HEROSMS_MAX_PRICE
         else:
             api_key = settings.get("SMS24H_API_KEY") or app_config.SMS24H_API_KEY
             country = settings.get("SMS24H_COUNTRY") or app_config.SMS24H_COUNTRY
@@ -41,7 +45,8 @@ def get_sms_service(sms_payload: dict | None = None):
 
     if provider == "herosms":
         from services.herosms import HeroSMSService
-        return HeroSMSService(api_key=api_key, country=country, service=service)
+        return HeroSMSService(api_key=api_key, country=country, service=service,
+                              max_price=max_price)
     else:
         from services.sms24h import SMS24HService
         return SMS24HService(api_key=api_key, country=country, service=service)

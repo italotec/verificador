@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="y55fyyau5ymaet0q0klcn0rj1su0lo" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bozola Wear - Moda & Acessórios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-in {
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+    .btn-glow:hover {
+      box-shadow:
+        0 0 8px rgb(236 72 153 / 0.6),
+        0 0 20px rgb(236 72 153 / 0.4);
+      transform: scale(1.05);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-pink-300 selection:text-gray-900">
+
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-2xl font-extrabold tracking-wide text-pink-600 hover:text-pink-500 transition">Bozola Wear</a>
+    <ul class="hidden md:flex gap-8 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-pink-600 transition">Coleção</a></li>
+      <li><a href="#destaques" class="hover:text-pink-600 transition">Destaques</a></li>
+      <li><a href="#acessorios" class="hover:text-pink-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-pink-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-pink-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden p-2 rounded-md hover:bg-pink-100 transition">
+      <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white/95 shadow-lg">
+    <ul class="flex flex-col gap-4 px-6 py-6 font-semibold text-pink-600 text-lg border-t border-pink-100">
+      <li><a href="#colecao" class="block hover:text-pink-400 transition">Coleção</a></li>
+      <li><a href="#destaques" class="block hover:text-pink-400 transition">Destaques</a></li>
+      <li><a href="#acessorios" class="block hover:text-pink-400 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-pink-400 transition">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-pink-400 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+<section id="hero" class="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-tr from-pink-100 via-pink-50 to-white overflow-hidden px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div class="space-y-6 fade-in" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-pink-600 leading-tight drop-shadow-sm">Vista-se com estilo. <br />Seja único, seja Bozola.</h1>
+      <p class="text-lg text-pink-800 font-medium max-w-xl">Descubra as últimas tendências em vestuário e acessórios cuidadosamente selecionados para você.</p>
+      <a href="#colecao" class="inline-block btn-glow bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition transform duration-300">Ver Coleção</a>
+    </div>
+    <div class="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-xl fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupa rosa" class="object-cover w-full h-full brightness-105 hover:brightness-110 transition duration-500 rounded-xl" />
+      <span class="absolute bottom-4 left-4 bg-pink-600/80 text-white px-3 py-1 rounded-full font-semibold text-sm tracking-wide select-none">Nova Coleção</span>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 py-16 sm:py-20">
+  <h2 class="text-4xl font-extrabold text-pink-700 mb-10 text-center fade-in" style="animation-delay: 0.2s;">Coleção Primavera/Verão 2024</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 fade-in" style="animation-delay: 0.4s;">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino vermelho" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="font-semibold text-xl text-pink-600 group-hover:text-pink-700 transition-colors">Vestido Vermelho Floral</h3>
+        <p class="text-pink-400 mt-2 font-medium">R$ 239,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1520975693013-43d7d9f3e934?auto=format&fit=crop&w=600&q=80" alt="Camisa masculina casual" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="font-semibold text-xl text-pink-600 group-hover:text-pink-700 transition-colors">Camisa Casual Azul</h3>
+        <p class="text-pink-400 mt-2 font-medium">R$ 179,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="font-semibold text-xl text-pink-600 group-hover:text-pink-700 transition-colors">Calça Jeans Skinny</h3>
+        <p class="text-pink-400 mt-2 font-medium">R$ 199,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1593032457866-eebf20d4d7b6?auto=format&fit=crop&w=600&q=80" alt="Tênis branco moderno" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="font-semibold text-xl text-pink-600 group-hover:text-pink-700 transition-colors">Tênis Branco Minimalista</h3>
+        <p class="text-pink-400 mt-2 font-medium">R$ 259,90</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="destaques" class="bg-pink-50 py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-pink-700 mb-12 text-center fade-in" style="animation-delay: 0.2s;">Destaques da Semana</h2>
+    <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
+      <figure class="relative flex-1 rounded-xl overflow-hidden shadow-lg cursor-pointer group fade-in" style="animation-delay: 0.4s;">
+        <img src="https://images.unsplash.com/photo-1475180095006-4d2ac7c3b9a0?auto=format&fit=crop&w=800&q=80" alt="Jaqueta jeans feminina" class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-pink-900/90 to-transparent p-6 text-white font-semibold text-xl">Jaqueta Jeans Oversized</figcaption>
+      </figure>
+      <figure class="relative flex-1 rounded-xl overflow-hidden shadow-lg cursor-pointer group fade-in" style="animation-delay: 0.6s;">
+        <img src="https://images.unsplash.com/photo-1535914254981-b5012eebbd15?auto=format&fit=crop&w=800&q=80" alt="Bolsa feminina preta" class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-pink-900/90 to-transparent p-6 text-white font-semibold text-xl">Bolsa de Couro Preta</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="acessorios" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-pink-700 mb-12 text-center fade-in" style="animation-delay: 0.2s;">Acessórios Exclusivos</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-6 fade-in" style="animation-delay: 0.4s;">
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=200&q=80" alt="Óculos de sol redondo" class="w-24 h-24 rounded-full object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Óculos Redondo</p>
+    </div>
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1555529669-eaee5c3b4a7a?auto=format&fit=crop&w=200&q=80" alt="Relógio minimalista" class="w-24 h-24 rounded-xl object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Relógio Minimalista</p>
+    </div>
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=200&q=80" alt="Chapéu de palha" class="w-24 h-24 rounded-full object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Chapéu de Palha</p>
+    </div>
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=200&q=80" alt="Brincos elegantes" class="w-24 h-24 rounded-full object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Brincos Elegantes</p>
+    </div>
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=200&q=80" alt="Pulseira de couro" class="w-24 h-24 rounded-xl object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Pulseira de Couro</p>
+    </div>
+    <div class="flex flex-col items-center text-center group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=200&q=80" alt="Carteira feminina" class="w-24 h-24 rounded-xl object-cover mb-3 shadow-md group-hover:scale-110 transition-transform duration-400" />
+      <p class="text-pink-600 font-semibold">Carteira Compacta</p>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-white py-16 px-6">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 fade-in" style="animation-delay: 0.2s;">
+      <h2 class="text-4xl font-extrabold text-pink-700 mb-6">Nossa História</h2>
+      <p class="text-pink-700 leading-relaxed text-lg">Na Bozola Wear, acreditamos que a moda é uma forma de expressão e empoderamento. Fundada em 2010, nossa missão é conectar pessoas a estilos autênticos, oferecendo roupas e acessórios que combinam qualidade, conforto e design contemporâneo.</p>
+      <p class="mt-4 text-pink-600 font-semibold">Venha fazer parte da família Bozola!</p>
+    </div>
+    <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-2xl fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Equipe de moda" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-pink-50 py-16 px-6">
+  <div class="max-w-3xl mx-auto text-center fade-in" style="animation-delay: 0.2s;">
+    <h2 class="text-4xl font-extrabold text-pink-700 mb-6">Fale Conosco</h2>
+    <p class="mb-10 text-pink-600 text-lg">Tem dúvidas ou quer saber mais sobre nossos produtos? Envie uma mensagem e responderemos o mais rápido possível.</p>
+    <form action="#" method="POST" class="bg-white rounded-xl shadow-lg p-8 flex flex-col gap-6 max-w-xl mx-auto">
+      <input type="text" name="nome" placeholder="Seu nome" required class="border border-pink-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-400 transition" />
+      <input type="email" name="email" placeholder="Seu e-mail" required class="border border-pink-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-400 transition" />
+      <textarea name="mensagem" rows="4" placeholder="Sua mensagem" required class="border border-pink-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-400 transition resize-none"></textarea>
+      <button type="submit" class="btn-glow bg-pink-600 text-white font-semibold py-3 rounded-full shadow-lg hover:bg-pink-700 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-pink-900 text-pink-100 py-12 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div class="space-y-3">
+      <h3 class="font-bold text-lg border-b border-pink-700 pb-2">Razão Social</h3>
+      <p>HF BOZOLA SERVICOS LTDA</p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="font-bold text-lg border-b border-pink-700 pb-2">CNPJ</h3>
+      <p>65.724.829/0001-82</p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="font-bold text-lg border-b border-pink-700 pb-2">Contato</h3>
+      <p><span id="telefone-comercial" class="font-semibold">(11) 93017-4030</span></p>
+      <p>hbozola@gmail.com</p>
+    </div>
+    <div class="space-y-3">
+      <h3 class="font-bold text-lg border-b border-pink-700 pb-2">Endereço</h3>
+      <p>Rua Doutor Campos Salles, 105</p>
+      <p>Bairro: Centro</p>
+      <p>Município: SOCORRO</p>
+      <p>Estado: SP</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 border-t border-pink-700 pt-6 flex flex-col md:flex-row justify-between items-center text-pink-300 text-sm font-light space-y-4 md:space-y-0">
+    <p>© 2024 Bozola Wear. Todos os direitos reservados.</p>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-pink-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-pink-400 transition">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

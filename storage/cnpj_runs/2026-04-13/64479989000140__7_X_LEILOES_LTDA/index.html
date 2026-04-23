@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="dpubagan51qdc1safx6wnvo6aa94kb" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7 X LEILOES - Loja de Roupas & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s forwards;
+  }
+  .fade-in-up:nth-child(1) { animation-delay: 0.2s; }
+  .fade-in-up:nth-child(2) { animation-delay: 0.4s; }
+  .fade-in-up:nth-child(3) { animation-delay: 0.6s; }
+  .fade-in-up:nth-child(4) { animation-delay: 0.8s; }
+  .fade-in-up:nth-child(5) { animation-delay: 1s; }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  a.underline-animate {
+    background-image: linear-gradient(120deg, #7dd3fc, #60a5fa);
+    background-repeat: no-repeat;
+    background-size: 100% 3px;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  a.underline-animate:hover {
+    background-size: 100% 6px;
+  }
+  nav a {
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: #3b82f6;
+    transition: width 0.3s;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+</style>
+</head>
+<body class="bg-gradient-to-b from-white via-slate-50 to-white text-slate-900">
+
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-3xl font-extrabold text-sky-600 tracking-tight select-none hover:text-sky-500 transition">7 X LEILOES</a>
+    <nav class="hidden md:flex space-x-8 font-semibold text-slate-700">
+      <a href="#home" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Home</a>
+      <a href="#vestuario" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Vestuário</a>
+      <a href="#acessorios" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Acessórios</a>
+      <a href="#sobre" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Sobre Nós</a>
+      <a href="#contato" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Contato</a>
+    </nav>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-sky-600 hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-400 rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+  <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+    <div class="flex flex-col px-6 py-4 space-y-3 font-semibold text-slate-700">
+      <a href="#home" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Home</a>
+      <a href="#vestuario" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Vestuário</a>
+      <a href="#acessorios" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Acessórios</a>
+      <a href="#sobre" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Sobre Nós</a>
+      <a href="#contato" class="hover:text-sky-600 focus:outline-none focus:text-sky-600">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<section id="home" class="relative bg-gradient-to-r from-cyan-50 via-sky-50 to-cyan-50 min-h-[90vh] flex items-center">
+  <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
+    <h1 class="text-5xl sm:text-6xl font-extrabold text-sky-700 drop-shadow-md fade-in-up max-w-3xl leading-tight">
+      Vista sua essência. <br />
+      <span class="text-cyan-600">Moda e acessórios</span> que inspiram seu dia a dia.
+    </h1>
+    <p class="mt-6 text-lg text-slate-600 max-w-xl mx-auto md:mx-0 fade-in-up">
+      Descubra as últimas tendências em vestuário e acessórios com qualidade e estilo, tudo em um só lugar.
+    </p>
+    <a href="#vestuario" class="inline-block mt-10 px-10 py-4 bg-sky-600 hover:bg-cyan-600 transition rounded-full font-semibold text-white shadow-lg shadow-cyan-300/30 fade-in-up focus:outline-none focus:ring-4 focus:ring-cyan-300">
+      Comece a Comprar
+    </a>
+  </div>
+  <picture class="absolute right-0 bottom-0 top-0 hidden md:block md:w-1/2 max-w-3xl overflow-hidden rounded-l-3xl shadow-2xl">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Pessoa vestindo roupa moderna" class="object-cover h-full w-full brightness-105" />
+  </picture>
+</section>
+
+<section id="vestuario" class="bg-white py-16 px-6 md:px-12 max-w-7xl mx-auto">
+  <h2 class="text-4xl font-extrabold text-sky-700 mb-10 underline underline-offset-8 decoration-cyan-400 decoration-4 max-w-max fade-in-up">Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <article class="bg-slate-50 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-sky-700 mb-2">Camisa Casual Azul</h3>
+        <p class="text-slate-600 mb-4">Conforto e estilo para seu dia a dia.</p>
+        <span class="text-cyan-600 font-bold text-lg">R$ 129,90</span>
+      </div>
+    </article>
+    <article class="bg-slate-50 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1520975696857-1eaea4c9b0a5?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino floral" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-sky-700 mb-2">Vestido Floral</h3>
+        <p class="text-slate-600 mb-4">Leveza e frescor para ocasiões especiais.</p>
+        <span class="text-cyan-600 font-bold text-lg">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="bg-slate-50 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans masculina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-sky-700 mb-2">Jaqueta Jeans</h3>
+        <p class="text-slate-600 mb-4">Clássica e versátil para qualquer estação.</p>
+        <span class="text-cyan-600 font-bold text-lg">R$ 230,00</span>
+      </div>
+    </article>
+    <article class="bg-slate-50 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Calça social masculina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-sky-700 mb-2">Calça Social Slim</h3>
+        <p class="text-slate-600 mb-4">Elegância para o trabalho e eventos.</p>
+        <span class="text-cyan-600 font-bold text-lg">R$ 179,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-cyan-50 py-16 px-6 md:px-12 max-w-7xl mx-auto">
+  <h2 class="text-4xl font-extrabold text-sky-700 mb-10 underline underline-offset-8 decoration-sky-500 decoration-4 max-w-max fade-in-up">Acessórios</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+    <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno masculino" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-sky-700 mb-3">Relógio Minimalista</h3>
+        <p class="text-slate-600 mb-4">Design clean para marcar seu tempo com estilo.</p>
+        <span class="block text-cyan-600 font-bold text-lg">R$ 299,00</span>
+      </div>
+    </div>
+    <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol feminino" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-sky-700 mb-3">Óculos de Sol Vintage</h3>
+        <p class="text-slate-600 mb-4">Proteção UV com toque retrô e elegante.</p>
+        <span class="block text-cyan-600 font-bold text-lg">R$ 189,90</span>
+      </div>
+    </div>
+    <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer fade-in-up">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-sky-700 mb-3">Bolsa de Couro</h3>
+        <p class="text-slate-600 mb-4">Praticidade e charme para seu dia a dia.</p>
+        <span class="block text-cyan-600 font-bold text-lg">R$ 349,00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-white py-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+  <picture class="flex-1 rounded-3xl overflow-hidden shadow-xl fade-in-up">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1533777324565-a04df0e527b7?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas" class="object-cover w-full h-96 rounded-3xl" />
+  </picture>
+  <div class="flex-1 fade-in-up">
+    <h2 class="text-4xl font-extrabold text-sky-700 mb-6 underline underline-offset-8 decoration-cyan-400 decoration-4 max-w-max">Quem Somos</h2>
+    <p class="text-slate-700 text-lg leading-relaxed mb-6 max-w-xl">
+      A 7 X LEILOES LTDA é uma loja de vestuário e acessórios que nasceu do desejo de oferecer moda acessível e de qualidade para todos os estilos. Nosso compromisso é trazer produtos selecionados com carinho, conectando você ao que há de melhor em tendências e conforto.
+    </p>
+    <p class="text-slate-600 italic max-w-xl">
+      "Moda é a expressão da sua identidade. Vista-se para impressionar, para sentir-se bem, para ser você."
+    </p>
+  </div>
+</section>
+
+<section id="contato" class="bg-cyan-50 py-20 px-6 md:px-12 max-w-4xl mx-auto fade-in-up rounded-3xl shadow-xl relative overflow-hidden">
+  <h2 class="text-4xl font-extrabold text-sky-700 mb-10 underline underline-offset-8 decoration-sky-500 decoration-4 max-w-max mx-auto text-center">Fale Conosco</h2>
+  <form class="bg-white rounded-2xl p-10 shadow-lg grid gap-8" action="#" method="POST" aria-label="Formulário de contato">
+    <div>
+      <label for="nome" class="block text-slate-700 font-semibold mb-2">Nome Completo</label>
+      <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition" />
+    </div>
+    <div>
+      <label for="email" class="block text-slate-700 font-semibold mb-2">E-mail</label>
+      <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition" />
+    </div>
+    <div>
+      <label for="mensagem" class="block text-slate-700 font-semibold mb-2">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" required rows="5" placeholder="Escreva sua mensagem aqui..." class="w-full resize-none rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition"></textarea>
+    </div>
+    <button type="submit" class="bg-sky-600 hover:bg-cyan-600 text-white font-bold rounded-lg py-4 shadow-lg shadow-cyan-300/30 transition focus:outline-none focus:ring-4 focus:ring-cyan-300">
+      Enviar Mensagem
+    </button>
+  </form>
+</section>
+
+<footer class="bg-slate-900 text-slate-300 py-14 px-6 md:px-12 mt-20 select-none">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-sm md:text-base">
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">CNPJ</h3>
+      <p>64.479.989/0001-40</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Razão Social</h3>
+      <p>7 X LEILOES LTDA</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">E-mail</h3>
+      <p><a href="mailto:FALACOMMARCIANO@HOTMAIL.COM" class="text-slate-400 hover:text-cyan-400 transition underline-animate">FALACOMMARCIANO@HOTMAIL.COM</a></p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Telefone</h3>
+      <p><span id="telefone-comercial" class="select-text">17-997597405</span></p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mt-10 text-sm md:text-base">
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Logradouro</h3>
+      <p>RUA SAO PAULO, 1905</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Bairro</h3>
+      <p>CENTRO</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Município</h3>
+      <p>MERIDIANO</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-cyan-400 font-semibold mb-2">Estado</h3>
+      <p>SP</p>
+    </div>
+  </div>
+  <div class="mt-12 text-center border-t border-slate-700 pt-6 text-sm text-slate-500 font-light">
+    <a href="#" class="mr-6 hover:text-cyan-400 transition underline-animate">Termos de Uso</a>
+    <a href="#" class="hover:text-cyan-400 transition underline-animate">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="e6654l0zub6ebwm0d05tnj5t87ihv8" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Moda Real - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto flex justify-between items-center py-4 px-6 md:px-12">
+    <a href="#home" class="text-3xl font-semibold text-indigo-600 hover:text-indigo-700 transition">ModaReal</a>
+    <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+      <li><a href="#collections" class="hover:text-indigo-600 transition">Coleções</a></li>
+      <li><a href="#about" class="hover:text-indigo-600 transition">Quem Somos</a></li>
+      <li><a href="#accessories" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#contact" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-700 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+    <ul class="flex flex-col px-6 py-4 space-y-4 font-semibold text-gray-700">
+      <li><a href="#home" class="block hover:text-indigo-600 transition">Início</a></li>
+      <li><a href="#collections" class="block hover:text-indigo-600 transition">Coleções</a></li>
+      <li><a href="#about" class="block hover:text-indigo-600 transition">Quem Somos</a></li>
+      <li><a href="#accessories" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#contact" class="block hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative bg-gradient-to-tr from-indigo-100 via-indigo-50 to-indigo-100 min-h-[88vh] flex items-center justify-center px-6">
+  <div class="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12 max-w-7xl">
+    <div class="max-w-xl fade-in" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl font-bold text-indigo-700 leading-tight mb-6">Vista Sua Confiança <br class="hidden md:block" /> com Estilo Real</h1>
+      <p class="text-lg text-indigo-600 mb-8">Moda feminina, masculina e acessórios exclusivos para você brilhar em qualquer ocasião.</p>
+      <a href="#collections" class="inline-block bg-indigo-600 hover:bg-indigo-700 transition text-white font-semibold px-8 py-3 rounded-lg shadow-md shadow-indigo-300">Explore Nossas Coleções</a>
+    </div>
+    <div class="w-full max-w-lg rounded-xl overflow-hidden shadow-xl fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com vestido" class="w-full object-cover aspect-[4/5]" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="collections" class="py-16 bg-white">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center fade-in" style="animation-delay: 0.1s;">Nossas Coleções</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 fade-in" style="animation-delay: 0.3s;">
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer bg-indigo-50">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Coleção feminina casual" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-800 mb-2">Moda Feminina Casual</h3>
+          <p class="text-indigo-700 font-light">Peças versáteis para o dia a dia com conforto e elegância.</p>
+        </div>
+      </article>
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer bg-indigo-50">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Moda masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-800 mb-2">Moda Masculina Urbana</h3>
+          <p class="text-indigo-700 font-light">Estilo moderno para homens que valorizam autenticidade.</p>
+        </div>
+      </article>
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer bg-indigo-50">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Vestidos de festa" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-800 mb-2">Vestidos de Festa</h3>
+          <p class="text-indigo-700 font-light">Modelos sofisticados para ocasiões especiais inesquecíveis.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="bg-indigo-50 py-16">
+  <div class="container mx-auto px-6 max-w-5xl flex flex-col md:flex-row items-center gap-12">
+    <div class="w-full md:w-1/2 fade-in" style="animation-delay: 0.2s;">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja de roupas" class="rounded-3xl shadow-xl object-cover aspect-[4/3]" loading="lazy" />
+    </div>
+    <div class="w-full md:w-1/2 fade-in" style="animation-delay: 0.4s;">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Quem Somos</h2>
+      <p class="text-indigo-700 leading-relaxed mb-4">Na ModaReal, acreditamos que vestir bem é uma forma de expressão e empoderamento. Desde 2010, oferecemos roupas e acessórios selecionados com paixão, qualidade e atenção aos detalhes para homens e mulheres que desejam um estilo único e autêntico.</p>
+      <p class="text-indigo-700 leading-relaxed">Nossa missão é conectar tendências, conforto e sustentabilidade para proporcionar experiências de compra inesquecíveis, dentro de um ambiente acolhedor e moderno.</p>
+    </div>
+  </div>
+</section>
+
+<section id="accessories" class="bg-white py-16">
+  <div class="container mx-auto px-6 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center fade-in" style="animation-delay: 0.1s;">Acessórios Exclusivos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 fade-in" style="animation-delay: 0.3s;">
+      <div class="group rounded-lg overflow-hidden shadow-md hover:shadow-2xl bg-indigo-50 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80" alt="Relógio moderno" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-800 mb-1">Relógio Moderno</h3>
+          <p class="text-indigo-700 text-sm font-light">Design minimalista e pulseira em couro legítimo.</p>
+        </div>
+      </div>
+      <div class="group rounded-lg overflow-hidden shadow-md hover:shadow-2xl bg-indigo-50 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1520975911424-4e05d2a42b3a?auto=format&fit=crop&w=500&q=80" alt="Óculos de sol" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-800 mb-1">Óculos de Sol</h3>
+          <p class="text-indigo-700 text-sm font-light">Lentes polarizadas e armação leve.</p>
+        </div>
+      </div>
+      <div class="group rounded-lg overflow-hidden shadow-md hover:shadow-2xl bg-indigo-50 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=500&q=80" alt="Bolsa feminina" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-800 mb-1">Bolsa Feminina</h3>
+          <p class="text-indigo-700 text-sm font-light">Compacta, elegante e com compartimentos internos.</p>
+        </div>
+      </div>
+      <div class="group rounded-lg overflow-hidden shadow-md hover:shadow-2xl bg-indigo-50 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=500&q=80" alt="Chapéu estiloso" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-indigo-800 mb-1">Chapéu Estiloso</h3>
+          <p class="text-indigo-700 text-sm font-light">Perfeito para proteger com charme e personalidade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="bg-indigo-100 py-16">
+  <div class="container mx-auto px-6 max-w-3xl fade-in" style="animation-delay: 0.2s;">
+    <h2 class="text-4xl font-extrabold text-indigo-800 mb-8 text-center">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-xl shadow-xl p-8 space-y-6">
+      <div>
+        <label for="name" class="block text-indigo-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="name" name="name" required placeholder="Seu nome" class="w-full rounded-md border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <div>
+        <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" class="w-full rounded-md border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <div>
+        <label for="message" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="message" name="message" rows="4" required placeholder="Escreva sua mensagem" class="w-full rounded-md border border-indigo-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-md transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-12">
+  <div class="container mx-auto px-6 max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div>
+      <h3 class="text-xl font-semibold mb-3 border-b border-indigo-700 pb-1">Informações Legais</h3>
+      <p class="mb-1"><span class="font-semibold">CNPJ:</span> 54.413.508/0001-40</p>
+      <p><span class="font-semibold">Razão Social:</span> REAL SERVICOS E NEGOCIOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-3 border-b border-indigo-700 pb-1">Contato</h3>
+      <p class="mb-1"><span class="font-semibold">E-mail:</span> <a href="mailto:SOCIETARIOMI@GMAIL.COM" class="underline hover:text-indigo-300">SOCIETARIOMI@GMAIL.COM</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="select-text">(11) 94885-0961</span></p>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-3 border-b border-indigo-700 pb-1">Endereço</h3>
+      <p class="mb-1"><span class="font-semibold">Logradouro:</span> AVENIDA BEIRA RIO, S/N</p>
+      <p class="mb-1"><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> ALFREDO WAGNER</p>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-3 border-b border-indigo-700 pb-1">Estado</h3>
+      <p class="text-lg font-semibold">SC</p>
+      <nav class="mt-6 space-x-4">
+        <a href="#" class="text-indigo-300 hover:text-indigo-100 underline transition">Termos de Uso</a>
+        <a href="#" class="text-indigo-300 hover:text-indigo-100 underline transition">Política de Privacidade</a>
+      </nav>
+    </div>
+  </div>
+  <div class="mt-12 text-center text-indigo-400 text-sm select-none">&copy; 2024 ModaReal. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

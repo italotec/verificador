@@ -119,7 +119,7 @@ def configurar_dns_subdominio(
 def limpar_para_subdominio(razao_social: str) -> str:
     texto = unicodedata.normalize("NFD", razao_social)
     texto = "".join(ch for ch in texto if unicodedata.category(ch) != "Mn")
-    texto = re.sub(r"[^a-zA-Z0-9\s]", "", texto.lower())
+    texto = re.sub(r"[^a-zA-Z\s]", "", texto.lower())
     texto = re.sub(r"\s+", "-", texto.strip())
     texto = re.sub(r"-+", "-", texto)
     texto = texto[:40].strip("-")

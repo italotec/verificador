@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="oyg4cyn3tr4cslkiey9m7101zjxwqg" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja PGMEI - Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .fadeInUp {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  /* Custom scrollbar for product grid */
+  ::-webkit-scrollbar {
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f9fafb;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #a3bffa;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-indigo-300 selection:text-indigo-900">
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+    <a href="#" class="text-indigo-700 font-extrabold text-3xl tracking-wide select-none hover:text-indigo-900 transition-colors" aria-label="Logo PGMEI">PGMEI Wear</a>
+    <nav class="hidden md:flex space-x-8 font-medium text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600 transition-colors">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600 transition-colors">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600 transition-colors">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-600 transition-colors">Contato</a>
+    </nav>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-700 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+    </button>
+  </div>
+  <nav id="mobile-menu" class="hidden md:hidden bg-indigo-50 border-t border-indigo-200">
+    <div class="flex flex-col px-6 py-4 space-y-3 font-semibold text-indigo-700">
+      <a href="#colecao" class="hover:text-indigo-900">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-900">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-900">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-900">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<section id="hero" class="relative bg-gradient-to-r from-indigo-100 via-white to-indigo-100 min-h-[calc(100vh-72px)] flex items-center">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div class="space-y-6 fadeInUp">
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-indigo-900">Vista-se com autenticidade.<br /><span class="text-indigo-600">Para cada ocasião, um estilo único.</span></h1>
+      <p class="text-lg text-indigo-700 max-w-xl">Explore nossa coleção exclusiva de roupas e acessórios que combinam conforto, modernidade e elegância para você brilhar todos os dias.</p>
+      <a href="#colecao" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-4 focus:ring-indigo-300">Ver Coleção</a>
+    </div>
+    <div class="relative w-full max-w-md mx-auto md:mx-0">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Modelo com roupa moderna" class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-700 ease-in-out" />
+      <div class="absolute bottom-6 left-6 bg-indigo-600 bg-opacity-80 rounded-lg px-4 py-2 text-white text-sm font-semibold select-none">Moda Urbana 2024</div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 py-16 md:py-20 scroll-mt-24">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-10 text-center tracking-tight">Coleção Destaque</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover-scale cursor-pointer relative group">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Jaqueta Jeans" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-2">Jaqueta Jeans Vintage</h3>
+        <p class="text-indigo-700 mb-3">Conforto e estilo para o dia a dia, perfeita para combinações casuais.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 249,90</span>
+      </div>
+      <div class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full select-none opacity-90">Novo</div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover-scale cursor-pointer relative group">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Vestido Floral" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-2">Vestido Floral Leve</h3>
+        <p class="text-indigo-700 mb-3">Fluidez e frescor para os dias mais quentes com toque delicado.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 199,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover-scale cursor-pointer relative group">
+      <img src="https://images.unsplash.com/photo-1520975691008-4a210b6f3a4d?auto=format&fit=crop&w=600&q=80" alt="Calça de Alfaiataria" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-2">Calça Alfaiataria Slim</h3>
+        <p class="text-indigo-700 mb-3">Elegância e conforto para ambientes formais ou casuais.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 179,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover-scale cursor-pointer relative group">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80" alt="Camiseta Básica" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-2">Camiseta Básica Algodão</h3>
+        <p class="text-indigo-700 mb-3">Peça curinga para montar qualquer visual com conforto.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 69,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16 md:py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-12 text-center tracking-tight">Acessórios que complementam</h2>
+    <div class="flex flex-col md:flex-row md:justify-center md:space-x-12 space-y-12 md:space-y-0">
+      <div class="max-w-xs mx-auto bg-white rounded-3xl shadow-lg overflow-hidden hover-scale cursor-pointer group transition-transform duration-500 ease-in-out">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio de pulso" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6 text-indigo-900">
+          <h3 class="text-xl font-semibold mb-2">Relógio Minimalista</h3>
+          <p class="mb-3 text-indigo-700">Design clean para acompanhar seu ritmo com estilo.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 299,90</span>
+        </div>
+      </div>
+      <div class="max-w-xs mx-auto bg-white rounded-3xl shadow-lg overflow-hidden hover-scale cursor-pointer group transition-transform duration-500 ease-in-out">
+        <img src="https://images.unsplash.com/photo-1533777324565-a04df0e527b7?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6 text-indigo-900">
+          <h3 class="text-xl font-semibold mb-2">Óculos de Sol Vintage</h3>
+          <p class="mb-3 text-indigo-700">Proteção e charme para os dias de sol intenso.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 159,90</span>
+        </div>
+      </div>
+      <div class="max-w-xs mx-auto bg-white rounded-3xl shadow-lg overflow-hidden hover-scale cursor-pointer group transition-transform duration-500 ease-in-out">
+        <img src="https://images.unsplash.com/photo-1555529669-e80bcf0f6686?auto=format&fit=crop&w=600&q=80" alt="Bolsa de mão" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6 text-indigo-900">
+          <h3 class="text-xl font-semibold mb-2">Bolsa de Mão Couro</h3>
+          <p class="mb-3 text-indigo-700">Praticidade e elegância para seu dia a dia com toque rústico.</p>
+          <span class="font-bold text-indigo-600 text-lg">R$ 379,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="max-w-7xl mx-auto px-6 py-16 md:py-20 scroll-mt-24">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-900 mb-10 text-center tracking-tight">Sobre a PGMEI Wear</h2>
+  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+    <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=400&q=80" alt="Equipe da loja" class="rounded-3xl shadow-xl w-80 md:w-96 object-cover" />
+    <div class="max-w-xl text-indigo-800 text-lg leading-relaxed">
+      <p>A PGMEI Wear é uma loja especializada em oferecer roupas e acessórios modernos, confortáveis e de alta qualidade para todos os perfis. Buscamos inspirar confiança e autenticidade para que nossos clientes expressem sua personalidade através da moda.</p>
+      <p class="mt-5">Com atendimento personalizado e atenção aos detalhes, construímos uma experiência única para quem valoriza estilo aliado a conforto e bem-estar.</p>
+      <p class="mt-5 font-semibold text-indigo-600">Junte-se a nós e descubra o prazer de vestir-se bem todos os dias.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-50 py-16 md:py-20">
+  <div class="max-w-3xl mx-auto px-6 text-indigo-900">
+    <h2 class="text-3xl font-extrabold mb-8 text-center tracking-tight">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10 space-y-6">
+      <div>
+        <label for="nome" class="block text-lg font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full rounded-lg border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-lg font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full rounded-lg border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-lg font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui" class="w-full rounded-lg border border-indigo-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-4 focus:ring-indigo-300">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-20">
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Dados Cadastrais</h3>
+      <p><span class="font-bold">CNPJ:</span> 66.017.511/0001-24</p>
+      <p><span class="font-bold">Razão Social:</span> PGMEI PAGAMENTOS E SERVICOS DAS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Contato</h3>
+      <p><span class="font-bold">E-mail:</span> <a href="mailto:pgmeipagamentos@gmail.com" class="underline hover:text-indigo-300">pgmeipagamentos@gmail.com</a></p>
+      <p><span class="font-bold">Telefone:</span> <span id="telefone-comercial" class="select-text">(91) 98063-7699</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Endereço</h3>
+      <p><span class="font-bold">Logradouro:</span> Rua Xv de Novembro, 858</p>
+      <p><span class="font-bold">Bairro:</span> Centro</p>
+      <p><span class="font-bold">Município:</span> JUSSARA</p>
+      <p><span class="font-bold">Estado:</span> PR</p>
+    </div>
+    <div class="flex flex-col justify-between">
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Legal</h3>
+      <nav class="flex flex-col space-y-3">
+        <a href="#" class="hover:underline hover:text-indigo-300 transition-colors">Termos de Uso</a>
+        <a href="#" class="hover:underline hover:text-indigo-300 transition-colors">Política de Privacidade</a>
+      </nav>
+    </div>
+  </div>
+  <div class="mt-12 text-center text-indigo-400 text-sm select-none">© 2024 PGMEI Wear. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

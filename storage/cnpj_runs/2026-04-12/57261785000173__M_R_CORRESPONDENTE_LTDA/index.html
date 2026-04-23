@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="2pxpikk32foszd2bvoukxn4r9efawv" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja Moderna de Roupas & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; }
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .fade-in-up:nth-child(1) { animation-delay: 0.2s; }
+  .fade-in-up:nth-child(2) { animation-delay: 0.4s; }
+  .fade-in-up:nth-child(3) { animation-delay: 0.6s; }
+  .fade-in-up:nth-child(4) { animation-delay: 0.8s; }
+  .fade-in-up:nth-child(5) { animation-delay: 1s; }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="bg-gradient-to-r from-rose-100 via-rose-200 to-rose-100 sticky top-0 z-50 shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-3xl font-semibold text-rose-600 tracking-wide">MR Store</a>
+    <ul class="hidden md:flex space-x-8 font-semibold text-rose-700">
+      <li><a href="#home" class="hover:text-rose-900 transition">Início</a></li>
+      <li><a href="#collections" class="hover:text-rose-900 transition">Coleções</a></li>
+      <li><a href="#about" class="hover:text-rose-900 transition">Sobre</a></li>
+      <li><a href="#testimonials" class="hover:text-rose-900 transition">Depoimentos</a></li>
+      <li><a href="#contact" class="hover:text-rose-900 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden text-rose-700 hover:text-rose-900 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-rose-50 shadow-inner px-6 pb-5">
+    <ul class="flex flex-col space-y-3 font-semibold text-rose-700 text-lg">
+      <li><a href="#home" class="block hover:text-rose-900 transition">Início</a></li>
+      <li><a href="#collections" class="block hover:text-rose-900 transition">Coleções</a></li>
+      <li><a href="#about" class="block hover:text-rose-900 transition">Sobre</a></li>
+      <li><a href="#testimonials" class="block hover:text-rose-900 transition">Depoimentos</a></li>
+      <li><a href="#contact" class="block hover:text-rose-900 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+<section id="home" class="relative bg-gradient-to-br from-rose-50 via-rose-100 to-rose-50 min-h-[85vh] flex items-center justify-center px-6 md:px-12">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="space-y-6 fade-in-up">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-rose-700 leading-tight">Moda que inspira seu estilo único</h1>
+      <p class="text-rose-600 text-lg md:text-xl max-w-xl">Roupas e acessórios cuidadosamente selecionados para você brilhar em qualquer ocasião com elegância e conforto.</p>
+      <a href="#collections" class="inline-block mt-4 px-8 py-3 bg-rose-600 text-white font-semibold rounded-lg shadow-lg hover:bg-rose-700 transition">Explore Coleções</a>
+    </div>
+    <div class="fade-in-up relative rounded-xl overflow-hidden shadow-xl">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Mulher usando vestido moderno" class="w-full h-[350px] md:h-[450px] object-cover object-center brightness-105 transition-transform hover:scale-105 duration-700 rounded-xl"/>
+      <div class="absolute bottom-4 left-4 bg-rose-700 bg-opacity-60 px-4 py-2 rounded text-white font-medium text-sm md:text-base">Elegância e conforto</div>
+    </div>
+  </div>
+</section>
+
+<section id="collections" class="max-w-7xl mx-auto px-6 md:px-12 py-20">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-rose-800 text-center mb-12 fade-in-up">Nossas Coleções</h2>
+  <div class="grid gap-8 md:grid-cols-3">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-in-up">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Calças e blusas modernas" class="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"/>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Roupas Casuais</h3>
+        <p class="text-rose-600 leading-relaxed">Peças versáteis para o dia a dia, combinando conforto com tendências atuais.</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-in-up">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Mulher usando acessórios" class="w-full h-56 object-cover object-center"/>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Acessórios Elegantes</h3>
+        <p class="text-rose-600 leading-relaxed">Bolsas, chapéus e bijuterias para complementar seu visual com personalidade.</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow fade-in-up">
+      <img src="https://images.unsplash.com/photo-1520975924885-9ecc2f3f61cb?auto=format&fit=crop&w=600&q=80" alt="Vestido fashion" class="w-full h-56 object-cover object-center"/>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-rose-700 mb-2">Moda Festa</h3>
+        <p class="text-rose-600 leading-relaxed">Vestidos e trajes sofisticados para suas ocasiões especiais com charme e brilho.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="bg-rose-50 py-20 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto text-center fade-in-up">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-rose-700 mb-6">Quem Somos</h2>
+    <p class="max-w-3xl mx-auto text-rose-600 text-lg leading-relaxed">Fundada com o propósito de oferecer moda acessível e de qualidade, a MR Store combina estilo contemporâneo com conforto para que você se sinta confiante e autêntico em cada peça que escolher. Nossa equipe é apaixonada por tendências e atendimento personalizado.</p>
+  </div>
+  <div class="mt-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja" class="rounded-3xl shadow-lg object-cover w-full max-h-[400px] brightness-95 hover:brightness-100 transition"/>
+    <div class="space-y-6 text-rose-700">
+      <h3 class="text-2xl font-semibold">Excelência em cada detalhe</h3>
+      <p class="text-lg leading-relaxed">Nosso compromisso é oferecer produtos que expressem a sua personalidade, com atendimento acolhedor e entrega rápida. Venha fazer parte da família MR Store e descubra o prazer de se vestir bem.</p>
+      <a href="#contact" class="inline-block px-6 py-3 bg-rose-600 text-white rounded-lg font-semibold shadow hover:bg-rose-700 transition">Fale Conosco</a>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="max-w-7xl mx-auto px-6 md:px-12 py-20">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-rose-800 text-center mb-12 fade-in-up">O que nossos clientes dizem</h2>
+  <div class="grid gap-10 md:grid-cols-3">
+    <blockquote class="bg-white rounded-xl p-8 shadow-lg fade-in-up border-l-4 border-rose-400 relative before:absolute before:content-['“'] before:text-6xl before:text-rose-300 before:-top-6 before:-left-4">
+      <p class="text-rose-700 italic leading-relaxed mb-6">"A qualidade das roupas é incrível e o atendimento é super atencioso. Encontrei acessórios que completaram meu look perfeitamente!"</p>
+      <footer class="text-rose-900 font-semibold">Ana Clara, RJ</footer>
+    </blockquote>
+    <blockquote class="bg-white rounded-xl p-8 shadow-lg fade-in-up border-l-4 border-rose-400 relative before:absolute before:content-['“'] before:text-6xl before:text-rose-300 before:-top-6 before:-left-4">
+      <p class="text-rose-700 italic leading-relaxed mb-6">"As coleções são modernas e confortáveis. Sempre recomendo a MR Store para minhas amigas que querem elegância sem abrir mão do conforto."</p>
+      <footer class="text-rose-900 font-semibold">Felipe Santos, SP</footer>
+    </blockquote>
+    <blockquote class="bg-white rounded-xl p-8 shadow-lg fade-in-up border-l-4 border-rose-400 relative before:absolute before:content-['“'] before:text-6xl before:text-rose-300 before:-top-6 before:-left-4">
+      <p class="text-rose-700 italic leading-relaxed mb-6">"O processo de compra online foi simples e rápido. Recebi tudo dentro do prazo e a embalagem estava impecável."</p>
+      <footer class="text-rose-900 font-semibold">Mariana Oliveira, MG</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section id="contact" class="bg-rose-100 py-20 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto fade-in-up">
+    <h2 class="text-3xl font-extrabold text-rose-700 mb-8 text-center">Entre em contato</h2>
+    <form action="#" method="POST" class="bg-white rounded-xl shadow-lg p-8 grid gap-6 md:grid-cols-2">
+      <div class="flex flex-col">
+        <label for="name" class="mb-2 font-semibold text-rose-700">Nome</label>
+        <input type="text" id="name" name="name" required class="rounded-md border border-rose-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400 transition"/>
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="mb-2 font-semibold text-rose-700">E-mail</label>
+        <input type="email" id="email" name="email" required class="rounded-md border border-rose-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-400 transition"/>
+      </div>
+      <div class="flex flex-col md:col-span-2">
+        <label for="message" class="mb-2 font-semibold text-rose-700">Mensagem</label>
+        <textarea id="message" name="message" rows="5" required class="rounded-md border border-rose-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-rose-400 transition"></textarea>
+      </div>
+      <div class="md:col-span-2 text-center">
+        <button type="submit" class="bg-rose-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-rose-700 transition">Enviar Mensagem</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-rose-900 text-rose-100 py-14 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+    <div>
+      <h3 class="font-bold text-lg mb-3 border-b border-rose-700 pb-2">Identificação</h3>
+      <p><span class="font-semibold">CNPJ:</span> 57.261.785/0001-73</p>
+      <p><span class="font-semibold">Razão Social:</span> M R CORRESPONDENTE LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-3 border-b border-rose-700 pb-2">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> MAGNO.ENGENHEIROFLORESTAL@GMAIL.COM</p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">69-999495630</span></p>
+    </div>
+    <div>
+      <h3 class="font-bold text-lg mb-3 border-b border-rose-700 pb-2">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> AVENIDA RIO DE JANEIRO, 3935</p>
+      <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> ALTA FLORESTA D'OESTE</p>
+      <p><span class="font-semibold">Estado:</span> RO</p>
+    </div>
+    <div class="flex flex-col justify-between">
+      <h3 class="font-bold text-lg mb-3 border-b border-rose-700 pb-2">Legal</h3>
+      <nav class="space-y-3">
+        <a href="#" class="hover:text-rose-300 transition block">Termos de Uso</a>
+        <a href="#" class="hover:text-rose-300 transition block">Política de Privacidade</a>
+      </nav>
+    </div>
+  </div>
+  <div class="mt-12 text-center text-rose-400 text-sm select-none">© 2024 MR Store - Todos os direitos reservados.</div>
+</footer>
+
+</body>
+</html>

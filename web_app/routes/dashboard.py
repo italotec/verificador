@@ -13,7 +13,7 @@ from flask_login import login_required, current_user
 from .. import db
 from ..models import (
     VerifyJob, ProfileSnapshot, WorkerCommand, WabaRecord,
-    StatusTransition, ErrorReport, log_event,
+    StatusTransition, ErrorReport, log_event, delete_waba_cascade,
     WABA_STATUS_AGUARDANDO, WABA_STATUS_EXECUTANDO, WABA_STATUS_EM_REVISAO,
     WABA_STATUS_NAO_VERIFICOU, WABA_STATUS_MONITORANDO_LIMITE,
     WABA_STATUS_250, WABA_STATUS_2K, WABA_STATUS_RESTRITA,
@@ -50,16 +50,29 @@ def _latest_job(profile_id: str) -> VerifyJob | None:
     )
 
 
+def _own_waba(waba: WabaRecord):
+    """Return a 403 JSON response if current_user doesn't own this WABA, else None."""
+    if current_user.is_admin:
+        return None
+    if waba.user_id and waba.user_id != current_user.id:
+        return jsonify({"ok": False, "error": "Sem permissão"}), 403
+    return None
+
+
 # ── Dashboard card stats ─────────────────────────────────────────────────────
 
-def _get_card_stats() -> dict:
-    """Get counts for each status card."""
+def _get_card_stats(user_id=None) -> dict:
+    """Get counts for each status card, scoped to user_id when provided."""
     from sqlalchemy import func
 
-    total = db.session.query(func.count(WabaRecord.id)).scalar() or 0
+    base = WabaRecord.query
+    if user_id is not None:
+        base = base.filter_by(user_id=user_id)
+
+    total = base.with_entities(func.count(WabaRecord.id)).scalar() or 0
 
     counts = (
-        db.session.query(WabaRecord.status, func.count(WabaRecord.id))
+        base.with_entities(WabaRecord.status, func.count(WabaRecord.id))
         .group_by(WabaRecord.status)
         .all()
     )
@@ -98,13 +111,14 @@ def index():
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    stats = _get_card_stats()
+    uid = None if current_user.is_admin else current_user.id
+    stats = _get_card_stats(uid)
     active_filter = request.args.get("status", "todos")
     page = request.args.get("page", 1, type=int)
     per_page = 50
 
     # Build query
-    query = WabaRecord.query
+    query = WabaRecord.query.filter_by(user_id=uid) if uid is not None else WabaRecord.query
 
     if active_filter != "todos":
         if active_filter == "verificadas":
@@ -140,7 +154,8 @@ def dashboard():
 @bp.route("/api/dashboard/stats")
 @login_required
 def api_stats():
-    return jsonify(_get_card_stats())
+    uid = None if current_user.is_admin else current_user.id
+    return jsonify(_get_card_stats(uid))
 
 
 # ── API: WABA list (AJAX) ───────────────────────────────────────────────────
@@ -152,7 +167,8 @@ def api_wabas():
     page = request.args.get("page", 1, type=int)
     per_page = request.args.get("per_page", 50, type=int)
 
-    query = WabaRecord.query
+    uid = None if current_user.is_admin else current_user.id
+    query = WabaRecord.query.filter_by(user_id=uid) if uid is not None else WabaRecord.query
     if status_filter != "todos":
         if status_filter == "verificadas":
             query = query.filter(WabaRecord.status.in_([
@@ -186,6 +202,7 @@ def api_wabas():
             "domain_done": w.domain_done,
             "waba_created": w.waba_created,
             "verification_sent": w.verification_sent,
+            "proxy_port": w.proxy_port,
         })
 
     return jsonify({
@@ -205,6 +222,9 @@ def trigger_check(waba_id: int):
     waba = db.session.get(WabaRecord, waba_id)
     if not waba:
         return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
 
     from ..config import Config
     if Config.USE_CELERY:
@@ -234,6 +254,9 @@ def run_waba(waba_id: int):
     waba = db.session.get(WabaRecord, waba_id)
     if not waba:
         return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
 
     if waba.status not in (WABA_STATUS_AGUARDANDO, WABA_STATUS_ERRO):
         return jsonify({"ok": False, "error": f"WABA não pode ser executada no status '{WABA_STATUS_LABELS.get(waba.status, waba.status)}'"}), 409
@@ -260,6 +283,9 @@ def cancel_waba(waba_id: int):
     waba = db.session.get(WabaRecord, waba_id)
     if not waba:
         return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
 
     if waba.status != WABA_STATUS_EXECUTANDO:
         return jsonify({"ok": False, "error": "WABA não está em execução"}), 409
@@ -308,7 +334,11 @@ def bulk_run():
     enqueued = 0
     for waba_id in waba_ids:
         waba = db.session.get(WabaRecord, waba_id)
-        if waba and waba.status in (WABA_STATUS_AGUARDANDO, WABA_STATUS_ERRO):
+        if not waba:
+            continue
+        if not current_user.is_admin and waba.user_id and waba.user_id != current_user.id:
+            continue
+        if waba.status in (WABA_STATUS_AGUARDANDO, WABA_STATUS_ERRO):
             dispatched = False
             if Config.USE_CELERY:
                 try:
@@ -341,15 +371,194 @@ def bulk_check():
     enqueued = 0
     for waba_id in waba_ids:
         waba = db.session.get(WabaRecord, waba_id)
-        if waba:
-            try:
-                from tasks.check_waba import check_waba_status
-                check_waba_status.apply_async(args=[waba_id], queue="check", retry=False)
-                enqueued += 1
-            except Exception:
-                return jsonify({"ok": False, "error": "Redis indisponível — inicie o Redis e tente novamente."}), 503
+        if not waba:
+            continue
+        if not current_user.is_admin and waba.user_id and waba.user_id != current_user.id:
+            continue
+        try:
+            from tasks.check_waba import check_waba_status
+            check_waba_status.apply_async(args=[waba_id], queue="check", retry=False)
+            enqueued += 1
+        except Exception:
+            return jsonify({"ok": False, "error": "Redis indisponível — inicie o Redis e tente novamente."}), 503
 
     return jsonify({"ok": True, "enqueued": enqueued})
+
+
+# ── API: delete WABA + AdsPower profile ─────────────────────────────────────
+
+@bp.route("/api/wabas/<int:waba_id>/delete", methods=["POST"])
+@login_required
+def delete_waba(waba_id: int):
+    waba = db.session.get(WabaRecord, waba_id)
+    if not waba:
+        return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
+    if waba.status == WABA_STATUS_EXECUTANDO:
+        return jsonify({"ok": False, "error": "Não é possível deletar um perfil em execução"}), 400
+
+    if waba.profile_id:
+        try:
+            _adspower().delete_profile(waba.profile_id)
+        except Exception as e:
+            log_event("warning", "profile", f"AdsPower delete falhou para {waba.profile_id}: {e}",
+                      user_id=current_user.id, profile_id=waba.profile_id)
+            return jsonify({"ok": False, "error": f"Falha ao deletar perfil no AdsPower: {e}"}), 500
+
+    delete_waba_cascade(waba)
+    db.session.commit()
+
+    log_event("info", "profile", f"WABA {waba_id} deletada", user_id=current_user.id)
+    return jsonify({"ok": True})
+
+
+@bp.route("/api/wabas/bulk/delete", methods=["POST"])
+@login_required
+def bulk_delete():
+    data = request.get_json(silent=True) or {}
+    waba_ids = data.get("waba_ids", [])
+    if not waba_ids:
+        return jsonify({"ok": False, "error": "Nenhuma WABA selecionada"}), 400
+
+    deleted = 0
+    ads = _adspower()
+    for waba_id in waba_ids:
+        waba = db.session.get(WabaRecord, waba_id)
+        if not waba or waba.status == WABA_STATUS_EXECUTANDO:
+            continue
+        if not current_user.is_admin and waba.user_id and waba.user_id != current_user.id:
+            continue
+        if waba.profile_id:
+            try:
+                ads.delete_profile(waba.profile_id)
+            except Exception as e:
+                log_event("warning", "profile", f"AdsPower delete falhou para {waba.profile_id}: {e}",
+                          user_id=current_user.id, profile_id=waba.profile_id)
+                continue  # skip DB delete — profile still exists in AdsPower
+        delete_waba_cascade(waba)
+        deleted += 1
+
+    db.session.commit()
+    log_event("info", "profile", f"{deleted} WABAs deletadas em massa", user_id=current_user.id)
+    return jsonify({"ok": True, "deleted": deleted})
+
+
+# ── Manual status change ────────────────────────────────────────────────────
+
+@bp.route("/api/wabas/<int:waba_id>/change-status", methods=["POST"])
+@login_required
+def change_status(waba_id: int):
+    waba = db.session.get(WabaRecord, waba_id)
+    if not waba:
+        return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
+
+    data = request.get_json(silent=True) or {}
+    new_status = (data.get("new_status") or "").strip()
+
+    if new_status not in ALL_WABA_STATUSES or new_status == WABA_STATUS_EXECUTANDO:
+        return jsonify({"ok": False, "error": f"Status inválido: {new_status}"}), 400
+
+    if waba.status == WABA_STATUS_EXECUTANDO:
+        return jsonify({"ok": False, "error": "Cancele a execução antes de alterar o status"}), 409
+
+    from services.status_manager import StatusManager
+    ok = StatusManager.transition(waba, new_status, reason="Alteração manual via dashboard", force=True)
+    if not ok:
+        return jsonify({"ok": False, "error": "Transição falhou"}), 500
+
+    log_event("info", "status", f"Status alterado manualmente para '{new_status}', waba_id={waba_id}",
+              user_id=current_user.id, profile_id=waba.profile_id)
+
+    return jsonify({
+        "ok": True,
+        "new_status": new_status,
+        "new_label": WABA_STATUS_LABELS.get(new_status, new_status),
+        "new_color": WABA_STATUS_COLORS.get(new_status, "bg-zinc-700"),
+    })
+
+
+# ── Manual proxy change ─────────────────────────────────────────────────────
+
+PROXY_HOST = "gw.dataimpulse.com"
+PROXY_USER = "496bdd77029527536ca2__cr.br"
+PROXY_PASS = "5a949c0744d6e127"
+PROXY_BASE_PORT = 10015
+
+
+@bp.route("/api/wabas/<int:waba_id>/change-proxy", methods=["POST"])
+@login_required
+def change_proxy(waba_id: int):
+    waba = db.session.get(WabaRecord, waba_id)
+    if not waba:
+        return jsonify({"ok": False, "error": "WABA não encontrada"}), 404
+    guard = _own_waba(waba)
+    if guard:
+        return guard
+
+    if not waba.profile_id:
+        return jsonify({"ok": False, "error": "WABA sem profile_id"}), 400
+
+    # Determine next port: max existing + 1, or base port
+    max_port = db.session.query(db.func.max(WabaRecord.proxy_port)).scalar()
+    new_port = (max_port + 1) if max_port and max_port >= PROXY_BASE_PORT else PROXY_BASE_PORT
+
+    proxy_config = {
+        "proxy_soft": "other",
+        "proxy_type": "http",
+        "proxy_host": PROXY_HOST,
+        "proxy_port": str(new_port),
+        "proxy_user": PROXY_USER,
+        "proxy_password": PROXY_PASS,
+    }
+
+    try:
+        client = _adspower()
+        client.update_profile(waba.profile_id, user_proxy_config=proxy_config)
+    except Exception as e:
+        return jsonify({"ok": False, "error": f"Erro ao atualizar proxy no AdsPower: {e}"}), 500
+
+    waba.proxy_port = new_port
+    db.session.commit()
+
+    proxy_display = f"{PROXY_HOST}:{new_port}"
+    log_event("info", "proxy", f"Proxy alterado para porta {new_port}, waba_id={waba_id}",
+              user_id=current_user.id, profile_id=waba.profile_id)
+
+    return jsonify({"ok": True, "proxy_display": proxy_display})
+
+
+@bp.route("/api/wabas/bulk/change-status", methods=["POST"])
+@login_required
+def bulk_change_status():
+    data = request.get_json(silent=True) or {}
+    waba_ids = data.get("waba_ids", [])
+    new_status = (data.get("new_status") or "").strip()
+
+    if not waba_ids:
+        return jsonify({"ok": False, "error": "Nenhuma WABA selecionada"}), 400
+
+    if new_status not in ALL_WABA_STATUSES or new_status == WABA_STATUS_EXECUTANDO:
+        return jsonify({"ok": False, "error": f"Status inválido: {new_status}"}), 400
+
+    from services.status_manager import StatusManager
+    changed = 0
+    for waba_id in waba_ids:
+        waba = db.session.get(WabaRecord, waba_id)
+        if not waba or waba.status == WABA_STATUS_EXECUTANDO or waba.status == new_status:
+            continue
+        if not current_user.is_admin and waba.user_id and waba.user_id != current_user.id:
+            continue
+        if StatusManager.transition(waba, new_status, reason="Alteração manual em massa via dashboard", force=True):
+            changed += 1
+
+    log_event("info", "status", f"Status de {changed} WABAs alterado em massa para '{new_status}'",
+              user_id=current_user.id)
+    return jsonify({"ok": True, "changed": changed})
 
 
 # ── Legacy: open profile ─────────────────────────────────────────────────────

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="5a67af4w5qp3v1gkgl9ysh1rble1sk" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Moda & Acessórios | Loja Exclusiva</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-indigo-400 selection:text-white">
+
+<header class="bg-white shadow-md sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-indigo-600 font-extrabold text-3xl uppercase tracking-widest hover:text-indigo-700 transition">VesteAcess</a>
+    <nav aria-label="Menu principal" class="hidden md:flex gap-12 text-gray-600 font-semibold tracking-wide">
+      <a href="#colecao" class="relative group px-1 py-2 hover:text-indigo-600 transition">
+        Coleção
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+      </a>
+      <a href="#vestuario" class="relative group px-1 py-2 hover:text-indigo-600 transition">
+        Vestuário
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+      </a>
+      <a href="#acessorios" class="relative group px-1 py-2 hover:text-indigo-600 transition">
+        Acessórios
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+      </a>
+      <a href="#sobre" class="relative group px-1 py-2 hover:text-indigo-600 transition">
+        Sobre Nós
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+      </a>
+      <a href="#contato" class="relative group px-1 py-2 hover:text-indigo-600 transition">
+        Contato
+        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+      </a>
+    </nav>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-800 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </div>
+  <nav id="menu-mobile" aria-label="Menu móvel" class="md:hidden bg-white shadow-md hidden">
+    <a href="#colecao" class="block px-6 py-3 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold">Coleção</a>
+    <a href="#vestuario" class="block px-6 py-3 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold">Vestuário</a>
+    <a href="#acessorios" class="block px-6 py-3 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold">Acessórios</a>
+    <a href="#sobre" class="block px-6 py-3 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold">Sobre Nós</a>
+    <a href="#contato" class="block px-6 py-3 hover:bg-indigo-50 text-indigo-700 font-semibold">Contato</a>
+  </nav>
+</header>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+  });
+</script>
+
+<section id="hero" class="relative bg-gradient-to-br from-indigo-100 via-indigo-50 to-white overflow-hidden min-h-[90vh] flex items-center">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+    <div class="space-y-6 fade-in-up" style="animation-delay: 0.2s;">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-indigo-700 leading-tight">Moda que inspira, estilo que transforma</h1>
+      <p class="text-lg md:text-xl text-indigo-600/90 max-w-xl">Descubra as últimas tendências em vestuário e acessórios para todas as ocasiões. Design exclusivo, qualidade e conforto em um só lugar.</p>
+      <a href="#colecao" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition">Explorar Coleção</a>
+    </div>
+    <div class="relative hidden md:block">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Moda feminina elegante" class="rounded-3xl shadow-lg scale-[1.05] hover:scale-100 transition-transform duration-700 ease-in-out" />
+      <div class="absolute -bottom-12 -right-12 w-40 h-40 bg-indigo-300 opacity-30 rounded-full blur-3xl animate-pulse"></div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" aria-label="Coleção principal" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-10 text-center tracking-tight fade-in-up" style="animation-delay:0.3s;">Coleção Primavera-Verão 2024</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.4s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido floral leve" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Floral Leve</h3>
+        <p class="text-indigo-600 text-sm mb-3">Conforto e elegância para dias ensolarados.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 249,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.5s;">
+      <img src="https://images.unsplash.com/photo-1520974737030-e4d4a4741247?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Camisa Casual Masculina</h3>
+        <p class="text-indigo-600 text-sm mb-3">Estilo moderno com toque clássico.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 199,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.6s;">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans oversized" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Jeans Oversized</h3>
+        <p class="text-indigo-600 text-sm mb-3">Para um look urbano e descolado.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 349,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.7s;">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Saia midi plissada" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Saia Midi Plissada</h3>
+        <p class="text-indigo-600 text-sm mb-3">Leveza e movimento para seu dia a dia.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 179,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="vestuario" aria-label="Vestuário" class="bg-indigo-50 py-16 px-6">
+  <div class="max-w-7xl mx-auto text-center mb-14 fade-in-up" style="animation-delay:0.2s;">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 tracking-tight">Vestuário</h2>
+    <p class="max-w-3xl mx-auto mt-3 text-indigo-600">Explore peças selecionadas com design exclusivo e tecidos de alta qualidade para todas as ocasiões.</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.3s;">
+      <img src="https://images.unsplash.com/photo-1533055640609-24b498cdfa20?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina gola alta" class="h-80 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">Blusa Gola Alta</h3>
+        <p class="text-indigo-600 flex-grow text-sm mb-4">Ideal para noites frescas e looks sofisticados.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 139,90</span>
+      </div>
+    </div>
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.4s;">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Calça alfaiataria feminina" class="h-80 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">Calça Alfaiataria</h3>
+        <p class="text-indigo-600 flex-grow text-sm mb-4">Elegância e conforto no corte perfeito.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 219,90</span>
+      </div>
+    </div>
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.5s;">
+      <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=600&q=80" alt="T-shirt masculina básica" class="h-80 w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">T-shirt Básica</h3>
+        <p class="text-indigo-600 flex-grow text-sm mb-4">Versátil, confortável e indispensável.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 79,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="acessorios" aria-label="Acessórios" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-10 text-center fade-in-up" style="animation-delay:0.2s;">Acessórios</h2>
+  <div class="flex flex-col md:flex-row md:justify-center md:gap-14 items-center">
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg max-w-xs w-full mb-10 md:mb-0 group overflow-hidden hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.3s;">
+      <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro marrom" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+      <div class="px-6 py-5">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">Bolsa de Couro Marrom</h3>
+        <p class="text-indigo-600 text-sm mb-3">Elegância prática para o dia a dia.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 299,90</span>
+      </div>
+    </div>
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg max-w-xs w-full mb-10 md:mb-0 group overflow-hidden hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.4s;">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80" alt="Relógio minimalista prata" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+      <div class="px-6 py-5">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">Relógio Minimalista</h3>
+        <p class="text-indigo-600 text-sm mb-3">Design clean para todos os estilos.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 379,90</span>
+      </div>
+    </div>
+    <div tabindex="0" class="bg-white rounded-3xl shadow-lg max-w-xs w-full group overflow-hidden hover:shadow-2xl transition-shadow fade-in-up" style="animation-delay:0.5s;">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol vintage" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+      <div class="px-6 py-5">
+        <h3 class="text-indigo-800 font-semibold text-xl mb-1">Óculos de Sol Vintage</h3>
+        <p class="text-indigo-600 text-sm mb-3">Proteção e estilo para o verão.</p>
+        <span class="text-indigo-700 font-bold text-lg">R$ 189,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" aria-label="Sobre nós" class="bg-indigo-50 py-16 px-6">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 items-center gap-14">
+    <div class="fade-in-up" style="animation-delay:0.3s;">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 tracking-tight">Quem Somos</h2>
+      <p class="text-indigo-600 leading-relaxed mb-4">Na VesteAcess, somos apaixonados por moda que vai além da estética, entregando conforto, qualidade e exclusividade. Nosso compromisso é oferecer a você peças que expressem sua personalidade e elevem seu estilo.</p>
+      <p class="text-indigo-600 leading-relaxed">Com curadoria cuidadosa e atendimento dedicado, buscamos criar uma experiência de compra única, onde cada detalhe importa. Venha fazer parte dessa jornada conosco!</p>
+    </div>
+    <div class="rounded-3xl overflow-hidden shadow-lg fade-in-up" style="animation-delay:0.4s;">
+      <img src="https://images.unsplash.com/photo-1520975692368-6e1b21d3ed60?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas sorrindo" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" aria-label="Contato" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-indigo-700 mb-8 text-center fade-in-up" style="animation-delay:0.2s;">Fale Conosco</h2>
+  <form action="#" method="POST" class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-10 fade-in-up" style="animation-delay:0.3s;" novalidate>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <label class="flex flex-col text-indigo-700 font-semibold">
+        Nome
+        <input type="text" name="nome" required placeholder="Seu nome completo" class="mt-2 rounded-lg border border-indigo-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-300 px-4 py-3 transition" />
+      </label>
+      <label class="flex flex-col text-indigo-700 font-semibold">
+        E-mail
+        <input type="email" name="email" required placeholder="seuemail@exemplo.com" class="mt-2 rounded-lg border border-indigo-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-300 px-4 py-3 transition" />
+      </label>
+    </div>
+    <label class="flex flex-col text-indigo-700 font-semibold mb-6">
+      Mensagem
+      <textarea name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="mt-2 rounded-lg border border-indigo-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-300 px-4 py-3 transition resize-none"></textarea>
+    </label>
+    <button type="submit" class="w-full md:w-auto bg-indigo-600 text-white font-bold rounded-lg px-10 py-4 shadow-lg hover:bg-indigo-700 transition">Enviar Mensagem</button>
+  </form>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 px-6 py-14">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 md:justify-between">
+    <div class="space-y-3" aria-label="Dados da empresa">
+      <p><span class="font-semibold">CNPJ:</span> 84.851.989/0001-37</p>
+      <p><span class="font-semibold">Razão Social:</span> CONTACTE SERVICOS ADMINISTRATIVOS LTDA -</p>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:CRISTOFOLLIELISETE@GMAIL.COM" class="underline hover:text-indigo-300">CRISTOFOLLIELISETE@GMAIL.COM</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="font-normal">(86) 99955-0655</span></p>
+    </div>
+    <div class="space-y-3" aria-label="Endereço">
+      <p><span class="font-semibold">Logradouro:</span> AVENIDA JACOB VALENGA, 2771</p>
+      <p><span class="font-semibold">Bairro:</span> VILA FRANCA</p>
+      <p><span class="font-semibold">Município:</span> PIRAQUARA</p>
+      <p><span class="font-semibold">Estado:</span> PR</p>
+    </div>
+    <nav aria-label="Links legais" class="flex flex-col justify-center space-y-4 text-indigo-300 font-semibold text-center md:text-right">
+      <a href="#" class="hover:text-indigo-100 transition underline">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-100 transition underline">Política de Privacidade</a>
+    </nav>
+  </div>
+  <div class="mt-14 text-center text-indigo-400 text-sm select-none">&copy; 2024 VesteAcess - Todos os direitos reservados.</div>
+</footer>
+
+</body>
+</html>

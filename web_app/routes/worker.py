@@ -10,7 +10,8 @@ from pathlib import Path
 
 from flask import Blueprint, request, jsonify, current_app
 from .. import db
-from ..models import ProfileSnapshot, VerifyJob, WorkerCommand, log_event
+from ..models import (ProfileSnapshot, VerifyJob, WabaRecord, WorkerCommand,
+                      delete_waba_cascade, log_event)
 
 bp = Blueprint("worker", __name__, url_prefix="/worker")
 
@@ -55,10 +56,16 @@ def push_profiles():
         snap.remark     = p.get("remark", "")
         snap.synced_at  = datetime.utcnow()
 
-    # Remove profiles no longer present in AdsPower
-    for old in ProfileSnapshot.query.all():
-        if old.profile_id not in incoming_ids:
-            db.session.delete(old)
+    # Remove profiles no longer in AdsPower — delete WabaRecords first, then snapshots
+    stale_ids = [old.profile_id for old in ProfileSnapshot.query.all()
+                 if old.profile_id not in incoming_ids]
+    if stale_ids:
+        for waba in WabaRecord.query.filter(WabaRecord.profile_id.in_(stale_ids)).all():
+            delete_waba_cascade(waba)
+        for pid in stale_ids:
+            snap = db.session.get(ProfileSnapshot, pid)
+            if snap:
+                db.session.delete(snap)
 
     db.session.commit()
     log_event("info", "worker", f"Worker sincronizou {len(profiles)} perfis")

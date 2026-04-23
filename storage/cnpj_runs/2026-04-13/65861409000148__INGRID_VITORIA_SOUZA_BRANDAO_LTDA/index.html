@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="1v14kezomgzwrmep2honvk3oiv7ct9" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja VogueStyle - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUpAnim 0.8s ease forwards;
+  }
+  .fade-up.delay-1 {
+    animation-delay: 0.2s;
+  }
+  .fade-up.delay-2 {
+    animation-delay: 0.4s;
+  }
+  .fade-up.delay-3 {
+    animation-delay: 0.6s;
+  }
+  @keyframes fadeUpAnim {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Scrollbar thumb custom */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #a78bfa;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-800 selection:bg-purple-300 selection:text-purple-900">
+
+<header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50">
+  <nav class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
+    <a href="#home" class="text-purple-700 font-extrabold text-2xl tracking-wide hover:text-purple-900 transition">VogueStyle</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+      <li><a href="#colecao" class="hover:text-purple-700 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-purple-700 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-purple-700 transition">Sobre</a></li>
+      <li><a href="#depoimentos" class="hover:text-purple-700 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="hover:text-purple-700 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="menu-btn" class="md:hidden text-purple-700 hover:text-purple-900 transition focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white shadow-md hidden px-6 pb-6 pt-2 space-y-3 font-semibold text-purple-700">
+    <a href="#colecao" class="block hover:text-purple-900">Coleção</a>
+    <a href="#acessorios" class="block hover:text-purple-900">Acessórios</a>
+    <a href="#sobre" class="block hover:text-purple-900">Sobre</a>
+    <a href="#depoimentos" class="block hover:text-purple-900">Depoimentos</a>
+    <a href="#contato" class="block hover:text-purple-900">Contato</a>
+  </div>
+</header>
+
+<main class="pt-20">
+
+<!-- Seção 1: Hero -->
+<section id="home" class="relative bg-gradient-to-r from-purple-100 via-purple-50 to-white min-h-[90vh] flex flex-col justify-center px-6 md:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div class="fade-up delay-1">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-purple-800 leading-tight mb-6">Renove seu estilo com <span class="text-purple-600">VogueStyle</span></h1>
+      <p class="text-lg md:text-xl text-purple-700 mb-8 max-w-lg">Moda contemporânea em roupas e acessórios para quem quer expressar personalidade e elegância todos os dias.</p>
+      <a href="#colecao" class="inline-block bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-purple-800 transition shadow-purple-300">Confira nossa coleção</a>
+    </div>
+    <div class="fade-up delay-2 rounded-xl overflow-hidden shadow-xl shadow-purple-200">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Moda feminina moderna" class="w-full h-full object-cover object-center" loading="lazy" />
+    </div>
+  </div>
+  <svg class="absolute bottom-0 left-0 w-full h-20 text-purple-50" preserveAspectRatio="none" viewBox="0 0 1440 320"><path fill="currentColor" fill-opacity="1" d="M0,224L1440,64L1440,320L0,320Z"></path></svg>
+</section>
+
+<!-- Seção 2: Coleção de Roupas -->
+<section id="colecao" class="bg-purple-50 py-16 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-purple-800 mb-3 fade-up delay-1">Coleção Premium</h2>
+    <p class="text-purple-700 max-w-3xl mx-auto fade-up delay-2">Descubra roupas que unem conforto, qualidade e tendências para todos os estilos.</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+    <article class="fade-up delay-1 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Vestido casual feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-purple-800 mb-1">Vestido Casual</h3>
+        <p class="text-purple-600 mb-3 text-sm">Leve e perfeito para o dia a dia.</p>
+        <span class="font-bold text-purple-700 text-lg">R$ 179,90</span>
+      </div>
+    </article>
+    <article class="fade-up delay-2 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina streetwear" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-purple-800 mb-1">Jaqueta Streetwear</h3>
+        <p class="text-purple-600 mb-3 text-sm">Estilo urbano e conforto térmico.</p>
+        <span class="font-bold text-purple-700 text-lg">R$ 299,90</span>
+      </div>
+    </article>
+    <article class="fade-up delay-3 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina elegante" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-purple-800 mb-1">Blusa Elegante</h3>
+        <p class="text-purple-600 mb-3 text-sm">Para ocasiões especiais e escritório.</p>
+        <span class="font-bold text-purple-700 text-lg">R$ 129,90</span>
+      </div>
+    </article>
+    <article class="fade-up delay-1 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-purple-800 mb-1">Calça Jeans</h3>
+        <p class="text-purple-600 mb-3 text-sm">Clássica e versátil.</p>
+        <span class="font-bold text-purple-700 text-lg">R$ 189,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Seção 3: Acessórios -->
+<section id="acessorios" class="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+  <div class="text-center mb-12 fade-up delay-1">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-purple-800 mb-3">Acessórios que completam o look</h2>
+    <p class="text-purple-700 max-w-3xl mx-auto">Explore bolsas, relógios, chapéus e muito mais para valorizar sua personalidade.</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="fade-up delay-1 bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden relative group">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina de couro" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-purple-800 mb-1">Bolsa de Couro</h3>
+        <span class="font-bold text-purple-700 text-base">R$ 249,90</span>
+      </div>
+    </div>
+    <div class="fade-up delay-2 bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden relative group">
+      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino moderno" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-purple-800 mb-1">Relógio Moderno</h3>
+        <span class="font-bold text-purple-700 text-base">R$ 399,90</span>
+      </div>
+    </div>
+    <div class="fade-up delay-3 bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden relative group">
+      <img src="https://images.unsplash.com/photo-1533681701527-97c0e1f9f7c0?auto=format&fit=crop&w=600&q=80" alt="Chapéu Panamá" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-purple-800 mb-1">Chapéu Panamá</h3>
+        <span class="font-bold text-purple-700 text-base">R$ 159,90</span>
+      </div>
+    </div>
+    <div class="fade-up delay-1 bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden relative group">
+      <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol estiloso" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-purple-800 mb-1">Óculos de Sol</h3>
+        <span class="font-bold text-purple-700 text-base">R$ 199,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seção 4: Sobre Nós -->
+<section id="sobre" class="bg-purple-50 py-16 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+    <div class="fade-up delay-1 md:w-1/2">
+      <h2 class="text-3xl font-extrabold text-purple-800 mb-6">Sobre a VogueStyle</h2>
+      <p class="text-purple-700 text-lg leading-relaxed mb-4">Fundada com paixão pela moda, a VogueStyle é uma marca que prioriza qualidade, sustentabilidade e exclusividade. Trabalhamos para oferecer peças que refletem autenticidade e conforto, conectando você às últimas tendências com um toque único.</p>
+      <p class="text-purple-700 text-lg leading-relaxed">Nosso compromisso é transformar o modo como você se veste, valorizando a sua personalidade e a diversidade de estilos.</p>
+    </div>
+    <div class="fade-up delay-2 md:w-1/2 rounded-xl overflow-hidden shadow-lg">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=720&q=80" alt="Equipe de moda fazendo brainstorming" class="w-full h-80 object-cover object-center" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- Seção 5: Depoimentos -->
+<section id="depoimentos" class="py-16 px-6 md:px-12 max-w-7xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-purple-800 text-center mb-12 fade-up delay-1">Depoimentos de Clientes</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <blockquote class="fade-up delay-1 bg-white rounded-2xl shadow-xl p-8 relative before:absolute before:content-['“'] before:text-purple-300 before:text-7xl before:-top-10 before:-left-5">
+      <p class="text-purple-700 mb-6 italic">"A qualidade das roupas é incrível! Sempre recebo elogios e me sinto confortável o dia inteiro. Recomendo para todos que buscam estilo e praticidade."</p>
+      <footer class="text-purple-900 font-semibold">Mariana S.</footer>
+    </blockquote>
+    <blockquote class="fade-up delay-2 bg-white rounded-2xl shadow-xl p-8 relative before:absolute before:content-['“'] before:text-purple-300 before:text-7xl before:-top-10 before:-left-5">
+      <p class="text-purple-700 mb-6 italic">"Os acessórios são simplesmente perfeitos! O atendimento foi super atencioso e recebi tudo rápido. Com certeza voltarei a comprar."</p>
+      <footer class="text-purple-900 font-semibold">Carlos T.</footer>
+    </blockquote>
+    <blockquote class="fade-up delay-3 bg-white rounded-2xl shadow-xl p-8 relative before:absolute before:content-['“'] before:text-purple-300 before:text-7xl before:-top-10 before:-left-5">
+      <p class="text-purple-700 mb-6 italic">"A variedade e o design das peças são de tirar o fôlego. Me sinto confiante e elegante em qualquer ocasião com VogueStyle."</p>
+      <footer class="text-purple-900 font-semibold">Ana P.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Seção Contato -->
+<section id="contato" class="bg-purple-50 py-16 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto text-center fade-up delay-1">
+    <h2 class="text-3xl font-extrabold text-purple-800 mb-6">Fale Conosco</h2>
+    <p class="text-purple-700 mb-8">Tem dúvidas, sugestões ou quer saber mais? Envie sua mensagem e responderemos o mais breve possível.</p>
+    <form class="bg-white rounded-xl shadow-lg p-8 max-w-xl mx-auto grid gap-6" action="#" method="POST" novalidate>
+      <div>
+        <label for="nome" class="block text-purple-900 font-semibold mb-1">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-purple-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-purple-900 font-semibold mb-1">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-purple-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-purple-900 font-semibold mb-1">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="4" required placeholder="Escreva sua mensagem" class="w-full border border-purple-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400 transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="bg-purple-700 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-purple-800 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-purple-900 text-purple-200 py-12 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-sm md:text-base">
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">CNPJ</h3>
+      <p>65.861.409/0001-48</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Razão Social</h3>
+      <p>INGRID VITORIA SOUZA BRANDAO LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">E-mail</h3>
+      <p>v9257989@gmail.com</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Telefone</h3>
+      <p><span id="telefone-comercial">(49) 99193-7657</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Logradouro</h3>
+      <p>Avenida Sao Paulo, 3352</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Bairro</h3>
+      <p>Jardim Santa Fe I</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Município</h3>
+      <p>PONTES E LACERDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2 text-purple-300">Estado</h3>
+      <p>MT</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 border-t border-purple-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-purple-400 space-y-3 md:space-y-0">
+    <p>© 2024 VogueStyle. Todos os direitos reservados.</p>
+    <div class="space-x-6">
+      <a href="#" class="hover:text-purple-200 transition underline">Termos de Uso</a>
+      <a href="#" class="hover:text-purple-200 transition underline">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

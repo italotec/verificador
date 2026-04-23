@@ -1,0 +1,234 @@
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja Lumina - Moda & Acessórios</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; }
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 1s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  nav a:hover {
+    color: #4f46e5;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    transition: background-position 0.4s;
+    background-size: 200% 100%;
+    background-position: left;
+  }
+  .btn-primary:hover {
+    background-position: right;
+  }
+  .card-animate:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgb(139 92 246 / 0.3), 0 10px 10px -5px rgb(139 92 246 / 0.2);
+  }
+  .card-animate {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-indigo-400 selection:text-white">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <div class="container mx-auto px-6 py-4 flex flex-wrap items-center justify-between">
+    <a href="#home" class="text-3xl font-extrabold text-indigo-600 hover:text-indigo-500 transition">Lumina</a>
+    <nav class="hidden md:flex gap-8 font-semibold text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-600 transition">Contato</a>
+    </nav>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </div>
+  <nav id="menu-mobile" class="md:hidden bg-white shadow-md max-h-0 overflow-hidden transition-max-height duration-300">
+    <div class="flex flex-col px-6 py-4 gap-4 font-semibold text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-600 transition">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    if(menuMobile.style.maxHeight && menuMobile.style.maxHeight !== "0px"){
+      menuMobile.style.maxHeight = "0px";
+    } else {
+      menuMobile.style.maxHeight = menuMobile.scrollHeight + "px";
+    }
+  });
+</script>
+
+<section id="home" class="relative bg-gradient-to-r from-indigo-100 via-indigo-50 to-white overflow-hidden">
+  <div class="container mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center gap-12">
+    <div class="max-w-xl fade-in" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl font-extrabold leading-tight tracking-tight text-indigo-700 mb-6">Renove seu estilo com a Lumina</h1>
+      <p class="text-lg text-indigo-600 mb-8">Moda contemporânea e acessórios exclusivos para quem busca elegância e conforto no dia a dia.</p>
+      <a href="#colecao" class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-xl">Ver Coleção</a>
+    </div>
+    <div class="w-full md:w-1/2 aspect-[4/5] rounded-3xl overflow-hidden shadow-lg fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Modelo com roupa elegante" class="w-full h-full object-cover"/>
+    </div>
+  </div>
+  <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 150" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#f8fafc" d="M0 0h1440v150H0z"/><path d="M0 120c120-40 350-40 480-10s350 90 480 20 360-60 480-20v60H0z" fill="#eef2ff"/></svg>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16 max-w-7xl">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center">Coleção Destaque</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+    <article class="bg-white rounded-2xl overflow-hidden shadow-lg card-animate hover:shadow-indigo-300">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina estilosa" class="w-full h-72 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Jaqueta Urban</h3>
+        <p class="text-gray-600 mb-4">Jaqueta leve com corte moderno e detalhe em zíper metalizado.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 289,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl overflow-hidden shadow-lg card-animate hover:shadow-indigo-300">
+      <img src="https://images.unsplash.com/photo-1463107971871-fbac9ddb920f?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino leve" class="w-full h-72 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Breeze</h3>
+        <p class="text-gray-600 mb-4">Vestido fluido com estampa floral sutil, ideal para dias quentes.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 199,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl overflow-hidden shadow-lg card-animate hover:shadow-indigo-300">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina moderna" class="w-full h-72 object-cover" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Denim Fit</h3>
+        <p class="text-gray-600 mb-4">Calça jeans com lavagem escura e corte slim, confortável para o dia a dia.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 159,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center">Acessórios Exclusivos</h2>
+    <div class="flex flex-col md:flex-row gap-12 justify-center items-center">
+      <div class="w-full max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden card-animate hover:shadow-indigo-300 transition-transform">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno" class="w-full h-80 object-cover"/>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Relógio Lumina</h3>
+          <p class="text-gray-600 mb-4">Design minimalista com pulseira de couro legítimo.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 349,90</span>
+        </div>
+      </div>
+      <div class="w-full max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden card-animate hover:shadow-indigo-300 transition-transform">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="w-full h-80 object-cover"/>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Óculos Solar Eclipse</h3>
+          <p class="text-gray-600 mb-4">Lentes polarizadas com armação leve de acetato.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 259,90</span>
+        </div>
+      </div>
+      <div class="w-full max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden card-animate hover:shadow-indigo-300 transition-transform">
+        <img src="https://images.unsplash.com/photo-1555529669-53e9fae5b0c7?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina elegante" class="w-full h-80 object-cover"/>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-2">Bolsa Clutch Aura</h3>
+          <p class="text-gray-600 mb-4">Compacta e elegante, perfeita para eventos e passeios.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 189,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 py-16 max-w-5xl">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-8 text-center">Quem Somos</h2>
+  <div class="text-center text-gray-700 max-w-3xl mx-auto leading-relaxed text-lg fade-in" style="animation-delay: 0.3s;">
+    <p>
+      A Lumina nasceu da paixão por moda que alia conforto, estilo e sustentabilidade. Trabalhamos com materiais selecionados e fornecedores responsáveis para entregar peças que valorizam a sua autenticidade e o meio ambiente. Nossa missão é iluminar seu guarda-roupa com roupas e acessórios que fazem você se sentir confiante em qualquer ocasião.
+    </p>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-100 py-16">
+  <div class="container max-w-3xl mx-auto px-6 rounded-3xl bg-white shadow-lg">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-8 text-center">Fale Conosco</h2>
+    <form class="space-y-6" action="#" method="POST" novalidate>
+      <div>
+        <label for="nome" class="block text-indigo-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="4" required placeholder="Escreva sua mensagem" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold text-white shadow-lg hover:shadow-xl transition">Enviar</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14">
+  <div class="container max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Empresa</h3>
+      <p class="leading-relaxed">Razão Social:</p>
+      <p class="font-semibold">PLATAFORMA DE RECURSOS DE TRANSITO LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Identificação</h3>
+      <p class="leading-relaxed">CNPJ:</p>
+      <p class="font-semibold">30.935.907/0001-03</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Contato</h3>
+      <p class="leading-relaxed">E-mail:</p>
+      <p class="font-semibold">SECSSCONT@GMAIL.COM</p>
+      <p class="leading-relaxed mt-3">Telefone:</p>
+      <p class="font-semibold"><span id="telefone-comercial">31-37531337</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 border-b border-indigo-700 pb-2">Endereço</h3>
+      <p class="leading-relaxed">Logradouro:</p>
+      <p class="font-semibold">RUA TEOFILO HONORATO DIAS, 15</p>
+      <p class="leading-relaxed mt-3">Bairro:</p>
+      <p class="font-semibold">CENTRO</p>
+      <p class="leading-relaxed mt-3">Município:</p>
+      <p class="font-semibold">RIO ESPERA</p>
+      <p class="leading-relaxed mt-3">Estado:</p>
+      <p class="font-semibold">MG</p>
+    </div>
+  </div>
+  <div class="border-t border-indigo-700 mt-10 pt-6 text-center text-sm text-indigo-300 flex flex-col sm:flex-row justify-center gap-6 select-none">
+    <span>© 2024 Lumina - Todos os direitos reservados</span>
+    <nav class="flex gap-4 justify-center">
+      <a href="#" class="hover:text-indigo-400 underline-offset-2 underline transition">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-400 underline-offset-2 underline transition">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

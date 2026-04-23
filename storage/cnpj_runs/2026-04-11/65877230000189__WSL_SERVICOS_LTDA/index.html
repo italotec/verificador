@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WSL Store - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    opacity: 0; 
+    animation: fadeInUp 1s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  .btn-animate:hover {
+    animation: pulse 1s infinite alternate;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 8px rgb(147 197 253 / 0.5);
+    }
+    100% {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgb(147 197 253 / 0.9);
+    }
+  }
+</style>
+</head>
+<body class="bg-gradient-to-b from-white via-slate-50 to-white text-slate-800 selection:bg-blue-300 selection:text-blue-900">
+
+<header class="sticky top-0 bg-white shadow-md z-30">
+  <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-12">
+    <a href="#home" class="text-3xl font-extrabold text-blue-600 tracking-tight hover:text-blue-700 transition">WSL Store</a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-blue-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-blue-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-blue-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-blue-600 transition">Contato</a></li>
+      <li><a href="#footer" class="hover:text-blue-600 transition">Informações</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden focus:outline-none text-blue-600 hover:text-blue-800 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+    <ul class="flex flex-col space-y-4 p-6 text-gray-700 font-semibold text-lg">
+      <li><a href="#colecao" class="hover:text-blue-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-blue-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-blue-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-blue-600 transition">Contato</a></li>
+      <li><a href="#footer" class="hover:text-blue-600 transition">Informações</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-r from-blue-50 to-white overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1470&q=80" alt="Moda Feminina" class="absolute inset-0 w-full h-full object-cover object-center opacity-10 select-none pointer-events-none" />
+  <div class="container mx-auto px-6 text-center max-w-4xl z-10 fade-in" style="animation-delay: 0.3s;">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-blue-700 leading-tight drop-shadow-lg">Sua Moda, Seu Estilo</h1>
+    <p class="mt-6 text-xl md:text-2xl text-blue-600/90 font-medium max-w-3xl mx-auto leading-relaxed">Descubra roupas e acessórios que unem conforto, qualidade e design moderno para todas as ocasiões.</p>
+    <a href="#colecao" class="inline-block mt-10 px-10 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg btn-animate hover:bg-blue-700 transition">Conheça a Coleção</a>
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16 md:py-24 max-w-7xl">
+  <h2 class="text-4xl font-extrabold text-blue-700 mb-12 text-center tracking-tight fade-in" style="animation-delay: 0.4s;">Coleção Destaque</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.5s;">
+      <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=800&q=80" alt="Vestido Casual Feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-blue-800 mb-2">Vestido Casual Floral</h3>
+        <p class="text-gray-600 mb-4">Leve e confortável, perfeito para o dia a dia e ocasiões especiais.</p>
+        <span class="font-bold text-blue-600 text-lg">R$ 149,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.6s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Camisa Masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-blue-800 mb-2">Camisa Polo Masculina</h3>
+        <p class="text-gray-600 mb-4">Estilo clássico com toque moderno para o seu visual casual.</p>
+        <span class="font-bold text-blue-600 text-lg">R$ 99,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.7s;">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Calça Jeans Feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-blue-800 mb-2">Calça Jeans Skinny</h3>
+        <p class="text-gray-600 mb-4">Modelagem ajustada para valorizar seu corpo com conforto.</p>
+        <span class="font-bold text-blue-600 text-lg">R$ 179,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-blue-50 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-4xl font-extrabold text-blue-700 mb-10 text-center tracking-tight fade-in" style="animation-delay: 0.4s;">Acessórios Exclusivos</h2>
+    <div class="flex flex-col md:flex-row md:space-x-10 space-y-10 md:space-y-0 justify-center items-center">
+      <div class="w-full md:w-1/3 bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.5s;">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Relógio Masculino" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Relógio Clássico</h3>
+          <p class="text-gray-700 mb-4">Elegância e precisão para todas as horas do seu dia.</p>
+          <span class="font-bold text-blue-600 text-lg">R$ 249,90</span>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.6s;">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Óculos de Sol Feminino" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Óculos de Sol Retro</h3>
+          <p class="text-gray-700 mb-4">Proteção UV com design vintage para seu charme único.</p>
+          <span class="font-bold text-blue-600 text-lg">R$ 179,90</span>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-500 fade-in" style="animation-delay: 0.7s;">
+        <img src="https://images.unsplash.com/photo-1471236799455-3a8a3f9a1a36?auto=format&fit=crop&w=800&q=80" alt="Bolsa Feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Bolsa de Couro</h3>
+          <p class="text-gray-700 mb-4">Design minimalista com amplo espaço para o dia a dia.</p>
+          <span class="font-bold text-blue-600 text-lg">R$ 329,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 py-16 max-w-5xl">
+  <h2 class="text-4xl font-extrabold text-blue-700 mb-12 text-center tracking-tight fade-in" style="animation-delay: 0.4s;">Sobre a WSL Store</h2>
+  <div class="flex flex-col md:flex-row items-center gap-12">
+    <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Equipe WSL Store" class="rounded-3xl shadow-lg w-full md:w-1/2 object-cover fade-in" style="animation-delay: 0.5s;" />
+    <div class="w-full md:w-1/2 text-gray-700 text-lg leading-relaxed fade-in" style="animation-delay: 0.6s;">
+      <p>Na WSL Store, acreditamos que o estilo é uma expressão única de cada pessoa. Por isso, oferecemos uma curadoria exclusiva de roupas e acessórios que unem qualidade, conforto e design contemporâneo. Nosso compromisso é proporcionar uma experiência de compra agradável, sustentável e que valorize a diversidade.</p>
+      <p class="mt-6">Com atendimento dedicado e paixão pela moda, estamos aqui para te ajudar a montar looks que elevam sua confiança e refletem sua personalidade.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-blue-50 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-3xl">
+    <h2 class="text-4xl font-extrabold text-blue-700 mb-10 text-center tracking-tight fade-in" style="animation-delay: 0.4s;">Fale Conosco</h2>
+    <form class="bg-white rounded-xl shadow-lg p-8 space-y-6 fade-in" style="animation-delay: 0.5s;" action="#" method="POST" novalidate>
+      <div>
+        <label for="nome" class="block text-blue-800 font-semibold mb-2">Nome completo</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full px-4 py-3 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-blue-800 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" class="w-full px-4 py-3 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-blue-800 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui" class="w-full px-4 py-3 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg shadow-md btn-animate hover:bg-blue-700 transition">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer id="footer" class="bg-slate-900 text-gray-300 py-14 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="space-y-3 fade-in" style="animation-delay: 0.4s;">
+      <h3 class="text-xl font-bold text-blue-400 mb-4">Nosso Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> Rua Antonio de Souza Serra, 92</p>
+      <p><span class="font-semibold">Bairro:</span> Centro</p>
+      <p><span class="font-semibold">Município:</span> MARILENA</p>
+      <p><span class="font-semibold">Estado:</span> PR</p>
+    </div>
+    <div class="space-y-3 fade-in" style="animation-delay: 0.5s;">
+      <h3 class="text-xl font-bold text-blue-400 mb-4">Contato Comercial</h3>
+      <p><span class="font-semibold">CNPJ:</span> 65.877.230/0001-89</p>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:wellington_lava@hotmail.com" class="hover:underline text-blue-400">wellington_lava@hotmail.com</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="text-blue-400 font-semibold">44-988135101</span></p>
+    </div>
+    <div class="space-y-3 fade-in" style="animation-delay: 0.6s;">
+      <h3 class="text-xl font-bold text-blue-400 mb-4">Informações Legais</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline text-blue-400 font-semibold">Termos de Uso</a></li>
+        <li><a href="#" class="hover:underline text-blue-400 font-semibold">Política de Privacidade</a></li>
+      </ul>
+      <p class="mt-8 text-sm text-gray-500">&copy; 2024 WSL SERVICOS LTDA. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

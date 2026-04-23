@@ -154,6 +154,8 @@ _WIZARD_TITLE_MAP: list[tuple[str, "str | None", str]] = [
     ("selecione o tipo da sua empresa",   None,        "entity_type"),
     # Screens 5, 6, 7 — all map to add_company_data; handler differentiates internally
     ("adicionar dados da empresa",        None,        "add_company_data"),
+    # reCAPTCHA modal
+    ("ajude-nos a confirmar",             None,        "identity_check"),
     # Screen 1 — "Verificar [BUSINESS_NAME]" (prefix match)
     ("verificar ",                        None,        "start"),
 ]
@@ -558,7 +560,7 @@ class FacebookBot:
                         self._mark_step_done("waba_done")
                     else:
                         self._shot(page, "waba_fail")
-                        print("[BOT] WABA creation failed — continuing anyway")
+                        return {"success": False, "error": "WABA creation failed — account not found on settings page after retries"}
                 else:
                     print("[BOT] Skipping WABA (already done — waba_done or waba_created flag set)")
 
@@ -852,6 +854,38 @@ class FacebookBot:
             print(f"[EMAIL] Temp email failed: {e}")
             return ""
 
+    def _find_jasper_or_click_entrar(self, page: Page) -> bool:
+        """Try to find Jasper's Market placeholder. If not found, click 'Entrar com o Facebook' and retry."""
+        # First attempt — just look for the placeholder
+        try:
+            field = page.get_by_placeholder("Jasper's Market")
+            if field.is_visible(timeout=3_000):
+                return True
+        except Exception:
+            pass
+
+        # Not found — try clicking "Entrar com o Facebook" button
+        print("[BM] Jasper's Market not found — looking for 'Entrar com o Facebook' button")
+        try:
+            entrar_btn = page.get_by_role("button").filter(has_text="Entrar com o Facebook")
+            if entrar_btn.is_visible(timeout=3_000):
+                entrar_btn.click()
+                print("[BM] Clicked 'Entrar com o Facebook'")
+                _wait(3)
+                _dismiss_overlays(page)
+                # Retry finding Jasper's Market
+                try:
+                    field = page.get_by_placeholder("Jasper's Market")
+                    if field.is_visible(timeout=5_000):
+                        return True
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        print("[BM] Jasper's Market still not found after 'Entrar com o Facebook' attempt")
+        return False
+
     def _create_business_portfolio(self, page: Page, ctx: BrowserContext) -> str:
         # Collect everything that requires navigation BEFORE opening the modal
         first, last = self._scrape_user_name(page)
@@ -954,12 +988,15 @@ class FacebookBot:
                     break
 
         if not portf_clicked:
-            print("[BM] Could not find portfolio button on adsmanager — trying business.facebook.com fallback")
-            return self._create_business_portfolio_biz_fallback(page, email)
+            print("[BM] Could not find portfolio button on adsmanager — trying /create fallback")
+            return self._create_business_portfolio_biz_create(page, email)
         _wait(1)
 
         # Business name — razao_social comes in ALL CAPS; FB rejects it, so title-case it
         biz_name = self.run["razao_social"].title()
+        if not self._find_jasper_or_click_entrar(page):
+            print("[BM] Jasper's Market not found on adsmanager — falling through to /create")
+            return self._create_business_portfolio_biz_create(page, email)
         _clear_fill(page.get_by_placeholder("Jasper's Market"), biz_name)
 
         # First / last name (already scraped before navigating here)
@@ -994,8 +1031,8 @@ class FacebookBot:
                     _wait(1)
 
         if not criar_clicked:
-            print("[BM] Could not click 'Criar' — form validation not resolved")
-            return ""
+            print("[BM] Could not click 'Criar' — falling through to /create fallback")
+            return self._create_business_portfolio_biz_create(page, email)
 
         page.wait_for_load_state("domcontentloaded", timeout=60_000)
         _wait(3)
@@ -1166,10 +1203,14 @@ class FacebookBot:
 
         # Business name (same placeholder as adsmanager form)
         biz_name = self.run["razao_social"].title()
+        if not self._find_jasper_or_click_entrar(page):
+            print("[BM-fallback] Jasper's Market not found — falling through to /create")
+            return self._create_business_portfolio_biz_create(page, email)
         try:
             _clear_fill(page.get_by_placeholder("Jasper's Market"), biz_name)
         except Exception as e:
             print(f"[BM-fallback] Could not fill business name: {e}")
+            return self._create_business_portfolio_biz_create(page, email)
 
         # Email — no placeholder on this form; try common labels then positional fallback
         if email:
@@ -1247,8 +1288,19 @@ class FacebookBot:
         _wait(3)
         _dismiss_overlays(page)
 
-        # Business name — same placeholder as adsmanager form
+        # Business name — try helper (clicks "Entrar com o Facebook" if needed),
+        # then retry by reloading /create if still not found
         biz_name = self.run["razao_social"].title()
+        jasper_found = self._find_jasper_or_click_entrar(page)
+        if not jasper_found:
+            print("[BM-create] Retrying — reloading business.facebook.com/create")
+            page.goto("https://business.facebook.com/create", wait_until="domcontentloaded", timeout=60_000)
+            _wait(3)
+            _dismiss_overlays(page)
+            jasper_found = self._find_jasper_or_click_entrar(page)
+        if not jasper_found:
+            print("[BM-create] Could not find Jasper's Market after retries — aborting")
+            return ""
         try:
             _clear_fill(page.get_by_placeholder("Jasper's Market"), biz_name)
         except Exception as e:
@@ -1840,43 +1892,42 @@ class FacebookBot:
             except Exception:
                 pass
 
-        # ── Verify WABA actually exists ──────────────────────────────────────
+        # ── Verify WABA actually exists (with retries for slow proxies) ─────
         # Navigate back to the WABA settings page and check for a WABA entry.
-        # The old code returned True right after closing the modal without
-        # confirming the WABA was actually created (waba_done bug).
-        _wait(2)
-        try:
-            page.goto(
-                f"https://business.facebook.com/latest/settings/whatsapp_account?business_id={self.business_id}",
-                wait_until="domcontentloaded",
-                timeout=30_000,
-            )
-            _wait(2)
-            self._shot(page, "waba_verify_exists")
-
-            # A WABA row in the table is a gridcell containing a heading element
-            # (the WABA name). This is the most reliable signal regardless of
-            # the account name or language.
-            waba_found = False
+        # Retries up to 3 times with increasing waits to handle slow proxies
+        # or delayed Facebook propagation.
+        retry_waits = [3, 5, 8]
+        for attempt, wait_secs in enumerate(retry_waits, 1):
+            _wait(wait_secs)
             try:
-                rows = page.locator('[role="gridcell"] [role="heading"]')
-                count = rows.count()
-                if count > 0:
-                    waba_name = rows.first.inner_text(timeout=3_000).strip()
-                    print(f"[WABA] WABA creation confirmed — found {count} account row(s), first: '{waba_name}'")
-                    waba_found = True
-            except Exception:
-                pass
+                page.goto(
+                    f"https://business.facebook.com/latest/settings/whatsapp_account?business_id={self.business_id}",
+                    wait_until="domcontentloaded",
+                    timeout=60_000,
+                )
+                _wait(3)
+                self._shot(page, f"waba_verify_exists_attempt{attempt}")
 
-            if not waba_found:
-                self._shot(page, "waba_not_found")
-                print("[WABA] WARNING: WABA not found on settings page after creation — possible failure")
-                return False
-            return True
-        except Exception as e:
-            # If navigation fails, log but don't block — assume creation succeeded
-            print(f"[WABA] Could not verify WABA existence: {e} — assuming success")
-            return True
+                # A WABA row in the table is a gridcell containing a heading element
+                # (the WABA name). This is the most reliable signal regardless of
+                # the account name or language.
+                try:
+                    rows = page.locator('[role="gridcell"] [role="heading"]')
+                    count = rows.count()
+                    if count > 0:
+                        waba_name = rows.first.inner_text(timeout=3_000).strip()
+                        print(f"[WABA] WABA creation confirmed on attempt {attempt}/{len(retry_waits)} — found {count} account row(s), first: '{waba_name}'")
+                        return True
+                except Exception:
+                    pass
+
+                print(f"[WABA] Retry {attempt}/{len(retry_waits)}: WABA not found on settings page yet")
+            except Exception as e:
+                print(f"[WABA] Retry {attempt}/{len(retry_waits)}: navigation failed: {e}")
+
+        self._shot(page, "waba_not_found")
+        print(f"[WABA] WABA not found after {len(retry_waits)} attempts — creation failed")
+        return False
 
     # ── stage 8: business verification wizard ────────────────────────────────
 
@@ -2492,7 +2543,7 @@ class FacebookBot:
                 "cnpj_list":         self._wiz_cnpj_list,
                 "add_company_data":  self._wiz_add_company_data,
                 "country_selection": self._wiz_advance,
-                "identity_check":    self._wiz_advance,
+                "identity_check":    self._wiz_identity_check,
             }.get(current)
 
             if handler:
@@ -2527,6 +2578,40 @@ class FacebookBot:
         return self._wizard_upload_and_verify(page)
 
     # ── Individual step handlers ───────────────────────────────────────────────
+
+    def _wiz_identity_check(self, page: Page):
+        """Wait indefinitely for user to solve reCAPTCHA, then click Avançar.
+
+        Facebook uses aria-disabled="true" (not the HTML disabled attribute)
+        on the Avançar button while the captcha is unsolved.  We poll until
+        aria-disabled disappears or becomes "false", then click.
+        """
+        print("[VERIFY] reCAPTCHA detected — waiting for manual solve (no timeout)...")
+        while True:
+            try:
+                btn = page.get_by_role("button", name="Avançar")
+                if not btn.is_visible(timeout=2_000):
+                    _wait(3)
+                    continue
+                aria = btn.get_attribute("aria-disabled") or ""
+                if aria.lower() == "true":
+                    _wait(3)
+                    continue
+                # Button is clickable — captcha was solved
+                btn.click()
+                print("[VERIFY] reCAPTCHA solved — Avançar clicked. Waiting for page transition...")
+                # Wait until the captcha title disappears so the wizard loop
+                # doesn't re-detect identity_check on the stale page.
+                for _ in range(30):  # up to ~30s
+                    _wait(1)
+                    new_title, _ = self._extract_wizard_title(page)
+                    if "ajude-nos a confirmar" not in new_title:
+                        print("[VERIFY] reCAPTCHA page transitioned — continuing wizard.")
+                        return
+                print("[VERIFY] reCAPTCHA page did not transition after 30s — continuing anyway.")
+                return
+            except Exception:
+                _wait(3)
 
     def _wiz_advance(self, page: Page):
         """Generic advance step — click Avançar (button or link)."""

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja WT - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    animation: fadeInUp 1.2s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16 md:h-20">
+    <a href="#" class="text-3xl font-extrabold text-indigo-600 tracking-tight drop-shadow-md hover:text-indigo-700 transition">WT Moda</a>
+    <ul class="hidden md:flex space-x-10 text-gray-700 font-semibold text-lg">
+      <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+      <li><a href="#footer" class="hover:text-indigo-600 transition">Informações</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-indigo-600 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+        viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white shadow-md max-w-xs w-full absolute top-full left-0 right-0 mx-auto rounded-b-lg overflow-hidden opacity-0 invisible transition-opacity duration-300">
+    <ul class="flex flex-col divide-y divide-gray-200 text-gray-700 font-semibold text-base px-6 py-4">
+      <li><a href="#colecao" class="py-3 block hover:text-indigo-600 transition" onclick="toggleMenu()">Coleção</a></li>
+      <li><a href="#acessorios" class="py-3 block hover:text-indigo-600 transition" onclick="toggleMenu()">Acessórios</a></li>
+      <li><a href="#sobre" class="py-3 block hover:text-indigo-600 transition" onclick="toggleMenu()">Sobre Nós</a></li>
+      <li><a href="#contato" class="py-3 block hover:text-indigo-600 transition" onclick="toggleMenu()">Contato</a></li>
+      <li><a href="#footer" class="py-3 block hover:text-indigo-600 transition" onclick="toggleMenu()">Informações</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative w-full min-h-[calc(100vh-5rem)] flex items-center justify-center bg-gradient-to-tr from-indigo-50 via-purple-100 to-pink-50 overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1470&q=80" alt="Mulher usando suéter rosa" class="absolute inset-0 w-full h-full object-cover object-center opacity-20"/>
+  <div class="relative max-w-4xl p-6 text-center">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 drop-shadow-lg fade-in" style="animation-delay: 0.3s;">Moda que inspira seu estilo</h1>
+    <p class="mt-6 text-xl md:text-2xl text-indigo-800/90 font-medium fade-in" style="animation-delay: 0.6s;">
+      Roupas e acessórios exclusivos para você brilhar em qualquer ocasião.
+    </p>
+    <a href="#colecao" class="inline-block mt-12 px-10 py-4 bg-indigo-600 hover:bg-indigo-700 font-semibold text-white rounded-full shadow-lg transform hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.9s;">
+      Confira a Coleção
+    </a>
+  </div>
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 sm:px-10 py-20">
+  <div class="mb-14 text-center max-w-3xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-3 fade-in" style="animation-delay: 0.2s;">Coleção Primavera-Verão 2024</h2>
+    <p class="text-lg text-gray-600 font-medium fade-in" style="animation-delay: 0.4s;">
+      Peças modernas, leves e cheias de estilo para renovar seu guarda-roupa com conforto.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <article class="rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 0.6s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Vestido estampado feminino" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 bg-white">
+        <h3 class="text-2xl font-semibold text-indigo-700 mb-2">Vestido Floral Chic</h3>
+        <p class="text-gray-600 mb-4">Leve e elegante para dias ensolarados.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 229,90</span>
+      </div>
+    </article>
+    <article class="rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 0.8s;">
+      <img src="https://images.unsplash.com/photo-1520975918230-c4c36b7e3a37?auto=format&fit=crop&w=800&q=80" alt="Homem com jaqueta jeans" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 bg-white">
+        <h3 class="text-2xl font-semibold text-indigo-700 mb-2">Jaqueta Jeans Oversized</h3>
+        <p class="text-gray-600 mb-4">Conforto urbano com toque retrô.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 349,90</span>
+      </div>
+    </article>
+    <article class="rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 1s;">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Calça branca feminina" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6 bg-white">
+        <h3 class="text-2xl font-semibold text-indigo-700 mb-2">Calça Pantalona Off-White</h3>
+        <p class="text-gray-600 mb-4">Versatilidade e elegância para o dia a dia.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 199,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-20">
+  <div class="max-w-7xl mx-auto px-6 sm:px-10">
+    <div class="mb-14 text-center max-w-3xl mx-auto">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-3 fade-in" style="animation-delay: 0.2s;">Acessórios que fazem a diferença</h2>
+      <p class="text-gray-700 font-medium fade-in" style="animation-delay: 0.4s;">
+        Complete seu look com peças selecionadas que unem design e funcionalidade.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 0.6s;">
+        <img src="https://images.unsplash.com/photo-1520975880749-3f2ca3d7a81a?auto=format&fit=crop&w=800&q=80" alt="Bolsa de couro marrom" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-700 mb-1">Bolsa de Couro Vintage</h3>
+          <p class="text-gray-600 mb-3">Estilo clássico para todas as horas.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 279,90</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 0.8s;">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Relógio masculino clássico" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-700 mb-1">Relógio Clássico Minimalista</h3>
+          <p class="text-gray-600 mb-3">Elegância que marca o tempo.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 399,90</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow duration-500 fade-in" style="animation-delay: 1s;">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Óculos de sol feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-indigo-700 mb-1">Óculos de Sol Retrô</h3>
+          <p class="text-gray-600 mb-3">Proteção e charme para seu rosto.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 189,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="max-w-7xl mx-auto px-6 sm:px-10 py-20">
+  <div class="flex flex-col md:flex-row items-center gap-14">
+    <div class="md:w-1/2 fade-in" style="animation-delay: 0.3s;">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Nossa História</h2>
+      <p class="text-gray-700 leading-relaxed text-lg font-medium">
+        Fundada em 2015, a WT Moda nasceu da paixão por criar roupas e acessórios que refletem personalidade e autenticidade. Valorizamos a qualidade, sustentabilidade e atendimento humanizado para garantir uma experiência única a cada cliente.
+      </p>
+    </div>
+    <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-lg fade-in" style="animation-delay: 0.5s;">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas" class="w-full h-80 object-cover object-center" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 py-20">
+  <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center fade-in" style="animation-delay: 0.3s;">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Fale Conosco</h2>
+    <p class="text-gray-700 mb-12 font-medium text-lg">
+      Tem dúvidas ou deseja um atendimento personalizado? Estamos prontos para ajudar você a encontrar o look perfeito.
+    </p>
+    <form action="#" method="POST" class="space-y-8 text-left">
+      <label class="block">
+        <span class="text-gray-700 font-semibold mb-2 block">Nome</span>
+        <input type="text" name="nome" required class="w-full rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-3 text-lg transition" placeholder="Seu nome" />
+      </label>
+      <label class="block">
+        <span class="text-gray-700 font-semibold mb-2 block">E-mail</span>
+        <input type="email" name="email" required class="w-full rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-3 text-lg transition" placeholder="seu@exemplo.com" />
+      </label>
+      <label class="block">
+        <span class="text-gray-700 font-semibold mb-2 block">Mensagem</span>
+        <textarea name="mensagem" rows="5" required class="w-full rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 px-4 py-3 text-lg transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </label>
+      <div class="text-center">
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-lg px-12 py-4 rounded-full shadow-lg transition transform hover:scale-105">
+          Enviar Mensagem
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer id="footer" class="bg-gray-900 text-gray-300 px-6 sm:px-10 py-16">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6">
+    <div class="space-y-2">
+      <h3 class="text-indigo-400 font-bold uppercase tracking-widest text-sm">Empresa</h3>
+      <p><span class="font-semibold">CNPJ:</span> 65.571.618/0001-57</p>
+      <p><span class="font-semibold">Razão Social:</span> WT SERVICOS DE LOGISTICA LTDA</p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="text-indigo-400 font-bold uppercase tracking-widest text-sm">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:WAGNERALLAN89@GMAIL.COM" class="hover:text-indigo-400 transition">WAGNERALLAN89@GMAIL.COM</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="text-indigo-400 font-semibold">82-991092508</span></p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="text-indigo-400 font-bold uppercase tracking-widest text-sm">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> RUA LAGOA MUNDAÚ, 06</p>
+      <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> SATUBA</p>
+      <p><span class="font-semibold">Estado:</span> AL</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-medium gap-4">
+    <p>© 2024 WT Moda. Todos os direitos reservados.</p>
+    <div class="space-x-6">
+      <a href="#" class="hover:text-indigo-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-400 transition">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    if(menuOpen){
+      mobileMenu.classList.remove('opacity-0','invisible');
+      mobileMenu.classList.add('opacity-100','visible');
+    } else {
+      mobileMenu.classList.add('opacity-0','invisible');
+      mobileMenu.classList.remove('opacity-100','visible');
+    }
+  }
+  menuBtn.addEventListener('click', toggleMenu);
+  // Close mobile menu on resize > md
+  window.addEventListener('resize', () => {
+    if(window.innerWidth >= 768){
+      mobileMenu.classList.add('opacity-0','invisible');
+      mobileMenu.classList.remove('opacity-100','visible');
+      menuOpen = false;
+    }
+  });
+</script>
+
+</body>
+</html>

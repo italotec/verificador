@@ -12,15 +12,18 @@ HEROSMS_BASE_URL = "https://hero-sms.com/stubs/handler_api.php"
 
 
 class HeroSMSService:
-    def __init__(self, api_key: str, country: str = "73", service: str = "fb"):
+    def __init__(self, api_key: str, country: str = "73", service: str = "fb",
+                 max_price: str = ""):
         """
-        api_key  : HeroSMS API key
-        country  : country code (73 = Brazil, same as SMS-Activate)
-        service  : service code (fb = Facebook)
+        api_key   : HeroSMS API key
+        country   : country code (73 = Brazil, same as SMS-Activate)
+        service   : service code (fb = Facebook)
+        max_price : maximum price per number in USD (empty = no limit)
         """
         self.api_key = api_key
         self.country = country
         self.service = service
+        self.max_price = max_price
 
     # ── internal ─────────────────────────────────────────────────────────────
 
@@ -40,11 +43,16 @@ class HeroSMSService:
         Buy a virtual number.
         Returns (activation_id, full_phone_with_country_code) or (None, None).
         """
-        resp = self._req({
+        params = {
             "action": "getNumber",
             "service": self.service,
             "country": self.country,
-        })
+        }
+        if self.max_price:
+            params["maxPrice"] = self.max_price
+            params["fixedPrice"] = "true"
+        print(f"[HEROSMS] buy_number params → {params}")
+        resp = self._req(params)
         print(f"[HEROSMS] buy_number → {resp}")
         if resp.startswith("ACCESS_NUMBER"):
             _, activation_id, full_phone = resp.split(":", 2)

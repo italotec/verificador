@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atlas Store - Moda & Estilo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes slideup {
+    0% { opacity: 0; transform: translateY(20px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+  .animate-slideup {
+    animation: slideup 0.8s ease forwards;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  .transition-smooth {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-amber-200 selection:text-amber-900">
+
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="container mx-auto flex items-center justify-between py-5 px-6 md:px-12">
+    <a href="#" class="text-3xl font-extrabold text-amber-600 tracking-tight select-none hover:text-amber-700 transition-colors">ATLAS STORE</a>
+    <ul class="hidden md:flex space-x-10 text-gray-700 font-semibold text-lg tracking-wide">
+      <li><a href="#colecao" class="hover:text-amber-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-amber-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-amber-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-amber-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" class="md:hidden text-amber-600 focus:outline-none" id="btn-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="menu-mobile" class="hidden md:hidden bg-white shadow-md">
+    <ul class="flex flex-col p-4 space-y-4 font-semibold text-lg text-gray-700">
+      <li><a href="#colecao" class="block hover:text-amber-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-amber-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-amber-600 transition-colors">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-amber-600 transition-colors">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative bg-gradient-to-r from-amber-50 via-amber-100 to-amber-50 min-h-[calc(100vh-80px)] flex flex-col justify-center items-center px-6 text-center">
+  <h1 class="text-5xl md:text-6xl font-extrabold max-w-4xl leading-tight text-amber-700 drop-shadow-[0_2px_8px_rgba(251,191,36,0.7)] animate-slideup">Vista-se com Estilo, Sinta-se Único</h1>
+  <p class="mt-6 max-w-3xl text-lg md:text-xl text-amber-900 font-medium animate-slideup delay-200">Roupas e acessórios que acompanham seu ritmo, para todas as ocasiões e estilos.</p>
+  <a href="#colecao" class="mt-10 inline-block bg-amber-600 text-white font-semibold rounded-lg px-10 py-4 shadow-lg hover:bg-amber-700 active:scale-95 transition-transform">
+    Explorar Coleção
+  </a>
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1920&q=80" alt="Background fashion" class="w-full h-full object-cover opacity-10 select-none" />
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 md:px-12 py-16 max-w-7xl">
+  <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center tracking-wide">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transition-smooth cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=600&q=80" alt="Casaco moderno bege" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-amber-800">Casaco Moderno Bege</h3>
+        <p class="mt-2 text-amber-600 font-medium">R$ 299,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transition-smooth cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Camisa social azul claro" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-amber-800">Camisa Social Azul Claro</h3>
+        <p class="mt-2 text-amber-600 font-medium">R$ 199,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transition-smooth cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Calça jeans estilosa" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-amber-800">Calça Jeans Estilosa</h3>
+        <p class="mt-2 text-amber-600 font-medium">R$ 249,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale transition-smooth cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido floral leve" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-lg font-semibold text-amber-800">Vestido Floral Leve</h3>
+        <p class="mt-2 text-amber-600 font-medium">R$ 289,90</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-amber-50 py-16">
+  <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center tracking-wide">Acessórios Selecionados</h2>
+    <div class="flex flex-wrap justify-center gap-10">
+      <figure class="w-48 bg-white rounded-xl shadow-md overflow-hidden hover-scale transition-smooth cursor-pointer group">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Relógio de pulso moderno" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="p-4 text-center font-semibold text-amber-800">Relógio de Pulso</figcaption>
+      </figure>
+      <figure class="w-48 bg-white rounded-xl shadow-md overflow-hidden hover-scale transition-smooth cursor-pointer group">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro marrom" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="p-4 text-center font-semibold text-amber-800">Bolsa de Couro</figcaption>
+      </figure>
+      <figure class="w-48 bg-white rounded-xl shadow-md overflow-hidden hover-scale transition-smooth cursor-pointer group">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol fashion" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="p-4 text-center font-semibold text-amber-800">Óculos de Sol</figcaption>
+      </figure>
+      <figure class="w-48 bg-white rounded-xl shadow-md overflow-hidden hover-scale transition-smooth cursor-pointer group">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80" alt="Chapéu Panamá elegante" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <figcaption class="p-4 text-center font-semibold text-amber-800">Chapéu Panamá</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 md:px-12 py-16 max-w-5xl text-center">
+  <h2 class="text-4xl font-extrabold text-amber-700 mb-8 tracking-wide">Quem Somos</h2>
+  <p class="text-lg leading-relaxed text-amber-900 max-w-3xl mx-auto">
+    A Atlas Store nasceu da paixão por moda que une conforto, estilo e qualidade. Nossa missão é vestir você para os momentos que importam, oferecendo peças cuidadosamente selecionadas para todos os estilos e ocasiões.
+  </p>
+  <p class="mt-6 text-lg leading-relaxed text-amber-900 max-w-3xl mx-auto italic">
+    "Moda é a expressão do seu eu mais autêntico. Venha descobrir o seu com a gente."
+  </p>
+</section>
+
+<section id="contato" class="bg-amber-50 py-16">
+  <div class="container mx-auto px-6 md:px-12 max-w-4xl bg-white rounded-3xl shadow-xl p-10">
+    <h2 class="text-4xl font-extrabold text-amber-700 mb-8 text-center tracking-wide">Fale Conosco</h2>
+    <form action="#" method="POST" class="space-y-6">
+      <div>
+        <label for="nome" class="block mb-2 font-semibold text-amber-800">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" class="w-full rounded-lg border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
+      </div>
+      <div>
+        <label for="email" class="block mb-2 font-semibold text-amber-800">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full rounded-lg border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block mb-2 font-semibold text-amber-800">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full rounded-lg border border-amber-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="bg-amber-600 text-white font-semibold rounded-xl px-12 py-4 shadow-lg hover:bg-amber-700 active:scale-95 transition-transform">
+          Enviar Mensagem
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-amber-900 text-amber-100 py-12 px-6 md:px-12 select-none">
+  <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-y-8 gap-x-16 text-sm md:text-base">
+    <div>
+      <h3 class="font-bold mb-3 text-lg md:text-xl tracking-wide">Informações Legais</h3>
+      <p><span class="font-semibold">CNPJ:</span> 53.213.593/0001-30</p>
+      <p><span class="font-semibold">Razão Social:</span> ATLAS AGRIMENSURA E CONSULTORIA LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3 text-lg md:text-xl tracking-wide">Contato Comercial</h3>
+      <p><span class="font-semibold">E-mail:</span> ATLASAGRIMENSURAA@GMAIL.COM</p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">49-999204144</span></p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3 text-lg md:text-xl tracking-wide">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> AVENIDA VINTE E SEIS DE ABRIL, 1043</p>
+      <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> ABDON BATISTA</p>
+      <p><span class="font-semibold">Estado:</span> SC</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-amber-700 pt-6 text-center text-amber-300 text-xs md:text-sm space-x-8 font-light">
+    <a href="#" class="hover:text-amber-200 transition-colors">Termos de Uso</a>
+    <a href="#" class="hover:text-amber-200 transition-colors">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

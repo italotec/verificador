@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="mw115jyoqazn2sp67fzxl8t80pwysr" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cascata Roupas & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Subtle fade in & slide up animation */
+  .fade-slide-up {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeSlideUp 0.8s forwards;
+  }
+  .fade-slide-up.delay-1 {
+    animation-delay: 0.15s;
+  }
+  .fade-slide-up.delay-2 {
+    animation-delay: 0.3s;
+  }
+  .fade-slide-up.delay-3 {
+    animation-delay: 0.45s;
+  }
+  .fade-slide-up.delay-4 {
+    animation-delay: 0.6s;
+  }
+  @keyframes fadeSlideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Custom scrollbar for product gallery */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #a0aec0;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-gradient-to-b from-white to-gray-50 text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="text-3xl font-extrabold text-indigo-600 hover:text-indigo-700 transition">CASCATA</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+      <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+      <li><a href="#destaques" class="hover:text-indigo-600 transition">Destaques</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded">
+      <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200 hidden">
+    <ul class="flex flex-col px-6 py-4 space-y-4 font-semibold text-indigo-700">
+      <li><a href="#colecao" class="block hover:underline">Coleção</a></li>
+      <li><a href="#destaques" class="block hover:underline">Destaques</a></li>
+      <li><a href="#acessorios" class="block hover:underline">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:underline">Sobre</a></li>
+      <li><a href="#contato" class="block hover:underline">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+<section id="hero" class="relative bg-gradient-to-tr from-indigo-100 via-white to-indigo-50 overflow-hidden">
+  <div class="container mx-auto px-6 md:px-12 py-20 md:py-28 flex flex-col-reverse md:flex-row items-center gap-12">
+    <div class="flex-1 fade-slide-up delay-1 max-w-xl">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 leading-tight mb-6 drop-shadow-sm">Vista a sua essência<br /><span class="text-indigo-400">com estilo e autenticidade</span></h1>
+      <p class="text-gray-600 text-lg md:text-xl mb-8">Roupas e acessórios que acompanham você em todos os momentos, com qualidade e design exclusivos.</p>
+      <a href="#colecao" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition">Ver Coleção</a>
+    </div>
+    <div class="flex-1 relative fade-slide-up delay-2">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupas modernas" class="rounded-3xl shadow-2xl w-full max-w-lg mx-auto" />
+      <div class="absolute top-0 left-0 w-48 h-48 bg-indigo-300 rounded-tl-3xl mix-blend-multiply filter blur-3xl opacity-40 -z-10"></div>
+      <div class="absolute bottom-0 right-0 w-56 h-56 bg-indigo-200 rounded-br-3xl mix-blend-multiply filter blur-3xl opacity-30 -z-10"></div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 md:px-12 py-20">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center fade-slide-up">Coleção Primavera-Verão</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-slide-up delay-1">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Vestido floral leve" class="w-full h-72 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Floral Leve</h3>
+        <p class="text-gray-600 mb-4">Estampa delicada e corte fluído para os dias quentes.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 189,00</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-slide-up delay-2">
+      <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a9e?auto=format&fit=crop&w=600&q=80" alt="Camiseta oversized" class="w-full h-72 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Camiseta Oversized</h3>
+        <p class="text-gray-600 mb-4">Conforto e estilo urbano em uma peça versátil.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 99,00</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-slide-up delay-3">
+      <img src="https://images.unsplash.com/photo-1520975698051-7c7a30e5e0c9?auto=format&fit=crop&w=600&q=80" alt="Calça de linho bege" class="w-full h-72 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Calça de Linho Bege</h3>
+        <p class="text-gray-600 mb-4">Leve e sofisticada para composições elegantes.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 229,00</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="destaques" class="bg-indigo-50 py-20 px-6 md:px-12">
+  <h2 class="text-4xl font-extrabold text-indigo-800 text-center mb-14 fade-slide-up">Destaques da Semana</h2>
+  <div class="overflow-x-auto scrollbar-thin">
+    <ul class="flex gap-8 min-w-[900px]">
+      <li class="relative shrink-0 w-72 rounded-xl shadow-lg bg-white hover:scale-105 transition transform fade-slide-up delay-1">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a9e?auto=format&fit=crop&w=480&q=80" alt="Blusa de tricô creme" class="rounded-t-xl h-72 w-full object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Blusa de Tricô Creme</h3>
+          <p class="text-gray-600 mb-3 text-sm">Maciez e elegância para dias fresquinhos.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 159,00</span>
+        </div>
+        <span class="absolute top-3 right-3 bg-indigo-600 text-white text-xs font-semibold px-2 py-1 rounded-full select-none">Novo</span>
+      </li>
+      <li class="relative shrink-0 w-72 rounded-xl shadow-lg bg-white hover:scale-105 transition transform fade-slide-up delay-2">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=480&q=80" alt="Jaqueta jeans oversized" class="rounded-t-xl h-72 w-full object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Jaqueta Jeans Oversized</h3>
+          <p class="text-gray-600 mb-3 text-sm">Peça-chave para um look moderno e despojado.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 279,00</span>
+        </div>
+        <span class="absolute top-3 right-3 bg-indigo-600 text-white text-xs font-semibold px-2 py-1 rounded-full select-none">Mais Vendido</span>
+      </li>
+      <li class="relative shrink-0 w-72 rounded-xl shadow-lg bg-white hover:scale-105 transition transform fade-slide-up delay-3">
+        <img src="https://images.unsplash.com/photo-1530845641230-65e9b651e4aa?auto=format&fit=crop&w=480&q=80" alt="Vestido midi listrado" class="rounded-t-xl h-72 w-full object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Vestido Midi Listrado</h3>
+          <p class="text-gray-600 mb-3 text-sm">Casual com toque de elegância para o dia a dia.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 199,00</span>
+        </div>
+      </li>
+      <li class="relative shrink-0 w-72 rounded-xl shadow-lg bg-white hover:scale-105 transition transform fade-slide-up delay-4">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=480&q=80" alt="Tênis branco casual" class="rounded-t-xl h-72 w-full object-cover" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-indigo-700 mb-1">Tênis Branco Casual</h3>
+          <p class="text-gray-600 mb-3 text-sm">Versatilidade e conforto para o seu dia.</p>
+          <span class="text-indigo-600 font-bold text-lg">R$ 299,00</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="acessorios" class="container mx-auto px-6 md:px-12 py-20">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center fade-slide-up">Acessórios Exclusivos</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="fade-slide-up delay-1 group relative rounded-xl overflow-hidden shadow-lg cursor-pointer border border-transparent hover:border-indigo-300 transition">
+      <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=480&q=80" alt="Bolsa de couro marrom" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      <div class="p-4 bg-white">
+        <h3 class="text-lg font-semibold text-indigo-800 mb-1">Bolsa de Couro Marrom</h3>
+        <p class="text-gray-600 text-sm mb-2">Design clássico para todas as ocasiões.</p>
+        <span class="text-indigo-600 font-bold">R$ 349,00</span>
+      </div>
+    </div>
+    <div class="fade-slide-up delay-2 group relative rounded-xl overflow-hidden shadow-lg cursor-pointer border border-transparent hover:border-indigo-300 transition">
+      <img src="https://images.unsplash.com/photo-1520975698051-7c7a30e5e0c9?auto=format&fit=crop&w=480&q=80" alt="Relógio minimalista prata" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      <div class="p-4 bg-white">
+        <h3 class="text-lg font-semibold text-indigo-800 mb-1">Relógio Minimalista Prata</h3>
+        <p class="text-gray-600 text-sm mb-2">Elegância discreta para seu pulso.</p>
+        <span class="text-indigo-600 font-bold">R$ 499,00</span>
+      </div>
+    </div>
+    <div class="fade-slide-up delay-3 group relative rounded-xl overflow-hidden shadow-lg cursor-pointer border border-transparent hover:border-indigo-300 transition">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=480&q=80" alt="Óculos de sol vintage" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      <div class="p-4 bg-white">
+        <h3 class="text-lg font-semibold text-indigo-800 mb-1">Óculos de Sol Vintage</h3>
+        <p class="text-gray-600 text-sm mb-2">Charme retrô para destacar seu rosto.</p>
+        <span class="text-indigo-600 font-bold">R$ 279,00</span>
+      </div>
+    </div>
+    <div class="fade-slide-up delay-4 group relative rounded-xl overflow-hidden shadow-lg cursor-pointer border border-transparent hover:border-indigo-300 transition">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=480&q=80" alt="Chapéu de palha natural" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      <div class="p-4 bg-white">
+        <h3 class="text-lg font-semibold text-indigo-800 mb-1">Chapéu de Palha Natural</h3>
+        <p class="text-gray-600 text-sm mb-2">Proteção com estilo para os dias ensolarados.</p>
+        <span class="text-indigo-600 font-bold">R$ 149,00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-white py-20 px-6 md:px-12">
+  <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center gap-16">
+    <div class="flex-1 fade-slide-up delay-1">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Nossa História</h2>
+      <p class="text-gray-700 text-lg leading-relaxed mb-4">Fundada em 2015, a CASCATA EMPREENDIMENTOS LTDA nasceu do desejo de oferecer moda com personalidade e qualidade para pessoas que buscam se expressar através do vestuário e acessórios. Cada coleção é pensada com carinho para unir tendências, conforto e sustentabilidade.</p>
+      <p class="text-gray-700 text-lg leading-relaxed">Nossa missão é vestir você para todos os momentos da vida, com peças que inspiram confiança e autenticidade.</p>
+    </div>
+    <div class="flex-1 fade-slide-up delay-2 rounded-3xl overflow-hidden shadow-xl">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas sorrindo" class="w-full h-96 object-cover" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-50 py-20 px-6 md:px-12">
+  <div class="container mx-auto max-w-3xl text-center fade-slide-up">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Fale Conosco</h2>
+    <p class="text-indigo-800 mb-10 text-lg">Tem dúvidas ou quer saber mais? Nosso time está pronto para ajudar você com atendimento personalizado.</p>
+    <form class="bg-white rounded-xl p-8 shadow-lg" action="#" method="POST" novalidate>
+      <div class="mb-6 text-left">
+        <label for="nome" class="block mb-2 font-semibold text-indigo-700">Nome</label>
+        <input type="text" id="nome" name="nome" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Seu nome completo" />
+      </div>
+      <div class="mb-6 text-left">
+        <label for="email" class="block mb-2 font-semibold text-indigo-700">E-mail</label>
+        <input type="email" id="email" name="email" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="seu@email.com" />
+      </div>
+      <div class="mb-6 text-left">
+        <label for="mensagem" class="block mb-2 font-semibold text-indigo-700">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition shadow-lg">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-sm select-none leading-relaxed">
+    <div>
+      <h3 class="font-semibold mb-3 border-b border-indigo-700 pb-1 text-lg">Dados da Empresa</h3>
+      <p class="mb-1"><span class="font-semibold">CNPJ:</span> 59.369.928/0001-90</p>
+      <p><span class="font-semibold">Razão Social:</span> CASCATA EMPREENDIMENTOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-3 border-b border-indigo-700 pb-1 text-lg">Contato</h3>
+      <p class="mb-1"><span class="font-semibold">E-mail:</span> CASCATASERVICOS@GMAIL.COM</p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">(67) 98416-0296</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-3 border-b border-indigo-700 pb-1 text-lg">Endereço</h3>
+      <p class="mb-1"><span class="font-semibold">Logradouro:</span> RUA FR ROGERIO, 18</p>
+      <p class="mb-1"><span class="font-semibold">Bairro:</span> CENTRO</p>
+      <p><span class="font-semibold">Município:</span> PONTE ALTA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-3 border-b border-indigo-700 pb-1 text-lg">Estado</h3>
+      <p>SC</p>
+      <nav class="mt-8 flex flex-col space-y-3">
+        <a href="#" class="hover:underline text-indigo-300">Termos de Uso</a>
+        <a href="#" class="hover:underline text-indigo-300">Política de Privacidade</a>
+      </nav>
+    </div>
+  </div>
+  <p class="text-center text-indigo-400 text-xs mt-12 select-text">&copy; 2024 CASCATA EMPREENDIMENTOS LTDA. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>

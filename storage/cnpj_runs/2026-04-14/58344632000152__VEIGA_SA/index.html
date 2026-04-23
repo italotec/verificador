@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="ejrokdveml7qfv2tex5wicpzcor748" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veiga Store - Moda & Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+    }
+    /* Subtle fade-in and slide on scroll */
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 bg-white shadow-md z-50">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+      <a href="#home" class="text-3xl font-extrabold text-indigo-600 tracking-wide hover:text-indigo-500 transition">VEIGA STORE</a>
+      <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+        <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+        <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner px-6 pb-5 space-y-4 font-semibold text-indigo-600">
+      <a href="#home" class="block hover:text-indigo-700 transition">Início</a>
+      <a href="#colecao" class="block hover:text-indigo-700 transition">Coleção</a>
+      <a href="#acessorios" class="block hover:text-indigo-700 transition">Acessórios</a>
+      <a href="#sobre" class="block hover:text-indigo-700 transition">Sobre</a>
+      <a href="#contato" class="block hover:text-indigo-700 transition">Contato</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-20 lg:py-36 flex flex-col-reverse lg:flex-row items-center gap-12">
+      <div class="w-full lg:w-1/2 text-center lg:text-left fade-slide" data-fade>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 leading-tight mb-6 tracking-tight drop-shadow-lg">Estilo que Inspira<br />Sua Nova Coleção</h1>
+        <p class="text-lg md:text-xl text-indigo-600 mb-8 max-w-md mx-auto lg:mx-0">Descubra roupas modernas e acessórios exclusivos para destacar sua personalidade com sofisticação e conforto.</p>
+        <a href="#colecao" class="inline-block bg-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:bg-indigo-700 transition-transform active:scale-95">Ver Coleção</a>
+      </div>
+      <div class="w-full lg:w-1/2 max-w-xl rounded-3xl overflow-hidden shadow-2xl fade-slide" data-fade>
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Model vestindo roupa estilosa" class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+    </div>
+    <svg class="absolute bottom-0 left-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="#eef2ff" fill-opacity="1" d="M0,96L48,101.3C96,107,192,117,288,144C384,171,480,213,576,224C672,235,768,213,864,192C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+  </section>
+
+  <!-- Coleção de Roupas Section -->
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+    <h2 class="text-4xl font-extrabold text-indigo-700 text-center mb-12 fade-slide" data-fade>Moda Feminina & Masculina</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 fade-slide" data-fade>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Camisa Casual</h3>
+          <p class="text-indigo-600 font-medium mb-4">Conforto e estilo para o dia a dia.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1520975698140-3c3e6fcb2c30?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino elegante" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Elegante</h3>
+          <p class="text-indigo-600 font-medium mb-4">Para ocasiões especiais com charme.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$ 199,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Jaqueta moderna masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Urbana</h3>
+          <p class="text-indigo-600 font-medium mb-4">Estilo contemporâneo e versátil.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$ 259,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina casual" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-800 mb-2">Blusa Casual</h3>
+          <p class="text-indigo-600 font-medium mb-4">Leveza e conforto para o seu dia.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$ 89,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios Section -->
+  <section id="acessorios" class="bg-indigo-50 py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-extrabold text-indigo-700 text-center mb-12 fade-slide" data-fade>Acessórios que Transformam</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-8 fade-slide" data-fade>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=200&q=80" alt="Relógio elegante" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Relógio</span>
+        </div>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=200&q=80" alt="Óculos de sol moderno" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Óculos de Sol</span>
+        </div>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=80" alt="Bolsa feminina de couro" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Bolsa</span>
+        </div>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Chapéu estiloso" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Chapéu</span>
+        </div>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09b3b?auto=format&fit=crop&w=200&q=80" alt="Tênis branco casual" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Tênis</span>
+        </div>
+        <div class="flex flex-col items-center space-y-3 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=80" alt="Pulseira delicada" class="w-20 h-20 object-cover rounded-full shadow-md group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <span class="text-indigo-800 font-semibold text-center text-sm">Pulseira</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nós Section -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="fade-slide" data-fade>
+        <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Nossa História</h2>
+        <p class="text-indigo-700 text-lg leading-relaxed mb-6">Fundada com paixão pela moda e compromisso com a qualidade, a VEIGA S/A nasceu para oferecer a você opções de vestuário e acessórios que unem contemporaneidade, conforto e exclusividade.</p>
+        <p class="text-indigo-600 text-lg leading-relaxed">Nosso time seleciona cuidadosamente cada peça para garantir que você se sinta confiante e elegante em qualquer ocasião. Junte-se a milhares de clientes satisfeitos que vestem VEIGA STORE.</p>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-lg fade-slide" data-fade>
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja de roupas sorrindo" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato Section -->
+  <section id="contato" class="bg-indigo-50 py-20 px-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-10 sm:p-14">
+      <h2 class="text-3xl font-extrabold text-indigo-700 mb-8 text-center">Fale Conosco</h2>
+      <form action="#" method="POST" class="space-y-6" novalidate>
+        <div>
+          <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome Completo</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition resize-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-semibold hover:bg-indigo-700 active:scale-95 transition-transform shadow-md">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-900 text-indigo-100 py-16 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div>
+        <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Dados da Empresa</h3>
+        <ul class="space-y-3 text-sm leading-relaxed">
+          <li><span class="font-semibold">CNPJ:</span> 58.344.632/0001-52</li>
+          <li><span class="font-semibold">Razão Social:</span> VEIGA S/A</li>
+          <li><span class="font-semibold">E-mail:</span> <a href="mailto:VEIGASA@GMAIL.COM" class="hover:underline">VEIGASA@GMAIL.COM</a></li>
+          <li><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">(21) 96986-1252</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Endereço</h3>
+        <ul class="space-y-3 text-sm leading-relaxed">
+          <li><span class="font-semibold">Logradouro:</span> RUA VICENTE FERREIRA DE FARIAS, 655</li>
+          <li><span class="font-semibold">Bairro:</span> CENTRO</li>
+          <li><span class="font-semibold">Município:</span> LAGOA DA CANOA</li>
+          <li><span class="font-semibold">Estado:</span> AL</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Links Úteis</h3>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#" class="hover:underline">Termos de Uso</a></li>
+          <li><a href="#" class="hover:underline">Política de Privacidade</a></li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-center items-center md:items-end text-sm text-indigo-400 italic select-none">
+        <p>© 2024 VEIGA STORE</p>
+        <p>Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    const btnMenu = document.getElementById('btn-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    btnMenu.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Fade-slide on scroll
+    const faders = document.querySelectorAll('[data-fade]');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+</body>
+</html>

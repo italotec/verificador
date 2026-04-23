@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="8nlla1zp0yo48zzyynd2zxv1wqewzh" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>F Martins de Brito - Loja de Roupas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+  .fade-in-delay-1 {
+    animation-delay: 0.3s;
+  }
+  .fade-in-delay-2 {
+    animation-delay: 0.6s;
+  }
+  .fade-in-delay-3 {
+    animation-delay: 0.9s;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-emerald-300 selection:text-gray-900">
+
+<header class="bg-white shadow sticky top-0 z-30">
+  <nav class="container mx-auto flex items-center justify-between py-5 px-6 md:px-12">
+    <a href="#home" class="text-emerald-600 font-extrabold text-3xl tracking-wide hover:text-emerald-700 transition">F Martins</a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-emerald-600 transition">Início</a></li>
+      <li><a href="#vestuario" class="hover:text-emerald-600 transition">Vestuário</a></li>
+      <li><a href="#acessorios" class="hover:text-emerald-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-emerald-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-emerald-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="menu-button" class="md:hidden text-emerald-600 hover:text-emerald-800 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 hidden flex-col text-center space-y-5 py-6 font-semibold text-gray-700">
+    <a href="#home" class="block hover:text-emerald-600">Início</a>
+    <a href="#vestuario" class="block hover:text-emerald-600">Vestuário</a>
+    <a href="#acessorios" class="block hover:text-emerald-600">Acessórios</a>
+    <a href="#sobre" class="block hover:text-emerald-600">Sobre Nós</a>
+    <a href="#contato" class="block hover:text-emerald-600">Contato</a>
+  </div>
+</header>
+
+<main class="select-none">
+
+<!-- SEÇÃO 1: Hero -->
+<section id="home" class="relative bg-gradient-to-r from-emerald-100 to-emerald-50 min-h-[90vh] flex flex-col justify-center items-center px-6 text-center overflow-hidden">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-emerald-800 max-w-4xl fade-in">Moda que inspira seu estilo e transforma seu dia</h1>
+  <p class="mt-6 text-xl md:text-2xl text-emerald-700 max-w-3xl fade-in fade-in-delay-1">Vestuário e acessórios exclusivos para quem valoriza elegância com conforto e personalidade.</p>
+  <a href="#vestuario" class="mt-10 inline-block bg-emerald-600 text-white font-semibold px-12 py-4 rounded-full shadow-lg hover:bg-emerald-700 transition fade-in fade-in-delay-2">Confira nossas coleções</a>
+
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80" alt="Modelo vestindo roupa elegante" class="absolute bottom-0 right-0 max-w-[45%] min-w-[280px] rounded-tl-3xl shadow-2xl hidden md:block animate-fadeInUp" style="animation-delay:1.2s; animation-fill-mode:forwards;">
+</section>
+
+<!-- SEÇÃO 2: Vestuário -->
+<section id="vestuario" class="container mx-auto px-6 md:px-12 py-20 scroll-mt-24">
+  <h2 class="text-4xl font-extrabold text-emerald-700 mb-12 text-center tracking-wide">Vestuário</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-emerald-400 transition">
+      <img src="https://images.unsplash.com/photo-1520975694560-0c936748be1a?auto=format&fit=crop&w=800&q=80" alt="Camisa masculina branca" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Camisa Social Branca</h3>
+        <p class="text-gray-600 mb-4">Confeccionada em algodão premium para conforto e estilo no trabalho ou eventos.</p>
+        <span class="font-bold text-emerald-600 text-lg">R$ 139,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-emerald-400 transition">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Vestido feminino rosa" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Vestido Midi Floral</h3>
+        <p class="text-gray-600 mb-4">Leve e fluido, perfeito para dias ensolarados com um toque de elegância casual.</p>
+        <span class="font-bold text-emerald-600 text-lg">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-emerald-400 transition">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Jaqueta preta masculina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Jaqueta de Couro Sintético</h3>
+        <p class="text-gray-600 mb-4">Visual moderno e resistente, ideal para noites urbanas e looks descolados.</p>
+        <span class="font-bold text-emerald-600 text-lg">R$ 299,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- SEÇÃO 3: Acessórios -->
+<section id="acessorios" class="bg-emerald-50 py-20 px-6 md:px-12">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-emerald-800 mb-14 text-center tracking-wide">Acessórios</h2>
+    <div class="flex flex-col md:flex-row md:space-x-12 space-y-12 md:space-y-0 justify-center">
+      <div class="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a14?auto=format&fit=crop&w=800&q=80" alt="Relógio masculino elegante" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-emerald-900 mb-2">Relógio Clássico</h3>
+          <p class="text-gray-700 mb-4">Design clean e pulseira em couro para combinar com qualquer ocasião.</p>
+          <span class="font-bold text-emerald-700 text-lg">R$ 249,90</span>
+        </div>
+      </div>
+      <div class="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1508214751197-c6f3e2d760bc?auto=format&fit=crop&w=800&q=80" alt="Bolsa feminina bege" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-emerald-900 mb-2">Bolsa Tote Bege</h3>
+          <p class="text-gray-700 mb-4">Espaçosa e versátil, perfeita para o dia a dia ou viagens curtas.</p>
+          <span class="font-bold text-emerald-700 text-lg">R$ 179,90</span>
+        </div>
+      </div>
+      <div class="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1515548212521-4bb2f4e8a1c9?auto=format&fit=crop&w=800&q=80" alt="Óculos de sol escuro" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-emerald-900 mb-2">Óculos de Sol Retro</h3>
+          <p class="text-gray-700 mb-4">Lentes UV400 com armação estilosa para proteger seus olhos com charme.</p>
+          <span class="font-bold text-emerald-700 text-lg">R$ 129,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 4: Sobre Nós -->
+<section id="sobre" class="container mx-auto px-6 md:px-12 py-20 scroll-mt-24 flex flex-col md:flex-row items-center justify-between gap-12">
+  <div class="md:w-1/2 space-y-6 fade-in">
+    <h2 class="text-4xl font-extrabold text-emerald-700 tracking-wide">Quem Somos</h2>
+    <p class="text-lg text-gray-700 leading-relaxed">Na F Martins de Brito, trazemos para você o melhor da moda em vestuário e acessórios, unindo qualidade, conforto e estilo contemporâneo em cada peça. Com anos de experiência, nossa missão é transformar seu visual e proporcionar uma experiência de compra inesquecível.</p>
+    <p class="text-lg text-gray-700 leading-relaxed">Valorizamos a autenticidade, o atendimento dedicado e a sustentabilidade, escolhendo fornecedores e materiais que respeitam o meio ambiente e as pessoas.</p>
+  </div>
+  <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja de roupas" class="md:w-1/2 rounded-3xl shadow-2xl fade-in fade-in-delay-1" />
+</section>
+
+<!-- SEÇÃO 5: Contato -->
+<section id="contato" class="bg-gradient-to-r from-emerald-100 to-emerald-50 py-20 px-6 md:px-12 scroll-mt-24">
+  <div class="container mx-auto max-w-3xl bg-white rounded-3xl shadow-xl p-10 md:p-16">
+    <h2 class="text-4xl font-extrabold text-emerald-800 mb-10 text-center tracking-wide">Fale Conosco</h2>
+    <form action="#" method="POST" class="space-y-8">
+      <div>
+        <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome Completo</label>
+        <input id="nome" name="nome" type="text" required placeholder="Seu nome" class="w-full border border-emerald-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+        <input id="email" name="email" type="email" required placeholder="seuemail@exemplo.com" class="w-full border border-emerald-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" required rows="5" placeholder="Escreva sua mensagem aqui" class="w-full border border-emerald-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-full shadow-lg hover:bg-emerald-700 transition">Enviar Mensagem</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-200 px-6 md:px-12 py-14 select-text">
+  <div class="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">CNPJ</h3>
+      <p>49.633.003/0001-51</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Razão Social</h3>
+      <p>F MARTINS DE BRITO LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">E-mail</h3>
+      <p>MMASSESSORIA@OUTLOOK.COM</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Telefone</h3>
+      <p><span id="telefone-comercial">(67) 94942-8692</span></p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Logradouro</h3>
+      <p>RUA TENENTE RUI BRITO, 1686</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Bairro</h3>
+      <p>COLIBRI</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Município</h3>
+      <p>PIRACURUCA</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-3 text-emerald-400">Estado</h3>
+      <p>PI</p>
+    </div>
+  </div>
+  <div class="mt-12 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+    <p>© 2024 F Martins de Brito. Todos os direitos reservados.</p>
+    <nav class="space-x-6 mt-4 md:mt-0">
+      <a href="#" class="hover:text-emerald-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-emerald-400 transition">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('menu-button');
+  const menuMobile = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+  });
+
+  // Optional: Close mobile menu on link click
+  menuMobile.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuMobile.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>

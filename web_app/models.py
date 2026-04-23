@@ -147,6 +147,9 @@ class WabaRecord(db.Model):
     created_at    = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at    = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
+    # ── Proxy ────────────────────────────────────────────────────────────────
+    proxy_port = db.Column(db.Integer, nullable=True)  # DataImpulse fixed port (10015+)
+
     # ── Error tracking ───────────────────────────────────────────────────────
     last_error     = db.Column(db.Text,       nullable=True)
     error_count    = db.Column(db.Integer,    default=0, nullable=False)
@@ -356,3 +359,11 @@ def log_event(level: str, category: str, message: str, *,
         db.session.commit()
     except Exception:
         db.session.rollback()
+
+
+def delete_waba_cascade(waba_record):
+    """Delete a WabaRecord and all dependent rows (no DB-level cascade configured)."""
+    StatusTransition.query.filter_by(waba_record_id=waba_record.id).delete()
+    ErrorReport.query.filter(ErrorReport.waba_record_id == waba_record.id).delete()
+    VerifyJob.query.filter_by(waba_record_id=waba_record.id).delete()
+    db.session.delete(waba_record)

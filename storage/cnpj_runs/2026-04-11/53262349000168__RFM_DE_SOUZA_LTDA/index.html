@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RFM de Souza - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  a {
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #4f46e5;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+<header class="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-3xl font-extrabold tracking-tight text-indigo-600 hover:text-indigo-700 select-none">RFM de Souza</a>
+    <nav class="hidden md:flex space-x-8 font-semibold text-gray-600">
+      <a href="#colecao" class="hover:text-indigo-600">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-600">Contato</a>
+    </nav>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-800 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </div>
+  <nav id="menu-mobile" class="md:hidden bg-white border-t border-gray-200 shadow-sm hidden">
+    <div class="flex flex-col px-6 py-4 space-y-4 font-semibold text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600">Sobre</a>
+      <a href="#contato" class="hover:text-indigo-600">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-grow">
+
+  <section id="hero" class="relative bg-gradient-to-br from-indigo-100 via-indigo-50 to-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center gap-12">
+      <div class="max-w-xl text-center md:text-left">
+        <h1 class="text-5xl font-extrabold text-indigo-700 tracking-tight leading-tight mb-4 animate-fadeInDown">Moda que Transforma<br><span class="text-indigo-500">Estilo & Personalidade</span></h1>
+        <p class="text-lg text-indigo-600 mb-8 animate-fadeIn delay-200">Roupas e acessórios selecionados para quem busca elegância e conforto em cada detalhe.</p>
+        <a href="#colecao" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition">Ver Coleção</a>
+      </div>
+      <div class="w-full max-w-lg overflow-hidden rounded-3xl shadow-xl animate-fadeInUp">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa usando roupa moderna" class="w-full object-cover object-center" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-10 text-center tracking-wide">Coleção Destaque</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <article class="bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-[1.03] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina casual" class="w-full h-64 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Blusa Casual Confort</h3>
+          <p class="text-gray-600 mb-4">Perfeita para o dia a dia, com tecido leve e toque macio.</p>
+          <span class="block font-bold text-indigo-700 text-lg">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-[1.03] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-64 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Calça Jeans Skinny</h3>
+          <p class="text-gray-600 mb-4">Modelagem ajustada que valoriza a silhueta com conforto.</p>
+          <span class="block font-bold text-indigo-700 text-lg">R$ 179,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-[1.03] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1520975698519-60f5e3e8f7a3?auto=format&fit=crop&w=600&q=80" alt="Vestido floral elegante" class="w-full h-64 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Vestido Floral Elegance</h3>
+          <p class="text-gray-600 mb-4">Leve e sofisticado, perfeito para ocasiões especiais.</p>
+          <span class="block font-bold text-indigo-700 text-lg">R$ 249,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-[1.03] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Suéter masculino casual" class="w-full h-64 object-cover" loading="lazy" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Suéter Masculino Soft</h3>
+          <p class="text-gray-600 mb-4">Ideal para dias frescos, com toque aveludado e design clean.</p>
+          <span class="block font-bold text-indigo-700 text-lg">R$ 199,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="acessorios" class="bg-indigo-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center">Acessórios Exclusivos</h2>
+      <div class="flex flex-col md:flex-row md:justify-center md:space-x-12 space-y-10 md:space-y-0">
+        <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno" class="w-full h-72 object-cover" loading="lazy" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Relógio Minimalista</h3>
+            <p class="text-gray-700 mb-4">Design clean com pulseira em couro legítimo.</p>
+            <span class="font-bold text-indigo-700 text-lg">R$ 329,90</span>
+          </div>
+        </div>
+        <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina elegante" class="w-full h-72 object-cover" loading="lazy" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Bolsa de Couro Premium</h3>
+            <p class="text-gray-700 mb-4">Compacta, elegante e perfeita para qualquer ocasião.</p>
+            <span class="font-bold text-indigo-700 text-lg">R$ 499,90</span>
+          </div>
+        </div>
+        <div class="max-w-xs bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Chapéu estiloso" class="w-full h-72 object-cover" loading="lazy" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-600 mb-3">Chapéu Fedora</h3>
+            <p class="text-gray-700 mb-4">Estilo vintage que nunca sai de moda.</p>
+            <span class="font-bold text-indigo-700 text-lg">R$ 149,90</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 tracking-wide">Quem Somos</h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-6">Na RFM de Souza, acreditamos que a moda é uma forma de expressão e empoderamento. Com mais de 15 anos no mercado, selecionamos cuidadosamente roupas e acessórios que aliam qualidade, conforto e estilo para você se sentir sempre confiante.</p>
+        <p class="text-gray-700 text-lg leading-relaxed">Nossa missão é oferecer peças que acompanhem as tendências sem perder a essência do design atemporal, com atendimento humanizado e compromisso ambiental.</p>
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-lg max-h-[480px]">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="bg-indigo-50 py-16">
+    <div class="max-w-xl mx-auto px-6 bg-white rounded-3xl shadow-lg p-10">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-8 text-center tracking-wide">Fale Conosco</h2>
+      <form action="#" method="POST" class="space-y-6" novalidate>
+        <div>
+          <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome Completo</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-gray-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg shadow-md hover:bg-indigo-700 transition">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-300 py-12 mt-16 select-text">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">CNPJ</h3>
+      <p class="text-lg font-mono">53.262.349/0001-68</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Razão Social</h3>
+      <p class="text-lg font-mono">RFM DE SOUZA LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">E-mail</h3>
+      <p class="text-lg font-mono">OLIVEIRASUPER1@GMAIL.COM</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Telefone</h3>
+      <p class="text-lg font-mono"><span id="telefone-comercial">63-984134940</span></p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Logradouro</h3>
+      <p class="text-lg font-mono">RUA RAIMUNDO NONATO SANTANA, 171</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Bairro</h3>
+      <p class="text-lg font-mono">CENTRO</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Município</h3>
+      <p class="text-lg font-mono">CAMPOS LINDOS</p>
+    </div>
+    <div>
+      <h3 class="text-indigo-400 uppercase font-semibold tracking-wider mb-3">Estado</h3>
+      <p class="text-lg font-mono">TO</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 mt-10 border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 font-medium space-y-3 sm:space-y-0">
+    <p>© 2024 RFM de Souza. Todos os direitos reservados.</p>
+    <div class="flex space-x-6">
+      <a href="#" class="hover:text-indigo-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-400 transition">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+  });
+
+  // Simple fadeIn animations using Tailwind and custom classes
+  document.querySelectorAll('.animate-fadeInDown').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(-20px)';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+    }, 100);
+  });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+    }, 300);
+  });
+  document.querySelectorAll('.animate-fadeIn').forEach(el => {
+    el.style.opacity = 0;
+    setTimeout(() => {
+      el.style.transition = 'opacity 1s ease';
+      el.style.opacity = 1;
+    }, 500);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="c0e9hyzzv7el27l4oglfs0fh016u2m" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiwi Midnight - Loja de Roupas & Acessórios</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  <style>
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-lime-400 selection:text-gray-900">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-3xl font-extrabold text-lime-600 tracking-tight hover:text-lime-700 transition">KIWI MIDNIGHT</a>
+    <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-lime-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-lime-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-lime-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-lime-600 transition">Contato</a></li>
+    </ul>
+    <button id="btn-menu" aria-label="Abrir menu" class="md:hidden text-lime-600 hover:text-lime-700 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden bg-white shadow-lg hidden">
+    <ul class="flex flex-col p-4 space-y-3 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-lime-600 transition block">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-lime-600 transition block">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-lime-600 transition block">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-lime-600 transition block">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="relative">
+  <!-- Seção Hero -->
+  <section class="relative h-screen flex items-center justify-center bg-gradient-to-br from-lime-200 via-white to-lime-100 overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1470&q=80" alt="Moda feminina moderna" class="absolute inset-0 w-full h-full object-cover object-center brightness-75 saturate-125" />
+    <div class="relative z-10 max-w-4xl text-center px-6">
+      <h1 class="text-5xl sm:text-6xl font-extrabold text-lime-900 drop-shadow-lg animate-pulse-slow">Viva Seu Estilo com Kiwi Midnight</h1>
+      <p class="mt-6 text-lg sm:text-xl max-w-xl mx-auto text-lime-800/90 font-medium leading-relaxed">Moda contemporânea em vestuário e acessórios que combinam conforto, estilo e sustentabilidade.</p>
+      <a href="#colecao" class="inline-block mt-10 px-8 py-3 bg-lime-600 text-white font-semibold rounded-lg shadow-lg hover:bg-lime-700 focus:outline-none focus:ring-4 focus:ring-lime-400 transition">Conheça a Coleção</a>
+    </div>
+  </section>
+
+  <!-- Seção Coleção de Vestuário -->
+  <section id="colecao" class="container mx-auto px-6 py-16 md:py-24">
+    <h2 class="text-4xl font-extrabold text-lime-800 mb-10 text-center tracking-wide">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Blusa casual feminina" class="w-full h-64 object-cover" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-lime-700 mb-2">Blusa Casual Fresh</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Leve e confortável, perfeita para o dia a dia com toque de modernidade e cor.</p>
+          <span class="text-lime-600 font-bold text-lg">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a03?auto=format&fit=crop&w=800&q=80" alt="Calça jeans masculina" class="w-full h-64 object-cover" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-lime-700 mb-2">Calça Jeans Slim Fit</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Denim premium com corte moderno para garantir estilo e conforto o dia todo.</p>
+          <span class="text-lime-600 font-bold text-lg">R$ 249,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1520975693180-4d7ee1e2c1b5?auto=format&fit=crop&w=800&q=80" alt="Vestido elegante feminino" class="w-full h-64 object-cover" />
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold text-lime-700 mb-2">Vestido Elegante Floral</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Estampa exclusiva com caimento perfeito para ocasiões especiais.</p>
+          <span class="text-lime-600 font-bold text-lg">R$ 299,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Seção Acessórios -->
+  <section id="acessorios" class="bg-lime-50 py-16 md:py-24">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-lime-900 mb-12 text-center tracking-wide">Acessórios que Definem Você</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Relógio masculino" class="w-28 h-28 object-cover rounded-full mb-4" />
+          <h3 class="text-xl font-semibold text-lime-700 mb-1">Relógio Minimalista</h3>
+          <p class="text-gray-600 text-center mb-3">Design clean para acompanhar seu ritmo com elegância.</p>
+          <span class="text-lime-600 font-bold">R$ 399,00</span>
+        </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol feminino" class="w-28 h-28 object-cover rounded-full mb-4" />
+          <h3 class="text-xl font-semibold text-lime-700 mb-1">Óculos de Sol Vintage</h3>
+          <p class="text-gray-600 text-center mb-3">Proteção UV com estilo retrô que nunca sai de moda.</p>
+          <span class="text-lime-600 font-bold">R$ 199,00</span>
+        </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=400&q=80" alt="Bolsa feminina" class="w-28 h-28 object-cover rounded-full mb-4" />
+          <h3 class="text-xl font-semibold text-lime-700 mb-1">Bolsa Tiracolo Urbana</h3>
+          <p class="text-gray-600 text-center mb-3">Compacta, funcional e cheia de atitude para o dia a dia.</p>
+          <span class="text-lime-600 font-bold">R$ 279,00</span>
+        </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Chapéu casual" class="w-28 h-28 object-cover rounded-full mb-4" />
+          <h3 class="text-xl font-semibold text-lime-700 mb-1">Chapéu Casual Panamá</h3>
+          <p class="text-gray-600 text-center mb-3">Proteção e estilo para os dias ensolarados com toque moderno.</p>
+          <span class="text-lime-600 font-bold">R$ 149,00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Sobre Nós -->
+  <section id="sobre" class="container mx-auto px-6 py-16 md:py-24">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Equipe da Kiwi Midnight" class="rounded-3xl shadow-lg w-full md:w-1/2 object-cover" />
+      <div class="w-full md:w-1/2 space-y-6">
+        <h2 class="text-4xl font-extrabold text-lime-800 tracking-wide">Nossa História & Missão</h2>
+        <p class="text-gray-700 leading-relaxed text-lg">Na Kiwi Midnight, acreditamos que roupas são mais do que apenas tecidos – são expressões de personalidade e estilo. Fundada em 2010, nossa missão é oferecer peças cuidadosamente selecionadas que unem tendência, qualidade e sustentabilidade, respeitando o meio ambiente e valorizando o conforto.</p>
+        <p class="text-gray-700 leading-relaxed text-lg">Nosso compromisso é com você, cliente, que busca autenticidade e inovação sem abrir mão da responsabilidade social e ambiental.</p>
+        <a href="#contato" class="inline-block mt-4 px-6 py-3 bg-lime-600 text-white font-semibold rounded-lg shadow-md hover:bg-lime-700 focus:ring-4 focus:ring-lime-400 transition">Fale Conosco</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Contato -->
+  <section id="contato" class="bg-lime-50 py-16 md:py-24">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <h2 class="text-4xl font-extrabold text-lime-900 mb-10 text-center tracking-wide">Entre em Contato</h2>
+      <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0">
+          <input type="text" name="nome" required placeholder="Seu nome" class="flex-1 rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-500 transition" />
+          <input type="email" name="email" required placeholder="Seu e-mail" class="flex-1 rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-500 transition" />
+        </div>
+        <input type="text" name="assunto" placeholder="Assunto" class="w-full rounded-md border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-500 transition" />
+        <textarea name="mensagem" required rows="5" placeholder="Sua mensagem" class="w-full rounded-md border border-gray-300 px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-500 transition"></textarea>
+        <button type="submit" class="w-full bg-lime-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-lime-700 focus:ring-4 focus:ring-lime-400 transition">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-gray-900 text-gray-300 py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl">
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">CNPJ</h3>
+      <p>83.034.074/0001-76</p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Razão Social</h3>
+      <p>KIWI MIDNIGHT SERVICOS ADMINISTRATIVOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">E-mail</h3>
+      <p><a href="mailto:DATAFIX.SOCIETARIO@GMAIL.COM" class="hover:text-lime-400 transition">DATAFIX.SOCIETARIO@GMAIL.COM</a></p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Telefone</h3>
+      <p><span id="telefone-comercial" class="font-mono text-lime-500">(11) 95273-9434</span></p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Logradouro</h3>
+      <p>RUA CHILE, 470</p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Bairro</h3>
+      <p>GUARITUBA</p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Município</h3>
+      <p>PIRAQUARA</p>
+    </div>
+    <div>
+      <h3 class="text-lime-400 uppercase font-semibold mb-2 tracking-widest">Estado</h3>
+      <p>PR</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm space-x-8">
+    <a href="#" class="hover:text-lime-400 transition font-semibold">Termos de Uso</a>
+    <a href="#" class="hover:text-lime-400 transition font-semibold">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>
