@@ -35,7 +35,12 @@ class AdsPowerClient:
     def _get(self, path: str, **params):
         for attempt in range(3):
             self._throttle()
-            r = self.session.get(f"{self.base}{path}", params=params, timeout=30)
+            try:
+                r = self.session.get(f"{self.base}{path}", params=params, timeout=30)
+            except requests.exceptions.ConnectionError:
+                raise RuntimeError(
+                    "AdsPower não está em execução. Abra o AdsPower e tente novamente."
+                )
             r.raise_for_status()
             data = r.json()
             if data.get("code") not in (0,):
@@ -48,7 +53,12 @@ class AdsPowerClient:
 
     def _post(self, path: str, body: dict):
         for attempt in range(3):
-            r = self.session.post(f"{self.base}{path}", json=body, timeout=30)
+            try:
+                r = self.session.post(f"{self.base}{path}", json=body, timeout=30)
+            except requests.exceptions.ConnectionError:
+                raise RuntimeError(
+                    "AdsPower não está em execução. Abra o AdsPower e tente novamente."
+                )
             r.raise_for_status()
             data = r.json()
             if data.get("code") not in (0,):
