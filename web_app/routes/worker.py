@@ -8,6 +8,9 @@ from datetime import datetime
 from functools import wraps
 from pathlib import Path
 
+import threading
+import uuid as _uuid
+
 from flask import Blueprint, request, jsonify, current_app, send_file
 from .. import db
 from ..models import (ProfileSnapshot, VerifyJob, WabaRecord, WorkerCommand,
@@ -242,12 +245,57 @@ def gerador_inject_meta_tag(run_id: int):
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+# poll_id → {"status": "pending"|"done"|"error", "run_id": int, "error": str}
+_gen_jobs: dict = {}
+
+
+def _run_generation(poll_id: str, app):
+    with app.app_context():
+        try:
+            from services.cnpj_pipeline import generate_cnpj_run
+            run = generate_cnpj_run()
+            _gen_jobs[poll_id] = {"status": "done", "run_id": run.id}
+        except Exception as e:
+            _gen_jobs[poll_id] = {"status": "error", "error": str(e)}
+
+
 @bp.route("/gerador/acquire-run", methods=["POST"])
 @_require_key
 def gerador_acquire_run():
-    from services.cnpj_pipeline import acquire_run
-    try:
-        run_id = acquire_run()
-        return jsonify({"run_id": run_id, "source": "remote"})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    from web_app.models import CNPJRun
+    from datetime import datetime
+
+    # Fast path: claim from pre-generated bank
+    pre = (
+        CNPJRun.query
+        .filter_by(is_pre_generated=True, claimed_at=None)
+        .order_by(CNPJRun.created_at.asc())
+        .first()
+    )
+    if pre:
+        pre.claimed_at = datetime.utcnow()
+        db.session.commit()
+        return jsonify({"run_id": pre.id, "source": "bank"})
+
+    # Bank empty — start async generation and return a poll handle
+    poll_id = str(_uuid.uuid4())
+    _gen_jobs[poll_id] = {"status": "pending"}
+    app = current_app._get_current_object()
+    t = threading.Thread(target=_run_generation, args=(poll_id, app), daemon=True)
+    t.start()
+    return jsonify({"status": "pending", "poll_id": poll_id}), 202
+
+
+@bp.route("/gerador/acquire-run/<poll_id>", methods=["GET"])
+@_require_key
+def gerador_acquire_run_poll(poll_id: str):
+    job = _gen_jobs.get(poll_id)
+    if job is None:
+        return jsonify({"error": "poll_id not found"}), 404
+    if job["status"] == "pending":
+        return jsonify({"status": "pending"}), 202
+    # Remove entry after it's been consumed
+    _gen_jobs.pop(poll_id, None)
+    if job["status"] == "done":
+        return jsonify({"status": "done", "run_id": job["run_id"], "source": "generated"})
+    return jsonify({"status": "error", "error": job.get("error", "unknown")}), 500

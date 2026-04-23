@@ -7,8 +7,20 @@ Drop-in replacement for GeradorService — same method signatures and return typ
 """
 import os
 import tempfile
+import time
 
 import requests
+
+
+def _check(r: requests.Response) -> requests.Response:
+    """Raise with the server's JSON error body when the response is not 2xx."""
+    if not r.ok:
+        try:
+            detail = r.json().get("error", r.text[:300])
+        except Exception:
+            detail = r.text[:300]
+        raise RuntimeError(f"VPS {r.status_code}: {detail}")
+    return r
 
 
 class GeradorRemoteClient:
@@ -22,8 +34,7 @@ class GeradorRemoteClient:
             headers=self.headers,
             timeout=30,
         )
-        r.raise_for_status()
-        return r.json()
+        return _check(r).json()
 
     def download_pdf(self, run_id: int, dest_path: str | None = None) -> str:
         r = requests.get(
@@ -32,7 +43,7 @@ class GeradorRemoteClient:
             timeout=60,
             stream=True,
         )
-        r.raise_for_status()
+        _check(r)
         if dest_path is None:
             fd, dest_path = tempfile.mkstemp(suffix=".pdf")
             os.close(fd)
@@ -48,12 +59,10 @@ class GeradorRemoteClient:
             json={"phone": phone_local},
             timeout=60,
         )
-        r.raise_for_status()
-        data = r.json()
+        data = _check(r).json()
         if not data.get("success"):
             raise RuntimeError(f"change-phone falhou: {data.get('error')}")
         phone_formatted = data["phone_formatted"]
-        # Fetch the regenerated PDF
         pdf_path = self.download_pdf(run_id)
         return phone_formatted, pdf_path
 
@@ -64,8 +73,7 @@ class GeradorRemoteClient:
             json={"phone": phone_local},
             timeout=60,
         )
-        r.raise_for_status()
-        return r.json().get("success", False)
+        return _check(r).json().get("success", False)
 
     def inject_meta_tag(self, run_id: int, meta_tag: str) -> bool:
         r = requests.post(
@@ -74,17 +82,34 @@ class GeradorRemoteClient:
             json={"meta_tag": meta_tag},
             timeout=60,
         )
-        r.raise_for_status()
-        return r.json().get("success", False)
+        return _check(r).json().get("success", False)
 
     def acquire_run(self) -> dict:
         r = requests.post(
             f"{self.base}/worker/gerador/acquire-run",
             headers=self.headers,
-            timeout=60,
+            timeout=30,
         )
-        r.raise_for_status()
-        return r.json()
+        data = _check(r).json()
+        if data.get("status") != "pending":
+            return data  # bank hit — immediate return
+
+        # Bank was empty; VPS is generating async — poll until done
+        poll_id = data["poll_id"]
+        for _ in range(40):  # up to ~10 minutes (40 × 15 s)
+            time.sleep(15)
+            r2 = requests.get(
+                f"{self.base}/worker/gerador/acquire-run/{poll_id}",
+                headers=self.headers,
+                timeout=15,
+            )
+            d2 = _check(r2).json()
+            if d2.get("status") == "done":
+                return d2
+            if d2.get("status") == "error":
+                raise RuntimeError(f"Gerador generation failed: {d2.get('error')}")
+            # status == "pending" → keep polling
+        raise TimeoutError("Gerador acquire-run timed out after 10 minutes")
 
     def wait_for_run(self, *args, **kwargs) -> int:  # noqa: ARG002
         raise NotImplementedError(
