@@ -3,6 +3,7 @@ AdsPower local API client.
 Handles profile CRUD, group management, and browser open/close.
 """
 import time
+import threading
 import requests
 
 # Desktop Windows Chrome UA injected into every new profile so FB never sees mobile
@@ -14,36 +15,49 @@ _DESKTOP_UA = (
 
 
 class AdsPowerClient:
+    _last_request_at: float = 0.0  # shared across all instances
+    _throttle_lock = threading.Lock()
+
     def __init__(self, base_url: str = "http://local.adspower.net:50325"):
         self.base = base_url.rstrip("/")
         self.session = requests.Session()
-        self._last_request_at: float = 0.0  # epoch seconds
 
     # ── low-level ────────────────────────────────────────────────────────────
 
     def _throttle(self, min_interval: float = 1.1):
-        """Ensure at least *min_interval* seconds between consecutive API calls."""
-        elapsed = time.time() - self._last_request_at
-        if elapsed < min_interval:
-            time.sleep(min_interval - elapsed)
-        self._last_request_at = time.time()
+        """Ensure at least *min_interval* seconds between consecutive API calls, across all instances."""
+        with AdsPowerClient._throttle_lock:
+            elapsed = time.time() - AdsPowerClient._last_request_at
+            if elapsed < min_interval:
+                time.sleep(min_interval - elapsed)
+            AdsPowerClient._last_request_at = time.time()
 
     def _get(self, path: str, **params):
-        self._throttle()
-        r = self.session.get(f"{self.base}{path}", params=params, timeout=30)
-        r.raise_for_status()
-        data = r.json()
-        if data.get("code") not in (0,):
-            raise RuntimeError(f"AdsPower error [{path}]: {data.get('msg')} | params={params}")
-        return data.get("data", {})
+        for attempt in range(3):
+            self._throttle()
+            r = self.session.get(f"{self.base}{path}", params=params, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            if data.get("code") not in (0,):
+                msg = data.get("msg", "")
+                if "Too many" in msg and attempt < 2:
+                    time.sleep(2 ** (attempt + 1))
+                    continue
+                raise RuntimeError(f"AdsPower error [{path}]: {msg} | params={params}")
+            return data.get("data", {})
 
     def _post(self, path: str, body: dict):
-        r = self.session.post(f"{self.base}{path}", json=body, timeout=30)
-        r.raise_for_status()
-        data = r.json()
-        if data.get("code") not in (0,):
-            raise RuntimeError(f"AdsPower error [{path}]: {data.get('msg')} | body={body}")
-        return data.get("data", {})
+        for attempt in range(3):
+            r = self.session.post(f"{self.base}{path}", json=body, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            if data.get("code") not in (0,):
+                msg = data.get("msg", "")
+                if "Too many" in msg and attempt < 2:
+                    time.sleep(2 ** (attempt + 1))
+                    continue
+                raise RuntimeError(f"AdsPower error [{path}]: {msg} | body={body}")
+            return data.get("data", {})
 
     # ── groups ────────────────────────────────────────────────────────────────
 
@@ -136,15 +150,7 @@ class AdsPowerClient:
         params = {"user_id": user_id}
         if headless:
             params["headless"] = "1"
-        # AdsPower may return -1 if another instance is already open; retry once
-        for attempt in range(2):
-            try:
-                return self._get("/api/v1/browser/start", **params)
-            except RuntimeError as e:
-                if attempt == 0 and "Too many" in str(e):
-                    time.sleep(2)
-                    continue
-                raise
+        return self._get("/api/v1/browser/start", **params)
 
     def close_browser(self, user_id: str):
         """Stop the profile browser (best-effort)."""
