@@ -25,8 +25,11 @@ def _sqlite_migrate(db):
         ("verify_job", "scheduled_at",    "DATETIME"),
         # profile_snapshot new columns
         ("profile_snapshot", "user_id",   "INTEGER"),
-        # waba_record proxy
+        # waba_record proxy + errors
         ("waba_record", "proxy_port",     "INTEGER"),
+        ("waba_record", "last_error",     "TEXT"),
+        ("waba_record", "error_count",    "INTEGER DEFAULT 0"),
+        ("waba_record", "last_screenshot","VARCHAR(512)"),
         # system_setting is created via db.create_all() — no ALTER needed
     ]
     for table, column, col_type in migrations:
@@ -35,6 +38,31 @@ def _sqlite_migrate(db):
             db.session.commit()
         except Exception:
             db.session.rollback()  # Column already exists — that's fine
+
+
+def _postgres_migrate(db):
+    """Add new columns to existing PostgreSQL tables without losing data."""
+    migrations = [
+        ("verify_job",        "waba_record_id",   "INTEGER"),
+        ("verify_job",        "job_type",          "VARCHAR(32) DEFAULT 'create_verify'"),
+        ("verify_job",        "priority",          "INTEGER DEFAULT 0"),
+        ("verify_job",        "retry_count",       "INTEGER DEFAULT 0"),
+        ("verify_job",        "max_retries",       "INTEGER DEFAULT 3"),
+        ("verify_job",        "scheduled_at",      "TIMESTAMP"),
+        ("profile_snapshot",  "user_id",           "INTEGER"),
+        ("waba_record",       "proxy_port",        "INTEGER"),
+        ("waba_record",       "last_error",        "TEXT"),
+        ("waba_record",       "error_count",       "INTEGER DEFAULT 0"),
+        ("waba_record",       "last_screenshot",   "VARCHAR(512)"),
+    ]
+    for table, column, col_type in migrations:
+        try:
+            db.session.execute(
+                db.text(f"ALTER TABLE {table} ADD COLUMN IF NOT EXISTS {column} {col_type}")
+            )
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
 
 
 def create_app():
@@ -91,8 +119,9 @@ def create_app():
                 db.session.commit()
                 _sqlite_migrate(db)
             else:
-                # PostgreSQL — create all tables directly (migrations handled via flask db upgrade)
+                # PostgreSQL — create tables then apply incremental column additions
                 db.create_all()
+                _postgres_migrate(db)
 
             # Reset jobs left running from a previous restart
             from .models import VerifyJob
