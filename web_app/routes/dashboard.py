@@ -400,12 +400,13 @@ def delete_waba(waba_id: int):
         return jsonify({"ok": False, "error": "Não é possível deletar um perfil em execução"}), 400
 
     if waba.profile_id:
-        try:
-            _adspower().delete_profile(waba.profile_id)
-        except Exception as e:
-            log_event("warning", "profile", f"AdsPower delete falhou para {waba.profile_id}: {e}",
+        from .agent_ws import push_to_agent, is_agent_connected
+        if is_agent_connected(current_user.id):
+            push_to_agent(current_user.id, {"type": "delete_profile", "profile_id": waba.profile_id})
+        else:
+            log_event("warning", "profile",
+                      f"Agent desconectado — perfil {waba.profile_id} não deletado do AdsPower",
                       user_id=current_user.id, profile_id=waba.profile_id)
-            return jsonify({"ok": False, "error": f"Falha ao deletar perfil no AdsPower: {e}"}), 500
 
     delete_waba_cascade(waba)
     db.session.commit()
@@ -422,8 +423,10 @@ def bulk_delete():
     if not waba_ids:
         return jsonify({"ok": False, "error": "Nenhuma WABA selecionada"}), 400
 
+    from .agent_ws import push_to_agent, is_agent_connected
+    agent_connected = is_agent_connected(current_user.id)
+
     deleted = 0
-    ads = _adspower()
     for waba_id in waba_ids:
         waba = db.session.get(WabaRecord, waba_id)
         if not waba or waba.status == WABA_STATUS_EXECUTANDO:
@@ -431,12 +434,12 @@ def bulk_delete():
         if not current_user.is_admin and waba.user_id and waba.user_id != current_user.id:
             continue
         if waba.profile_id:
-            try:
-                ads.delete_profile(waba.profile_id)
-            except Exception as e:
-                log_event("warning", "profile", f"AdsPower delete falhou para {waba.profile_id}: {e}",
+            if agent_connected:
+                push_to_agent(current_user.id, {"type": "delete_profile", "profile_id": waba.profile_id})
+            else:
+                log_event("warning", "profile",
+                          f"Agent desconectado — perfil {waba.profile_id} não deletado do AdsPower",
                           user_id=current_user.id, profile_id=waba.profile_id)
-                continue  # skip DB delete — profile still exists in AdsPower
         delete_waba_cascade(waba)
         deleted += 1
 
@@ -516,11 +519,15 @@ def change_proxy(waba_id: int):
         "proxy_password": PROXY_PASS,
     }
 
-    try:
-        client = _adspower()
-        client.update_profile(waba.profile_id, user_proxy_config=proxy_config)
-    except Exception as e:
-        return jsonify({"ok": False, "error": f"Erro ao atualizar proxy no AdsPower: {e}"}), 500
+    from .agent_ws import push_to_agent, is_agent_connected
+    if not is_agent_connected(current_user.id):
+        return jsonify({"ok": False, "error": "Agent não conectado. Abra o Client Verificador e conecte-se."}), 503
+
+    push_to_agent(current_user.id, {
+        "type":         "change_proxy",
+        "profile_id":   waba.profile_id,
+        "proxy_config": proxy_config,
+    })
 
     waba.proxy_port = new_port
     db.session.commit()

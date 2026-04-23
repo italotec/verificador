@@ -276,6 +276,25 @@ async def _handle_run_job(msg: dict, outbox: asyncio.Queue, log):
         await outbox.put(json.dumps(result))
 
 
+async def _handle_change_proxy(msg: dict, log):
+    profile_id   = msg.get("profile_id", "")
+    proxy_config = msg.get("proxy_config", {})
+    try:
+        await asyncio.to_thread(_client.update_profile, profile_id, user_proxy_config=proxy_config)
+        log(f"[CMD] Proxy atualizado para {profile_id}")
+    except Exception as e:
+        log(f"[CMD] Erro ao atualizar proxy para {profile_id}: {e}")
+
+
+async def _handle_delete_profile(msg: dict, log):
+    profile_id = msg.get("profile_id", "")
+    try:
+        await asyncio.to_thread(_client.delete_profile, profile_id)
+        log(f"[CMD] Perfil {profile_id} deletado do AdsPower")
+    except Exception as e:
+        log(f"[CMD] Erro ao deletar perfil {profile_id}: {e}")
+
+
 async def _handle_open_browser(msg: dict, outbox: asyncio.Queue, log):
     profile_id = msg.get("profile_id", "")
     cmd_id     = msg.get("cmd_id")
@@ -301,6 +320,10 @@ async def _receiver(ws, outbox: asyncio.Queue, log, stop: asyncio.Event):
             asyncio.create_task(_handle_run_job(msg, outbox, log))
         elif t == "open_browser":
             asyncio.create_task(_handle_open_browser(msg, outbox, log))
+        elif t == "change_proxy":
+            asyncio.create_task(_handle_change_proxy(msg, log))
+        elif t == "delete_profile":
+            asyncio.create_task(_handle_delete_profile(msg, log))
         elif t == "sync_request":
             asyncio.create_task(_sync_profiles(outbox, log))
 
