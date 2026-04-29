@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moda & Acessórios | Loja Completa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-in {
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+    .btn-glow {
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 15px rgb(168 85 247 / 0.7);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header / Navbar -->
+  <header class="fixed w-full z-30 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-12">
+      <a href="#" class="text-3xl font-semibold tracking-tight text-purple-700 drop-shadow-lg hover:text-purple-600 transition">VestiLux</a>
+      <ul class="hidden md:flex space-x-10 text-gray-700 font-semibold">
+        <li><a href="#colecao" class="hover:text-purple-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="hover:text-purple-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-purple-600 transition">Sobre</a></li>
+        <li><a href="#contato" class="hover:text-purple-600 transition">Contato</a></li>
+      </ul>
+      <button aria-label="Menu" id="btn-menu" class="md:hidden text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="menu-mobile" class="md:hidden bg-white shadow-lg border-t border-gray-200 hidden">
+      <ul class="flex flex-col space-y-3 p-6 text-gray-700 font-semibold">
+        <li><a href="#colecao" class="block hover:text-purple-600 transition">Coleção</a></li>
+        <li><a href="#acessorios" class="block hover:text-purple-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-purple-600 transition">Sobre</a></li>
+        <li><a href="#contato" class="block hover:text-purple-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="pt-24">
+
+    <!-- Hero Section -->
+    <section aria-label="Apresentação principal" class="relative bg-gradient-to-br from-purple-50 to-indigo-50 overflow-hidden">
+      <div class="container mx-auto px-6 md:px-12 lg:flex lg:items-center lg:justify-between py-20">
+        <div class="max-w-2xl fade-in" style="animation-delay: 0.2s;">
+          <h1 class="text-5xl font-extrabold text-purple-700 leading-tight drop-shadow-md">Sua Moda, Seu Estilo</h1>
+          <p class="mt-6 text-lg text-gray-600 font-light leading-relaxed">Explore as últimas tendências em vestuário e acessórios. Elegância e conforto para todas as ocasiões.</p>
+          <a href="#colecao" class="inline-block mt-8 px-8 py-3 rounded-full bg-purple-600 text-white font-semibold btn-glow shadow-lg hover:bg-purple-700 transition">Ver Coleção</a>
+        </div>
+        <div class="mt-12 lg:mt-0 lg:max-w-lg lg:flex-shrink-0 fade-in" style="animation-delay: 0.4s;">
+          <img
+            src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
+            alt="Mulher elegante vestindo roupa moderna"
+            class="w-full rounded-3xl shadow-xl object-cover aspect-[4/5]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <svg class="absolute -bottom-20 left-0 w-full h-40 text-purple-100" fill="currentColor" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+        <path fill-opacity="0.3" d="M0,224L48,202.7C96,181,192,139,288,154.7C384,171,480,245,576,245.3C672,245,768,171,864,165.3C960,160,1056,224,1152,229.3C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </section>
+
+    <!-- Coleção de Roupas -->
+    <section id="colecao" aria-label="Coleção de roupas" class="container mx-auto px-6 md:px-12 py-20">
+      <h2 class="text-4xl font-bold text-purple-700 mb-10 text-center fade-in" style="animation-delay: 0.2s;">Coleção de Roupas</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 fade-in" style="animation-delay: 0.3s;">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Camisa branca de algodão" loading="lazy" class="w-full h-72 object-cover" />
+          <div class="p-6">
+            <h3 class="font-semibold text-xl text-purple-800 mb-2">Camisa Essential</h3>
+            <p class="text-gray-600 font-light mb-4">Camisa branca 100% algodão, toque macio e caimento perfeito para o dia a dia.</p>
+            <span class="text-purple-600 font-bold text-lg">R$ 129,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 fade-in" style="animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1520975699734-94b84d4a1053?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" loading="lazy" class="w-full h-72 object-cover" />
+          <div class="p-6">
+            <h3 class="font-semibold text-xl text-purple-800 mb-2">Calça Jeans Slim</h3>
+            <p class="text-gray-600 font-light mb-4">Calça jeans azul escuro, modelagem slim, ideal para looks casuais e modernos.</p>
+            <span class="text-purple-600 font-bold text-lg">R$ 189,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-3xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 fade-in" style="animation-delay: 0.5s;">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido floral" loading="lazy" class="w-full h-72 object-cover" />
+          <div class="p-6">
+            <h3 class="font-semibold text-xl text-purple-800 mb-2">Vestido Floral</h3>
+            <p class="text-gray-600 font-light mb-4">Vestido leve com estampa floral, perfeito para dias ensolarados e ocasiões especiais.</p>
+            <span class="text-purple-600 font-bold text-lg">R$ 249,90</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Acessórios -->
+    <section id="acessorios" aria-label="Acessórios da loja" class="bg-indigo-50 py-20">
+      <div class="container mx-auto px-6 md:px-12">
+        <h2 class="text-4xl font-bold text-purple-700 mb-12 text-center fade-in" style="animation-delay: 0.2s;">Acessórios Exclusivos</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-7">
+          <div class="bg-white rounded-2xl shadow-md p-5 flex flex-col items-center fade-in" style="animation-delay: 0.3s;">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno" loading="lazy" class="w-32 h-32 object-cover rounded-lg mb-4" />
+            <h3 class="font-semibold text-lg text-purple-800 mb-1">Relógio Minimalista</h3>
+            <p class="text-gray-600 font-light text-center">Design clean em aço inox, ideal para uso diário.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 flex flex-col items-center fade-in" style="animation-delay: 0.4s;">
+            <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a9f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" loading="lazy" class="w-32 h-32 object-cover rounded-lg mb-4" />
+            <h3 class="font-semibold text-lg text-purple-800 mb-1">Óculos de Sol</h3>
+            <p class="text-gray-600 font-light text-center">Proteção UV 400 com armação leve e confortável.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 flex flex-col items-center fade-in" style="animation-delay: 0.5s;">
+            <img src="https://images.unsplash.com/photo-1536305035173-3e4c1c7e1f59?auto=format&fit=crop&w=400&q=80" alt="Bolsa artesanal" loading="lazy" class="w-32 h-32 object-cover rounded-lg mb-4" />
+            <h3 class="font-semibold text-lg text-purple-800 mb-1">Bolsa Artesanal</h3>
+            <p class="text-gray-600 font-light text-center">Feita à mão com materiais sustentáveis.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 flex flex-col items-center fade-in" style="animation-delay: 0.6s;">
+            <img src="https://images.unsplash.com/photo-1519741491573-bd7a3dce2bc5?auto=format&fit=crop&w=400&q=80" alt="Chapéu de palha" loading="lazy" class="w-32 h-32 object-cover rounded-lg mb-4" />
+            <h3 class="font-semibold text-lg text-purple-800 mb-1">Chapéu de Palha</h3>
+            <p class="text-gray-600 font-light text-center">Estilo e proteção para os dias de sol.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre" aria-label="Sobre a loja" class="container mx-auto px-6 md:px-12 py-20">
+      <div class="max-w-4xl mx-auto text-center fade-in" style="animation-delay: 0.2s;">
+        <h2 class="text-4xl font-bold text-purple-700 mb-8">Quem Somos</h2>
+        <p class="text-gray-700 text-lg font-light leading-relaxed mb-6">A VestiLux nasceu da paixão pela moda que une estilo, conforto e sustentabilidade. Desde 2010, buscamos oferecer peças cuidadosamente selecionadas para clientes que valorizam autenticidade e qualidade.</p>
+        <p class="text-gray-700 text-lg font-light leading-relaxed">Nossa missão é transformar o seu guarda-roupa com roupas e acessórios que contam histórias, respeitando o meio ambiente e promovendo a diversidade cultural. Venha fazer parte dessa experiência única.</p>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" aria-label="Formulário de contato" class="bg-purple-50 py-20">
+      <div class="container mx-auto px-6 md:px-12 max-w-3xl fade-in" style="animation-delay: 0.2s;">
+        <h2 class="text-4xl font-bold text-purple-700 mb-10 text-center">Fale Conosco</h2>
+        <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10">
+          <div class="flex flex-col space-y-6">
+            <label for="nome" class="text-purple-800 font-semibold">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required class="border border-purple-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition" />
+            
+            <label for="email" class="text-purple-800 font-semibold">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required class="border border-purple-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition" />
+            
+            <label for="mensagem" class="text-purple-800 font-semibold">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua mensagem aqui" required class="border border-purple-300 rounded-xl px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 transition"></textarea>
+            
+            <button type="submit" class="bg-purple-600 text-white font-semibold rounded-full px-8 py-3 btn-glow shadow-lg hover:bg-purple-700 transition">Enviar Mensagem</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-purple-900 text-purple-100 py-14">
+    <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-sm sm:text-base">
+      <div>
+        <h3 class="font-semibold text-lg mb-2 border-b border-purple-700 pb-1">Dados da Empresa</h3>
+        <p><span class="font-semibold">CNPJ:</span> 48.351.978/0001-24</p>
+        <p><span class="font-semibold">Razão Social:</span> 48.351.978 LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-2 border-b border-purple-700 pb-1">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> <a href="mailto:THALITAANDREINNA04@GMAIL.COM" class="underline hover:text-purple-300">THALITAANDREINNA04@GMAIL.COM</a></p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">98-985181511</span></p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-2 border-b border-purple-700 pb-1">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> AVENIDA AV MARIANO V NEGREIRO, S/N</p>
+        <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-2 border-b border-purple-700 pb-1">Localização</h3>
+        <p><span class="font-semibold">Município:</span> CEDRAL</p>
+        <p><span class="font-semibold">Estado:</span> MA</p>
+        <nav class="mt-5 flex space-x-6 text-purple-300">
+          <a href="#" class="hover:text-purple-100 underline">Termos de Uso</a>
+          <a href="#" class="hover:text-purple-100 underline">Política de Privacidade</a>
+        </nav>
+      </div>
+    </div>
+    <p class="text-center mt-12 text-purple-400 text-sm select-none">&copy; 2024 VestiLux. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const btnMenu = document.getElementById('btn-menu');
+    const menuMobile = document.getElementById('menu-mobile');
+    btnMenu.addEventListener('click', () => {
+      menuMobile.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

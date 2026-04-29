@@ -568,6 +568,31 @@ def bulk_change_status():
     return jsonify({"ok": True, "changed": changed})
 
 
+@bp.route("/api/wabas/bulk/share", methods=["POST"])
+@login_required
+def bulk_share():
+    data = request.get_json()
+    waba_ids = data.get("waba_ids", [])
+    receiver = (data.get("receiver") or "").strip()
+    content = data.get("content") or None
+
+    if not receiver:
+        return jsonify({"ok": False, "error": "Email do destinatário obrigatório"}), 400
+
+    wabas = WabaRecord.query.filter(WabaRecord.id.in_(waba_ids)).all()
+    profile_ids = [w.profile_id for w in wabas if w.profile_id]
+
+    if not profile_ids:
+        return jsonify({"ok": False, "error": "Nenhum perfil AdsPower encontrado nas WABAs selecionadas"}), 400
+
+    try:
+        client = _adspower()
+        group_name = client.share_profiles(profile_ids, receiver, content)
+        return jsonify({"ok": True, "group_name": group_name, "shared": len(profile_ids)})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
 # ── Legacy: open profile ─────────────────────────────────────────────────────
 
 @bp.route("/api/profile/<profile_id>/open", methods=["POST"])

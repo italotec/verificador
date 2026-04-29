@@ -66,7 +66,7 @@ class AdsPowerClient:
                 if "Too many" in msg and attempt < 2:
                     time.sleep(2 ** (attempt + 1))
                     continue
-                raise RuntimeError(f"AdsPower error [{path}]: {msg} | body={body}")
+                raise RuntimeError(f"AdsPower error [{path}]: {msg}")
             return data.get("data", {})
 
     # ── groups ────────────────────────────────────────────────────────────────
@@ -145,6 +145,13 @@ class AdsPowerClient:
     def move_to_group(self, user_id: str, group_id: str = "0"):
         """Move profile to group_id (use '0' to remove from all groups)."""
         self.update_profile(user_id, group_id=str(group_id))
+
+    def share_profiles(self, profile_ids: list[str], receiver: str, content: list[str] | None = None) -> str:
+        body: dict = {"profile_id": profile_ids, "receiver": receiver, "share_type": 1}
+        if content:
+            body["content"] = content
+        result = self._post("/api/v2/browser-profile/share", body)
+        return result.get("group_name", "")
 
     def delete_profile(self, user_id: str) -> None:
         """Permanently delete a profile from AdsPower."""

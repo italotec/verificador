@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loja Foca - Moda e Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom subtle animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fadeInUp {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-white via-slate-50 to-white text-gray-800 font-sans selection:bg-indigo-300 selection:text-white">
+
+  <!-- Navbar -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50">
+    <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-12">
+      <a href="#home" class="font-extrabold text-indigo-600 text-2xl tracking-tight hover:text-indigo-700 transition">LOJA FOCA</a>
+      <ul class="hidden md:flex space-x-8 font-semibold text-gray-700">
+        <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="#vestuario" class="hover:text-indigo-600 transition">Vestuário</a></li>
+        <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#novidades" class="hover:text-indigo-600 transition">Novidades</a></li>
+        <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+      </ul>
+      <button id="menu-btn" aria-label="Abrir menu"
+        class="md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded text-indigo-600 hover:text-indigo-700 transition">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <line x1="3" y1="7" x2="21" y2="7" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="17" x2="21" y2="17" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="md:hidden bg-white shadow-lg hidden">
+      <ul class="flex flex-col space-y-4 p-6 font-semibold text-gray-700">
+        <li><a href="#home" class="block hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="#vestuario" class="block hover:text-indigo-600 transition">Vestuário</a></li>
+        <li><a href="#acessorios" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#novidades" class="block hover:text-indigo-600 transition">Novidades</a></li>
+        <li><a href="#sobre" class="block hover:text-indigo-600 transition">Sobre</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="pt-20">
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-r from-indigo-50 to-indigo-100 overflow-hidden">
+      <div class="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center min-h-[620px]">
+        <div class="md:w-1/2 text-center md:text-left fadeInUp" style="animation-delay: 0.2s;">
+          <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 leading-tight mb-6">
+            Descubra Seu Estilo <br />Com a Loja Foca
+          </h1>
+          <p class="text-lg md:text-xl text-indigo-900 mb-8 max-w-lg">Moda contemporânea em roupas e acessórios que expressam sua personalidade com conforto e elegância.</p>
+          <a href="#vestuario" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition transform hover:-translate-y-1">Compre Agora</a>
+        </div>
+        <div class="md:w-1/2 overflow-visible relative">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupa moderna" class="rounded-3xl shadow-2xl scale-[1.05] md:scale-100"/>
+          <div class="absolute -bottom-20 -right-16 w-48 h-48 bg-indigo-300 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vestuário Section -->
+    <section id="vestuario" class="container mx-auto px-6 md:px-12 py-16">
+      <h2 class="text-indigo-700 font-extrabold text-4xl mb-8 text-center tracking-wide">Vestuário</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina casual" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"/>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Blusa Casual Feminina</h3>
+            <p class="text-gray-600 mb-3">Conforto e estilo para o dia a dia, tecido leve e toque macio.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 129,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09b78?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"/>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Jeans Masculina</h3>
+            <p class="text-gray-600 mb-3">Denim premium, corte moderno e ajuste perfeito.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 189,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 relative group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Vestido floral" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"/>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Floral</h3>
+            <p class="text-gray-600 mb-3">Estampa delicada, ideal para ocasiões especiais e dias quentes.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 219,90</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Acessórios Section -->
+    <section id="acessorios" class="bg-indigo-50 py-16">
+      <div class="container mx-auto px-6 md:px-12">
+        <h2 class="text-indigo-700 font-extrabold text-4xl mb-8 text-center tracking-wide">Acessórios</h2>
+        <div class="flex flex-col md:flex-row md:justify-center md:space-x-10 space-y-10 md:space-y-0 max-w-7xl mx-auto">
+          <div class="bg-white rounded-3xl shadow-lg p-6 max-w-sm mx-auto hover:shadow-2xl transition cursor-pointer group">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol moderno" class="rounded-xl mb-5 w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <h3 class="text-indigo-700 text-2xl font-semibold mb-2">Óculos de Sol</h3>
+            <p class="text-gray-600 mb-3">Design arrojado e lentes UV para proteção e estilo.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 149,90</span>
+          </div>
+          <div class="bg-white rounded-3xl shadow-lg p-6 max-w-sm mx-auto hover:shadow-2xl transition cursor-pointer group">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Relógio elegante" class="rounded-xl mb-5 w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <h3 class="text-indigo-700 text-2xl font-semibold mb-2">Relógio Elegante</h3>
+            <p class="text-gray-600 mb-3">Pulseira em couro e mostrador minimalista para ocasiões formais e casuais.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 299,90</span>
+          </div>
+          <div class="bg-white rounded-3xl shadow-lg p-6 max-w-sm mx-auto hover:shadow-2xl transition cursor-pointer group">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Bolsa moderna feminina" class="rounded-xl mb-5 w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <h3 class="text-indigo-700 text-2xl font-semibold mb-2">Bolsa Feminina</h3>
+            <p class="text-gray-600 mb-3">Compacta, versátil e com acabamento premium.</p>
+            <span class="text-indigo-600 font-bold text-lg">R$ 249,90</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Novidades Section -->
+    <section id="novidades" class="container mx-auto px-6 md:px-12 py-16">
+      <h2 class="text-indigo-700 font-extrabold text-4xl mb-10 text-center tracking-wide">Novidades</h2>
+      <div class="relative group max-w-5xl mx-auto overflow-hidden rounded-3xl shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1200&q=80" alt="Coleção nova de moda" class="w-full object-cover h-96 md:h-[480px] transition-transform duration-700 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/80 via-indigo-900/40 to-transparent flex flex-col justify-end p-12">
+          <h3 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-3 max-w-xl leading-tight">Coleção Primavera-Verão 2024</h3>
+          <p class="text-indigo-200 text-lg max-w-lg drop-shadow-md">Peças leves, cores vibrantes e designs que acompanham as tendências globais para você renovar o guarda-roupa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="bg-indigo-100 py-16">
+      <div class="container mx-auto px-6 md:px-12 max-w-5xl">
+        <h2 class="text-indigo-700 font-extrabold text-4xl mb-8 text-center tracking-wide">Sobre a Loja Foca</h2>
+        <p class="text-indigo-900 text-lg leading-relaxed mb-6 max-w-3xl mx-auto text-center">
+          Fundada em 2010, a Loja Foca nasceu do desejo de trazer para o mercado uma experiência completa em moda, unindo qualidade,
+          sustentabilidade e atendimento personalizado. Nosso compromisso é ajudar você a encontrar a peça perfeita para cada momento,
+          valorizando o estilo único de cada cliente com coleções pensadas para quem busca autenticidade e conforto.
+        </p>
+        <div class="flex justify-center gap-8">
+          <a href="#vestuario" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition transform hover:-translate-y-1">Conheça o Vestuário</a>
+          <a href="#acessorios" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition transform hover:-translate-y-1">Veja Acessórios</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-900 text-indigo-100 py-12 px-6 md:px-20 select-text">
+    <div class="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-12">
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-indigo-700 pb-2">Empresa</h3>
+        <p><span class="font-semibold">Razão Social:</span> GERONCIO ANTONIO FOCA</p>
+        <p><span class="font-semibold">CNPJ:</span> 24.467.050/0001-41</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-indigo-700 pb-2">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> <a href="mailto:focagera@hotmail.com" class="underline hover:text-indigo-400">FOCAGERA@HOTMAIL.COM</a></p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="inline-block">27-37551120</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-indigo-700 pb-2">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> AVENIDA FLORIANO RUBIM, 827</p>
+        <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-xl mb-4 border-b border-indigo-700 pb-2">Localização</h3>
+        <p><span class="font-semibold">Município:</span> ECOPORANGA</p>
+        <p><span class="font-semibold">Estado:</span> ES</p>
+        <nav class="mt-6 flex space-x-6">
+          <a href="#" class="text-indigo-300 hover:text-indigo-400 underline">Termos de Uso</a>
+          <a href="#" class="text-indigo-300 hover:text-indigo-400 underline">Política de Privacidade</a>
+        </nav>
+      </div>
+    </div>
+    <p class="text-center text-indigo-400 mt-10 text-sm select-none">© 2024 Loja Foca. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking outside or on a link
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

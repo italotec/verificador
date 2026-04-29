@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chalega - Loja de Roupas e Acessórios</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md z-50">
+    <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-12">
+      <a href="#" class="text-3xl font-extrabold text-indigo-600 tracking-wide hover:text-indigo-500 transition">CHALEGA</a>
+      <ul class="hidden md:flex gap-10 font-semibold text-gray-700">
+        <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#destaques" class="hover:text-indigo-600 transition">Destaques</a></li>
+        <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+      <button id="menu-btn" aria-label="Abrir menu" class="md:hidden text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden bg-white shadow-md md:hidden">
+      <ul class="flex flex-col gap-4 p-6 font-semibold text-gray-700">
+        <li><a href="#colecao" class="block hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#destaques" class="block hover:text-indigo-600 transition">Destaques</a></li>
+        <li><a href="#acessorios" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#contato" class="block hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="pt-20">
+
+    <!-- Hero - Apresentação -->
+    <section id="hero" class="relative bg-gradient-to-r from-indigo-50 via-white to-indigo-50 min-h-[80vh] flex items-center">
+      <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6 max-w-xl">
+          <h1 class="text-5xl font-extrabold leading-tight text-indigo-700 drop-shadow-[0_2px_4px_rgba(99,102,241,0.3)] animate-fadeInDown">Estilo que Transforma</h1>
+          <p class="text-lg text-indigo-600 font-medium">Descubra nossa coleção exclusiva de roupas e acessórios que combinam conforto, elegância e modernidade para todas as ocasiões.</p>
+          <a href="#colecao" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-md shadow-lg hover:bg-indigo-700 transition shadow-indigo-400 hover:shadow-indigo-600 animate-bounce">Ver Coleção</a>
+        </div>
+        <div class="relative rounded-xl overflow-hidden shadow-xl animate-fadeInUp">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher com roupa estilosa" class="w-full h-full object-cover aspect-[4/5]" />
+          <div class="absolute bottom-6 left-6 bg-indigo-600 bg-opacity-70 text-white rounded-md px-5 py-3 backdrop-blur-sm font-semibold text-lg">Moda & Acessórios</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coleção - Roupas -->
+    <section id="colecao" class="container mx-auto px-6 md:px-12 py-16 scroll-mt-28">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-10 border-b-4 border-indigo-300 inline-block pb-2">Coleção Primavera/Verão</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-indigo-300 transition overflow-hidden group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Vestido leve feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Leve Floral</h3>
+            <p class="text-gray-600 mb-4">Vestido com estampa floral, ideal para dias quentes e eventos casuais.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 189,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-indigo-300 transition overflow-hidden group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Blusa branca feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Blusa Off-White</h3>
+            <p class="text-gray-600 mb-4">Blusa confortável e versátil para combinar com qualquer look.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 99,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-indigo-300 transition overflow-hidden group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1520975698897-337e2d6d1c20?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Jeans Slim</h3>
+            <p class="text-gray-600 mb-4">Calça jeans slim fit para um visual moderno e confortável.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 149,90</span>
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-indigo-300 transition overflow-hidden group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Jaqueta leve masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">Jaqueta Corta-Vento</h3>
+            <p class="text-gray-600 mb-4">Jaqueta leve e resistente à água para dias com vento e chuva.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 239,90</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Destaques - Looks em destaque -->
+    <section id="destaques" class="bg-indigo-50 py-16 px-6 md:px-12">
+      <div class="container mx-auto max-w-7xl">
+        <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 border-b-4 border-indigo-400 inline-block pb-2">Destaques da Semana</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
+          <div class="relative rounded-xl shadow-2xl overflow-hidden group cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1463107971871-fbac9ddb920f?auto=format&fit=crop&w=800&q=90" alt="Look casual feminino" class="w-full h-[520px] object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-indigo-900/90 to-transparent p-8">
+              <h3 class="text-3xl font-bold text-white drop-shadow-lg">Look Casual Chic</h3>
+              <p class="text-indigo-200 mt-2 max-w-md">Combinação perfeita entre conforto e elegância para o dia a dia.</p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-8">
+            <div class="flex gap-6 rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-indigo-400 transition-shadow">
+              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=200&q=80" alt="Homem com acessório" class="w-32 h-32 object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div class="p-4 flex flex-col justify-center">
+                <h4 class="text-xl font-semibold text-indigo-700">Acessórios Masculinos</h4>
+                <p class="text-gray-600 text-sm">Relógios, pulseiras e carteiras para complementar seu estilo.</p>
+              </div>
+            </div>
+            <div class="flex gap-6 rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-indigo-400 transition-shadow">
+              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=200&q=80" alt="Mulher com bolsa" class="w-32 h-32 object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div class="p-4 flex flex-col justify-center">
+                <h4 class="text-xl font-semibold text-indigo-700">Bolsas Femininas</h4>
+                <p class="text-gray-600 text-sm">Modelos modernos e práticos para qualquer ocasião.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acessórios -->
+    <section id="acessorios" class="container mx-auto px-6 md:px-12 py-16 scroll-mt-28">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-10 border-b-4 border-indigo-300 inline-block pb-2">Acessórios Exclusivos</h2>
+      <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
+        <div class="flex-1 bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow">
+          <img src="https://images.unsplash.com/photo-1556909190-21f2eeb3e6d1?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-700 mb-3">Relógio Clássico</h3>
+            <p class="text-gray-700 mb-4">Elegância atemporal com pulseira em couro legítimo e acabamento refinado.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 399,90</span>
+          </div>
+        </div>
+        <div class="flex-1 bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol feminino" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-700 mb-3">Óculos de Sol</h3>
+            <p class="text-gray-700 mb-4">Design moderno com lentes UV400 para máxima proteção.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 249,90</span>
+          </div>
+        </div>
+        <div class="flex-1 bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Carteira masculina" class="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500" />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-700 mb-3">Carteira de Couro</h3>
+            <p class="text-gray-700 mb-4">Compacta, prática e feita com couro genuíno premium.</p>
+            <span class="font-bold text-indigo-600 text-lg">R$ 179,90</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre" class="bg-white py-16 px-6 md:px-12">
+      <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center md:space-x-16">
+        <div class="flex-1 mb-10 md:mb-0">
+          <h2 class="text-4xl font-extrabold text-indigo-700 mb-6 border-b-4 border-indigo-300 inline-block pb-2">Quem Somos</h2>
+          <p class="text-gray-700 text-lg leading-relaxed mb-6">Na CHALEGA, acreditamos que a moda é uma forma de expressão e transformação. Com anos de experiência no mercado de vestuário e acessórios, oferecemos produtos de alta qualidade, design exclusivo e atendimento personalizado para que você se sinta único(a) em cada peça.</p>
+          <p class="text-gray-700 text-lg leading-relaxed">Nosso compromisso é com a sustentabilidade, valorizando matérias-primas eco-friendly e práticas de produção responsáveis. Venha fazer parte dessa jornada conosco!</p>
+        </div>
+        <div class="flex-1 rounded-xl shadow-xl overflow-hidden animate-fadeInRight">
+          <img src="https://images.unsplash.com/photo-1533777324565-a04df0e527b7?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja de roupas" class="w-full h-full object-cover rounded-xl" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="bg-indigo-50 py-16 px-6 md:px-12 scroll-mt-28">
+      <div class="container mx-auto max-w-3xl bg-white rounded-xl shadow-lg p-10">
+        <h2 class="text-4xl font-extrabold text-indigo-700 mb-8 border-b-4 border-indigo-400 inline-block pb-2">Fale Conosco</h2>
+        <form action="#" method="POST" class="space-y-6">
+          <div>
+            <label for="nome" class="block text-indigo-700 font-semibold mb-2">Nome Completo</label>
+            <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+          </div>
+          <div>
+            <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+          </div>
+          <div>
+            <label for="mensagem" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"></textarea>
+          </div>
+          <button type="submit" class="bg-indigo-600 text-white font-bold px-8 py-3 rounded-md hover:bg-indigo-700 shadow-lg shadow-indigo-400 hover:shadow-indigo-600 transition">Enviar Mensagem</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-900 text-indigo-100 pt-12 pb-8 px-6 md:px-12">
+    <div class="container mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-indigo-700 pb-1">Empresa</h3>
+        <p><span class="font-semibold">CNPJ:</span> 48.553.084/0001-17</p>
+        <p><span class="font-semibold">Razão Social:</span> CHALEGA SERVICOS LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-indigo-700 pb-1">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> MN100SISTEMAS@GMAIL.COM</p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">75-991701758</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-4 border-b border-indigo-700 pb-1">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> PRACA RUI BARBOSA, 41</p>
+        <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+        <p><span class="font-semibold">Município:</span> ACAJUTIBA</p>
+        <p><span class="font-semibold">Estado:</span> BA</p>
+      </div>
+      <div class="flex flex-col justify-between">
+        <h3 class="font-bold text-lg mb-4 border-b border-indigo-700 pb-1">Políticas</h3>
+        <nav class="flex flex-col space-y-3">
+          <a href="#" class="hover:underline hover:text-indigo-300 transition">Termos de Uso</a>
+          <a href="#" class="hover:underline hover:text-indigo-300 transition">Política de Privacidade</a>
+        </nav>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-indigo-400 text-sm select-none">© 2024 CHALEGA SERVICOS LTDA. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Animation classes
+    const fadeInDown = document.createElement('style');
+    fadeInDown.innerHTML = `
+      @keyframes fadeInDown {
+        0% {opacity: 0; transform: translateY(-30px);}
+        100% {opacity: 1; transform: translateY(0);}
+      }
+      .animate-fadeInDown {
+        animation: fadeInDown 1s ease forwards;
+      }
+      @keyframes fadeInUp {
+        0% {opacity: 0; transform: translateY(30px);}
+        100% {opacity: 1; transform: translateY(0);}
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 1s ease forwards;
+      }
+      @keyframes fadeInRight {
+        0% {opacity: 0; transform: translateX(30px);}
+        100% {opacity: 1; transform: translateX(0);}
+      }
+      .animate-fadeInRight {
+        animation: fadeInRight 1s ease forwards;
+      }
+    `;
+    document.head.appendChild(fadeInDown);
+  </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja DNB - Roupas & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-amber-300 selection:text-amber-900">
+
+<header class="bg-white shadow sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#home" class="text-3xl font-extrabold text-amber-600 tracking-tight hover:text-amber-700 transition">DNB</a>
+    <ul class="hidden md:flex space-x-10 text-gray-600 font-semibold">
+      <li><a href="#home" class="hover:text-amber-600 transition">Home</a></li>
+      <li><a href="#colecao" class="hover:text-amber-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-amber-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-amber-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-amber-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden flex flex-col gap-1.5">
+      <span class="block w-6 h-0.5 bg-amber-600 rounded"></span>
+      <span class="block w-6 h-0.5 bg-amber-600 rounded"></span>
+      <span class="block w-6 h-0.5 bg-amber-600 rounded"></span>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+    <ul class="flex flex-col p-4 space-y-4 font-semibold text-amber-700">
+      <li><a href="#home" class="block hover:text-amber-900">Home</a></li>
+      <li><a href="#colecao" class="block hover:text-amber-900">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-amber-900">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-amber-900">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-amber-900">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home" class="relative bg-gradient-to-r from-amber-50 to-amber-100 min-h-[calc(100vh-72px)] flex flex-col justify-center items-center px-6 text-center overflow-hidden">
+    <h1 class="fade-in max-w-4xl text-5xl md:text-6xl font-extrabold text-amber-700 leading-tight drop-shadow-md">Vista sua autenticidade com estilo e elegância</h1>
+    <p class="fade-in delay-200 mt-6 max-w-xl text-lg md:text-xl text-amber-900/80 font-medium">Roupas e acessórios que traduzem sua personalidade. Qualidade, conforto e design para todas as ocasiões.</p>
+    <a href="#colecao" class="fade-in delay-400 inline-block mt-10 rounded-full bg-amber-600 hover:bg-amber-700 transition text-white font-semibold px-10 py-4 shadow-lg shadow-amber-300/50 focus:outline-none focus:ring-4 focus:ring-amber-400">Conheça a Coleção</a>
+    <img src="https://images.unsplash.com/photo-1520962918788-9bb0a2d36300?auto=format&fit=crop&w=1200&q=80" alt="Mulher estilosa vestindo roupa moderna" class="absolute bottom-0 right-0 w-44 md:w-72 opacity-40 select-none pointer-events-none" loading="lazy" />
+  </section>
+
+  <!-- Coleção de Roupas -->
+  <section id="colecao" class="container mx-auto px-6 py-16">
+    <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center drop-shadow-[1px_1px_1px_rgba(251,191,36,0.7)]">Coleção Destaque</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=70" alt="Homem com jaqueta preta moderna" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="font-semibold text-2xl text-amber-700 mb-2">Jaqueta Urban Black</h3>
+          <p class="text-gray-600 mb-4">Jaqueta leve e resistente para dias frescos, design minimalista e elegante.</p>
+          <span class="inline-block font-bold text-amber-600 text-lg">R$ 299,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+        <img src="https://images.unsplash.com/photo-1556909192-3d18f3d3a5f6?auto=format&fit=crop&w=800&q=70" alt="Mulher com vestido amarelo vibrante" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="font-semibold text-2xl text-amber-700 mb-2">Vestido Sunny Days</h3>
+          <p class="text-gray-600 mb-4">Vestido leve e fluido em amarelo vibrante que realça sua energia.</p>
+          <span class="inline-block font-bold text-amber-600 text-lg">R$ 179,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition relative group">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=70" alt="Homem com suéter cinza e jeans" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-6">
+          <h3 class="font-semibold text-2xl text-amber-700 mb-2">Suéter Cozy Grey</h3>
+          <p class="text-gray-600 mb-4">Suéter macio e confortável para o dia a dia com toque premium.</p>
+          <span class="inline-block font-bold text-amber-600 text-lg">R$ 229,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" class="bg-amber-50 py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-12 text-center drop-shadow-[1px_1px_1px_rgba(251,191,36,0.7)]">Acessórios Exclusivos</h2>
+      <div class="flex flex-col lg:flex-row gap-12 justify-center items-center">
+        <div class="max-w-sm bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col items-center">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=70" alt="Bolsa de couro marrom" class="w-full h-64 object-cover" loading="lazy" />
+          <div class="p-6 text-center">
+            <h3 class="font-semibold text-xl text-amber-700 mb-1">Bolsa de Couro Vintage</h3>
+            <p class="text-gray-600 mb-3">Bolsa artesanal com acabamento premium e design atemporal.</p>
+            <span class="font-bold text-amber-600 text-lg">R$ 349,90</span>
+          </div>
+        </div>
+        <div class="max-w-sm bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col items-center">
+          <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=70" alt="Relógio moderno com pulseira preta" class="w-full h-64 object-cover" loading="lazy" />
+          <div class="p-6 text-center">
+            <h3 class="font-semibold text-xl text-amber-700 mb-1">Relógio Minimalista</h3>
+            <p class="text-gray-600 mb-3">Design clean com pulseira de couro legítimo e mostrador elegante.</p>
+            <span class="font-bold text-amber-600 text-lg">R$ 499,90</span>
+          </div>
+        </div>
+        <div class="max-w-sm bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col items-center">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=70" alt="Óculos de sol estiloso" class="w-full h-64 object-cover" loading="lazy" />
+          <div class="p-6 text-center">
+            <h3 class="font-semibold text-xl text-amber-700 mb-1">Óculos de Sol Urbano</h3>
+            <p class="text-gray-600 mb-3">Lentes polarizadas e armação leve para conforto total.</p>
+            <span class="font-bold text-amber-600 text-lg">R$ 259,90</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <h2 class="text-4xl font-extrabold text-amber-700 mb-6 drop-shadow-[1px_1px_1px_rgba(251,191,36,0.7)]">Sobre a DNB</h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">Na DNB, acreditamos que a moda é uma forma poderosa de expressar quem você realmente é. Por isso, selecionamos cuidadosamente cada peça com foco em qualidade, conforto e estilo contemporâneo.</p>
+        <p class="text-gray-700 text-lg leading-relaxed">Nossa missão é oferecer roupas e acessórios que acompanhem você em todos os momentos, com versatilidade e sofisticação, sempre valorizando a autenticidade e o bom gosto.</p>
+      </div>
+      <div class="overflow-hidden rounded-xl shadow-lg">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=70" alt="Equipe da loja estilosa" class="w-full h-full object-cover object-center" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="bg-amber-100 py-16">
+    <div class="container mx-auto px-6 max-w-xl">
+      <h2 class="text-4xl font-extrabold text-amber-700 mb-8 text-center drop-shadow-[1px_1px_1px_rgba(251,191,36,0.7)]">Fale Conosco</h2>
+      <form action="#" method="POST" class="bg-white rounded-xl shadow-lg p-8 space-y-6">
+        <label class="block">
+          <span class="text-gray-700 font-semibold mb-1 block">Nome</span>
+          <input type="text" name="nome" required placeholder="Seu nome completo" class="w-full rounded-md border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition" />
+        </label>
+        <label class="block">
+          <span class="text-gray-700 font-semibold mb-1 block">E-mail</span>
+          <input type="email" name="email" required placeholder="seuemail@email.com" class="w-full rounded-md border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition" />
+        </label>
+        <label class="block">
+          <span class="text-gray-700 font-semibold mb-1 block">Mensagem</span>
+          <textarea name="mensagem" rows="4" required placeholder="Escreva sua mensagem aqui..." class="w-full rounded-md border border-amber-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition resize-none"></textarea>
+        </label>
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 transition text-white font-semibold rounded-full py-3 shadow-md focus:outline-none focus:ring-4 focus:ring-amber-400">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-amber-900 text-amber-100 py-12 mt-16 select-none">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm font-semibold leading-relaxed">
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">CNPJ</h3>
+      <p>56.259.548/0001-05</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Razão Social</h3>
+      <p>DNB ASSESSORIA ADMINISTRATIVA E FINANCEIRA LTDA.</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">E-mail</h3>
+      <p class="lowercase">NABACKES@YAHOO.COM.BR</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Telefone</h3>
+      <p><span id="telefone-comercial">(92) 94687-3310</span></p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Logradouro</h3>
+      <p>AVENIDA PEDRO BACKES, SN</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Bairro</h3>
+      <p>CENTRO</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Município</h3>
+      <p>SINIMBU</p>
+    </div>
+    <div>
+      <h3 class="text-amber-300 mb-2 uppercase tracking-wide">Estado</h3>
+      <p>RS</p>
+    </div>
+  </div>
+  <div class="border-t border-amber-700 mt-10 pt-6 text-center text-amber-300 text-xs flex flex-col sm:flex-row justify-center gap-6">
+    <a href="#" class="hover:text-amber-100 transition">Termos de Uso</a>
+    <a href="#" class="hover:text-amber-100 transition">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Adding subtle fade-in delays
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.animationDelay = `${i * 0.2}s`;
+  });
+</script>
+</body>
+</html>

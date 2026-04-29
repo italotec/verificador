@@ -83,6 +83,7 @@ def create_app():
     from .routes.account import bp as account_bp
     from .routes.profiles import bp as profiles_bp
     from .routes.errors import bp as errors_bp
+    from .routes.cnpj import bp as cnpj_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
@@ -93,6 +94,7 @@ def create_app():
     app.register_blueprint(account_bp)
     app.register_blueprint(profiles_bp)
     app.register_blueprint(errors_bp)
+    app.register_blueprint(cnpj_bp)
 
     @sock.route("/agent/ws")
     def agent_ws_route(ws):

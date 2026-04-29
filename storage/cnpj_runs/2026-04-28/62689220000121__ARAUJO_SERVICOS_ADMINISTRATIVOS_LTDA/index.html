@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja Araujo - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    animation: fadeIn 1.2s ease forwards;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  .btn-hover:hover {
+    background-position: right center;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="bg-white shadow-md fixed w-full z-30">
+  <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#home" class="text-3xl font-semibold text-indigo-600 hover:text-indigo-700 transition">Araujo<span class="text-pink-500">Wear</span></a>
+    <nav class="hidden md:flex gap-8 font-semibold text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a>
+      <a href="#contato" class="hover:text-indigo-600 transition">Contato</a>
+    </nav>
+    <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Abrir menu">
+      <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden bg-white shadow-md md:hidden">
+    <nav class="flex flex-col gap-4 px-6 py-4 font-semibold text-gray-700">
+      <a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a>
+      <a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a>
+      <a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a>
+      <a href="#contato" class="hover:text-indigo-600 transition">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pt-20">
+
+<!-- Seção Home / Hero -->
+<section id="home" class="relative bg-gradient-to-br from-indigo-50 to-pink-50 min-h-[90vh] flex flex-col justify-center items-center text-center px-6 md:px-12 fade-in">
+  <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-indigo-700 drop-shadow-md mb-6 leading-tight max-w-4xl">
+    Descubra o Estilo que Transforma <br class="hidden sm:block" />Sua Personalidade
+  </h1>
+  <p class="text-lg md:text-xl text-indigo-500 max-w-2xl mb-10">Moda feminina e masculina, acessórios únicos para elevar seu visual com elegância e autenticidade.</p>
+  <a href="#colecao" class="inline-block bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 btn-hover bg-[length:200%_100%] bg-left hover:bg-right">
+    Conheça a Coleção
+  </a>
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80" alt="Modelo com roupa estilosa" class="absolute bottom-0 right-0 max-w-[40vw] max-h-[50vh] object-cover rounded-tl-3xl hidden lg:block shadow-lg" loading="lazy" />
+</section>
+
+<!-- Seção Coleção de Roupas -->
+<section id="colecao" class="container mx-auto px-6 py-20 fade-in">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-8 border-l-4 border-pink-500 pl-4 max-w-max">Moda & Vestuário</h2>
+  <p class="text-indigo-600 max-w-xl mb-12 leading-relaxed">Explore nossa seleção exclusiva de roupas com cortes modernos, tecidos sustentáveis e conforto para o dia a dia ou ocasiões especiais.</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-xl shadow-md overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow duration-300">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=70" alt="Jaqueta moderna feminina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-1">Jaqueta Urbana Feminina</h3>
+        <p class="text-pink-500 font-bold text-lg">R$ 249,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow duration-300">
+      <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b4?auto=format&fit=crop&w=600&q=70" alt="Homem com camiseta casual" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-1">Camiseta Casual Masculina</h3>
+        <p class="text-pink-500 font-bold text-lg">R$ 99,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow duration-300">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=70" alt="Vestido leve feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-1">Vestido Leve Floral</h3>
+        <p class="text-pink-500 font-bold text-lg">R$ 189,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md overflow-hidden group cursor-pointer hover:shadow-indigo-300 transition-shadow duration-300">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=70" alt="Calça jeans masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-1">Calça Jeans Slim</h3>
+        <p class="text-pink-500 font-bold text-lg">R$ 179,90</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Seção Acessórios -->
+<section id="acessorios" class="bg-gradient-to-r from-pink-50 to-indigo-50 py-20 fade-in">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-pink-600 mb-8 border-l-4 border-indigo-600 pl-4 max-w-max">Acessórios Exclusivos</h2>
+    <p class="text-indigo-700 max-w-2xl mb-12 leading-relaxed">Complete seu look com acessórios sofisticados, do casual ao elegante, feitos para destacar sua personalidade.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+      <figure class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-pink-300 transition-shadow duration-300 cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=70" alt="Relógio elegante" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-5 text-center">
+          <h3 class="text-xl font-semibold text-pink-600 mb-1">Relógio Minimalista</h3>
+          <p class="text-indigo-600 font-semibold">R$ 349,00</p>
+        </figcaption>
+      </figure>
+      <figure class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-pink-300 transition-shadow duration-300 cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=70" alt="Óculos de sol moderno" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-5 text-center">
+          <h3 class="text-xl font-semibold text-pink-600 mb-1">Óculos de Sol Retro</h3>
+          <p class="text-indigo-600 font-semibold">R$ 279,00</p>
+        </figcaption>
+      </figure>
+      <figure class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-pink-300 transition-shadow duration-300 cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1536305033944-592f8a6c9f4e?auto=format&fit=crop&w=600&q=70" alt="Bolsa de couro feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-5 text-center">
+          <h3 class="text-xl font-semibold text-pink-600 mb-1">Bolsa de Couro Vintage</h3>
+          <p class="text-indigo-600 font-semibold">R$ 499,00</p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Seção Sobre Nós -->
+<section id="sobre" class="container mx-auto px-6 py-20 fade-in">
+  <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
+    <div class="lg:w-1/2 max-w-xl">
+      <h2 class="text-4xl font-bold text-indigo-700 mb-6 border-l-4 border-pink-500 pl-4 max-w-max">Sobre a Araujo Wear</h2>
+      <p class="text-indigo-600 leading-relaxed mb-6">
+        Com paixão por moda e autenticidade, a Araujo Wear nasceu para vestir pessoas que buscam estilo, conforto e exclusividade. Trabalhamos com fornecedores confiáveis e priorizamos a sustentabilidade em cada coleção.
+      </p>
+      <p class="text-indigo-600 leading-relaxed">
+        Nossa missão é transformar tendências em experiências únicas, respeitando a diversidade e valorizando a cultura brasileira.
+      </p>
+    </div>
+    <div class="lg:w-1/2 rounded-xl overflow-hidden shadow-lg">
+      <img src="https://images.unsplash.com/photo-1520975921633-5ef5d0c3d3e9?auto=format&fit=crop&w=800&q=80" alt="Equipe de loja de roupas sorrindo" class="w-full h-80 object-cover" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- Seção Contato -->
+<section id="contato" class="bg-indigo-700 text-indigo-50 py-20 fade-in">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <h2 class="text-4xl font-bold mb-8 border-l-4 border-pink-400 pl-4 max-w-max">Fale Conosco</h2>
+    <form action="#" method="POST" class="flex flex-col gap-6">
+      <input type="text" name="nome" placeholder="Seu nome" required class="px-4 py-3 rounded-md text-indigo-900 font-semibold focus:outline-none focus:ring-2 focus:ring-pink-400" />
+      <input type="email" name="email" placeholder="Seu e-mail" required class="px-4 py-3 rounded-md text-indigo-900 font-semibold focus:outline-none focus:ring-2 focus:ring-pink-400" />
+      <textarea name="mensagem" rows="5" placeholder="Sua mensagem" required class="px-4 py-3 rounded-md text-indigo-900 font-semibold resize-none focus:outline-none focus:ring-2 focus:ring-pink-400"></textarea>
+      <button type="submit" class="bg-pink-500 hover:bg-pink-600 transition-colors font-bold py-3 rounded-full shadow-lg">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-indigo-900 text-indigo-200 py-12 mt-20">
+  <div class="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm leading-relaxed font-semibold">
+    <div>
+      <p><span class="font-bold">CNPJ:</span> 62.689.220/0001-21</p>
+    </div>
+    <div>
+      <p><span class="font-bold">Razão Social:</span> ARAUJO SERVICOS ADMINISTRATIVOS LTDA</p>
+    </div>
+    <div>
+      <p><span class="font-bold">E-mail:</span> REJANESILVA_DMF@HOTMAIL.COM</p>
+    </div>
+    <div>
+      <p><span class="font-bold">Telefone:</span> <span id="telefone-comercial">75-32610233</span></p>
+    </div>
+    <div>
+      <p><span class="font-bold">Logradouro:</span> RUA FRANCISCO FERREIRA MOTA, 30</p>
+    </div>
+    <div>
+      <p><span class="font-bold">Bairro:</span> CENTRO</p>
+    </div>
+    <div>
+      <p><span class="font-bold">Município:</span> ARACI</p>
+    </div>
+    <div>
+      <p><span class="font-bold">Estado:</span> BA</p>
+    </div>
+  </div>
+  <div class="container mx-auto px-6 mt-10 border-t border-indigo-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-indigo-400 text-sm font-medium gap-4">
+    <p>© 2024 Araujo Wear. Todos os direitos reservados.</p>
+    <nav class="flex gap-6">
+      <a href="#" class="hover:text-pink-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-pink-400 transition">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

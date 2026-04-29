@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MARIS - Loja de Roupas e Acessórios</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+<style>
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-10px); opacity: 0.8; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-floatUp {
+    animation: floatUp 6s ease-in-out infinite;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-emerald-300 selection:text-emerald-900">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-3xl font-extrabold text-emerald-700 tracking-wide hover:text-emerald-900 transition duration-300">MARIS</a>
+    <ul class="hidden md:flex gap-10 font-medium text-gray-700">
+      <li><a href="#colecao" class="hover:text-emerald-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-emerald-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-emerald-600 transition">Sobre</a></li>
+      <li><a href="#depoimentos" class="hover:text-emerald-600 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="hover:text-emerald-600 transition">Contato</a></li>
+    </ul>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-emerald-600">
+      <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner border-t border-gray-200">
+    <ul class="flex flex-col gap-4 px-6 py-4 text-gray-700 font-semibold text-lg">
+      <li><a href="#colecao" class="block hover:text-emerald-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-emerald-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-emerald-600 transition">Sobre</a></li>
+      <li><a href="#depoimentos" class="block hover:text-emerald-600 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="block hover:text-emerald-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative bg-gradient-to-tr from-emerald-100 to-white overflow-hidden min-h-[88vh] flex items-center">
+  <div class="container mx-auto px-6 lg:px-12 flex flex-col-reverse lg:flex-row items-center gap-12">
+    <div class="max-w-xl text-center lg:text-left space-y-6">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-emerald-800 leading-tight drop-shadow-md">Moda que Transforma<br /><span class="text-emerald-600">Roupas e Acessórios Exclusivos</span></h1>
+      <p class="text-gray-700 text-lg md:text-xl">Descubra o equilíbrio perfeito entre estilo, conforto e personalidade. Conheça nossa coleção feita para você.</p>
+      <a href="#colecao" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg px-8 py-3 shadow-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Ver Coleção</a>
+    </div>
+    <div class="w-full max-w-lg relative">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Modelo vestindo roupa estilosa" class="rounded-3xl shadow-2xl animate-floatUp" />
+      <div class="absolute -top-6 -left-6 w-24 h-24 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-floatUp" style="animation-delay: 0s;"></div>
+      <div class="absolute bottom-4 right-4 w-16 h-16 bg-emerald-300 rounded-full mix-blend-screen filter blur-lg opacity-60 animate-floatUp" style="animation-delay: 3s;"></div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16 lg:py-24 max-w-7xl">
+  <h2 class="text-4xl font-extrabold text-emerald-700 mb-12 text-center">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Camisa casual masculina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Camisa Casual</h3>
+        <p class="text-gray-600 mb-3">Conforto e estilo para o dia a dia, com tecido leve e toque macio.</p>
+        <span class="font-bold text-emerald-700">R$ 129,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400">
+      <img src="https://images.unsplash.com/photo-1520975691226-cd2d0b1b6f1d?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino floral" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Vestido Floral</h3>
+        <p class="text-gray-600 mb-3">Leve e fluido, perfeito para ocasiões especiais e dias quentes.</p>
+        <span class="font-bold text-emerald-700">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400">
+      <img src="https://images.unsplash.com/photo-1463107971871-fbac9ddb920f?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Calça Jeans</h3>
+        <p class="text-gray-600 mb-3">Modelagem moderna com tecido de alta qualidade e elasticidade.</p>
+        <span class="font-bold text-emerald-700">R$ 159,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Blusa básica feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-emerald-800 mb-2">Blusa Básica</h3>
+        <p class="text-gray-600 mb-3">Essencial para seu guarda-roupa, com cores neutras e corte perfeito.</p>
+        <span class="font-bold text-emerald-700">R$ 79,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-emerald-50 py-16 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-4xl font-extrabold text-emerald-800 mb-12 text-center">Acessórios em Destaque</h2>
+    <div class="flex flex-col md:flex-row md:justify-center md:gap-12 gap-10">
+      <div class="flex-1 bg-white rounded-3xl shadow-xl overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400 max-w-sm mx-auto md:max-w-none">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro marrom" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Bolsa de Couro</h3>
+          <p class="text-gray-600 mb-4">Design sofisticado e funcional para uso diário e eventos.</p>
+          <span class="font-bold text-emerald-800 text-lg">R$ 249,90</span>
+        </div>
+      </div>
+      <div class="flex-1 bg-white rounded-3xl shadow-xl overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400 max-w-sm mx-auto md:max-w-none">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno masculino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Relógio Moderno</h3>
+          <p class="text-gray-600 mb-4">Pulseira em aço inox e mostrador elegante para qualquer ocasião.</p>
+          <span class="font-bold text-emerald-800 text-lg">R$ 399,90</span>
+        </div>
+      </div>
+      <div class="flex-1 bg-white rounded-3xl shadow-xl overflow-hidden group hover:shadow-emerald-400 transition-shadow duration-400 max-w-sm mx-auto md:max-w-none">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="p-6 text-center">
+          <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Óculos de Sol</h3>
+          <p class="text-gray-600 mb-4">Armação leve e lentes UV para proteção com muito estilo.</p>
+          <span class="font-bold text-emerald-800 text-lg">R$ 179,90</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 py-16 max-w-5xl">
+  <h2 class="text-4xl font-extrabold text-emerald-700 mb-10 text-center">Quem Somos</h2>
+  <div class="flex flex-col lg:flex-row gap-12 items-center">
+    <img src="https://images.unsplash.com/photo-1533777324565-a04df0e527b7?auto=format&fit=crop&w=600&q=80" alt="Equipe da loja" class="rounded-3xl shadow-lg w-full lg:w-1/2 object-cover" />
+    <div class="lg:w-1/2 space-y-6 text-gray-700 text-lg leading-relaxed">
+      <p>A MARIS é uma marca apaixonada por moda, que nasceu com o propósito de trazer peças que unem conforto, qualidade e design contemporâneo. Nosso time seleciona cuidadosamente cada produto para garantir que você tenha uma experiência única ao vestir nossas roupas e acessórios.</p>
+      <p>Valorizamos a sustentabilidade e a autenticidade, buscando fornecedores que compartilham dos mesmos valores para construir uma relação verdadeira com nossos clientes e o planeta.</p>
+      <p>Venha fazer parte da nossa comunidade e descubra o que significa vestir-se com personalidade!</p>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" class="bg-emerald-100 py-16 px-6">
+  <h2 class="text-4xl font-extrabold text-emerald-800 mb-12 text-center">Depoimentos</h2>
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <blockquote class="bg-white p-8 rounded-3xl shadow-lg relative before:absolute before:content-['“'] before:text-6xl before:text-emerald-300 before:-top-8 before:-left-6 before:opacity-30">
+      <p class="text-gray-800 mb-6">Adorei a qualidade das roupas. O tecido é muito confortável e o caimento perfeito. O atendimento foi super atencioso e rápido.</p>
+      <footer class="text-emerald-700 font-semibold">Mariana S.</footer>
+    </blockquote>
+    <blockquote class="bg-white p-8 rounded-3xl shadow-lg relative before:absolute before:content-['“'] before:text-6xl before:text-emerald-300 before:-top-8 before:-left-6 before:opacity-30">
+      <p class="text-gray-800 mb-6">Os acessórios são lindos e muito estilosos! Recebi vários elogios no meu relógio novo. Recomendo para quem busca exclusividade.</p>
+      <footer class="text-emerald-700 font-semibold">Carlos M.</footer>
+    </blockquote>
+    <blockquote class="bg-white p-8 rounded-3xl shadow-lg relative before:absolute before:content-['“'] before:text-6xl before:text-emerald-300 before:-top-8 before:-left-6 before:opacity-30">
+      <p class="text-gray-800 mb-6">A experiência de compra foi ótima, o site é fácil de navegar, e a entrega foi super rápida. Com certeza vou comprar mais vezes.</p>
+      <footer class="text-emerald-700 font-semibold">Isabela R.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section id="contato" class="container mx-auto px-6 py-16 max-w-4xl">
+  <h2 class="text-4xl font-extrabold text-emerald-700 mb-12 text-center">Fale Conosco</h2>
+  <form action="#" method="POST" class="bg-white rounded-3xl shadow-xl p-10 max-w-3xl mx-auto grid grid-cols-1 gap-8">
+    <div>
+      <label for="nome" class="block mb-2 font-semibold text-gray-700">Nome Completo</label>
+      <input type="text" id="nome" name="nome" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" placeholder="Seu nome completo" />
+    </div>
+    <div>
+      <label for="email" class="block mb-2 font-semibold text-gray-700">E-mail</label>
+      <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" placeholder="seuemail@exemplo.com" />
+    </div>
+    <div>
+      <label for="mensagem" class="block mb-2 font-semibold text-gray-700">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-y focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+    </div>
+    <button type="submit" class="self-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg px-10 py-3 shadow-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Enviar</button>
+  </form>
+</section>
+
+<footer class="bg-emerald-900 text-emerald-200 py-14 px-6">
+  <div class="container max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="space-y-2">
+      <h3 class="font-bold text-lg tracking-wide border-b border-emerald-700 pb-2 mb-4">Empresa</h3>
+      <p><span class="font-semibold">CNPJ:</span> 66.046.860/0001-74</p>
+      <p><span class="font-semibold">Razão Social:</span> MARIS GESTAO EMPRESARIAL LTDA</p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-bold text-lg tracking-wide border-b border-emerald-700 pb-2 mb-4">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:ESCRITORIOROSSINI@GMAIL.COM" class="underline hover:text-emerald-400">ESCRITORIOROSSINI@GMAIL.COM</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="inline-block font-semibold">17-997775576</span></p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-bold text-lg tracking-wide border-b border-emerald-700 pb-2 mb-4">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> RUA BRAS CUBAS, 2508</p>
+      <p><span class="font-semibold">Bairro:</span> ESTELA PARQUE RESIDENCIAL</p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-bold text-lg tracking-wide border-b border-emerald-700 pb-2 mb-4">Localização</h3>
+      <p><span class="font-semibold">Município:</span> VOTUPORANGA</p>
+      <p><span class="font-semibold">Estado:</span> SP</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-emerald-700 pt-6 text-center text-sm text-emerald-400 font-light select-text">
+    <a href="#" class="underline hover:text-emerald-300 mx-4">Termos de Uso</a>
+    <a href="#" class="underline hover:text-emerald-300 mx-4">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

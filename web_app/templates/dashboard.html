@@ -78,6 +78,10 @@
             class="hidden px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-700 hover:bg-purple-600 text-white">
       Alterar Status
     </button>
+    <button onclick="openShareModal()" id="btn-bulk-share"
+            class="hidden px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-700 hover:bg-sky-600 text-white">
+      Compartilhar
+    </button>
     <button onclick="location.reload()"
             title="Recarregar"
             class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700">
@@ -466,6 +470,7 @@ function updateBulkButtons() {
   document.getElementById("btn-bulk-delete").classList.toggle("hidden", selected === 0);
   document.getElementById("btn-bulk-status").classList.toggle("hidden", selected === 0);
   document.getElementById("bulk-status-select").classList.toggle("hidden", selected === 0);
+  document.getElementById("btn-bulk-share").classList.toggle("hidden", selected === 0);
 }
 
 function getSelectedIds() {
@@ -619,6 +624,44 @@ async function bulkChangeStatus() {
   location.reload();
 }
 
+// ── Share profiles ───────────────────────────────────────────────────────────
+function toggleShareAll(el) {
+  document.querySelectorAll(".share-content-cb").forEach(cb => cb.checked = el.checked);
+}
+
+function openShareModal() {
+  if (!getSelectedIds().length) return;
+  document.getElementById("share-receiver").value = "";
+  document.getElementById("share-select-all").checked = false;
+  document.querySelectorAll(".share-content-cb").forEach(cb => cb.checked = false);
+  document.getElementById("share-modal").classList.remove("hidden");
+}
+
+function closeShareModal() {
+  document.getElementById("share-modal").classList.add("hidden");
+}
+
+async function submitShare() {
+  const ids = getSelectedIds();
+  const receiver = document.getElementById("share-receiver").value.trim();
+  if (!receiver) { alert("Informe o email do destinatário."); return; }
+
+  const extra = Array.from(document.querySelectorAll(".share-content-cb:checked")).map(cb => cb.value);
+
+  const res = await fetch("/api/wabas/bulk/share", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ waba_ids: ids, receiver, content: extra.length ? extra : null }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    closeShareModal();
+    alert(`${data.shared} perfil(is) compartilhado(s) com ${receiver}.\nGrupo: ${data.group_name}`);
+  } else {
+    alert("Erro: " + data.error);
+  }
+}
+
 // ── Auto-refresh stats every 10s ─────────────────────────────────────────────
 setInterval(async () => {
   try {
@@ -637,4 +680,68 @@ setInterval(async () => {
 }, 10000);
 </script>
 
+<div id="share-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+     onclick="if(event.target===this)closeShareModal()">
+  <div class="bg-zinc-900 rounded-2xl border border-zinc-700 p-6 w-full max-w-md shadow-2xl">
+    <h3 class="text-lg font-bold text-white mb-4">Compartilhar Perfis AdsPower</h3>
+
+    <div class="mb-4">
+      <label class="block text-xs text-zinc-400 mb-1">Email do destinatário</label>
+      <input type="email" id="share-receiver" placeholder="destinatario@email.com"
+             class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm
+                    text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500">
+    </div>
+
+    <div class="mb-5">
+      <div class="text-xs text-zinc-400 mb-2">Compartilhamento de conteúdo</div>
+      <div class="bg-zinc-800 rounded-lg p-3 flex flex-col gap-2">
+        <label class="flex items-center gap-2 text-sm text-zinc-200 cursor-pointer font-medium border-b border-zinc-700 pb-2 mb-1">
+          <input type="checkbox" id="share-select-all" onchange="toggleShareAll(this)"
+                 class="rounded bg-zinc-700 border-zinc-600">
+          Selecionar tudo
+        </label>
+        <div class="grid grid-cols-2 gap-2">
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="name" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Nome
+          </label>
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="proxy" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Proxy
+          </label>
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="remark" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Notas
+          </label>
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="tabs" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Abas
+          </label>
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="bookmark" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Favoritos
+          </label>
+          <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer">
+            <input type="checkbox" value="password" class="share-content-cb rounded bg-zinc-700 border-zinc-600">
+            Senhas salvas
+          </label>
+        </div>
+      </div>
+      <p class="text-[10px] text-zinc-500 mt-2">
+        Padrão de compartilhamento: plataforma, conta, senha, chave 2FA, cookies, dados de impressão digital, IP, etc.
+      </p>
+    </div>
+
+    <div class="flex justify-end gap-3">
+      <button onclick="closeShareModal()"
+              class="px-4 py-2 text-sm rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300">
+        Cancelar
+      </button>
+      <button onclick="submitShare()"
+              class="px-4 py-2 text-sm rounded-lg bg-sky-700 hover:bg-sky-600 text-white font-semibold">
+        Compartilhar
+      </button>
+    </div>
+  </div>
+</div>
 {% endblock %}

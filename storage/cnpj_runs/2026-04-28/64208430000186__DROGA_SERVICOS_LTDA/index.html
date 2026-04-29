@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DROGA SERVICOS LTDA - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Custom subtle animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+  }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Scrollbar thumb for better UX */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<header class="bg-white shadow sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="text-3xl font-extrabold tracking-tight text-indigo-600 select-none hover:text-indigo-700 transition">DROGA SERVICOS</a>
+    <ul class="hidden md:flex space-x-10 font-medium tracking-wide text-gray-700">
+      <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded" id="btn-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="menu-mobile" class="md:hidden bg-white shadow-md max-h-0 overflow-hidden transition-all duration-300">
+    <ul class="flex flex-col space-y-4 px-6 py-5 font-semibold text-indigo-700">
+      <li><a href="#colecao" class="block hover:text-indigo-900 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-900 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-900 transition">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-900 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="hero" class="relative bg-gradient-to-br from-indigo-100 to-indigo-50 min-h-[85vh] flex items-center">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+    <div class="md:w-1/2 fade-in-up" style="animation-delay: 0.1s">
+      <h1 class="text-5xl font-extrabold text-indigo-700 leading-tight mb-6 tracking-wide">Moda que inspira seu estilo</h1>
+      <p class="text-lg text-indigo-600 mb-8 max-w-xl">Descubra as últimas tendências em vestuário e acessórios com qualidade e design pensado para você.</p>
+      <a href="#colecao" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-4 focus:ring-indigo-300">Veja a Coleção</a>
+    </div>
+    <div class="md:w-1/2 relative rounded-lg overflow-hidden shadow-2xl fade-in-up" style="animation-delay: 0.3s">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Modelo com roupa estilosa" class="w-full h-[400px] object-cover object-center md:rounded-lg" />
+      <div class="absolute bottom-4 left-6 bg-indigo-700 bg-opacity-70 text-white rounded-xl px-4 py-2 font-semibold text-sm tracking-wide select-none">Novidades 2024</div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-indigo-800 mb-10 text-center tracking-tight fade-in-up" style="animation-delay: 0.2s">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.3s">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Blusa casual feminina" loading="lazy" class="w-full h-64 object-cover object-top" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Blusa Casual Feminina</h3>
+        <p class="text-gray-600 mb-4">Conforto e estilo para o dia a dia, em tecido leve e toque suave.</p>
+        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.4s">
+      <img src="https://images.unsplash.com/photo-1520975699724-357b7a08eeb6?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" loading="lazy" class="w-full h-64 object-cover object-center" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Calça Jeans Masculina</h3>
+        <p class="text-gray-600 mb-4">Durabilidade e estilo para compor seu look casual ou social.</p>
+        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.5s">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Vestido elegante para festa" loading="lazy" class="w-full h-64 object-cover object-top" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Vestido Elegante</h3>
+        <p class="text-gray-600 mb-4">Ideal para festas e eventos, com caimento perfeito e design sofisticado.</p>
+        <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-indigo-800 mb-12 text-center tracking-tight fade-in-up" style="animation-delay: 0.2s">Acessórios que completam seu look</h2>
+    <div class="flex flex-col md:flex-row gap-10 justify-center items-center">
+      <div class="max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.3s">
+        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno" loading="lazy" class="w-full h-72 object-cover object-center" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-3">Relógio Moderno</h3>
+          <p class="text-gray-600 mb-5">Design minimalista para você marcar o tempo com elegância.</p>
+          <button class="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+        </div>
+      </div>
+      <div class="max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.4s">
+        <img src="https://images.unsplash.com/photo-1520975699724-357b7a08eeb6?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina" loading="lazy" class="w-full h-72 object-cover object-center" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-3">Bolsa Feminina</h3>
+          <p class="text-gray-600 mb-5">Prática e estilosa para o seu dia a dia e eventos especiais.</p>
+          <button class="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+        </div>
+      </div>
+      <div class="max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition fade-in-up" style="animation-delay: 0.5s">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol estiloso" loading="lazy" class="w-full h-72 object-cover object-center" />
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-indigo-700 mb-3">Óculos de Sol</h3>
+          <p class="text-gray-600 mb-5">Proteção e estilo para qualquer estação do ano.</p>
+          <button class="bg-indigo-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-indigo-700 transition w-full">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="max-w-7xl mx-auto px-6 py-16">
+  <div class="flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 fade-in-up" style="animation-delay: 0.2s">
+      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=700&q=80" alt="Equipe da loja" class="rounded-3xl shadow-lg object-cover w-full h-[400px]" />
+    </div>
+    <div class="md:w-1/2 fade-in-up" style="animation-delay: 0.3s">
+      <h2 class="text-4xl font-extrabold text-indigo-800 mb-6 tracking-tight">Nossa História</h2>
+      <p class="text-gray-700 text-lg leading-relaxed mb-5">Fundada com dedicação e paixão pelo mundo da moda, a DROGA SERVICOS LTDA entrega a você uma curadoria exclusiva de roupas e acessórios em sintonia com as últimas tendências e a sustentabilidade.</p>
+      <p class="text-gray-700 text-lg leading-relaxed">Nosso compromisso é proporcionar qualidade, conforto e estilo, para que você se sinta confiante e único em cada momento.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-50 py-16">
+  <div class="max-w-4xl mx-auto px-6 fade-in-up" style="animation-delay: 0.2s">
+    <h2 class="text-4xl font-extrabold text-indigo-800 mb-10 text-center tracking-tight">Fale Conosco</h2>
+    <form action="#" class="bg-white rounded-xl shadow-lg p-10 max-w-xl mx-auto">
+      <div class="mb-6">
+        <label for="nome" class="block mb-2 font-semibold text-indigo-700">Nome</label>
+        <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block mb-2 font-semibold text-indigo-700">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="mensagem" class="block mb-2 font-semibold text-indigo-700">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-4 focus:ring-indigo-300">Enviar</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-12 mt-16 select-none">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-sm md:text-base">
+    <div>
+      <h3 class="font-bold mb-3 text-indigo-300">Identificação</h3>
+      <p>CNPJ: 64.208.430/0001-86</p>
+      <p>Razão Social: DROGA SERVICOS LTDA</p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3 text-indigo-300">Contato</h3>
+      <p>E-mail: <a href="mailto:RECEPCAO@SLCONTA.COM.BR" class="underline hover:text-indigo-400">RECEPCAO@SLCONTA.COM.BR</a></p>
+      <p>Telefone: <span id="telefone-comercial" class="font-semibold">33-33151560</span></p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3 text-indigo-300">Endereço</h3>
+      <p>Logradouro: AVENIDA PADRE JOAO PINA DO AMARAL, 77</p>
+      <p>Bairro: CENTRO</p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3 text-indigo-300">Localização</h3>
+      <p>Município: ENGENHEIRO CALDAS</p>
+      <p>Estado: MG</p>
+      <nav class="mt-6 space-x-6">
+        <a href="#" class="underline hover:text-indigo-400">Termos de Uso</a>
+        <a href="#" class="underline hover:text-indigo-400">Política de Privacidade</a>
+      </nav>
+    </div>
+  </div>
+  <div class="text-center text-indigo-400 mt-10 text-xs select-text">© 2024 DROGA SERVICOS LTDA. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    if (menuMobile.style.maxHeight && menuMobile.style.maxHeight !== '0px') {
+      menuMobile.style.maxHeight = '0';
+    } else {
+      menuMobile.style.maxHeight = menuMobile.scrollHeight + 'px';
+    }
+  });
+</script>
+
+</body>
+</html>

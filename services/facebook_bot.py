@@ -1864,14 +1864,28 @@ class FacebookBot:
             except Exception as e:
                 print(f"[WABA] Category selection failed: {e}")
 
-        # Click "Continuar"
-        try:
-            page.get_by_role("button", name="Continuar").click(timeout=5_000)
-            _wait(2)
-            self._shot(page, "waba_continuar")
-        except Exception as e:
-            print(f"[WABA] 'Continuar' not found: {e}")
-            return False
+        # Click "Continuar" — wait indefinitely if reCAPTCHA blocks it
+        self._shot(page, "waba_pre_continuar")
+        continuar_clicked = False
+        while not continuar_clicked:
+            try:
+                btn = page.get_by_role("button", name="Continuar")
+                if not btn.is_visible(timeout=2_000):
+                    _wait(3)
+                    continue
+                aria = (btn.get_attribute("aria-disabled") or "").lower()
+                is_disabled = aria == "true" or bool(btn.get_attribute("disabled"))
+                has_captcha = page.locator('iframe[src*="recaptcha"]').count() > 0
+                if is_disabled or has_captcha:
+                    print("[WABA] reCAPTCHA detected or button disabled — waiting for manual solve (no timeout)...")
+                    _wait(3)
+                    continue
+                btn.click()
+                continuar_clicked = True
+                _wait(2)
+                self._shot(page, "waba_continuar")
+            except Exception:
+                _wait(3)
 
         # Close the modal (try aria-label selectors, then Escape)
         for close_label in ("Fechar", "Close"):
