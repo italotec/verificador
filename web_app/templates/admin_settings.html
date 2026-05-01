@@ -216,6 +216,40 @@
       </div>
     </div>
 
+    {# ── Phase order ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-1">Ordem das fases intermediárias</h2>
+      <p class="text-xs text-zinc-400 mb-4">Arraste para reordenar. Login e criação do BM sempre vêm primeiro; o wizard sempre vem por último.</p>
+
+      <input type="hidden" name="MIDDLE_PHASE_ORDER" id="middle-phase-order-input"
+             value="{{ settings.MIDDLE_PHASE_ORDER }}">
+
+      <ul id="phase-order-list" class="flex flex-col gap-2 mb-4 select-none">
+        {% for phase in settings.MIDDLE_PHASE_ORDER.split(',') %}
+        {% set phase = phase.strip() %}
+        <li data-phase="{{ phase }}"
+            class="flex items-center gap-3 rounded-xl border border-zinc-700 bg-zinc-800/60 px-4 py-3 cursor-grab active:cursor-grabbing">
+          <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 8h16M4 16h16"/>
+          </svg>
+          <span class="text-sm font-medium">
+            {% if phase == 'business_info' %}Informações do negócio
+            {% elif phase == 'domain' %}Domínio
+            {% elif phase == 'waba' %}WABA
+            {% else %}{{ phase }}{% endif %}
+          </span>
+          <span class="ml-auto text-xs text-zinc-500 font-mono">{{ phase }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <p class="text-xs text-amber-400/80">
+        ⚠ A Meta pode rejeitar ordens não convencionais — recomenda-se manter
+        <span class="font-mono">business_info → domain → waba</span>.
+      </p>
+    </div>
+
     <div class="flex justify-end">
       <button type="submit"
               class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors">
@@ -249,6 +283,27 @@ async function testBalance(provider) {
     el.className = "ml-2 text-xs text-red-400";
   }
 }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+<script>
+(function () {
+  const list = document.getElementById('phase-order-list');
+  const input = document.getElementById('middle-phase-order-input');
+  if (!list || !input) return;
+
+  function syncInput() {
+    const order = Array.from(list.querySelectorAll('li'))
+      .map(li => li.dataset.phase);
+    input.value = order.join(',');
+  }
+
+  Sortable.create(list, {
+    animation: 150,
+    ghostClass: 'opacity-40',
+    onEnd: syncInput,
+  });
+})();
 </script>
 
 {% endblock %}

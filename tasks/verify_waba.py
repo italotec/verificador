@@ -89,6 +89,8 @@ def _run_verification(task, waba_record_id: int):
             run_data = gerador.get_run(waba.run_id)
             from web_app.models import SystemSetting as _SS
             run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
+            _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
+            run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
 
             # Open AdsPower browser
             profile_id = waba.profile_id

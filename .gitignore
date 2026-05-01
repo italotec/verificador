@@ -41,6 +41,9 @@ logs/
 # Screenshots (generated at runtime)
 web_app/static/screenshots/
 
+# Runtime-generated CNPJ runs storage
+storage/
+
 # OS
 Thumbs.db
 .DS_Store

@@ -256,10 +256,14 @@ def _run_for_profile(
         from web_app.models import SystemSetting as _SS
         if has_app_context():
             run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
+            _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
+            run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
         else:
             from web_app import create_app
             with create_app().app_context():
                 run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
+                _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
+                run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
     except Exception as e:
         raise RuntimeError(f"Falha ao buscar dados do Gerador (run {run_id}): {e}") from e
 

@@ -482,146 +482,20 @@ class FacebookBot:
                     self._shot(page, "portfolio_ok")
                     self._mark_step_done("business_id", self.business_id)
 
-                if not self._gerador_data.get("business_info_done"):
-                    self._set_company_details(page)
-                    self._shot(page, "company_details")
-                    self._mark_step_done("business_info_done")
-                else:
-                    print("[BOT] Skipping company details (already done)")
-
-                # Accept both current flag name ("domain_done") and legacy name ("domain_zone")
-                domain_already_done = (
-                    self._gerador_data.get("domain_done") or self._gerador_data.get("domain_zone")
-                )
-                if not domain_already_done:
-                    # Navigate to domains page first so we can check for an existing "Verificado" badge
-                    # before trying to add the domain again.
-                    try:
-                        page.goto(
-                            f"https://business.facebook.com/settings/owned-domains/?business_id={self.business_id}",
-                            wait_until="domcontentloaded", timeout=15_000,
-                        )
-                        _wait(2)
-                        for verified_text in ("Verificado", "Verified"):
-                            try:
-                                if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
-                                    print(f"[BOT] Domain already verified on page ('{verified_text}') — marking done and skipping")
-                                    self._mark_step_done("domain_done")
-                                    domain_already_done = True
-                                    break
-                            except Exception:
-                                pass
-                    except Exception:
-                        pass
-
-                if not domain_already_done:
-                    verify_method = self.run.get("domain_verification_method", "meta_tag")
-                    print(f"[BOT] domain_verification_method={verify_method!r} (from self.run)")
-                    meta_tag = self._add_domain(page)
-
-                    if verify_method == "dns_txt":
-                        token = self._select_dns_txt_method_and_extract_token(page)
-                        if not token:
-                            self._shot(page, "domain_no_txt_token")
-                            return {"success": False, "error": "Domain verification failed: TXT token not found"}
-
-                        # Split FQDN into (host, parent_domain) using the dominios pool
-                        host, parent = "", ""
-                        for parent_candidate in self.run.get("dominios", []):
-                            if self.domain == parent_candidate or self.domain.endswith("." + parent_candidate):
-                                parent = parent_candidate
-                                host = self.domain[:-(len(parent) + 1)] if self.domain != parent else "@"
-                                break
-                        if not parent:
-                            self._shot(page, "domain_no_parent")
-                            raise DomainVerificationError(
-                                f"[DOMAIN] {self.domain} not in dominios pool — cannot add TXT record"
-                            )
-
-                        from services.cloudpanel_deploy import adicionar_txt_record
-                        api_key = self.run.get("spaceship_api_key", "")
-                        api_secret = self.run.get("spaceship_api_secret", "")
-                        if not api_key or not api_secret:
-                            raise DomainVerificationError("[DOMAIN] Spaceship credentials missing in run data")
-
-                        ok = adicionar_txt_record(parent, host, f"facebook-domain-verification={token}", api_key, api_secret)
-                        if not ok:
-                            self._shot(page, "domain_txt_failed")
-                            raise DomainVerificationError("[DOMAIN] Failed to add TXT record on Spaceship")
-
-                        _wait(45)  # DNS propagation window
-                        last_err = None
-                        verified = False
-                        for attempt in range(3):
-                            try:
-                                verified = self._verify_domain(page)
-                                if verified:
-                                    break
-                            except DomainVerificationError as e:
-                                last_err = e
-                                if attempt < 2:
-                                    _wait(30)
-                                    try:
-                                        page.reload(wait_until="domcontentloaded", timeout=15_000)
-                                        _wait(2)
-                                    except Exception:
-                                        pass
-                        if verified:
-                            self._shot(page, "domain_verified")
-                            self._mark_step_done("domain_done")
-                        else:
-                            self._shot(page, "domain_failed")
-                            raise last_err or DomainVerificationError("[DOMAIN] DNS verification failed after retries")
-
-                    else:
-                        # ── meta-tag flow (default) ──
-                        if meta_tag:
-                            print(f"[BOT] Injecting meta tag: {meta_tag[:60]}…")
-                            self.gerador.inject_meta_tag(self.run["run_id"], meta_tag)
-                            _wait(30)  # give DNS / CloudPanel time to propagate
-                            try:
-                                verified = self._verify_domain(page)
-                                self._shot(page, "domain_verified")
-                                if verified:
-                                    self._mark_step_done("domain_done")
-                            except DomainVerificationError:
-                                self._shot(page, "domain_failed")
-                                raise  # non-retryable — propagate directly
-                            except RuntimeError as e:
-                                self._shot(page, "domain_failed")
-                                return {"success": False, "error": str(e)}
-                        else:
-                            self._shot(page, "domain_no_metatag")
-                            # No meta tag returned — domain may already exist and be verified
-                            # from a previous partial run where the remark wasn't saved.
-                            # Check the domains settings page for a "Verificado" badge.
-                            print("[BOT] No meta tag — checking if domain already verified")
-                            domain_verified_found = False
-                            for verified_text in ("Verificado", "Verified"):
-                                try:
-                                    if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
-                                        print(f"[BOT] Domain already verified ('{verified_text}') — marking done")
-                                        self._mark_step_done("domain_done")
-                                        domain_verified_found = True
-                                        break
-                                except Exception:
-                                    pass
-                            if not domain_verified_found:
-                                print("[BOT] Domain not verified and no meta tag available — aborting")
-                                return {"success": False, "error": "Domain verification failed: no meta tag returned and Verified badge not found"}
-                else:
-                    print("[BOT] Skipping domain (already done — domain_done or domain_zone flag set)")
-
-                # Accept both "waba_done" and legacy "waba_created" flag names
-                if not (self._gerador_data.get("waba_done") or self._gerador_data.get("waba_created")):
-                    if self._create_waba(page):
-                        self._shot(page, "waba_done")
-                        self._mark_step_done("waba_done")
-                    else:
-                        self._shot(page, "waba_fail")
-                        return {"success": False, "error": "WABA creation failed — account not found on settings page after retries"}
-                else:
-                    print("[BOT] Skipping WABA (already done — waba_done or waba_created flag set)")
+                phase_order = self.run.get("middle_phase_order", ["business_info", "domain", "waba"])
+                phase_map = {
+                    "business_info": self._phase_business_info,
+                    "domain":        self._phase_domain,
+                    "waba":          self._phase_waba,
+                }
+                for _phase_name in phase_order:
+                    _phase_fn = phase_map.get(_phase_name)
+                    if not _phase_fn:
+                        print(f"[BOT] Unknown phase {_phase_name!r} in MIDDLE_PHASE_ORDER — skipping")
+                        continue
+                    _phase_result = _phase_fn(page)
+                    if isinstance(_phase_result, dict) and not _phase_result.get("success", True):
+                        return _phase_result
 
                 result = False
                 _last_verification_error: "VerificationStepError | None" = None
@@ -691,6 +565,152 @@ class FacebookBot:
                     browser.close()
                 except Exception:
                     pass
+
+    # ── middle phase methods (orderable via MIDDLE_PHASE_ORDER) ─────────────
+
+    def _phase_business_info(self, page: "Page"):
+        if not self._gerador_data.get("business_info_done"):
+            self._set_company_details(page)
+            self._shot(page, "company_details")
+            self._mark_step_done("business_info_done")
+        else:
+            print("[BOT] Skipping company details (already done)")
+
+    def _phase_domain(self, page: "Page"):
+        # Accept both current flag name ("domain_done") and legacy name ("domain_zone")
+        domain_already_done = (
+            self._gerador_data.get("domain_done") or self._gerador_data.get("domain_zone")
+        )
+        if not domain_already_done:
+            # Navigate to domains page first so we can check for an existing "Verificado" badge
+            # before trying to add the domain again.
+            try:
+                page.goto(
+                    f"https://business.facebook.com/settings/owned-domains/?business_id={self.business_id}",
+                    wait_until="domcontentloaded", timeout=15_000,
+                )
+                _wait(2)
+                for verified_text in ("Verificado", "Verified"):
+                    try:
+                        if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
+                            print(f"[BOT] Domain already verified on page ('{verified_text}') — marking done and skipping")
+                            self._mark_step_done("domain_done")
+                            domain_already_done = True
+                            break
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+
+        if not domain_already_done:
+            verify_method = self.run.get("domain_verification_method", "meta_tag")
+            print(f"[BOT] domain_verification_method={verify_method!r} (from self.run)")
+            meta_tag = self._add_domain(page)
+
+            if verify_method == "dns_txt":
+                token = self._select_dns_txt_method_and_extract_token(page)
+                if not token:
+                    self._shot(page, "domain_no_txt_token")
+                    return {"success": False, "error": "Domain verification failed: TXT token not found"}
+
+                # Split FQDN into (host, parent_domain) using the dominios pool
+                host, parent = "", ""
+                for parent_candidate in self.run.get("dominios", []):
+                    if self.domain == parent_candidate or self.domain.endswith("." + parent_candidate):
+                        parent = parent_candidate
+                        host = self.domain[:-(len(parent) + 1)] if self.domain != parent else "@"
+                        break
+                if not parent:
+                    self._shot(page, "domain_no_parent")
+                    raise DomainVerificationError(
+                        f"[DOMAIN] {self.domain} not in dominios pool — cannot add TXT record"
+                    )
+
+                from services.cloudpanel_deploy import adicionar_txt_record
+                api_key = self.run.get("spaceship_api_key", "")
+                api_secret = self.run.get("spaceship_api_secret", "")
+                if not api_key or not api_secret:
+                    raise DomainVerificationError("[DOMAIN] Spaceship credentials missing in run data")
+
+                ok = adicionar_txt_record(parent, host, f"facebook-domain-verification={token}", api_key, api_secret)
+                if not ok:
+                    self._shot(page, "domain_txt_failed")
+                    raise DomainVerificationError("[DOMAIN] Failed to add TXT record on Spaceship")
+
+                _wait(45)  # DNS propagation window
+                last_err = None
+                verified = False
+                for attempt in range(3):
+                    try:
+                        verified = self._verify_domain(page)
+                        if verified:
+                            break
+                    except DomainVerificationError as e:
+                        last_err = e
+                        if attempt < 2:
+                            _wait(30)
+                            try:
+                                page.reload(wait_until="domcontentloaded", timeout=15_000)
+                                _wait(2)
+                            except Exception:
+                                pass
+                if verified:
+                    self._shot(page, "domain_verified")
+                    self._mark_step_done("domain_done")
+                else:
+                    self._shot(page, "domain_failed")
+                    raise last_err or DomainVerificationError("[DOMAIN] DNS verification failed after retries")
+
+            else:
+                # ── meta-tag flow (default) ──
+                if meta_tag:
+                    print(f"[BOT] Injecting meta tag: {meta_tag[:60]}…")
+                    self.gerador.inject_meta_tag(self.run["run_id"], meta_tag)
+                    _wait(30)  # give DNS / CloudPanel time to propagate
+                    try:
+                        verified = self._verify_domain(page)
+                        self._shot(page, "domain_verified")
+                        if verified:
+                            self._mark_step_done("domain_done")
+                    except DomainVerificationError:
+                        self._shot(page, "domain_failed")
+                        raise  # non-retryable — propagate directly
+                    except RuntimeError as e:
+                        self._shot(page, "domain_failed")
+                        return {"success": False, "error": str(e)}
+                else:
+                    self._shot(page, "domain_no_metatag")
+                    # No meta tag returned — domain may already exist and be verified
+                    # from a previous partial run where the remark wasn't saved.
+                    # Check the domains settings page for a "Verificado" badge.
+                    print("[BOT] No meta tag — checking if domain already verified")
+                    domain_verified_found = False
+                    for verified_text in ("Verificado", "Verified"):
+                        try:
+                            if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
+                                print(f"[BOT] Domain already verified ('{verified_text}') — marking done")
+                                self._mark_step_done("domain_done")
+                                domain_verified_found = True
+                                break
+                        except Exception:
+                            pass
+                    if not domain_verified_found:
+                        print("[BOT] Domain not verified and no meta tag available — aborting")
+                        return {"success": False, "error": "Domain verification failed: no meta tag returned and Verified badge not found"}
+        else:
+            print("[BOT] Skipping domain (already done — domain_done or domain_zone flag set)")
+
+    def _phase_waba(self, page: "Page"):
+        # Accept both "waba_done" and legacy "waba_created" flag names
+        if not (self._gerador_data.get("waba_done") or self._gerador_data.get("waba_created")):
+            if self._create_waba(page):
+                self._shot(page, "waba_done")
+                self._mark_step_done("waba_done")
+            else:
+                self._shot(page, "waba_fail")
+                return {"success": False, "error": "WABA creation failed — account not found on settings page after retries"}
+        else:
+            print("[BOT] Skipping WABA (already done — waba_done or waba_created flag set)")
 
     # ── stage 1: login ────────────────────────────────────────────────────────
 

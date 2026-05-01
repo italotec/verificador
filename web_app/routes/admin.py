@@ -204,6 +204,7 @@ def admin_settings():
         "HEROSMS_MAX_PRICE":     SystemSetting.get("HEROSMS_MAX_PRICE", verif_config.HEROSMS_MAX_PRICE),
         "AI_PROVIDER":           SystemSetting.get("AI_PROVIDER",           "anthropic"),
         "DOMAIN_VERIFICATION_METHOD": SystemSetting.get("DOMAIN_VERIFICATION_METHOD", "meta_tag"),
+        "MIDDLE_PHASE_ORDER":         SystemSetting.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba"),
         "ANTHROPIC_API_KEY_CNPJ": SystemSetting.get("ANTHROPIC_API_KEY_CNPJ", verif_config.ANTHROPIC_API_KEY),
         "ANTHROPIC_MODEL_CNPJ":  SystemSetting.get("ANTHROPIC_MODEL_CNPJ",  verif_config.CLAUDE_FAST_MODEL),
         "OPENAI_API_KEY_CNPJ":   SystemSetting.get("OPENAI_API_KEY_CNPJ",   verif_config.OPENAI_API_KEY),
@@ -230,6 +231,15 @@ def admin_settings_save():
         val = (request.form.get(field) or "").strip()
         if val:
             SystemSetting.set(field, val)
+
+    _VALID_PHASES = {"business_info", "domain", "waba"}
+    _phase_order_val = (request.form.get("MIDDLE_PHASE_ORDER") or "").strip()
+    if _phase_order_val:
+        _submitted = [p.strip() for p in _phase_order_val.split(",") if p.strip()]
+        if set(_submitted) == _VALID_PHASES and len(_submitted) == 3:
+            SystemSetting.set("MIDDLE_PHASE_ORDER", ",".join(_submitted))
+        else:
+            flash("Ordem de fases inválida — deve conter exatamente: business_info, domain, waba.", "error")
 
     log_event("info", "admin", "Configurações de SMS atualizadas", user_id=current_user.id)
     flash("Configurações salvas com sucesso.", "success")
