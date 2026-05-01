@@ -86,11 +86,9 @@ def _run_verification(task, waba_record_id: int):
                 logger.error(f"WabaRecord {waba_record_id} has no run_id")
                 raise ValueError("No run_id assigned to this WABA record")
 
+            # domain_verification_method and middle_phase_order are populated
+            # by get_run_data() reading SystemSetting in this same VPS DB.
             run_data = gerador.get_run(waba.run_id)
-            from web_app.models import SystemSetting as _SS
-            run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
-            _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
-            run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
 
             # Open AdsPower browser
             profile_id = waba.profile_id

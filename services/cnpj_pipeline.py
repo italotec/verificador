@@ -270,6 +270,13 @@ def get_run_data(run_id: int) -> dict:
     cnpj_d = re.sub(r"\D", "", empresa.get("cnpj", ""))
     estado_sigla = (empresa.get("estado") or "").upper()
 
+    # Admin-configurable settings live in the VPS DB. Resolve them here so the
+    # remote agent gets the right value via /worker/gerador/runs/<id>.
+    from web_app.models import SystemSetting as _SS
+    _domain_verify_method = _SS.get("DOMAIN_VERIFICATION_METHOD", "dns_txt")
+    _phase_order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
+    _phase_order = [p.strip() for p in _phase_order_str.split(",") if p.strip()]
+
     # Build formatted CNPJ
     cnpj_fmt = (
         f"{cnpj_d[:2]}.{cnpj_d[2:5]}.{cnpj_d[5:8]}/{cnpj_d[8:12]}-{cnpj_d[12:14]}"
@@ -297,6 +304,9 @@ def get_run_data(run_id: int) -> dict:
         "dominios": cfg_module.CLOUDPANEL_DOMAINS,
         "spaceship_api_key": cfg_module.SPACESHIP_API_KEY,
         "spaceship_api_secret": cfg_module.SPACESHIP_API_SECRET,
+        # Admin-configurable settings (resolved from VPS DB above)
+        "domain_verification_method": _domain_verify_method,
+        "middle_phase_order": _phase_order,
     }
 
 

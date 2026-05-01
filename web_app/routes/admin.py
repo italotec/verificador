@@ -203,7 +203,7 @@ def admin_settings():
         "HEROSMS_SERVICE":       SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE),
         "HEROSMS_MAX_PRICE":     SystemSetting.get("HEROSMS_MAX_PRICE", verif_config.HEROSMS_MAX_PRICE),
         "AI_PROVIDER":           SystemSetting.get("AI_PROVIDER",           "anthropic"),
-        "DOMAIN_VERIFICATION_METHOD": SystemSetting.get("DOMAIN_VERIFICATION_METHOD", "meta_tag"),
+        "DOMAIN_VERIFICATION_METHOD": SystemSetting.get("DOMAIN_VERIFICATION_METHOD", "dns_txt"),
         "MIDDLE_PHASE_ORDER":         SystemSetting.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba"),
         "ANTHROPIC_API_KEY_CNPJ": SystemSetting.get("ANTHROPIC_API_KEY_CNPJ", verif_config.ANTHROPIC_API_KEY),
         "ANTHROPIC_MODEL_CNPJ":  SystemSetting.get("ANTHROPIC_MODEL_CNPJ",  verif_config.CLAUDE_FAST_MODEL),

@@ -246,24 +246,13 @@ def _run_for_profile(
     user_id = profile["user_id"]
     print(f"\n[VERIFICADOR] Processing profile {user_id} — {profile.get('name', '')}")
 
-    # Fetch company data from Gerador
+    # Fetch company data from Gerador.
+    # domain_verification_method and middle_phase_order are resolved server-side
+    # in get_run_data() so the agent (which talks to a remote VPS) gets the
+    # admin settings from the VPS DB, not its local SQLite.
     try:
         run_data = gerador.get_run(run_id)
         run_data["run_id"] = run_id  # ensure it's in the dict
-        # Always read from DB. Caller (jobs.py / Celery) may already have an app context;
-        # agent.py does not, so we lazily push one for this lookup.
-        from flask import has_app_context
-        from web_app.models import SystemSetting as _SS
-        if has_app_context():
-            run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
-            _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
-            run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
-        else:
-            from web_app import create_app
-            with create_app().app_context():
-                run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
-                _order_str = _SS.get("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
-                run_data["middle_phase_order"] = [p.strip() for p in _order_str.split(",") if p.strip()]
     except Exception as e:
         raise RuntimeError(f"Falha ao buscar dados do Gerador (run {run_id}): {e}") from e
 

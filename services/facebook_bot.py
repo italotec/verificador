@@ -603,7 +603,7 @@ class FacebookBot:
                 pass
 
         if not domain_already_done:
-            verify_method = self.run.get("domain_verification_method", "meta_tag")
+            verify_method = self.run.get("domain_verification_method", "dns_txt")
             print(f"[BOT] domain_verification_method={verify_method!r} (from self.run)")
             meta_tag = self._add_domain(page)
 
