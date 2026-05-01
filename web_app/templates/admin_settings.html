@@ -189,7 +189,8 @@
     {# ── Domain verification method selector ── #}
     <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
       <h2 class="text-base font-semibold mb-1">Verificação de domínio</h2>
-      <p class="text-xs text-zinc-500 mb-4">Como o bot verifica o domínio na Business Manager.</p>
+      <p class="text-xs text-zinc-500 mb-1">Como o bot verifica o domínio na Business Manager.</p>
+      <p class="text-xs text-amber-400 mb-4">Configurado via <code>.env</code> (DOMAIN_VERIFICATION_METHOD) no momento — alterações aqui não terão efeito até a próxima atualização.</p>
 
       <div class="flex gap-4">
 
@@ -219,7 +220,8 @@
     {# ── Phase order ── #}
     <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
       <h2 class="text-base font-semibold mb-1">Ordem das fases intermediárias</h2>
-      <p class="text-xs text-zinc-400 mb-4">Arraste para reordenar. Login e criação do BM sempre vêm primeiro; o wizard sempre vem por último.</p>
+      <p class="text-xs text-zinc-400 mb-1">Arraste para reordenar. Login e criação do BM sempre vêm primeiro; o wizard sempre vem por último.</p>
+      <p class="text-xs text-amber-400 mb-4">Configurado via <code>.env</code> (MIDDLE_PHASE_ORDER) no momento — alterações aqui não terão efeito até a próxima atualização.</p>
 
       <input type="hidden" name="MIDDLE_PHASE_ORDER" id="middle-phase-order-input"
              value="{{ settings.MIDDLE_PHASE_ORDER }}">

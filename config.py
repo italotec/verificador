@@ -59,6 +59,13 @@ CLOUDPANEL_DOMAINS = os.getenv("CLOUDPANEL_DOMAINS", "lusquetarock.com").split("
 SPACESHIP_API_KEY = os.getenv("SPACESHIP_API_KEY", "")
 SPACESHIP_API_SECRET = os.getenv("SPACESHIP_API_SECRET", "")
 
+# Domain verification method on Business Manager: "dns_txt" | "meta_tag"
+DOMAIN_VERIFICATION_METHOD = os.getenv("DOMAIN_VERIFICATION_METHOD", "dns_txt")
+
+# Order of middle phases. Comma-separated subset of {business_info, domain, waba}
+_phase_order_raw = os.getenv("MIDDLE_PHASE_ORDER", "business_info,domain,waba")
+MIDDLE_PHASE_ORDER = [p.strip() for p in _phase_order_raw.split(",") if p.strip()]
+
 # SMS24H credentials
 SMS24H_API_KEY = os.getenv("SMS24H_API_KEY", "")
 SMS24H_COUNTRY = os.getenv("SMS24H_COUNTRY", "73")   # 73 = Brazil
