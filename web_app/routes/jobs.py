@@ -70,6 +70,10 @@ def _job_thread(app, job_id: int, profile: dict, run_id, email_mode: str,
                 job.status = "running"
                 job.started_at = datetime.utcnow()
                 db.session.commit()
+            from ..models import SystemSetting as _SS
+            gerador_data = gerador_data or {}
+            # Always override from DB — never let stale remark values win
+            gerador_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
 
         # Add project root to sys.path so we can import main.py helpers
         project_root = str(Path(__file__).parent.parent.parent)

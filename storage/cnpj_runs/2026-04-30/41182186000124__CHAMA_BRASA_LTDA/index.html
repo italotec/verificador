@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="zbvg48661kwnnci3ideedq3qlhstyp" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chama Brasa - Loja de Roupas e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Subtle fade-in animation for cards */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+  }
+  .fade-delay-1 {
+    animation-delay: 0.2s;
+  }
+  .fade-delay-2 {
+    animation-delay: 0.4s;
+  }
+  .fade-delay-3 {
+    animation-delay: 0.6s;
+  }
+  .fade-delay-4 {
+    animation-delay: 0.8s;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Custom scrollbar for products section */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #ef4444;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-3xl font-extrabold text-red-600 tracking-tight hover:text-red-700 transition">Chama Brasa</a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-red-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-red-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-red-600 transition">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-red-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="menu-btn" class="md:hidden focus:outline-none text-red-600 hover:text-red-700">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner">
+    <ul class="flex flex-col space-y-3 px-6 py-4 font-semibold text-gray-700">
+      <li><a href="#colecao" class="hover:text-red-600 transition block">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-red-600 transition block">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-red-600 transition block">Sobre Nós</a></li>
+      <li><a href="#contato" class="hover:text-red-600 transition block">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="relative bg-gradient-to-br from-red-50 via-red-100 to-red-50 min-h-[90vh] flex flex-col justify-center items-center text-center px-6 md:px-12">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-red-700 drop-shadow-md max-w-4xl leading-tight animate-fade-in">Estilo que Acende Sua Paixão</h1>
+  <p class="mt-6 max-w-3xl text-lg md:text-xl text-red-600/90 font-medium">Roupas e acessórios autênticos para quem quer brilhar no dia a dia com conforto e elegância.</p>
+  <a href="#colecao" class="mt-10 inline-block bg-red-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg hover:bg-red-700 transition transform hover:-translate-y-1">Conheça a Coleção</a>
+  <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80" alt="Modelo vestindo roupa vermelha estilosa" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-12 max-w-[90vw] md:max-w-none md:w-[900px] rounded-t-3xl shadow-2xl select-none pointer-events-none opacity-80" loading="lazy" />
+</section>
+
+<section id="colecao" class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-red-700 mb-12 text-center md:text-left">Coleção de Vestuário</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <article class="fade-in fade-delay-1 bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-[1.03]">
+      <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd54?auto=format&fit=crop&w=800&q=80" alt="Camisa vermelha masculina" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-red-700 mb-2">Camisa Urbana Vermelha</h3>
+        <p class="text-gray-600 mb-4">Confeccionada em algodão premium, confortável e estilosa para o dia a dia.</p>
+        <span class="text-red-600 font-bold text-lg">R$ 149,90</span>
+      </div>
+    </article>
+    <article class="fade-in fade-delay-2 bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-[1.03]">
+      <img src="https://images.unsplash.com/photo-1503342452485-86f3403b8f0e?auto=format&fit=crop&w=800&q=80" alt="Jaqueta feminina vermelha" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-red-700 mb-2">Jaqueta Slim Fit</h3>
+        <p class="text-gray-600 mb-4">Elegância e proteção para as noites mais fresquinhas.</p>
+        <span class="text-red-600 font-bold text-lg">R$ 299,90</span>
+      </div>
+    </article>
+    <article class="fade-in fade-delay-3 bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-[1.03]">
+      <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80" alt="Calça jeans vermelha feminina" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-red-700 mb-2">Calça Jeans Vermelha</h3>
+        <p class="text-gray-600 mb-4">Modelagem ajustada que valoriza suas curvas com conforto.</p>
+        <span class="text-red-600 font-bold text-lg">R$ 189,90</span>
+      </div>
+    </article>
+    <article class="fade-in fade-delay-4 bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-[1.03]">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Vestido casual vermelho" class="w-full h-64 object-cover" loading="lazy" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-red-700 mb-2">Vestido Casual</h3>
+        <p class="text-gray-600 mb-4">Leve e fluido, perfeito para dias ensolarados.</p>
+        <span class="text-red-600 font-bold text-lg">R$ 229,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-red-50 py-16 px-6">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-red-700 mb-12 text-center md:text-left">Acessórios que Fazem a Diferença</h2>
+    <div class="flex overflow-x-auto gap-8 scrollbar-thin snap-x snap-mandatory px-2">
+      <article class="min-w-[280px] rounded-3xl bg-white shadow-lg flex-shrink-0 snap-center hover:shadow-2xl transition transform hover:scale-105 fade-in fade-delay-1">
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80" alt="Bolsa vermelha de couro" class="h-56 w-full object-cover rounded-t-3xl" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-red-700 mb-2">Bolsa de Couro Vermelha</h3>
+          <p class="text-gray-600 mb-3">Compacta e prática para qualquer ocasião.</p>
+          <span class="text-red-600 font-bold text-lg">R$ 179,90</span>
+        </div>
+      </article>
+      <article class="min-w-[280px] rounded-3xl bg-white shadow-lg flex-shrink-0 snap-center hover:shadow-2xl transition transform hover:scale-105 fade-in fade-delay-2">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" alt="Chapéu vermelho estiloso" class="h-56 w-full object-cover rounded-t-3xl" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-red-700 mb-2">Chapéu Fedora Vermelho</h3>
+          <p class="text-gray-600 mb-3">Para adicionar charme e personalidade.</p>
+          <span class="text-red-600 font-bold text-lg">R$ 99,90</span>
+        </div>
+      </article>
+      <article class="min-w-[280px] rounded-3xl bg-white shadow-lg flex-shrink-0 snap-center hover:shadow-2xl transition transform hover:scale-105 fade-in fade-delay-3">
+        <img src="https://images.unsplash.com/photo-1530639836708-cbdb1e668f4c?auto=format&fit=crop&w=600&q=80" alt="Relógio vermelho elegante" class="h-56 w-full object-cover rounded-t-3xl" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-red-700 mb-2">Relógio Clássico</h3>
+          <p class="text-gray-600 mb-3">Design minimalista com pulseira vermelha.</p>
+          <span class="text-red-600 font-bold text-lg">R$ 249,90</span>
+        </div>
+      </article>
+      <article class="min-w-[280px] rounded-3xl bg-white shadow-lg flex-shrink-0 snap-center hover:shadow-2xl transition transform hover:scale-105 fade-in fade-delay-4">
+        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol vermelhos" class="h-56 w-full object-cover rounded-t-3xl" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-red-700 mb-2">Óculos de Sol Vermelho</h3>
+          <p class="text-gray-600 mb-3">Estilo retrô com lentes escuras.</p>
+          <span class="text-red-600 font-bold text-lg">R$ 129,90</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-12">
+  <div class="md:w-1/2 space-y-6">
+    <h2 class="text-4xl font-extrabold text-red-700">Nossa História</h2>
+    <p class="text-gray-700 text-lg leading-relaxed">Fundada em 2010, a Chama Brasa nasceu do desejo de trazer roupas e acessórios que expressam paixão, autenticidade e estilo para pessoas que querem se destacar sem perder o conforto. Cada peça é cuidadosamente selecionada para oferecer qualidade, durabilidade e design atual.</p>
+    <p class="text-gray-700 text-lg leading-relaxed">Com foco em sustentabilidade, trabalhamos com fornecedores responsáveis e buscamos sempre inovar para você se sentir confiante e radiante.</p>
+  </div>
+  <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-2xl hover:scale-[1.04] transition-transform cursor-pointer">
+    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja" class="w-full h-full object-cover" loading="lazy" />
+  </div>
+</section>
+
+<section id="contato" class="bg-red-50 py-16 px-6">
+  <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-10">
+    <h2 class="text-4xl font-extrabold text-red-700 mb-8 text-center">Fale Conosco</h2>
+    <form action="#" class="space-y-6" novalidate>
+      <div>
+        <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" required class="w-full border border-red-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition" placeholder="Seu nome" />
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" required class="w-full border border-red-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition" placeholder="seu@email.com" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-red-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+      </div>
+      <button type="submit" class="w-full bg-red-600 text-white font-bold rounded-lg py-4 hover:bg-red-700 transition shadow-md hover:shadow-lg focus:ring-4 focus:ring-red-400">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-300 py-12 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div>
+      <h3 class="text-red-600 font-extrabold mb-3">Dados da Empresa</h3>
+      <p><span class="font-semibold">CNPJ:</span> 41.182.186/0001-24</p>
+      <p><span class="font-semibold">Razão Social:</span> CHAMA BRASA LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-red-600 font-extrabold mb-3">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:CONTBRASIL@YHOO.COM.BR" class="hover:text-red-500 transition">CONTBRASIL@YHOO.COM.BR</a></p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="text-red-500">38-998126525</span></p>
+    </div>
+    <div>
+      <h3 class="text-red-600 font-extrabold mb-3">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> FAZENDA CANA BRAVA, S/N</p>
+      <p><span class="font-semibold">Bairro:</span> AREA RURAL</p>
+      <p><span class="font-semibold">Município:</span> GUARACIAMA</p>
+      <p><span class="font-semibold">Estado:</span> MG</p>
+    </div>
+    <div class="flex flex-col justify-end space-y-3">
+      <a href="#" class="text-gray-400 hover:text-red-500 font-semibold transition underline decoration-red-700 decoration-2 underline-offset-2">Termos de Uso</a>
+      <a href="#" class="text-gray-400 hover:text-red-500 font-semibold transition underline decoration-red-700 decoration-2 underline-offset-2">Política de Privacidade</a>
+    </div>
+  </div>
+  <div class="mt-10 text-center text-gray-600 text-sm select-none">&copy; 2024 Chama Brasa LTDA. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

@@ -250,6 +250,16 @@ def _run_for_profile(
     try:
         run_data = gerador.get_run(run_id)
         run_data["run_id"] = run_id  # ensure it's in the dict
+        # Always read from DB. Caller (jobs.py / Celery) may already have an app context;
+        # agent.py does not, so we lazily push one for this lookup.
+        from flask import has_app_context
+        from web_app.models import SystemSetting as _SS
+        if has_app_context():
+            run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
+        else:
+            from web_app import create_app
+            with create_app().app_context():
+                run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
     except Exception as e:
         raise RuntimeError(f"Falha ao buscar dados do Gerador (run {run_id}): {e}") from e
 

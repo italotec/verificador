@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja Toledo - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes floatUp {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-floatUp {
+    animation: floatUp 0.8s ease forwards;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-teal-300 selection:text-gray-900">
+
+<header class="sticky top-0 bg-white shadow-md z-50 animate-floatUp">
+  <nav class="container mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+    <a href="#" class="text-3xl font-extrabold tracking-wide text-teal-600 hover:text-teal-700 transition">Toledo Moda</a>
+    <ul class="hidden md:flex space-x-8 text-gray-700 font-semibold uppercase text-sm tracking-wide">
+      <li><a href="#colecao" class="hover:text-teal-600 transition">Coleção</a></li>
+      <li><a href="#vestuario" class="hover:text-teal-600 transition">Vestuário</a></li>
+      <li><a href="#acessorios" class="hover:text-teal-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-teal-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-teal-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden focus:outline-none">
+      <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+      viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" /></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner border-t border-gray-200">
+    <ul class="flex flex-col space-y-2 py-4 px-6 text-gray-700 font-semibold uppercase text-base tracking-wide">
+      <li><a href="#colecao" class="block hover:text-teal-600 transition">Coleção</a></li>
+      <li><a href="#vestuario" class="block hover:text-teal-600 transition">Vestuário</a></li>
+      <li><a href="#acessorios" class="block hover:text-teal-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-teal-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-teal-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="colecao" class="relative bg-gradient-to-r from-teal-100 via-teal-50 to-white overflow-hidden">
+  <div class="container mx-auto px-6 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div class="space-y-6 max-w-xl animate-floatUp">
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-teal-700">Nova Coleção Primavera 2024</h1>
+      <p class="text-lg md:text-xl text-teal-900/90">Descubra as tendências que vão transformar seu guarda-roupa com elegância e conforto. Roupas e acessórios que acompanham seu estilo.</p>
+      <a href="#vestuario" class="inline-block px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg shadow-lg transition-all active:scale-95">Explore Agora</a>
+    </div>
+    <div class="overflow-hidden rounded-3xl shadow-xl animate-floatUp">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher com vestido floral na natureza" class="w-full h-auto object-cover object-center" loading="lazy" />
+    </div>
+  </div>
+  <svg class="absolute bottom-0 left-0 w-full h-20 text-white" preserveAspectRatio="none" viewBox="0 0 1440 320"><path fill="currentColor" fill-opacity="1" d="M0,256L80,229.3C160,203,320,149,480,149.3C640,149,800,203,960,224C1120,245,1280,235,1360,229.3L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
+</section>
+
+<section id="vestuario" class="bg-white py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-teal-800 mb-10 text-center md:text-left tracking-tight animate-floatUp">Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <article class="group bg-gray-50 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.1s;">
+        <div class="aspect-[5/6] relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1520975698517-7d0a4d3a3341?auto=format&fit=crop&w=600&q=80" alt="Camisa masculina azul" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700 group-hover:text-teal-900 transition-colors">Camisa Slim Fit</h3>
+          <p class="mt-2 text-teal-600 font-semibold text-xl">R$ 149,90</p>
+        </div>
+      </article>
+      <article class="group bg-gray-50 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.2s;">
+        <div class="aspect-[5/6] relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1503342217505-ecfbc6eccb9b?auto=format&fit=crop&w=600&q=80" alt="Mulher com jaqueta bege" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700 group-hover:text-teal-900 transition-colors">Jaqueta Oversized</h3>
+          <p class="mt-2 text-teal-600 font-semibold text-xl">R$ 279,00</p>
+        </div>
+      </article>
+      <article class="group bg-gray-50 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.3s;">
+        <div class="aspect-[5/6] relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583695601710-817d163e9a0a?auto=format&fit=crop&w=600&q=80" alt="Vestido longo floral" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700 group-hover:text-teal-900 transition-colors">Vestido Longo Floral</h3>
+          <p class="mt-2 text-teal-600 font-semibold text-xl">R$ 199,90</p>
+        </div>
+      </article>
+      <article class="group bg-gray-50 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.4s;">
+        <div class="aspect-[5/6] relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1520975698517-62d43f9c9d0a?auto=format&fit=crop&w=600&q=80" alt="Moletom cinza masculino" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700 group-hover:text-teal-900 transition-colors">Moletom Básico</h3>
+          <p class="mt-2 text-teal-600 font-semibold text-xl">R$ 129,00</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-teal-50 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-4xl font-extrabold text-teal-800 mb-12 text-center md:text-left tracking-wide animate-floatUp">Acessórios</h2>
+    <div class="flex flex-nowrap overflow-x-auto scrollbar-hide gap-8 py-4">
+      <article class="min-w-[260px] flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.1s;">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro marrom" class="rounded-t-3xl w-full h-56 object-cover object-center" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700">Bolsa de Couro</h3>
+          <p class="text-teal-600 font-semibold mt-2">R$ 299,90</p>
+        </div>
+      </article>
+      <article class="min-w-[260px] flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.2s;">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Relógio dourado" class="rounded-t-3xl w-full h-56 object-cover object-center" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700">Relógio Dourado</h3>
+          <p class="text-teal-600 font-semibold mt-2">R$ 499,00</p>
+        </div>
+      </article>
+      <article class="min-w-[260px] flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.3s;">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Chapéu estiloso" class="rounded-t-3xl w-full h-56 object-cover object-center" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700">Chapéu Estiloso</h3>
+          <p class="text-teal-600 font-semibold mt-2">R$ 89,90</p>
+        </div>
+      </article>
+      <article class="min-w-[260px] flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow animate-floatUp" style="animation-delay: 0.4s;">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="rounded-t-3xl w-full h-56 object-cover object-center" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-semibold text-lg text-teal-700">Óculos de Sol</h3>
+          <p class="text-teal-600 font-semibold mt-2">R$ 159,90</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-white py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 animate-floatUp">
+      <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=700&q=80" alt="Equipe de loja de roupas" class="rounded-3xl shadow-lg object-cover w-full h-96" loading="lazy" />
+    </div>
+    <div class="md:w-1/2 space-y-6 animate-floatUp">
+      <h2 class="text-4xl font-extrabold text-teal-800 tracking-wide">Quem Somos</h2>
+      <p class="text-teal-700 text-lg leading-relaxed">Na Toledo Moda, unimos estilo, qualidade e sustentabilidade para oferecer roupas e acessórios que valorizam sua personalidade. Com mais de 10 anos no mercado, nossa missão é vestir você com elegância e conforto em todas as ocasiões.</p>
+      <p class="text-teal-700 text-lg leading-relaxed">Nossa equipe seleciona cuidadosamente cada peça, sempre atenta às últimas tendências e ao impacto ambiental, para garantir uma experiência única e consciente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-teal-50 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-4xl bg-white rounded-3xl shadow-xl p-10 animate-floatUp">
+    <h2 class="text-4xl font-extrabold text-teal-800 mb-8 tracking-wide text-center">Fale Conosco</h2>
+    <form class="space-y-6" action="#" method="POST" novalidate>
+      <div>
+        <label for="nome" class="block text-teal-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required class="w-full rounded-lg border border-teal-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-300 px-4 py-3 outline-none transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-teal-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required class="w-full rounded-lg border border-teal-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-300 px-4 py-3 outline-none transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-teal-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem" required class="w-full rounded-lg border border-teal-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-300 px-4 py-3 outline-none transition resize-none"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-extrabold py-3 rounded-xl shadow-lg transition active:scale-95">Enviar Mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-300 py-14 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <h3 class="text-xl font-semibold mb-4 text-teal-400">Informações da Empresa</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold text-gray-400">CNPJ:</span> 31.118.531/0001-07</li>
+        <li><span class="font-semibold text-gray-400">Razão Social:</span> TOLEDO PRESTACAO DE SERVICOS LTDA</li>
+        <li><span class="font-semibold text-gray-400">E-mail:</span> <a href="mailto:KATIAGANDINI@HOTMAIL.COM" class="text-teal-400 hover:underline">KATIAGANDINI@HOTMAIL.COM</a></li>
+        <li><span class="font-semibold text-gray-400">Telefone:</span> <span id="telefone-comercial" class="text-teal-400">(82) 95634-4588</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-4 text-teal-400">Endereço</h3>
+      <address class="not-italic space-y-2 text-sm leading-relaxed">
+        <p><span class="font-semibold text-gray-400">Logradouro:</span> RUA SERGIO LENZI, 41</p>
+        <p><span class="font-semibold text-gray-400">Bairro:</span> NOVO HORIZONTE</p>
+        <p><span class="font-semibold text-gray-400">Município:</span> MONSENHOR PAULO</p>
+        <p><span class="font-semibold text-gray-400">Estado:</span> MG</p>
+      </address>
+    </div>
+    <div class="flex flex-col justify-between">
+      <h3 class="text-xl font-semibold mb-4 text-teal-400">Links Úteis</h3>
+      <nav>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#" class="hover:text-teal-400 transition font-semibold">Termos de Uso</a></li>
+          <li><a href="#" class="hover:text-teal-400 transition font-semibold">Política de Privacidade</a></li>
+        </ul>
+      </nav>
+      <p class="mt-8 text-xs text-gray-500">© 2024 Toledo Moda. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

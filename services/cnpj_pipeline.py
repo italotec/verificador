@@ -293,6 +293,10 @@ def get_run_data(run_id: int) -> dict:
         "cep_formatted": f"{cep_d[:5]}-{cep_d[5:]}" if len(cep_d) == 8 else empresa.get("cep", ""),
         "deploy_url": run.deploy_url or "",
         "pdf_filename": Path(run.pdf_rel).name if run.pdf_rel else "",
+        # DNS-TXT verification needs the parent-domain pool + Spaceship API creds
+        "dominios": cfg_module.CLOUDPANEL_DOMAINS,
+        "spaceship_api_key": cfg_module.SPACESHIP_API_KEY,
+        "spaceship_api_secret": cfg_module.SPACESHIP_API_SECRET,
     }
 
 

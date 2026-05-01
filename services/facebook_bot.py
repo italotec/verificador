@@ -515,41 +515,100 @@ class FacebookBot:
                         pass
 
                 if not domain_already_done:
+                    verify_method = self.run.get("domain_verification_method", "meta_tag")
+                    print(f"[BOT] domain_verification_method={verify_method!r} (from self.run)")
                     meta_tag = self._add_domain(page)
-                    if meta_tag:
-                        print(f"[BOT] Injecting meta tag: {meta_tag[:60]}…")
-                        self.gerador.inject_meta_tag(self.run["run_id"], meta_tag)
-                        _wait(30)  # give DNS / CloudPanel time to propagate
-                        try:
-                            verified = self._verify_domain(page)
-                            self._shot(page, "domain_verified")
-                            if verified:
-                                self._mark_step_done("domain_done")
-                        except DomainVerificationError:
-                            self._shot(page, "domain_failed")
-                            raise  # non-retryable — propagate directly
-                        except RuntimeError as e:
-                            self._shot(page, "domain_failed")
-                            return {"success": False, "error": str(e)}
-                    else:
-                        self._shot(page, "domain_no_metatag")
-                        # No meta tag returned — domain may already exist and be verified
-                        # from a previous partial run where the remark wasn't saved.
-                        # Check the domains settings page for a "Verificado" badge.
-                        print("[BOT] No meta tag — checking if domain already verified")
-                        domain_verified_found = False
-                        for verified_text in ("Verificado", "Verified"):
+
+                    if verify_method == "dns_txt":
+                        token = self._select_dns_txt_method_and_extract_token(page)
+                        if not token:
+                            self._shot(page, "domain_no_txt_token")
+                            return {"success": False, "error": "Domain verification failed: TXT token not found"}
+
+                        # Split FQDN into (host, parent_domain) using the dominios pool
+                        host, parent = "", ""
+                        for parent_candidate in self.run.get("dominios", []):
+                            if self.domain == parent_candidate or self.domain.endswith("." + parent_candidate):
+                                parent = parent_candidate
+                                host = self.domain[:-(len(parent) + 1)] if self.domain != parent else "@"
+                                break
+                        if not parent:
+                            self._shot(page, "domain_no_parent")
+                            raise DomainVerificationError(
+                                f"[DOMAIN] {self.domain} not in dominios pool — cannot add TXT record"
+                            )
+
+                        from services.cloudpanel_deploy import adicionar_txt_record
+                        api_key = self.run.get("spaceship_api_key", "")
+                        api_secret = self.run.get("spaceship_api_secret", "")
+                        if not api_key or not api_secret:
+                            raise DomainVerificationError("[DOMAIN] Spaceship credentials missing in run data")
+
+                        ok = adicionar_txt_record(parent, host, f"facebook-domain-verification={token}", api_key, api_secret)
+                        if not ok:
+                            self._shot(page, "domain_txt_failed")
+                            raise DomainVerificationError("[DOMAIN] Failed to add TXT record on Spaceship")
+
+                        _wait(45)  # DNS propagation window
+                        last_err = None
+                        verified = False
+                        for attempt in range(3):
                             try:
-                                if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
-                                    print(f"[BOT] Domain already verified ('{verified_text}') — marking done")
-                                    self._mark_step_done("domain_done")
-                                    domain_verified_found = True
+                                verified = self._verify_domain(page)
+                                if verified:
                                     break
-                            except Exception:
-                                pass
-                        if not domain_verified_found:
-                            print("[BOT] Domain not verified and no meta tag available — aborting")
-                            return {"success": False, "error": "Domain verification failed: no meta tag returned and Verified badge not found"}
+                            except DomainVerificationError as e:
+                                last_err = e
+                                if attempt < 2:
+                                    _wait(30)
+                                    try:
+                                        page.reload(wait_until="domcontentloaded", timeout=15_000)
+                                        _wait(2)
+                                    except Exception:
+                                        pass
+                        if verified:
+                            self._shot(page, "domain_verified")
+                            self._mark_step_done("domain_done")
+                        else:
+                            self._shot(page, "domain_failed")
+                            raise last_err or DomainVerificationError("[DOMAIN] DNS verification failed after retries")
+
+                    else:
+                        # ── meta-tag flow (default) ──
+                        if meta_tag:
+                            print(f"[BOT] Injecting meta tag: {meta_tag[:60]}…")
+                            self.gerador.inject_meta_tag(self.run["run_id"], meta_tag)
+                            _wait(30)  # give DNS / CloudPanel time to propagate
+                            try:
+                                verified = self._verify_domain(page)
+                                self._shot(page, "domain_verified")
+                                if verified:
+                                    self._mark_step_done("domain_done")
+                            except DomainVerificationError:
+                                self._shot(page, "domain_failed")
+                                raise  # non-retryable — propagate directly
+                            except RuntimeError as e:
+                                self._shot(page, "domain_failed")
+                                return {"success": False, "error": str(e)}
+                        else:
+                            self._shot(page, "domain_no_metatag")
+                            # No meta tag returned — domain may already exist and be verified
+                            # from a previous partial run where the remark wasn't saved.
+                            # Check the domains settings page for a "Verificado" badge.
+                            print("[BOT] No meta tag — checking if domain already verified")
+                            domain_verified_found = False
+                            for verified_text in ("Verificado", "Verified"):
+                                try:
+                                    if page.get_by_text(verified_text, exact=True).is_visible(timeout=3_000):
+                                        print(f"[BOT] Domain already verified ('{verified_text}') — marking done")
+                                        self._mark_step_done("domain_done")
+                                        domain_verified_found = True
+                                        break
+                                except Exception:
+                                    pass
+                            if not domain_verified_found:
+                                print("[BOT] Domain not verified and no meta tag available — aborting")
+                                return {"success": False, "error": "Domain verification failed: no meta tag returned and Verified badge not found"}
                 else:
                     print("[BOT] Skipping domain (already done — domain_done or domain_zone flag set)")
 
@@ -1719,6 +1778,140 @@ class FacebookBot:
             print(f"[DOMAIN] Meta tag: {meta_text}")
 
         return meta_text
+
+    def _select_dns_txt_method_and_extract_token(self, page: Page) -> str:
+        """
+        Switch the verification method combobox from 'Adicionar uma metatag' to
+        'Atualize o registro TXT do DNS', then extract the bare token.
+        Called while still on the domain detail page right after _add_domain().
+        Returns the token string or '' on failure.
+        """
+        self._shot(page, "dns_01_before_select")
+
+        # ── Step 1: open the combobox ─────────────────────────────────────────
+        # Facebook's React combobox listens for mousedown at the document root
+        # (React synthetic events). Playwright's .click() can miss because its
+        # hit-test sees the wrapping label, not the combobox itself.
+        # Fix: dispatch a native MouseEvent with bubbles:true from JS so React's
+        # document-level listener picks it up. Try multiple locator strategies.
+        opened = False
+        _combo_locators = [
+            page.get_by_label("Selecione uma opção"),
+            page.locator('[aria-haspopup="listbox"]').first,
+            page.locator('[role="combobox"]').first,
+        ]
+        for combo in _combo_locators:
+            try:
+                combo.wait_for(state="visible", timeout=4_000)
+            except Exception:
+                continue
+            # Primary: bubble a real mousedown so React's synthetic event router fires
+            for _fn in [
+                lambda c=combo: c.evaluate(
+                    "el => el.dispatchEvent(new MouseEvent('mousedown', {bubbles:true,cancelable:true,view:window}))"
+                ),
+                lambda c=combo: c.evaluate("el => el.click()"),
+                lambda c=combo: c.click(force=True),
+            ]:
+                try:
+                    _fn()
+                    # Confirm the listbox appeared
+                    page.locator('[role="listbox"], [role="option"]').first.wait_for(
+                        state="visible", timeout=2_000
+                    )
+                    opened = True
+                    break
+                except Exception:
+                    pass
+            if opened:
+                break
+
+        if not opened:
+            print("[DOMAIN/DNS] Could not open the verification method combobox")
+            return ""
+
+        _wait(1.5)
+        self._shot(page, "dns_02_dropdown_open")
+
+        # ── Step 2: select the DNS TXT option ────────────────────────────────
+        # Listbox is a React portal rendered at body level — wait for it first.
+        selected = False
+        try:
+            page.locator('[role="listbox"]').wait_for(state="visible", timeout=6_000)
+            for _loc in [
+                page.locator('[role="listbox"]').get_by_text("Atualize o registro TXT do DNS"),
+                page.locator('[role="listbox"]').get_by_text(re.compile(r"TXT do DNS", re.I)),
+            ]:
+                try:
+                    _loc.first.click(force=True, timeout=4_000)
+                    selected = True
+                    break
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        if not selected:
+            # listbox may lack role="listbox" — search full page
+            for _loc in [
+                page.get_by_text("Atualize o registro TXT do DNS"),
+                page.get_by_text(re.compile(r"Atualize o registro TXT", re.I)),
+                page.get_by_text(re.compile(r"TXT do DNS", re.I)),
+            ]:
+                try:
+                    _loc.first.wait_for(state="visible", timeout=4_000)
+                    _loc.first.click(force=True, timeout=4_000)
+                    selected = True
+                    break
+                except Exception:
+                    pass
+
+        if not selected:
+            print("[DOMAIN/DNS] Could not select the DNS TXT option")
+            return ""
+
+        _wait(2)
+        self._shot(page, "dns_03_dns_selected")
+
+        # ── Step 3: extract token ─────────────────────────────────────────────
+        # Live HTML shows token inside <strong>, not <code>/<pre>.
+        def _extract_token(raw: str) -> str:
+            m = re.search(r'facebook-domain-verification=([a-z0-9]{20,})', raw)
+            return m.group(1) if m else ""
+
+        token = ""
+        for _sel in (
+            'strong:has-text("facebook-domain-verification")',
+            'code:has-text("facebook-domain-verification")',
+            'pre:has-text("facebook-domain-verification")',
+            '[class*="code"]:has-text("facebook-domain-verification")',
+            'span:has-text("facebook-domain-verification")',
+        ):
+            try:
+                el = page.locator(_sel).first
+                if el.is_visible(timeout=3_000):
+                    token = _extract_token(el.inner_text(timeout=3_000))
+                    if token:
+                        break
+            except Exception:
+                pass
+
+        if not token:
+            try:
+                token = _extract_token(page.locator("body").inner_text(timeout=5_000))
+            except Exception:
+                pass
+        if not token:
+            try:
+                token = _extract_token(page.content())
+            except Exception:
+                pass
+
+        if token:
+            print(f"[DOMAIN/DNS] TXT token: {token}")
+        else:
+            print("[DOMAIN/DNS] TXT token not found")
+        return token
 
     def _verify_domain(self, page: Page) -> bool:
         """

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BRL Store - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .animate-fade-in {
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="bg-white text-gray-800 leading-relaxed selection:bg-blue-300 selection:text-blue-900">
+
+<header class="sticky top-0 z-50 bg-white shadow-md backdrop-blur-md bg-opacity-70">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between p-5 md:px-8">
+    <a href="#home" class="text-3xl font-extrabold text-blue-600 tracking-wide hover:text-blue-800 transition">BRL Store</a>
+    <ul class="hidden md:flex gap-10 text-gray-700 font-semibold">
+      <li><a href="#colecao" class="hover:text-blue-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-blue-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-blue-600 transition">Sobre</a></li>
+      <li><a href="#depoimentos" class="hover:text-blue-600 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="hover:text-blue-600 transition">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
+      <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner">
+    <ul class="flex flex-col p-4 gap-5 font-semibold text-gray-700">
+      <li><a href="#colecao" class="block py-2 hover:text-blue-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="block py-2 hover:text-blue-600 transition">Acessórios</a></li>
+      <li><a href="#sobre" class="block py-2 hover:text-blue-600 transition">Sobre</a></li>
+      <li><a href="#depoimentos" class="block py-2 hover:text-blue-600 transition">Depoimentos</a></li>
+      <li><a href="#contato" class="block py-2 hover:text-blue-600 transition">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+
+  <!-- SEÇÃO 1 - Hero -->
+  <section id="home" class="relative flex flex-col-reverse md:flex-row items-center gap-10 mt-12 mb-20">
+    <div class="max-w-lg text-center md:text-left animate-fade-in">
+      <h1 class="text-5xl font-extrabold text-blue-700 leading-tight mb-4">Descubra Seu Estilo com BRL Store</h1>
+      <p class="text-gray-600 text-lg mb-8">Roupas e acessórios modernos pensados para você que valoriza qualidade, conforto e autenticidade. Renove seu guarda-roupa com exclusividade.</p>
+      <a href="#colecao" class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition">
+        Ver Coleção
+      </a>
+    </div>
+    <div class="flex-1 max-w-xl overflow-hidden rounded-3xl shadow-2xl animate-fade-in">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Moda jovem" class="w-full h-auto object-cover" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2 - Coleção de Vestuário -->
+  <section id="colecao" class="mb-20">
+    <h2 class="text-4xl font-bold text-blue-700 mb-8 text-center">Coleção de Vestuário</h2>
+    <p class="max-w-3xl mx-auto text-center text-gray-700 mb-12 px-4 sm:px-0">
+      Peças versáteis e contemporâneas para todos os momentos. Do casual ao sofisticado, escolha o look que combina com você.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-0">
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition relative cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Camisa masculina azul" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        <div class="p-5 bg-white">
+          <h3 class="font-semibold text-lg text-gray-900 mb-1">Camisa Azul Clássica</h3>
+          <p class="text-gray-600 mb-3">Algodão premium, caimento perfeito.</p>
+          <span class="font-bold text-blue-600">R$ 129,90</span>
+        </div>
+      </article>
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition relative cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino floral" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        <div class="p-5 bg-white">
+          <h3 class="font-semibold text-lg text-gray-900 mb-1">Vestido Floral Elegante</h3>
+          <p class="text-gray-600 mb-3">Leve e fresco para dias ensolarados.</p>
+          <span class="font-bold text-blue-600">R$ 159,90</span>
+        </div>
+      </article>
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition relative cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans feminina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        <div class="p-5 bg-white">
+          <h3 class="font-semibold text-lg text-gray-900 mb-1">Jaqueta Jeans Vintage</h3>
+          <p class="text-gray-600 mb-3">Estilo atemporal e conforto.</p>
+          <span class="font-bold text-blue-600">R$ 229,90</span>
+        </div>
+      </article>
+      <article class="group rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition relative cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Calça social masculina" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        <div class="p-5 bg-white">
+          <h3 class="font-semibold text-lg text-gray-900 mb-1">Calça Social Cinza</h3>
+          <p class="text-gray-600 mb-3">Elegância para o dia a dia no trabalho.</p>
+          <span class="font-bold text-blue-600">R$ 199,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3 - Acessórios -->
+  <section id="acessorios" class="mb-20 bg-blue-50 py-14 rounded-3xl">
+    <h2 class="text-4xl font-extrabold text-blue-800 mb-10 text-center">Acessórios que Completam Seu Visual</h2>
+    <p class="max-w-3xl mx-auto text-center text-blue-700 mb-14 px-6 sm:px-0">
+      Bolsas, relógios, chapéus e muito mais para elevar seu estilo e dar aquele toque especial em qualquer look.
+    </p>
+    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-12 px-4 sm:px-0 max-w-6xl mx-auto">
+      <div class="w-72 rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-2xl transition cursor-pointer group relative">
+        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80" alt="Bolsa de couro marrom" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-bold text-blue-800 mb-2">Bolsa de Couro Marrom</h3>
+          <p class="text-blue-700 mb-3 text-sm">Durabilidade e estilo em um só acessório.</p>
+          <span class="font-extrabold text-blue-600 text-lg">R$ 299,90</span>
+        </div>
+      </div>
+      <div class="w-72 rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-2xl transition cursor-pointer group relative">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino clássico" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-bold text-blue-800 mb-2">Relógio Clássico</h3>
+          <p class="text-blue-700 mb-3 text-sm">Elegância e precisão para todas as horas.</p>
+          <span class="font-extrabold text-blue-600 text-lg">R$ 379,90</span>
+        </div>
+      </div>
+      <div class="w-72 rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-2xl transition cursor-pointer group relative">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Chapéu de palha" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-bold text-blue-800 mb-2">Chapéu de Palha</h3>
+          <p class="text-blue-700 mb-3 text-sm">Proteção e charme para os dias ensolarados.</p>
+          <span class="font-extrabold text-blue-600 text-lg">R$ 89,90</span>
+        </div>
+      </div>
+      <div class="w-72 rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-2xl transition cursor-pointer group relative">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol moderno" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="font-bold text-blue-800 mb-2">Óculos de Sol Moderno</h3>
+          <p class="text-blue-700 mb-3 text-sm">Design arrojado e proteção UV total.</p>
+          <span class="font-extrabold text-blue-600 text-lg">R$ 149,90</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4 - Sobre Nós -->
+  <section id="sobre" class="mb-20 max-w-5xl mx-auto px-6 sm:px-0">
+    <h2 class="text-4xl font-extrabold text-blue-700 mb-10 text-center">Quem Somos</h2>
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1 animate-fade-in">
+        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+          Na BRL Store, acreditamos que vestir-se bem é uma forma de expressar sua personalidade. Fundada em 2010, nossa missão é oferecer roupas e acessórios que unem qualidade, conforto e estilo para homens e mulheres modernos.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Nosso time seleciona cuidadosamente cada peça para garantir que você tenha uma experiência única de compra, com produtos que acompanham as tendências e valorizam a sua individualidade.
+        </p>
+      </div>
+      <div class="flex-1 rounded-3xl overflow-hidden shadow-xl animate-fade-in">
+        <img src="https://images.unsplash.com/photo-1520975698512-1e9f5d6f55f4?auto=format&fit=crop&w=720&q=80" alt="Equipe da loja BRL Store" class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5 - Depoimentos -->
+  <section id="depoimentos" class="mb-20 bg-gradient-to-r from-blue-100 via-blue-50 to-white rounded-3xl py-16 px-6 md:px-12 max-w-7xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-blue-800 mb-12 text-center">O que nossos clientes dizem</h2>
+    <div class="grid gap-10 md:grid-cols-3">
+      <blockquote class="bg-white rounded-xl shadow-lg p-8 relative before:absolute before:top-4 before:left-6 before:text-7xl before:text-blue-200 before:font-bold before:content-['“']">
+        <p class="text-gray-700 mb-6 leading-relaxed italic">“Comprei uma jaqueta jeans e fiquei impressionada com a qualidade. O caimento perfeito e o atendimento foram excepcionais. Recomendo demais!”</p>
+        <footer class="text-blue-800 font-semibold">Mariana S.</footer>
+      </blockquote>
+      <blockquote class="bg-white rounded-xl shadow-lg p-8 relative before:absolute before:top-4 before:left-6 before:text-7xl before:text-blue-200 before:font-bold before:content-['“']">
+        <p class="text-gray-700 mb-6 leading-relaxed italic">“A variedade de acessórios é incrível! O relógio que comprei é lindo e chegou super rápido. A BRL Store ganhou minha confiança.”</p>
+        <footer class="text-blue-800 font-semibold">Rafael M.</footer>
+      </blockquote>
+      <blockquote class="bg-white rounded-xl shadow-lg p-8 relative before:absolute before:top-4 before:left-6 before:text-7xl before:text-blue-200 before:font-bold before:content-['“']">
+        <p class="text-gray-700 mb-6 leading-relaxed italic">“Adoro o estilo jovem e moderno das roupas. Sempre encontro peças que combinam comigo e a experiência de compra é muito fácil e agradável.”</p>
+        <footer class="text-blue-800 font-semibold">Lívia F.</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6 - Contato -->
+  <section id="contato" class="mb-32 max-w-4xl mx-auto px-6 sm:px-0">
+    <h2 class="text-4xl font-extrabold text-blue-700 mb-12 text-center">Fale Conosco</h2>
+    <form action="#" method="POST" class="bg-white rounded-2xl shadow-xl p-10 space-y-8 animate-fade-in">
+      <div>
+        <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+      </div>
+      <div>
+        <label for="mensagem" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required class="w-full border border-gray-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md">Enviar Mensagem</button>
+    </form>
+  </section>
+</main>
+
+<footer class="bg-gray-900 text-gray-200 py-12 px-6 sm:px-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
+    <div>
+      <h3 class="text-lg font-semibold mb-3 border-b border-gray-700 pb-2">Dados da Empresa</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">CNPJ:</span> 65.952.501/0001-13</li>
+        <li><span class="font-semibold">Razão Social:</span> NACIONAL SETOR ADMINISTRATIVO BRL LTDA</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold mb-3 border-b border-gray-700 pb-2">Contato</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">E-mail:</span> NACIONALSETORADMINISTRATIVO@GMAIL.COM</li>
+        <li><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">(32) 95619-4028</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold mb-3 border-b border-gray-700 pb-2">Endereço</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">Logradouro:</span> AVENIDA DOS PIONEIROS, 502</li>
+        <li><span class="font-semibold">Bairro:</span> CENTRO</li>
+        <li><span class="font-semibold">Município:</span> CATANDUVAS</li>
+        <li><span class="font-semibold">Estado:</span> PR</li>
+      </ul>
+    </div>
+    <div class="flex flex-col justify-between">
+      <h3 class="text-lg font-semibold mb-3 border-b border-gray-700 pb-2">Informações Legais</h3>
+      <nav class="flex flex-col space-y-3 text-sm">
+        <a href="#" class="hover:text-blue-400 transition">Termos de Uso</a>
+        <a href="#" class="hover:text-blue-400 transition">Política de Privacidade</a>
+      </nav>
+      <p class="mt-8 text-xs text-gray-500">&copy; 2024 BRL Store. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  btnMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Close menu on link click (mobile)
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>

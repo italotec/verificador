@@ -203,6 +203,7 @@ def admin_settings():
         "HEROSMS_SERVICE":       SystemSetting.get("HEROSMS_SERVICE", verif_config.HEROSMS_SERVICE),
         "HEROSMS_MAX_PRICE":     SystemSetting.get("HEROSMS_MAX_PRICE", verif_config.HEROSMS_MAX_PRICE),
         "AI_PROVIDER":           SystemSetting.get("AI_PROVIDER",           "anthropic"),
+        "DOMAIN_VERIFICATION_METHOD": SystemSetting.get("DOMAIN_VERIFICATION_METHOD", "meta_tag"),
         "ANTHROPIC_API_KEY_CNPJ": SystemSetting.get("ANTHROPIC_API_KEY_CNPJ", verif_config.ANTHROPIC_API_KEY),
         "ANTHROPIC_MODEL_CNPJ":  SystemSetting.get("ANTHROPIC_MODEL_CNPJ",  verif_config.CLAUDE_FAST_MODEL),
         "OPENAI_API_KEY_CNPJ":   SystemSetting.get("OPENAI_API_KEY_CNPJ",   verif_config.OPENAI_API_KEY),
@@ -221,6 +222,7 @@ def admin_settings_save():
         "SMS24H_API_KEY", "SMS24H_COUNTRY", "SMS24H_SERVICE",
         "HEROSMS_API_KEY", "HEROSMS_COUNTRY", "HEROSMS_SERVICE", "HEROSMS_MAX_PRICE",
         "AI_PROVIDER",
+        "DOMAIN_VERIFICATION_METHOD",
         "ANTHROPIC_API_KEY_CNPJ", "ANTHROPIC_MODEL_CNPJ",
         "OPENAI_API_KEY_CNPJ", "OPENAI_MODEL_CNPJ",
     ]

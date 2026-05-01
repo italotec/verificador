@@ -186,6 +186,36 @@
 
     </div>
 
+    {# ── Domain verification method selector ── #}
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
+      <h2 class="text-base font-semibold mb-1">Verificação de domínio</h2>
+      <p class="text-xs text-zinc-500 mb-4">Como o bot verifica o domínio na Business Manager.</p>
+
+      <div class="flex gap-4">
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="DOMAIN_VERIFICATION_METHOD" value="meta_tag" class="sr-only peer"
+                 {% if settings.DOMAIN_VERIFICATION_METHOD != 'dns_txt' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">Meta tag (HTML)</div>
+            <div class="text-xs text-zinc-400">Injeta &lt;meta&gt; no index.html via SSH (CloudPanel)</div>
+          </div>
+        </label>
+
+        <label class="flex-1 cursor-pointer">
+          <input type="radio" name="DOMAIN_VERIFICATION_METHOD" value="dns_txt" class="sr-only peer"
+                 {% if settings.DOMAIN_VERIFICATION_METHOD == 'dns_txt' %}checked{% endif %}>
+          <div class="rounded-xl border-2 border-zinc-700 bg-zinc-800/50 p-4 transition-all
+                      peer-checked:border-indigo-500 peer-checked:bg-indigo-950/30">
+            <div class="font-semibold text-sm mb-1">Registro TXT (DNS)</div>
+            <div class="text-xs text-zinc-400">Adiciona TXT no domínio pai via Spaceship API</div>
+          </div>
+        </label>
+
+      </div>
+    </div>
+
     <div class="flex justify-end">
       <button type="submit"
               class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors">

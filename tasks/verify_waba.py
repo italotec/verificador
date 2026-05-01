@@ -87,6 +87,8 @@ def _run_verification(task, waba_record_id: int):
                 raise ValueError("No run_id assigned to this WABA record")
 
             run_data = gerador.get_run(waba.run_id)
+            from web_app.models import SystemSetting as _SS
+            run_data["domain_verification_method"] = _SS.get("DOMAIN_VERIFICATION_METHOD", "meta_tag")
 
             # Open AdsPower browser
             profile_id = waba.profile_id

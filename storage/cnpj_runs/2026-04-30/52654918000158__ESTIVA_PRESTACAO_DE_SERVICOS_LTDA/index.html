@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estiva Fashion Store</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Subtle fade-in animation for images */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  .fade-in:nth-child(1){animation-delay: 0.2s;}
+  .fade-in:nth-child(2){animation-delay: 0.4s;}
+  .fade-in:nth-child(3){animation-delay: 0.6s;}
+  .fade-in:nth-child(4){animation-delay: 0.8s;}
+  .fade-in:nth-child(5){animation-delay: 1s;}
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Button subtle hover glow */
+  .btn-glow:hover {
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+  }
+</style>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-50 text-gray-800">
+
+<header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-md z-50">
+  <nav class="container mx-auto flex justify-between items-center px-6 py-4">
+    <a href="#home" class="text-3xl font-extrabold tracking-tight text-blue-700 drop-shadow-sm select-none">ESTIVA<span class="text-indigo-500">Fashion</span></a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#colecao" class="relative group px-1">Coleção<span class="block max-w-0 group-hover:max-w-full transition-all h-0.5 bg-indigo-500"></span></a></li>
+      <li><a href="#vestuario" class="relative group px-1">Vestuário<span class="block max-w-0 group-hover:max-w-full transition-all h-0.5 bg-indigo-500"></span></a></li>
+      <li><a href="#acessorios" class="relative group px-1">Acessórios<span class="block max-w-0 group-hover:max-w-full transition-all h-0.5 bg-indigo-500"></span></a></li>
+      <li><a href="#sobre" class="relative group px-1">Sobre Nós<span class="block max-w-0 group-hover:max-w-full transition-all h-0.5 bg-indigo-500"></span></a></li>
+      <li><a href="#contato" class="relative group px-1">Contato<span class="block max-w-0 group-hover:max-w-full transition-all h-0.5 bg-indigo-500"></span></a></li>
+    </ul>
+    <button aria-label="Abrir menu" id="btn-menu" class="md:hidden text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="menu-mobile" class="md:hidden bg-white/95 backdrop-blur-md shadow-lg max-h-0 overflow-hidden transition-max-height duration-300">
+    <ul class="flex flex-col space-y-4 px-6 py-6 font-semibold text-indigo-700">
+      <li><a href="#colecao" class="block hover:text-indigo-500" onclick="menuMobileClose()">Coleção</a></li>
+      <li><a href="#vestuario" class="block hover:text-indigo-500" onclick="menuMobileClose()">Vestuário</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-500" onclick="menuMobileClose()">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-500" onclick="menuMobileClose()">Sobre Nós</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-500" onclick="menuMobileClose()">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    if(menuMobile.style.maxHeight && menuMobile.style.maxHeight !== '0px') {
+      menuMobile.style.maxHeight = '0';
+    } else {
+      menuMobile.style.maxHeight = menuMobile.scrollHeight + 'px';
+    }
+  });
+  function menuMobileClose(){
+    menuMobile.style.maxHeight = '0';
+  }
+</script>
+
+<section id="home" class="relative min-h-screen flex items-center justify-center text-center px-6 bg-gradient-to-tr from-indigo-50 to-white">
+  <div class="max-w-4xl space-y-6">
+    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-indigo-700 drop-shadow-lg animate-fadeInUp">Moda que inspira seu estilo</h1>
+    <p class="text-lg text-indigo-600 max-w-2xl mx-auto">Descubra as últimas tendências em vestuário e acessórios com qualidade e design exclusivo para você.</p>
+    <a href="#colecao" class="inline-block mt-6 bg-indigo-600 text-white font-semibold rounded-lg px-8 py-3 shadow-lg transition transform hover:scale-105 hover:brightness-110 btn-glow focus:outline-none focus:ring-4 focus:ring-indigo-300">Veja a Coleção</a>
+  </div>
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Mulher estilosa" class="absolute bottom-0 right-0 w-1/3 max-w-xs hidden md:block rounded-tl-3xl shadow-lg opacity-90 animate-fadeInUp" />
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-bold text-indigo-700 mb-10 text-center tracking-wide">Coleção Primavera/Verão 2024</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <article class="fade-in bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Vestido Floral" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Floral Leve</h3>
+        <p class="text-gray-600 mb-4">Conforto e frescor para dias ensolarados, perfeito para ocasiões casuais.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 179,90</span>
+      </div>
+    </article>
+    <article class="fade-in bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Jaqueta Casual" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Casual Moderna</h3>
+        <p class="text-gray-600 mb-4">Estilo urbano com tecido resistente e corte contemporâneo.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 249,90</span>
+      </div>
+    </article>
+    <article class="fade-in bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1495121605193-b116b5b09a28?auto=format&fit=crop&w=800&q=80" alt="Calça Jeans" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Calça Jeans Slim Fit</h3>
+        <p class="text-gray-600 mb-4">Versatilidade e conforto para o dia a dia com toque moderno.</p>
+        <span class="text-indigo-600 font-bold text-lg">R$ 199,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="vestuario" class="bg-indigo-50 py-16 px-6">
+  <div class="container mx-auto max-w-7xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide">Vestuário</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h3 class="text-3xl font-semibold text-indigo-800 mb-6">Estilos para todas as ocasiões</h3>
+        <p class="text-indigo-700 mb-6 leading-relaxed">Nossa linha de roupas abrange desde peças casuais e confortáveis até trajes sofisticados para eventos especiais, sempre com atenção aos detalhes e à qualidade dos tecidos.</p>
+        <ul class="list-disc list-inside text-indigo-600 space-y-2 font-medium">
+          <li>Camisetas e blusas com tecidos sustentáveis</li>
+          <li>Vestidos fluidos e elegantes</li>
+          <li>Calças e shorts para o dia a dia</li>
+          <li>Casacos e jaquetas com design contemporâneo</li>
+        </ul>
+      </div>
+      <div class="rounded-xl overflow-hidden shadow-lg flex justify-center">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975693456-9f8723e7e8d3?auto=format&fit=crop&w=800&q=80" alt="Coleção de Vestuário" class="object-cover w-full max-w-md rounded-xl" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="acessorios" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide">Acessórios</h2>
+  <div class="flex flex-wrap justify-center gap-12">
+    <div class="fade-in max-w-xs bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro" class="w-36 h-36 object-cover rounded-full mb-5 group-hover:scale-110 transition-transform duration-500" />
+      <h3 class="text-xl font-semibold text-indigo-800 mb-2">Bolsa de Couro Vintage</h3>
+      <span class="text-indigo-600 font-bold text-lg">R$ 299,90</span>
+    </div>
+    <div class="fade-in max-w-xs bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol" class="w-36 h-36 object-cover rounded-full mb-5 group-hover:scale-110 transition-transform duration-500" />
+      <h3 class="text-xl font-semibold text-indigo-800 mb-2">Óculos de Sol Clássico</h3>
+      <span class="text-indigo-600 font-bold text-lg">R$ 159,90</span>
+    </div>
+    <div class="fade-in max-w-xs bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-indigo-400 transition-shadow cursor-pointer group">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno" class="w-36 h-36 object-cover rounded-full mb-5 group-hover:scale-110 transition-transform duration-500" />
+      <h3 class="text-xl font-semibold text-indigo-800 mb-2">Relógio Moderno Minimalista</h3>
+      <span class="text-indigo-600 font-bold text-lg">R$ 349,90</span>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="bg-indigo-50 py-16 px-6">
+  <div class="container mx-auto max-w-5xl text-center">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-8 tracking-wide">Sobre a ESTIVA Fashion Store</h2>
+    <p class="text-indigo-700 text-lg leading-relaxed max-w-3xl mx-auto mb-6">Fundada com paixão pela moda e pela inovação, a ESTIVA Fashion Store nasceu para oferecer roupas e acessórios que traduzem personalidade, conforto e sustentabilidade. Priorizamos materiais de alta qualidade e processos responsáveis para garantir uma experiência de compra que respeita você e o planeta.</p>
+    <p class="text-indigo-600 italic max-w-2xl mx-auto">"Nossa missão é vestir histórias, criar confiança e valorizar a autenticidade em cada peça."</p>
+  </div>
+</section>
+
+<section id="contato" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-extrabold text-indigo-700 mb-10 text-center tracking-wide">Fale Conosco</h2>
+  <form class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-10" action="#" method="POST" novalidate>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label for="nome" class="block text-indigo-700 font-semibold mb-2">Nome</label>
+        <input id="nome" type="text" name="nome" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-600 transition" placeholder="Seu nome" />
+      </div>
+      <div>
+        <label for="email" class="block text-indigo-700 font-semibold mb-2">E-mail</label>
+        <input id="email" type="email" name="email" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-600 transition" placeholder="seuemail@exemplo.com" />
+      </div>
+    </div>
+    <div class="mb-6">
+      <label for="mensagem" class="block text-indigo-700 font-semibold mb-2">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required class="w-full border border-indigo-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-600 transition" placeholder="Escreva sua mensagem aqui..."></textarea>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="bg-indigo-600 text-white font-semibold rounded-lg px-10 py-3 shadow-lg transition transform hover:scale-105 hover:brightness-110 btn-glow focus:outline-none focus:ring-4 focus:ring-indigo-300">Enviar</button>
+    </div>
+  </form>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-12 px-6">
+  <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div>
+      <h3 class="text-lg font-bold mb-4 border-b border-indigo-700 pb-1">Dados da Empresa</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">CNPJ:</span> 52.654.918/0001-58</li>
+        <li><span class="font-semibold">Razão Social:</span> ESTIVA PRESTACAO DE SERVICOS LTDA</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-bold mb-4 border-b border-indigo-700 pb-1">Contato Comercial</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">E-mail:</span> COMERCIALFERNANDES1000@GMAIL.COM</li>
+        <li><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="font-mono text-indigo-300">77-34501277</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-bold mb-4 border-b border-indigo-700 pb-1">Endereço</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">Logradouro:</span> RUA PADRE ANTONIO RIBEIRO FOLHA, SN</li>
+        <li><span class="font-semibold">Bairro:</span> CENTRO</li>
+        <li><span class="font-semibold">Município:</span> BARRA DA ESTIVA</li>
+        <li><span class="font-semibold">Estado:</span> BA</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-indigo-700 pt-6 text-center text-indigo-400 text-sm select-none">
+    <a href="#" class="hover:text-indigo-200 mx-4 transition">Termos de Uso</a>
+    <a href="#" class="hover:text-indigo-200 mx-4 transition">Política de Privacidade</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="2cccnfzl8onsmvaj897dyhrzx4bjs6" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Munari Store - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; }
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  a.link-underline:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-400;
+  }
+  .btn-secondary {
+    @apply border border-indigo-500 text-indigo-600 font-semibold rounded-xl px-6 py-2 hover:bg-indigo-50 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-400;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<header class="bg-white fixed w-full z-30 shadow-md">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#home" class="text-3xl font-bold text-indigo-600 tracking-wide hover:text-purple-600 transition-colors">Munari Store</a>
+    <ul class="hidden md:flex space-x-10 font-medium text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#depoimentos" class="hover:text-indigo-600 transition-colors">Depoimentos</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="menu-btn" class="md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+      <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+    <ul class="flex flex-col px-6 py-4 space-y-4 font-medium text-gray-700">
+      <li><a href="#home" class="block hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="block hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#depoimentos" class="block hover:text-indigo-600 transition-colors">Depoimentos</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="flex-grow pt-20">
+  <section id="home" class="relative bg-gradient-to-b from-indigo-100 to-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="fade-in-up">
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-indigo-700 mb-6">Moda que inspira sua autenticidade</h1>
+        <p class="text-gray-600 text-lg md:text-xl mb-8 max-w-xl">Roupas e acessórios exclusivos para você criar seu estilo único com conforto e elegância.</p>
+        <a href="#colecao" class="btn-primary inline-block px-8 py-3 shadow-lg">Confira a Coleção</a>
+      </div>
+      <div class="fade-in-up relative rounded-3xl overflow-hidden shadow-xl shadow-indigo-200/40">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupas modernas" class="w-full object-cover aspect-[4/5] hover:scale-105 transition-transform duration-700"/>
+        <div class="absolute bottom-4 left-4 bg-indigo-700/70 text-white rounded-lg px-4 py-2 font-semibold text-sm backdrop-blur-sm select-none">Street Style 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="colecao" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-28">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center fade-in-up">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <article class="fade-in-up rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-500">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina casual" class="w-full h-64 object-cover"/>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-1">Blusa Casual Feminina</h3>
+          <p class="text-gray-600 mb-3">Tecido leve e confortável para o dia a dia.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$129,90</span>
+        </div>
+      </article>
+      <article class="fade-in-up rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-500" style="animation-delay: 0.15s">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Homem com jaqueta moderna" class="w-full h-64 object-cover"/>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-1">Jaqueta Masculina Slim</h3>
+          <p class="text-gray-600 mb-3">Design moderno com corte ajustado.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$289,90</span>
+        </div>
+      </article>
+      <article class="fade-in-up rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-500" style="animation-delay: 0.3s">
+        <img src="https://images.unsplash.com/photo-1520975913420-3c53f4f94d6d?auto=format&fit=crop&w=600&q=80" alt="Vestido estampado" class="w-full h-64 object-cover"/>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-1">Vestido Estampado</h3>
+          <p class="text-gray-600 mb-3">Leveza e estilo para ocasiões especiais.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$199,90</span>
+        </div>
+      </article>
+      <article class="fade-in-up rounded-xl shadow-lg bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-500" style="animation-delay: 0.45s">
+        <img src="https://images.unsplash.com/photo-1530845642395-9ef0f6cdb3f2?auto=format&fit=crop&w=600&q=80" alt="Calça jeans masculina" class="w-full h-64 object-cover"/>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-600 mb-1">Calça Jeans Masculina</h3>
+          <p class="text-gray-600 mb-3">Durabilidade com estilo casual.</p>
+          <span class="text-indigo-700 font-bold text-lg">R$159,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="acessorios" class="bg-indigo-50 py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center fade-in-up">Acessórios Exclusivos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div class="fade-in-up rounded-3xl bg-white shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 flex flex-col items-center text-center p-6">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Relógio estiloso" class="w-36 h-36 object-cover rounded-full mb-5 shadow-md"/>
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Relógio Minimalista</h3>
+          <p class="text-gray-600 mb-4 max-w-xs">Design clean para o seu pulso, perfeito para qualquer ocasião.</p>
+          <span class="font-bold text-indigo-700 text-lg">R$349,90</span>
+        </div>
+        <div class="fade-in-up rounded-3xl bg-white shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 flex flex-col items-center text-center p-6" style="animation-delay: 0.15s">
+          <img src="https://images.unsplash.com/photo-1520975913420-2d1a2b72c8d8?auto=format&fit=crop&w=400&q=80" alt="Bolsa feminina" class="w-36 h-36 object-cover rounded-full mb-5 shadow-md"/>
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Bolsa Tiracolo</h3>
+          <p class="text-gray-600 mb-4 max-w-xs">Compacta e elegante, ideal para o dia a dia ou eventos.</p>
+          <span class="font-bold text-indigo-700 text-lg">R$229,90</span>
+        </div>
+        <div class="fade-in-up rounded-3xl bg-white shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-500 flex flex-col items-center text-center p-6" style="animation-delay: 0.3s">
+          <img src="https://images.unsplash.com/photo-1533616688413-c4b5a82a3e2a?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol moderno" class="w-36 h-36 object-cover rounded-full mb-5 shadow-md"/>
+          <h3 class="text-xl font-semibold text-indigo-600 mb-2">Óculos de Sol</h3>
+          <p class="text-gray-600 mb-4 max-w-xs">Proteção UV com design arrojado para seu visual.</p>
+          <span class="font-bold text-indigo-700 text-lg">R$179,90</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos" class="max-w-7xl mx-auto px-6 py-20 scroll-mt-28">
+    <h2 class="text-4xl font-bold text-indigo-700 mb-12 text-center fade-in-up">O que dizem nossos clientes</h2>
+    <div class="flex flex-col md:flex-row gap-10">
+      <blockquote class="fade-in-up bg-white rounded-2xl shadow-lg p-8 flex-1 border-l-8 border-indigo-500 relative before:absolute before:content-['“'] before:text-indigo-200 before:text-6xl before:-top-6 before:-left-5 before:select-none">
+        <p class="text-gray-700 italic leading-relaxed mb-4">“A qualidade das roupas é excelente, o caimento perfeito e o atendimento foi super atencioso. Recomendo muito!”</p>
+        <footer class="text-indigo-700 font-semibold">Mariana S.</footer>
+      </blockquote>
+      <blockquote class="fade-in-up bg-white rounded-2xl shadow-lg p-8 flex-1 border-l-8 border-indigo-500 relative before:absolute before:content-['“'] before:text-indigo-200 before:text-6xl before:-top-6 before:-left-5 before:select-none" style="animation-delay: 0.15s">
+        <p class="text-gray-700 italic leading-relaxed mb-4">“A variedade de acessórios é incrível. Encontrei o presente perfeito para minha esposa e ela adorou!”</p>
+        <footer class="text-indigo-700 font-semibold">Carlos M.</footer>
+      </blockquote>
+      <blockquote class="fade-in-up bg-white rounded-2xl shadow-lg p-8 flex-1 border-l-8 border-indigo-500 relative before:absolute before:content-['“'] before:text-indigo-200 before:text-6xl before:-top-6 before:-left-5 before:select-none" style="animation-delay: 0.3s">
+        <p class="text-gray-700 italic leading-relaxed mb-4">“Comprei uma jaqueta que virou minha peça favorita. Estilo moderno e confortável para todas as ocasiões.”</p>
+        <footer class="text-indigo-700 font-semibold">Felipe R.</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="contato" class="bg-indigo-50 py-20 px-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-10 fade-in-up">
+      <h2 class="text-4xl font-bold text-indigo-700 mb-8 text-center">Fale Conosco</h2>
+      <form action="#" method="POST" class="space-y-6" novalidate>
+        <div>
+          <label for="nome" class="block text-gray-700 font-medium mb-1">Nome</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-1">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-gray-700 font-medium mb-1">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn-primary px-10 py-3 w-full md:w-auto">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6 select-text">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
+    <div>
+      <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Informações Legais</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">CNPJ:</span> 54.386.895/0001-73</li>
+        <li><span class="font-semibold">Razão Social:</span> MUNARI SERVICOS ADMINISTRATIVOS LTDA</li>
+        <li><span class="font-semibold">E-mail:</span> <a href="mailto:JURIDICO@POLOEPAULA.COM.BR" class="hover:underline text-indigo-300">JURIDICO@POLOEPAULA.COM.BR</a></li>
+        <li><span class="font-semibold">Telefone:</span> <span id="telefone-comercial" class="text-indigo-300">11-48201307</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Endereço</h3>
+      <ul class="space-y-2 text-sm leading-relaxed">
+        <li><span class="font-semibold">Logradouro:</span> RUA SANTANA, 82</li>
+        <li><span class="font-semibold">Bairro:</span> JARDIM SANTA TEREZA</li>
+        <li><span class="font-semibold">Município:</span> RIO GRANDE DA SERRA</li>
+        <li><span class="font-semibold">Estado:</span> SP</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-xl font-semibold mb-4 border-b border-indigo-700 pb-2">Links Úteis</h3>
+      <ul class="space-y-3">
+        <li><a href="#" class="text-indigo-300 hover:text-indigo-100 link-underline font-semibold">Termos de Uso</a></li>
+        <li><a href="#" class="text-indigo-300 hover:text-indigo-100 link-underline font-semibold">Política de Privacidade</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 text-center text-indigo-400 text-sm select-none">&copy; 2024 Munari Store. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

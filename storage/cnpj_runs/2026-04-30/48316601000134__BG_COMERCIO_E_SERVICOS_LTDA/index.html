@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BG Store - Moda e Acessórios</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @keyframes slideInLeft {
+      0% {opacity: 0; transform: translateX(-30px);}
+      100% {opacity: 1; transform: translateX(0);}
+    }
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    .animate-slideInLeft {
+      animation: slideInLeft 0.8s ease forwards;
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .btn-hover:hover {
+      background-color: #7dd3fc;
+      color: #0369a1;
+      box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+      transform: translateY(-3px);
+      transition: all 0.3s ease;
+    }
+    .btn-hover {
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #0284c7;
+      text-underline-offset: 3px;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    ::selection {
+      background-color: #bae6fd;
+      color: #0369a1;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans selection:bg-sky-300 selection:text-sky-900">
+
+  <!-- Navbar -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-sm shadow-md z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="#home" class="text-2xl font-extrabold text-sky-700 hover:text-sky-900 transition-colors">BG Store</a>
+      <nav class="hidden md:flex gap-8 text-lg font-medium text-slate-600">
+        <a href="#collections" class="nav-link">Coleções</a>
+        <a href="#novidades" class="nav-link">Novidades</a>
+        <a href="#acessorios" class="nav-link">Acessórios</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+      <button aria-label="Menu" id="btn-menu" class="md:hidden text-sky-700 hover:text-sky-900 focus:outline-none focus:ring-2 focus:ring-sky-400">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm shadow-inner">
+      <ul class="flex flex-col gap-4 px-6 py-4 text-lg font-semibold text-slate-700">
+        <li><a href="#collections" class="block hover:text-sky-700 transition-colors">Coleções</a></li>
+        <li><a href="#novidades" class="block hover:text-sky-700 transition-colors">Novidades</a></li>
+        <li><a href="#acessorios" class="block hover:text-sky-700 transition-colors">Acessórios</a></li>
+        <li><a href="#sobre" class="block hover:text-sky-700 transition-colors">Sobre</a></li>
+        <li><a href="#contato" class="block hover:text-sky-700 transition-colors">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <script>
+    const btnMenu = document.getElementById('btn-menu')
+    const mobileMenu = document.getElementById('mobile-menu')
+    btnMenu.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden')
+    })
+  </script>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex flex-col justify-center bg-gradient-to-tr from-sky-100 via-sky-50 to-white px-6 md:px-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="animate-slideInLeft space-y-6">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-sky-900 drop-shadow-lg">Vista seu Estilo com <span class="text-sky-600">BG Store</span></h1>
+        <p class="text-lg md:text-xl text-slate-700 max-w-xl">Moda contemporânea e acessórios que acompanham a sua personalidade. Descubra o novo conceito em vestuário e estilo.</p>
+        <a href="#collections" class="inline-block bg-sky-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg btn-hover select-none">Confira nossas coleções</a>
+      </div>
+      <div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-lg">
+        <img loading="lazy" class="object-cover w-full h-full brightness-105 hover:scale-105 transition-transform duration-700 ease-in-out" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Modelo vestindo roupa moderna" />
+        <div class="absolute bottom-4 right-4 bg-sky-700/70 text-white text-xs uppercase tracking-widest px-3 py-1 rounded-lg font-semibold select-none">Estilo & Conforto</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections Section -->
+  <section id="collections" class="bg-white py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-sky-800 mb-2 animate-fadeInUp">Nossas Coleções</h2>
+      <p class="text-slate-600 max-w-3xl mx-auto animate-fadeInUp" style="animation-delay: 0.15s;">Explore as linhas exclusivas que preparamos para você, com peças versáteis para todas as ocasiões e estilos.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <article class="bg-sky-50 rounded-3xl shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-500 cursor-pointer">
+        <img loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=75" alt="Coleção Casual" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-sky-700 mb-2">Casual Despojado</h3>
+          <p class="text-slate-700 text-sm leading-relaxed">Peças leves e modernas para o seu dia a dia, com conforto e estilo que acompanham seu ritmo.</p>
+        </div>
+      </article>
+      <article class="bg-sky-50 rounded-3xl shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-500 cursor-pointer">
+        <img loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=75" alt="Coleção Elegante" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-sky-700 mb-2">Elegância Urbana</h3>
+          <p class="text-slate-700 text-sm leading-relaxed">Tons neutros e cortes refinados para quem busca sofisticação em qualquer ocasião.</p>
+        </div>
+      </article>
+      <article class="bg-sky-50 rounded-3xl shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-500 cursor-pointer">
+        <img loading="lazy" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=75" alt="Coleção Streetwear" />
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-sky-700 mb-2">Streetwear Atitude</h3>
+          <p class="text-slate-700 text-sm leading-relaxed">Inspire-se com peças urbanas, estampas ousadas e design contemporâneo que fazem você se destacar.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Novidades Section -->
+  <section id="novidades" class="bg-gradient-to-tr from-white to-sky-50 py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-14">
+      <div class="md:w-1/2 space-y-6 animate-fadeInUp">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-sky-900">Novidades Que Encantam</h2>
+        <p class="text-slate-700 leading-relaxed text-lg max-w-lg">Chegaram novas peças para você renovar o guarda-roupa com tendências fresquinhas. Qualidade, exclusividade e personalidade em cada detalhe.</p>
+        <a href="#collections" class="inline-block bg-sky-700 text-white px-10 py-3 rounded-full font-semibold shadow-lg btn-hover select-none">Veja as novidades</a>
+      </div>
+      <div class="md:w-1/2 grid grid-cols-2 gap-6">
+        <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+          <img loading="lazy" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1618222238384-b4c0dcaac1c1?auto=format&fit=crop&w=600&q=80" alt="Nova coleção feminina" />
+          <div class="absolute bottom-0 left-0 right-0 bg-sky-800/80 text-white px-4 py-2 text-center font-semibold text-sm uppercase tracking-wide">Coleção Feminina</div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+          <img loading="lazy" class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1600185366311-4c4dbf1b6a47?auto=format&fit=crop&w=600&q=80" alt="Nova coleção masculina" />
+          <div class="absolute bottom-0 left-0 right-0 bg-sky-800/80 text-white px-4 py-2 text-center font-semibold text-sm uppercase tracking-wide">Coleção Masculina</div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer col-span-2">
+          <img loading="lazy" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" src="https://images.unsplash.com/photo-1475180092425-9d61c9818f1e?auto=format&fit=crop&w=900&q=80" alt="Novos acessórios" />
+          <div class="absolute bottom-0 left-0 right-0 bg-sky-800/80 text-white px-4 py-2 text-center font-semibold text-sm uppercase tracking-wide">Acessórios Novos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acessórios Section -->
+  <section id="acessorios" class="bg-white py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto text-center mb-14">
+      <h2 class="text-3xl md:text-4xl font-bold text-sky-800 mb-3 animate-fadeInUp">Acessórios Exclusivos</h2>
+      <p class="text-slate-600 max-w-3xl mx-auto animate-fadeInUp" style="animation-delay: 0.1s;">Complementos que fazem toda a diferença. Descubra bolsas, chapéus, bijuterias e muito mais para um look completo.</p>
+    </div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg bg-sky-50 hover:shadow-xl transition-shadow duration-400">
+        <img loading="lazy" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=75" alt="Bolsa de couro marrom" />
+        <div class="p-4 text-center">
+          <h3 class="font-semibold text-sky-700 mb-1">Bolsa de Couro</h3>
+          <span class="text-slate-700 text-sm">Elegância e resistência para o dia a dia</span>
+        </div>
+      </div>
+      <div class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg bg-sky-50 hover:shadow-xl transition-shadow duration-400">
+        <img loading="lazy" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1495121605193-b116b5b09d2a?auto=format&fit=crop&w=600&q=75" alt="Chapéu bege estiloso" />
+        <div class="p-4 text-center">
+          <h3 class="font-semibold text-sky-700 mb-1">Chapéu Bege</h3>
+          <span class="text-slate-700 text-sm">Proteção com estilo para qualquer estação</span>
+        </div>
+      </div>
+      <div class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg bg-sky-50 hover:shadow-xl transition-shadow duration-400">
+        <img loading="lazy" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=75" alt="Pulseiras delicadas" />
+        <div class="p-4 text-center">
+          <h3 class="font-semibold text-sky-700 mb-1">Pulseiras Delicadas</h3>
+          <span class="text-slate-700 text-sm">Detalhes que valorizam qualquer look</span>
+        </div>
+      </div>
+      <div class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg bg-sky-50 hover:shadow-xl transition-shadow duration-400">
+        <img loading="lazy" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=75" alt="Óculos de sol moderno" />
+        <div class="p-4 text-center">
+          <h3 class="font-semibold text-sky-700 mb-1">Óculos de Sol</h3>
+          <span class="text-slate-700 text-sm">Proteção e estilo para seus dias ao sol</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Section -->
+  <section id="sobre" class="bg-sky-50 py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-14">
+      <div class="md:w-1/2 space-y-6 animate-fadeInUp">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-sky-900">Sobre a BG Store</h2>
+        <p class="text-slate-700 text-lg leading-relaxed">Fundada com a missão de democratizar o acesso a roupas e acessórios de alta qualidade, a BG Store une design contemporâneo, sustentabilidade e atendimento personalizado para criar uma experiência única.</p>
+        <p class="text-slate-700 text-lg leading-relaxed">Nosso time está sempre atento às tendências globais, garantindo peças que traduzem personalidade e autenticidade para você.</p>
+      </div>
+      <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-lg relative group">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Equipe BG Store" class="object-cover w-full h-96 group-hover:scale-105 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-sky-900/20 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-3xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato Section -->
+  <section id="contato" class="bg-white py-20 px-6 md:px-12">
+    <div class="max-w-4xl mx-auto bg-sky-50 rounded-3xl shadow-lg p-10 animate-fadeInUp">
+      <h2 class="text-3xl text-sky-800 font-bold mb-6 text-center">Fale Conosco</h2>
+      <form class="space-y-6" action="#" method="POST" novalidate>
+        <div>
+          <label for="nome" class="block text-slate-700 font-semibold mb-2">Nome</label>
+          <input type="text" id="nome" name="nome" required placeholder="Seu nome completo" class="w-full rounded-lg border border-sky-300 focus:border-sky-600 focus:ring-2 focus:ring-sky-300 px-4 py-3 text-slate-800 placeholder-slate-400 transition" />
+        </div>
+        <div>
+          <label for="email" class="block text-slate-700 font-semibold mb-2">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" class="w-full rounded-lg border border-sky-300 focus:border-sky-600 focus:ring-2 focus:ring-sky-300 px-4 py-3 text-slate-800 placeholder-slate-400 transition" />
+        </div>
+        <div>
+          <label for="mensagem" class="block text-slate-700 font-semibold mb-2">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua dúvida ou comentário" class="w-full rounded-lg border border-sky-300 focus:border-sky-600 focus:ring-2 focus:ring-sky-300 px-4 py-3 text-slate-800 placeholder-slate-400 transition resize-none"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-sky-700 text-white px-12 py-3 rounded-full font-semibold shadow-lg btn-hover select-none">Enviar Mensagem</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300 py-14 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-sm md:text-base select-text">
+      <div>
+        <h3 class="font-bold text-sky-400 mb-3 uppercase tracking-wide">Informações Legais</h3>
+        <p><span class="font-semibold text-slate-200">CNPJ:</span> 48.316.601/0001-34</p>
+        <p><span class="font-semibold text-slate-200">Razão Social:</span> BG COMERCIO E SERVICOS LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-sky-400 mb-3 uppercase tracking-wide">Contato Comercial</h3>
+        <p><span class="font-semibold text-slate-200">E-mail:</span> BGCOMSERVE2022@HOTMAIL.COM</p>
+        <p><span class="font-semibold text-slate-200">Telefone:</span> <span id="telefone-comercial" class="text-sky-400 select-all">88-20029262</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold text-sky-400 mb-3 uppercase tracking-wide">Endereço</h3>
+        <p><span class="font-semibold text-slate-200">Logradouro:</span> 10A RUA RUA PROFESSOR JOSE HERMINIO, 115</p>
+        <p><span class="font-semibold text-slate-200">Bairro:</span> CENTRO</p>
+        <p><span class="font-semibold text-slate-200">Município:</span> MORRINHOS</p>
+        <p><span class="font-semibold text-slate-200">Estado:</span> CE</p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-10 border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs md:text-sm gap-4">
+      <p>© 2024 BG Store. Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-sky-400 transition-colors font-semibold">Termos de Uso</a>
+        <a href="#" class="hover:text-sky-400 transition-colors font-semibold">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

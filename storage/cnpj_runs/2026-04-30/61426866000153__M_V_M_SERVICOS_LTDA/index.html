@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ModaViva - Loja de Roupas e Acessórios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes floatUp {
+      0%, 100% {transform: translateY(0);}
+      50% {transform: translateY(-10px);}
+    }
+    .animate-float {
+      animation: floatUp 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans selection:bg-yellow-300 selection:text-gray-900">
+
+  <!-- Header / Navbar -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-md shadow-md z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 md:py-5">
+      <a href="#" class="text-2xl font-extrabold tracking-tight text-yellow-600 hover:text-yellow-500 transition-colors select-none">ModaViva</a>
+      <nav class="hidden md:flex space-x-10 font-medium text-gray-700">
+        <a href="#colecao" class="hover:text-yellow-600 transition-colors">Coleção</a>
+        <a href="#acessorios" class="hover:text-yellow-600 transition-colors">Acessórios</a>
+        <a href="#sobre" class="hover:text-yellow-600 transition-colors">Sobre Nós</a>
+        <a href="#depoimentos" class="hover:text-yellow-600 transition-colors">Depoimentos</a>
+        <a href="#contato" class="hover:text-yellow-600 transition-colors">Contato</a>
+      </nav>
+      <button aria-label="Abrir menu" class="md:hidden text-yellow-600 hover:text-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400" id="btn-menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <nav id="menu-mobile" class="md:hidden bg-white/95 backdrop-blur-md shadow-md absolute w-full left-0 top-full max-h-0 overflow-hidden transition-[max-height] duration-500">
+      <ul class="flex flex-col gap-2 py-4 px-6 text-gray-700 font-semibold select-none">
+        <li><a href="#colecao" class="block py-2 hover:text-yellow-600 transition-colors">Coleção</a></li>
+        <li><a href="#acessorios" class="block py-2 hover:text-yellow-600 transition-colors">Acessórios</a></li>
+        <li><a href="#sobre" class="block py-2 hover:text-yellow-600 transition-colors">Sobre Nós</a></li>
+        <li><a href="#depoimentos" class="block py-2 hover:text-yellow-600 transition-colors">Depoimentos</a></li>
+        <li><a href="#contato" class="block py-2 hover:text-yellow-600 transition-colors">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section aria-label="Apresentação da loja" class="pt-24 bg-gradient-to-tr from-yellow-50 via-white to-yellow-100 shadow-inner">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-20 min-h-[calc(100vh-5rem)]">
+      <div class="max-w-xl text-center md:text-left space-y-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-700 drop-shadow-md">Vista-se de estilo e personalidade</h1>
+        <p class="text-lg md:text-xl text-yellow-900/90 leading-relaxed font-medium">Encontre as últimas tendências em vestuário e acessórios para todas as ocasiões. ModaViva, onde a moda ganha vida com você.</p>
+        <a href="#colecao" class="inline-block bg-yellow-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all font-semibold select-none animate-float">Confira nossa coleção</a>
+      </div>
+      <div class="relative w-full max-w-lg rounded-xl overflow-hidden shadow-2xl ring-4 ring-yellow-300 ring-opacity-40 animate-float">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com roupa moderna" width="800" height="600" class="object-cover w-full h-full" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Coleção de Vestuário -->
+  <section id="colecao" class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20 scroll-mt-24">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-700 mb-10 text-center md:text-left select-none drop-shadow-sm">Coleção de Vestuário</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Casaco estiloso masculino" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Casaco Urbano</h3>
+          <p class="text-yellow-600 font-medium">Conforto e estilo para os dias frios.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 299,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino moderno" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Vestido Floral</h3>
+          <p class="text-yellow-600 font-medium">Leveza e elegância para qualquer ocasião.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 249,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1520975911117-8c0e2d0d1b64?auto=format&fit=crop&w=600&q=80" alt="Calça jeans rasgada" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Jeans Destroyed</h3>
+          <p class="text-yellow-600 font-medium">Estilo casual para o dia a dia.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 179,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=600&q=80" alt="Camisa branca masculina" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Camisa Social</h3>
+          <p class="text-yellow-600 font-medium">Clássico e versátil para o trabalho.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 139,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1562158070-3a5cbbcbb73f?auto=format&fit=crop&w=600&q=80" alt="Blusa de tricô feminina" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Blusa Tricô</h3>
+          <p class="text-yellow-600 font-medium">Conforto e estilo para o inverno.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 159,90</span>
+        </div>
+      </article>
+      <article class="bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Short jeans feminino" class="w-full h-64 object-cover group-hover:brightness-90 transition-all" loading="lazy" decoding="async" />
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-semibold text-yellow-800">Short Jeans</h3>
+          <p class="text-yellow-600 font-medium">Para dias quentes com muito estilo.</p>
+          <span class="block font-bold text-yellow-700 text-lg">R$ 109,90</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Seção Acessórios -->
+  <section id="acessorios" class="bg-yellow-50 py-20 px-6 md:px-12 lg:px-16 scroll-mt-24">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-800 mb-10 text-center md:text-left select-none drop-shadow-sm">Acessórios que completam seu look</h2>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-yellow-400 transition-shadow cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina artesanal" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-yellow-700">Bolsa Artesanal</h3>
+          <p class="text-yellow-600 font-medium mt-1">Design exclusivo feito à mão.</p>
+          <span class="block font-bold text-yellow-800 mt-2">R$ 189,90</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-yellow-400 transition-shadow cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1520975911117-8c0e2d0d1b64?auto=format&fit=crop&w=600&q=80" alt="Relógio masculino moderno" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-yellow-700">Relógio Moderno</h3>
+          <p class="text-yellow-600 font-medium mt-1">Pulseira em couro legítimo.</p>
+          <span class="block font-bold text-yellow-800 mt-2">R$ 349,90</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-yellow-400 transition-shadow cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1520975911117-8c0e2d0d1b64?auto=format&fit=crop&w=600&q=80&sat=-100" alt="Óculos de sol unissex" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-yellow-700">Óculos de Sol</h3>
+          <p class="text-yellow-600 font-medium mt-1">Proteção UV com estilo.</p>
+          <span class="block font-bold text-yellow-800 mt-2">R$ 219,90</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-yellow-400 transition-shadow cursor-pointer group">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80&sat=-40" alt="Chapéu masculino bege" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-yellow-700">Chapéu Bege</h3>
+          <p class="text-yellow-600 font-medium mt-1">Elegância e proteção solar.</p>
+          <span class="block font-bold text-yellow-800 mt-2">R$ 129,90</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Sobre Nós -->
+  <section id="sobre" class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20 scroll-mt-24 flex flex-col md:flex-row items-center gap-12">
+    <div class="md:w-1/2 space-y-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-700 select-none drop-shadow-sm">Sobre a ModaViva</h2>
+      <p class="text-yellow-800 leading-relaxed text-lg font-medium">
+        Fundada em 2010, a ModaViva nasceu do desejo de oferecer roupas e acessórios que unem qualidade, conforto e design contemporâneo. Nosso compromisso é vestir pessoas com confiança e autenticidade, respeitando a diversidade e o meio ambiente.
+      </p>
+      <p class="text-yellow-800 leading-relaxed text-lg font-medium">
+        Trabalhamos com fornecedores certificados e temos um rigoroso controle de qualidade para garantir a melhor experiência para nossos clientes.
+      </p>
+      <a href="#contato" class="inline-block bg-yellow-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-colors select-none">Fale conosco</a>
+    </div>
+    <div class="md:w-1/2 rounded-xl overflow-hidden shadow-lg ring-4 ring-yellow-300 ring-opacity-30 animate-float">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Equipe da loja de roupas sorridente" class="object-cover w-full h-96" loading="lazy" decoding="async" />
+    </div>
+  </section>
+
+  <!-- Seção Depoimentos -->
+  <section id="depoimentos" class="bg-yellow-100 py-20 px-6 md:px-12 lg:px-16 scroll-mt-24">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-800 mb-12 text-center select-none drop-shadow-sm">Depoimentos dos Clientes</h2>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+      <figure class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-yellow-500 hover:shadow-yellow-400 transition-shadow select-text">
+        <blockquote class="text-yellow-700 italic text-lg leading-relaxed">
+          "A qualidade das roupas da ModaViva é incrível. Sempre recebo elogios e o atendimento é impecável. Recomendo sem dúvidas!"
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=64&q=80" alt="Foto de cliente Ana" class="rounded-full w-12 h-12 object-cover ring-2 ring-yellow-400" loading="lazy" decoding="async" />
+          <div class="text-yellow-900 font-semibold">Ana Paula, São Luís</div>
+        </figcaption>
+      </figure>
+      <figure class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-yellow-500 hover:shadow-yellow-400 transition-shadow select-text">
+        <blockquote class="text-yellow-700 italic text-lg leading-relaxed">
+          "Os acessórios são lindos e duráveis. A entrega sempre rápida e a embalagem feita com muito carinho."
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1520975911117-8c0e2d0d1b64?auto=format&fit=crop&w=64&q=80" alt="Foto de cliente Lucas" class="rounded-full w-12 h-12 object-cover ring-2 ring-yellow-400" loading="lazy" decoding="async" />
+          <div class="text-yellow-900 font-semibold">Lucas Fernandes, Bacabeira</div>
+        </figcaption>
+      </figure>
+      <figure class="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-yellow-500 hover:shadow-yellow-400 transition-shadow select-text">
+        <blockquote class="text-yellow-700 italic text-lg leading-relaxed">
+          "ModaViva tem o melhor custo-benefício que já encontrei. Roupa bonita, confortável e preço justo."
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=64&q=80" alt="Foto de cliente Mariana" class="rounded-full w-12 h-12 object-cover ring-2 ring-yellow-400" loading="lazy" decoding="async" />
+          <div class="text-yellow-900 font-semibold">Mariana Silva, São Paulo</div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Seção Contato -->
+  <section id="contato" class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20 scroll-mt-24">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-yellow-700 mb-10 text-center md:text-left select-none drop-shadow-sm">Fale Conosco</h2>
+    <div class="bg-white rounded-3xl shadow-xl p-10 max-w-3xl mx-auto md:mx-0">
+      <form action="#" method="POST" class="flex flex-col gap-6">
+        <label for="nome" class="flex flex-col font-semibold text-yellow-800">
+          Nome
+          <input type="text" id="nome" name="nome" required class="mt-1 rounded-xl border border-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-500 px-4 py-3 transition" placeholder="Seu nome completo" autocomplete="name" />
+        </label>
+        <label for="email" class="flex flex-col font-semibold text-yellow-800">
+          E-mail
+          <input type="email" id="email" name="email" required class="mt-1 rounded-xl border border-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-500 px-4 py-3 transition" placeholder="exemplo@dominio.com" autocomplete="email" />
+        </label>
+        <label for="mensagem" class="flex flex-col font-semibold text-yellow-800">
+          Mensagem
+          <textarea id="mensagem" name="mensagem" rows="5" required class="mt-1 rounded-xl border border-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-500 px-4 py-3 transition resize-none" placeholder="Escreva sua mensagem aqui..."></textarea>
+        </label>
+        <button type="submit" class="self-start bg-yellow-600 text-white font-semibold rounded-full px-8 py-3 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition select-none">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-yellow-300 py-12 px-6 md:px-12 lg:px-16 select-text">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-20">
+      <div>
+        <h3 class="font-bold text-lg mb-2">CNPJ</h3>
+        <p class="text-yellow-400 font-mono break-all">61.426.866/0001-53</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Razão Social</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">M V M SERVICOS LTDA</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">E-mail</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">FISCAL@GLSCONT.COM.BR</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Telefone</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed"><span id="telefone-comercial">98-32569161</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Logradouro</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">RODOVIA BR 135 KM 50, SN</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Bairro</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">CENTRO</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Município</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">BACABEIRA</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg mb-2">Estado</h3>
+        <p class="text-yellow-400 font-mono leading-relaxed">MA</p>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-yellow-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-yellow-500 text-sm font-medium space-y-4 sm:space-y-0">
+      <p>© 2024 ModaViva. Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-yellow-400 transition-colors underline decoration-yellow-400 decoration-2 underline-offset-4" aria-label="Termos de Uso">Termos de Uso</a>
+        <a href="#" class="hover:text-yellow-400 transition-colors underline decoration-yellow-400 decoration-2 underline-offset-4" aria-label="Política de Privacidade">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btnMenu = document.getElementById('btn-menu');
+    const menuMobile = document.getElementById('menu-mobile');
+    btnMenu.addEventListener('click', () => {
+      if(menuMobile.style.maxHeight && menuMobile.style.maxHeight !== "0px") {
+        menuMobile.style.maxHeight = "0";
+      } else {
+        menuMobile.style.maxHeight = menuMobile.scrollHeight + "px";
+      }
+    });
+
+    // Close mobile menu on link click
+    menuMobile.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuMobile.style.maxHeight = "0";
+      });
+    });
+  </script>
+</body>
+</html>

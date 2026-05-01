@@ -114,6 +114,42 @@ def configurar_dns_subdominio(
         return False
 
 
+def adicionar_txt_record(
+    parent_domain: str,
+    host: str,
+    value: str,
+    api_key: str,
+    api_secret: str,
+) -> bool:
+    """
+    Add a single TXT record to parent_domain on Spaceship.
+    `host` is the subdomain label (e.g. 'coolsub') or '@' for the apex.
+    Uses force=False to preserve existing A/CNAME records on the zone.
+    """
+    payload = {
+        "force": False,
+        "items": [
+            {"type": "TXT", "name": host, "value": value, "ttl": 300},
+        ],
+    }
+    try:
+        headers = _spaceship_headers(api_key, api_secret)
+        r = requests.put(
+            f"https://spaceship.dev/api/v1/dns/records/{parent_domain}",
+            headers=headers,
+            json=payload,
+            timeout=40,
+        )
+        if r.status_code in (200, 202, 204):
+            print(f"[DNS/TXT] {host}.{parent_domain} TXT criado com sucesso")
+            return True
+        print(f"[DNS/TXT] Erro {r.status_code}: {r.text[:300]}")
+        return False
+    except Exception as e:
+        print(f"[DNS/TXT] Falha: {e}")
+        return False
+
+
 # ── Subdomain name generation ─────────────────────────────────────────────────
 
 def limpar_para_subdominio(razao_social: str) -> str:

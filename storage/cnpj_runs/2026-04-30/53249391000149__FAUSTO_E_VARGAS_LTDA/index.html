@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casa do Estilo - Moda & Acessórios</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fefefe;
+      color: #1e293b;
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards;
+    }
+    .fade-in-up.delay-100 {
+      animation-delay: 0.1s;
+    }
+    .fade-in-up.delay-200 {
+      animation-delay: 0.2s;
+    }
+    .fade-in-up.delay-300 {
+      animation-delay: 0.3s;
+    }
+    .fade-in-up.delay-400 {
+      animation-delay: 0.4s;
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#home" class="text-3xl font-extrabold text-indigo-600 tracking-tight select-none hover:text-indigo-700 transition">Casa do Estilo</a>
+      <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+        <li><a href="#home" class="hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+      <button id="menu-btn" aria-label="Abrir menu" class="md:hidden text-indigo-600 hover:text-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+      <ul class="flex flex-col px-6 py-4 space-y-3 text-gray-700 font-semibold">
+        <li><a href="#home" class="block hover:text-indigo-600 transition">Início</a></li>
+        <li><a href="#colecao" class="block hover:text-indigo-600 transition">Coleção</a></li>
+        <li><a href="#sobre" class="block hover:text-indigo-600 transition">Sobre Nós</a></li>
+        <li><a href="#acessorios" class="block hover:text-indigo-600 transition">Acessórios</a></li>
+        <li><a href="#contato" class="block hover:text-indigo-600 transition">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative pt-28 pb-20 bg-gradient-to-tr from-indigo-50 via-indigo-100 to-white overflow-hidden">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col-reverse md:flex-row items-center gap-12">
+        <div class="max-w-xl fade-in-up delay-100">
+          <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-indigo-700 drop-shadow-md">Vista-se de Confiança e Estilo</h1>
+          <p class="mt-6 text-lg text-indigo-600/90 leading-relaxed">Explore a Casa do Estilo, sua loja online de roupas e acessórios que une moda contemporânea e conforto para o seu dia a dia.</p>
+          <a href="#colecao" class="inline-block mt-8 px-8 py-3 text-white bg-indigo-600 rounded-lg shadow-lg font-semibold uppercase tracking-wider hover:bg-indigo-700 transition focus:outline-none focus:ring-4 focus:ring-indigo-300">Ver Coleção</a>
+        </div>
+        <div class="flex-1 fade-in-up delay-200 max-w-md md:max-w-lg rounded-xl overflow-hidden shadow-2xl border border-indigo-200">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Moda Feminina moderna" class="w-full object-cover object-center aspect-[4/5]" loading="lazy" />
+        </div>
+      </div>
+    </div>
+    <svg class="absolute top-0 right-0 w-48 h-48 opacity-20 -z-10" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 100 100" >
+      <circle cx="50" cy="50" r="48" stroke="url(#grad1)" />
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#6366F1" stop-opacity="0.2" />
+          <stop offset="100%" stop-color="#A5B4FC" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </section>
+
+  <!-- Coleção de Roupas -->
+  <section id="colecao" class="container mx-auto px-6 py-16">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center fade-in-up delay-100">Coleção Destaque</h2>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <article class="group bg-white rounded-xl shadow-lg overflow-hidden ring-1 ring-indigo-100 hover:ring-indigo-400 transition relative fade-in-up delay-200">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido Casual Feminino" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 group-hover:text-indigo-600 transition">Vestido Casual</h3>
+          <p class="mt-2 text-indigo-600 font-semibold">R$ 189,90</p>
+        </div>
+      </article>
+      <article class="group bg-white rounded-xl shadow-lg overflow-hidden ring-1 ring-indigo-100 hover:ring-indigo-400 transition relative fade-in-up delay-300">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Jaqueta masculina moderna" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 group-hover:text-indigo-600 transition">Jaqueta Masculina</h3>
+          <p class="mt-2 text-indigo-600 font-semibold">R$ 299,90</p>
+        </div>
+      </article>
+      <article class="group bg-white rounded-xl shadow-lg overflow-hidden ring-1 ring-indigo-100 hover:ring-indigo-400 transition relative fade-in-up delay-400">
+        <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a8e?auto=format&fit=crop&w=600&q=80" alt="Blusa feminina elegante" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 group-hover:text-indigo-600 transition">Blusa Elegante</h3>
+          <p class="mt-2 text-indigo-600 font-semibold">R$ 129,90</p>
+        </div>
+      </article>
+      <article class="group bg-white rounded-xl shadow-lg overflow-hidden ring-1 ring-indigo-100 hover:ring-indigo-400 transition relative fade-in-up delay-400">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Calça Jeans masculina" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-indigo-800 group-hover:text-indigo-600 transition">Calça Jeans</h3>
+          <p class="mt-2 text-indigo-600 font-semibold">R$ 219,90</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Sobre Nós -->
+  <section id="sobre" class="bg-indigo-50 py-16 px-6">
+    <div class="container mx-auto max-w-4xl text-center fade-in-up delay-200">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Nossa História</h2>
+      <p class="text-indigo-600 text-lg leading-relaxed max-w-3xl mx-auto">Fundada com paixão pela moda e qualidade, a Casa do Estilo nasceu para vestir você com peças que traduzem personalidade, conforto e modernidade. Nossa missão é oferecer uma experiência de compra única, com atendimento personalizado e coleções cuidadosamente selecionadas, para que você se sinta seguro e confiante em cada escolha.</p>
+    </div>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="fade-in-up delay-300 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=128&q=80" alt="Equipe Casa do Estilo" class="w-32 h-32 rounded-full object-cover shadow-md mb-6" loading="lazy" />
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Equipe Dedicada</h3>
+        <p class="text-indigo-600 text-center">Profissionais apaixonados pela moda que escolhem cada produto com carinho e atenção aos detalhes.</p>
+      </div>
+      <div class="fade-in-up delay-400 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=128&q=80" alt="Qualidade e Sustentabilidade" class="w-32 h-32 rounded-full object-cover shadow-md mb-6" loading="lazy" />
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Qualidade & Sustentabilidade</h3>
+        <p class="text-indigo-600 text-center">Produtos selecionados que prezam por durabilidade e responsabilidade ambiental.</p>
+      </div>
+      <div class="fade-in-up delay-500 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+        <img src="https://images.unsplash.com/photo-1556742400-b5c1a0a8f7f3?auto=format&fit=crop&w=128&q=80" alt="Atendimento ao cliente" class="w-32 h-32 rounded-full object-cover shadow-md mb-6" loading="lazy" />
+        <h3 class="text-xl font-semibold text-indigo-700 mb-2">Suporte Premium</h3>
+        <p class="text-indigo-600 text-center">Estamos aqui para ajudar você a escolher a peça perfeita com atendimento rápido e atencioso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acessórios -->
+  <section id="acessorios" class="container mx-auto px-6 py-16">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center fade-in-up delay-100">Acessórios que Transformam</h2>
+    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      <figure class="group rounded-lg overflow-hidden shadow-lg bg-white ring-1 ring-indigo-100 hover:ring-indigo-400 transition fade-in-up delay-200 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80" alt="Relógio Masculino" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-4 text-indigo-700 font-semibold text-center">Relógio Masculino</figcaption>
+      </figure>
+      <figure class="group rounded-lg overflow-hidden shadow-lg bg-white ring-1 ring-indigo-100 hover:ring-indigo-400 transition fade-in-up delay-300 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1535905748047-14f3d4e360f3?auto=format&fit=crop&w=500&q=80" alt="Bolsa Feminina de Couro" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-4 text-indigo-700 font-semibold text-center">Bolsa Feminina</figcaption>
+      </figure>
+      <figure class="group rounded-lg overflow-hidden shadow-lg bg-white ring-1 ring-indigo-100 hover:ring-indigo-400 transition fade-in-up delay-400 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=500&q=80" alt="Óculos de Sol Moderno" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-4 text-indigo-700 font-semibold text-center">Óculos de Sol</figcaption>
+      </figure>
+      <figure class="group rounded-lg overflow-hidden shadow-lg bg-white ring-1 ring-indigo-100 hover:ring-indigo-400 transition fade-in-up delay-500 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1520975691065-e4c19e1a9d22?auto=format&fit=crop&w=500&q=80" alt="Chapéu Estiloso" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-4 text-indigo-700 font-semibold text-center">Chapéu Estiloso</figcaption>
+      </figure>
+      <figure class="group rounded-lg overflow-hidden shadow-lg bg-white ring-1 ring-indigo-100 hover:ring-indigo-400 transition fade-in-up delay-600 cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1543168259-18e8b6f5b6b0?auto=format&fit=crop&w=500&q=80" alt="Pulseira Unissex" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+        <figcaption class="p-4 text-indigo-700 font-semibold text-center">Pulseira Unissex</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="bg-indigo-50 py-16 px-6">
+    <div class="container max-w-3xl mx-auto text-center fade-in-up delay-200">
+      <h2 class="text-4xl font-extrabold text-indigo-700 mb-6">Fale Conosco</h2>
+      <p class="text-indigo-600 text-lg mb-8">Quer saber mais sobre nossos produtos ou ter um atendimento personalizado? Envie uma mensagem!</p>
+      <form class="bg-white rounded-xl shadow-lg p-8 max-w-xl mx-auto" action="#" method="POST" novalidate>
+        <div class="mb-6 text-left">
+          <label for="nome" class="block mb-2 font-semibold text-indigo-700">Nome</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Seu nome" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" />
+        </div>
+        <div class="mb-6 text-left">
+          <label for="email" class="block mb-2 font-semibold text-indigo-700">E-mail</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" />
+        </div>
+        <div class="mb-6 text-left">
+          <label for="mensagem" class="block mb-2 font-semibold text-indigo-700">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" required rows="5" placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-md px-4 py-3 resize-none focus:ring-2 focus:ring-indigo-400 focus:outline-none transition"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white font-extrabold px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-4 focus:ring-indigo-300 uppercase tracking-wide">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-900 text-indigo-100 py-14 px-6">
+    <div class="container mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div class="space-y-2 fade-in-up delay-100">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-2">Dados da Empresa</h3>
+        <p><span class="font-semibold">CNPJ:</span> 53.249.391/0001-49</p>
+        <p><span class="font-semibold">Razão Social:</span> FAUSTO E VARGAS LTDA</p>
+      </div>
+      <div class="space-y-2 fade-in-up delay-200">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-2">Contato</h3>
+        <p><span class="font-semibold">E-mail:</span> CASADOCONSTRUTORCOMBINADO@GMAIL.COM</p>
+        <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">(88) 95157-6024</span></p>
+      </div>
+      <div class="space-y-2 fade-in-up delay-300">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-2">Endereço</h3>
+        <p><span class="font-semibold">Logradouro:</span> RUA GOV SIQUEIRA CAMPOS, 29</p>
+        <p><span class="font-semibold">Bairro:</span> CENTRO</p>
+      </div>
+      <div class="space-y-2 fade-in-up delay-400">
+        <h3 class="font-bold text-lg border-b border-indigo-700 pb-2 mb-2">Localização</h3>
+        <p><span class="font-semibold">Município:</span> COMBINADO</p>
+        <p><span class="font-semibold">Estado:</span> TO</p>
+      </div>
+    </div>
+    <div class="mt-10 border-t border-indigo-700 pt-6 text-center text-indigo-300 text-sm space-x-6 fade-in-up delay-500">
+      <a href="#" class="hover:text-indigo-100 transition font-semibold">Termos de Uso</a>
+      <a href="#" class="hover:text-indigo-100 transition font-semibold">Política de Privacidade</a>
+    </div>
+  </footer>
+
+</body>
+</html>

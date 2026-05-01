@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alves & Alves - Moda e Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpAnim 0.8s forwards;
+  }
+  @keyframes fadeUpAnim {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  nav a:hover {
+    color: #2563eb;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-blue-300 selection:text-white">
+
+<header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-extrabold tracking-tight text-blue-700 hover:text-blue-600">Alves &amp; Alves</a>
+    <nav class="hidden md:flex gap-8 font-medium text-gray-600 uppercase tracking-wide">
+      <a href="#colecao" class="hover:text-blue-600 transition">Coleção</a>
+      <a href="#acessorios" class="hover:text-blue-600 transition">Acessórios</a>
+      <a href="#sobre" class="hover:text-blue-600 transition">Sobre</a>
+      <a href="#contato" class="hover:text-blue-600 transition">Contato</a>
+      <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
+    </nav>
+    <button id="menu-btn" aria-label="Abrir menu" class="md:hidden focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
+      <svg class="w-7 h-7 text-blue-700" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+        <line x1="3" y1="7" x2="21" y2="7" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="17" x2="21" y2="17" />
+      </svg>
+    </button>
+  </div>
+  <nav id="mobile-menu" class="md:hidden bg-white shadow-md w-full max-w-xs absolute top-full left-0 right-0 mx-auto hidden rounded-b-lg overflow-hidden font-semibold text-blue-700 uppercase tracking-wide">
+    <a href="#colecao" class="block px-5 py-3 border-b border-blue-100 hover:bg-blue-50 transition">Coleção</a>
+    <a href="#acessorios" class="block px-5 py-3 border-b border-blue-100 hover:bg-blue-50 transition">Acessórios</a>
+    <a href="#sobre" class="block px-5 py-3 border-b border-blue-100 hover:bg-blue-50 transition">Sobre</a>
+    <a href="#contato" class="block px-5 py-3 border-b border-blue-100 hover:bg-blue-50 transition">Contato</a>
+    <a href="#faq" class="block px-5 py-3 hover:bg-blue-50 transition">FAQ</a>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+  window.addEventListener('resize', () => {
+    if(window.innerWidth >= 768) {
+      menu.classList.add('hidden');
+    }
+  });
+</script>
+
+<main class="pt-24 max-w-7xl mx-auto px-6">
+
+<!-- Hero -->
+<section class="relative rounded-lg overflow-hidden bg-gradient-to-tr from-blue-50 to-indigo-100 shadow-lg mb-20">
+  <div class="grid md:grid-cols-2 gap-8 items-center py-16 px-8 md:px-16">
+    <div class="space-y-6 max-w-xl fade-up" style="animation-delay: 0.2s">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 leading-tight">Seu estilo, nossa paixão</h1>
+      <p class="text-lg text-blue-800/90">Descubra a coleção exclusiva de roupas e acessórios que combinam conforto, elegância e autenticidade. Para todas as ocasiões e estilos.</p>
+      <a href="#colecao" class="inline-block btn-primary text-white px-8 py-3 rounded-lg font-semibold shadow-md transition-transform transform hover:scale-105">Ver Coleção</a>
+    </div>
+    <div class="relative rounded-xl overflow-hidden shadow-xl fade-up" style="animation-delay: 0.4s">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Mulher estilosa com camisa azul" class="w-full object-cover aspect-[4/5] md:aspect-auto"/>
+      <div class="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm rounded-md px-3 py-1 text-sm text-blue-900 font-semibold select-none">Foto: Unsplash</div>
+    </div>
+  </div>
+</section>
+
+<!-- Coleção de Roupas -->
+<section id="colecao" class="mb-20">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-10 text-center fade-up" style="animation-delay: 0.1s">Coleção de Roupas</h2>
+  <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden fade-up" style="animation-delay: 0.2s">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Vestido vermelho elegante" class="w-full h-64 object-cover"/>
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-blue-800 mb-2">Vestido Vermelho Elegante</h3>
+        <p class="text-gray-600 mb-3">Vestido longo em tecido leve, perfeito para eventos especiais.</p>
+        <span class="block text-blue-700 font-bold text-xl">R$ 239,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden fade-up" style="animation-delay: 0.3s">
+      <img src="https://images.unsplash.com/photo-1520975922651-7d3a3df0d811?auto=format&fit=crop&w=600&q=80" alt="Jaqueta de couro preta" class="w-full h-64 object-cover"/>
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-blue-800 mb-2">Jaqueta de Couro Preta</h3>
+        <p class="text-gray-600 mb-3">Couro legítimo com corte moderno para seu visual urbano.</p>
+        <span class="block text-blue-700 font-bold text-xl">R$ 489,00</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden fade-up" style="animation-delay: 0.4s">
+      <img src="https://images.unsplash.com/photo-1503342452485-86d4b6d5f1c2?auto=format&fit=crop&w=600&q=80" alt="Camisa masculina casual" class="w-full h-64 object-cover"/>
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-blue-800 mb-2">Camisa Masculina Casual</h3>
+        <p class="text-gray-600 mb-3">Ideal para o dia a dia, em algodão macio e respirável.</p>
+        <span class="block text-blue-700 font-bold text-xl">R$ 119,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden fade-up" style="animation-delay: 0.5s">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-64 object-cover"/>
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-blue-800 mb-2">Calça Jeans Feminina</h3>
+        <p class="text-gray-600 mb-3">Modelagem skinny com elastano para conforto e estilo.</p>
+        <span class="block text-blue-700 font-bold text-xl">R$ 159,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Acessórios -->
+<section id="acessorios" class="mb-20 bg-gradient-to-tr from-indigo-50 to-blue-50 rounded-lg py-16 px-8 md:px-16 shadow-inner">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12 text-center fade-up" style="animation-delay: 0.1s">Acessórios Exclusivos</h2>
+  <div class="flex flex-col md:flex-row justify-center gap-12 max-w-6xl mx-auto">
+    <div class="flex-1 fade-up" style="animation-delay: 0.2s">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Relógio moderno" class="rounded-xl shadow-lg aspect-[4/3] object-cover w-full"/>
+      <h3 class="mt-5 text-xl font-semibold text-blue-800">Relógio Moderno</h3>
+      <p class="text-gray-700 mt-2">Design minimalista e pulseira em aço inoxidável.</p>
+      <span class="mt-3 block font-bold text-blue-700 text-lg">R$ 299,90</span>
+    </div>
+    <div class="flex-1 fade-up" style="animation-delay: 0.3s">
+      <img src="https://images.unsplash.com/photo-1512499617640-c2f9991ca9f9?auto=format&fit=crop&w=600&q=80" alt="Óculos de sol estiloso" class="rounded-xl shadow-lg aspect-[4/3] object-cover w-full"/>
+      <h3 class="mt-5 text-xl font-semibold text-blue-800">Óculos de Sol</h3>
+      <p class="text-gray-700 mt-2">Lentes polarizadas e armação leve em acetato.</p>
+      <span class="mt-3 block font-bold text-blue-700 text-lg">R$ 199,90</span>
+    </div>
+    <div class="flex-1 fade-up" style="animation-delay: 0.4s">
+      <img src="https://images.unsplash.com/photo-1530845642039-4f9a95c9e8d3?auto=format&fit=crop&w=600&q=80" alt="Bolsa feminina" class="rounded-xl shadow-lg aspect-[4/3] object-cover w-full"/>
+      <h3 class="mt-5 text-xl font-semibold text-blue-800">Bolsa Feminina</h3>
+      <p class="text-gray-700 mt-2">Couro sintético premium e design versátil.</p>
+      <span class="mt-3 block font-bold text-blue-700 text-lg">R$ 349,90</span>
+    </div>
+  </div>
+</section>
+
+<!-- Sobre Nós -->
+<section id="sobre" class="mb-20 max-w-5xl mx-auto px-6 fade-up" style="animation-delay: 0.1s">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-10 text-center">Sobre a Alves &amp; Alves</h2>
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="text-lg text-gray-700 leading-relaxed mb-6">Fundada em Tucano, BA, a Alves &amp; Alves Soluções LTDA é uma marca dedicada a oferecer roupas e acessórios que unem qualidade, conforto e estilo. Com foco na sustentabilidade e nas tendências globais, buscamos proporcionar experiências únicas para nossos clientes.</p>
+      <p class="text-lg text-gray-700 leading-relaxed">Nossa paixão pelo vestuário e acessórios nos impulsiona a inovar constantemente, trazendo coleções que refletem autenticidade e personalidade.</p>
+    </div>
+    <div class="rounded-xl overflow-hidden shadow-lg">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=720&q=80" alt="Equipe da loja de roupas" class="w-full object-cover aspect-[4/3]"/>
+      <div class="p-4 bg-white">
+        <small class="text-gray-400 font-semibold select-none">Foto: Unsplash</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="mb-20 max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s">
+  <h2 class="text-3xl font-extrabold text-blue-900 mb-10 text-center">Perguntas Frequentes</h2>
+  <div class="space-y-6">
+    <details class="group bg-white rounded-xl shadow p-5 cursor-pointer hover:shadow-lg transition-shadow">
+      <summary class="font-semibold text-blue-800 list-none marker:hidden flex justify-between items-center">
+        Qual o prazo para entrega?
+        <svg class="w-5 h-5 text-blue-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="mt-3 text-gray-700 leading-relaxed">O prazo padrão é de 5 a 10 dias úteis, podendo variar conforme a localidade.</p>
+    </details>
+    <details class="group bg-white rounded-xl shadow p-5 cursor-pointer hover:shadow-lg transition-shadow">
+      <summary class="font-semibold text-blue-800 list-none marker:hidden flex justify-between items-center">
+        Posso trocar ou devolver um produto?
+        <svg class="w-5 h-5 text-blue-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="mt-3 text-gray-700 leading-relaxed">Sim, aceitamos trocas e devoluções em até 7 dias após o recebimento, desde que o produto esteja em perfeito estado.</p>
+    </details>
+    <details class="group bg-white rounded-xl shadow p-5 cursor-pointer hover:shadow-lg transition-shadow">
+      <summary class="font-semibold text-blue-800 list-none marker:hidden flex justify-between items-center">
+        Quais formas de pagamento são aceitas?
+        <svg class="w-5 h-5 text-blue-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <p class="mt-3 text-gray-700 leading-relaxed">Aceitamos cartões de crédito, boleto bancário e PIX.</p>
+    </details>
+  </div>
+</section>
+
+<!-- Contato -->
+<section id="contato" class="mb-24 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl shadow-lg max-w-4xl mx-auto px-8 py-12 fade-up" style="animation-delay: 0.1s">
+  <h2 class="text-3xl font-extrabold text-blue-900 mb-8 text-center">Fale Conosco</h2>
+  <form class="grid gap-6 sm:grid-cols-2" action="#" novalidate>
+    <div class="sm:col-span-2">
+      <label for="nome" class="block text-sm font-medium text-blue-800 mb-2">Nome completo</label>
+      <input type="text" id="nome" name="nome" required class="w-full rounded-lg border border-blue-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" placeholder="Seu nome"/>
+    </div>
+    <div>
+      <label for="email" class="block text-sm font-medium text-blue-800 mb-2">E-mail</label>
+      <input type="email" id="email" name="email" required class="w-full rounded-lg border border-blue-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" placeholder="seu@email.com"/>
+    </div>
+    <div>
+      <label for="assunto" class="block text-sm font-medium text-blue-800 mb-2">Assunto</label>
+      <input type="text" id="assunto" name="assunto" required class="w-full rounded-lg border border-blue-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" placeholder="Motivo do contato"/>
+    </div>
+    <div class="sm:col-span-2">
+      <label for="mensagem" class="block text-sm font-medium text-blue-800 mb-2">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required class="w-full rounded-lg border border-blue-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition" placeholder="Escreva sua mensagem"></textarea>
+    </div>
+    <div class="sm:col-span-2 text-center">
+      <button type="submit" class="btn-primary px-12 py-3 rounded-lg font-bold text-white shadow-md hover:scale-105 transition-transform">Enviar</button>
+    </div>
+  </form>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-300 py-12 px-6 md:px-20">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">CNPJ</h3>
+      <p>62.838.640/0001-22</p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Razão Social</h3>
+      <p>ALVES E ALVES SOLUCOES LTDA</p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">E-mail</h3>
+      <p><a href="mailto:MPCONTASTUCANO@OUTLOOK.COM" class="hover:text-blue-400 transition">MPCONTASTUCANO@OUTLOOK.COM</a></p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Telefone</h3>
+      <p><span id="telefone-comercial" class="select-text">71-997001116</span></p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Logradouro</h3>
+      <p>RUA GERONIMO FERREIRA DE MACEDO, SN</p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Bairro</h3>
+      <p>CALDAS DO JORRO</p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Município</h3>
+      <p>TUCANO</p>
+    </div>
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-3">Estado</h3>
+      <p>BA</p>
+    </div>
+  </div>
+  <div class="mt-10 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-6 text-gray-400 text-sm">
+    <p>© 2024 Alves &amp; Alves Soluções LTDA. Todos os direitos reservados.</p>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-blue-400 transition">Termos de Uso</a>
+      <a href="#" class="hover:text-blue-400 transition">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

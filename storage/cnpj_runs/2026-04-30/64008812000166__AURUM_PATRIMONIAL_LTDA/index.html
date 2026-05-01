@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="vl4alhts0yd2moj47bzg5sb1nv3oqc" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aurum Store - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+</style>
+</head>
+<body class="bg-gradient-to-b from-white via-gray-50 to-gray-100 text-gray-800 font-sans">
+
+<header class="w-full bg-white shadow-md sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 flex flex-wrap items-center justify-between">
+    <a href="#" class="flex items-center space-x-2 text-indigo-700 font-extrabold text-2xl tracking-tight hover:text-indigo-600 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      </svg>
+      <span>Aurum Store</span>
+    </a>
+    <button aria-label="Abrir menu" id="btn-menu" class="text-indigo-700 md:hidden focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <ul id="menu" class="hidden md:flex md:items-center md:space-x-10 text-lg font-medium">
+      <li><a href="#colecao" class="hover:text-indigo-600 transition">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition">Acessórios</a></li>
+      <li><a href="#depoimentos" class="hover:text-indigo-600 transition">Depoimentos</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition">Contato</a></li>
+    </ul>
+  </nav>
+  <div id="menu-mobile" class="md:hidden bg-white shadow-md hidden px-6 pb-6">
+    <ul class="flex flex-col space-y-4 text-indigo-700 font-semibold text-lg">
+      <li><a href="#colecao" class="block">Coleção</a></li>
+      <li><a href="#acessorios" class="block">Acessórios</a></li>
+      <li><a href="#depoimentos" class="block">Depoimentos</a></li>
+      <li><a href="#sobre" class="block">Sobre</a></li>
+      <li><a href="#contato" class="block">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMobile = document.getElementById('menu-mobile');
+  btnMenu.addEventListener('click', () => {
+    menuMobile.classList.toggle('hidden');
+  });
+</script>
+
+<section class="relative bg-indigo-50 overflow-hidden pt-20 pb-32 md:pt-32 md:pb-40">
+  <div class="container mx-auto px-6 md:flex md:items-center md:justify-between">
+    <div class="md:max-w-xl lg:max-w-2xl text-center md:text-left">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-700 leading-tight tracking-tight animate-pulse-slow">
+        Renove seu estilo com Aurum Store
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-indigo-900/80 max-w-xl mx-auto md:mx-0">
+        Moda contemporânea em vestuário e acessórios para quem valoriza elegância e conforto.
+      </p>
+      <a href="#colecao" class="inline-block mt-8 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+        Confira a Coleção
+      </a>
+    </div>
+    <div class="mt-12 md:mt-0 md:flex-1">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=80" alt="Model wearing stylish clothes" class="rounded-3xl shadow-2xl mx-auto max-w-full max-h-[480px] object-cover" />
+    </div>
+  </div>
+  <svg class="absolute right-0 bottom-0 w-48 opacity-30" fill="none" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="100" fill="#6366F1"/>
+  </svg>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 py-20 md:py-28">
+  <h2 class="text-3xl font-extrabold text-indigo-900 mb-10 text-center tracking-wide">Coleção de Vestuário</h2>
+  <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=600&q=80" alt="Camisa masculina branca" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-indigo-800">Camisa Masculina Branca</h3>
+        <p class="mt-1 text-indigo-600 font-semibold">R$ 129,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Vestido feminino floral" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-indigo-800">Vestido Floral Feminino</h3>
+        <p class="mt-1 text-indigo-600 font-semibold">R$ 189,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Jaqueta preta unissex" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-indigo-800">Jaqueta Preta Unissex</h3>
+        <p class="mt-1 text-indigo-600 font-semibold">R$ 299,90</p>
+      </div>
+    </article>
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+      <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a62?auto=format&fit=crop&w=600&q=80" alt="Calça jeans feminina" class="w-full h-64 object-cover" />
+      <div class="p-5">
+        <h3 class="font-semibold text-lg text-indigo-800">Calça Jeans Feminina</h3>
+        <p class="mt-1 text-indigo-600 font-semibold">R$ 159,90</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-20">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-extrabold text-indigo-900 mb-12 text-center tracking-wide">Acessórios Exclusivos</h2>
+    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+      <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno" class="w-32 h-32 object-cover rounded-full mb-5" />
+        <h3 class="text-indigo-800 font-semibold text-lg mb-1">Relógio Moderno</h3>
+        <p class="text-indigo-600 font-semibold">R$ 499,00</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol estiloso" class="w-32 h-32 object-cover rounded-full mb-5" />
+        <h3 class="text-indigo-800 font-semibold text-lg mb-1">Óculos de Sol</h3>
+        <p class="text-indigo-600 font-semibold">R$ 299,00</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bolsa feminina elegante" class="w-32 h-32 object-cover rounded-full mb-5" />
+        <h3 class="text-indigo-800 font-semibold text-lg mb-1">Bolsa Elegante</h3>
+        <p class="text-indigo-600 font-semibold">R$ 399,00</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+        <img src="https://images.unsplash.com/photo-1518546305923-c1b8e0306b5c?auto=format&fit=crop&w=400&q=80" alt="Chapéu de palha" class="w-32 h-32 object-cover rounded-full mb-5" />
+        <h3 class="text-indigo-800 font-semibold text-lg mb-1">Chapéu de Palha</h3>
+        <p class="text-indigo-600 font-semibold">R$ 159,00</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" class="container mx-auto px-6 py-20 md:py-28">
+  <h2 class="text-3xl font-extrabold text-indigo-900 mb-14 text-center tracking-wide">O Que Nossos Clientes Dizem</h2>
+  <div class="space-y-12 max-w-5xl mx-auto">
+    <blockquote class="bg-white rounded-3xl p-8 shadow-lg border-l-8 border-indigo-600 transform hover:scale-[1.02] transition-transform duration-300">
+      <p class="text-indigo-700 italic text-lg leading-relaxed">"Comprei uma jaqueta e fiquei impressionado com a qualidade e o caimento. Além disso, o atendimento foi super atencioso e rápido. Recomendo demais!"</p>
+      <footer class="mt-6 text-indigo-900 font-semibold">Lucas S.</footer>
+    </blockquote>
+    <blockquote class="bg-white rounded-3xl p-8 shadow-lg border-l-8 border-indigo-600 transform hover:scale-[1.02] transition-transform duration-300">
+      <p class="text-indigo-700 italic text-lg leading-relaxed">"A seleção de acessórios é maravilhosa, encontrei um relógio que combinou perfeitamente com meu estilo. Entrega rápida e embalagem impecável."</p>
+      <footer class="mt-6 text-indigo-900 font-semibold">Mariana T.</footer>
+    </blockquote>
+    <blockquote class="bg-white rounded-3xl p-8 shadow-lg border-l-8 border-indigo-600 transform hover:scale-[1.02] transition-transform duration-300">
+      <p class="text-indigo-700 italic text-lg leading-relaxed">"A Aurum Store traz peças versáteis que funcionam para várias ocasiões. Amei o vestido floral que comprei, já virou meu favorito."</p>
+      <footer class="mt-6 text-indigo-900 font-semibold">Renata P.</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section id="sobre" class="bg-indigo-50 py-20 md:py-32">
+  <div class="container mx-auto px-6 flex flex-col md:flex-row md:items-center md:space-x-16 max-w-6xl">
+    <div class="md:w-1/2 mb-12 md:mb-0 text-center md:text-left">
+      <h2 class="text-3xl font-extrabold text-indigo-900 mb-6 tracking-wide">Quem Somos</h2>
+      <p class="text-indigo-800 text-lg leading-relaxed">
+        A Aurum Store é uma marca que nasceu da paixão por moda e estilo, trazendo para você uma curadoria exclusiva de roupas e acessórios que unem modernidade, conforto e sofisticação. Nosso compromisso é oferecer produtos de alta qualidade e um atendimento personalizado para que você se sinta único em cada peça.
+      </p>
+      <p class="mt-4 text-indigo-700 text-lg leading-relaxed">
+        Trabalhamos com fornecedores selecionados e buscamos sempre tendências inovadoras sem perder a essência do clássico. Sua satisfação é o nosso ouro.
+      </p>
+    </div>
+    <div class="md:w-1/2 rounded-3xl overflow-hidden shadow-xl">
+      <img src="https://images.unsplash.com/photo-1542838687-c8f0f7d2e9cc?auto=format&fit=crop&w=800&q=80" alt="Equipe Aurum Store" class="w-full object-cover h-[350px] md:h-[420px]" />
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="container mx-auto px-6 py-20 md:py-28 max-w-3xl">
+  <h2 class="text-3xl font-extrabold text-indigo-900 mb-10 text-center tracking-wide">Fale Conosco</h2>
+  <form action="#" method="POST" class="bg-white rounded-3xl shadow-lg p-10 space-y-8">
+    <div>
+      <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome Completo</label>
+      <input type="text" id="nome" name="nome" required placeholder="Seu nome" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" />
+    </div>
+    <div>
+      <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+      <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" class="w-full px-4 py-3 border border-indigo-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" />
+    </div>
+    <div>
+      <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full px-4 py-3 border border-indigo-300 rounded-lg resize-none focus:ring-2 focus:ring-indigo-400 focus:outline-none transition"></textarea>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+        Enviar Mensagem
+      </button>
+    </div>
+  </form>
+</section>
+
+<footer class="bg-indigo-900 text-indigo-100 py-14 px-6">
+  <div class="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-sm select-none">
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">CNPJ</h3>
+      <p>64.008.812/0001-66</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Razão Social</h3>
+      <p>AURUM PATRIMONIAL LTDA</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">E-mail</h3>
+      <p><a href="mailto:OS.PIVA@HOTMAIL.COM" class="hover:underline">OS.PIVA@HOTMAIL.COM</a></p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Telefone</h3>
+      <p><span id="telefone-comercial" class="font-semibold">54-999785159</span></p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Logradouro</h3>
+      <p>RUA RIO BRANCO, 493</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Bairro</h3>
+      <p>CENTRO</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Município</h3>
+      <p>RONDA ALTA</p>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-bold text-indigo-300 uppercase tracking-wide mb-2">Estado</h3>
+      <p>RS</p>
+    </div>
+  </div>
+  <div class="mt-12 border-t border-indigo-700 pt-6 text-center text-indigo-400 text-xs font-medium space-x-6 select-text">
+    <a href="#" class="hover:underline">Termos de Uso</a>
+    <a href="#" class="hover:underline">Política de Privacidade</a>
+  </div>
+</footer>
+
+</body>
+</html>

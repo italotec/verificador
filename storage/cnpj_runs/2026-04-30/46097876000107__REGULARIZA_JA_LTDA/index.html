@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta name="facebook-domain-verification" content="6qjpaz8fs86ib47mlwa5j6lzhgesew" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VestiLux - Moda & Acessórios</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  html {
+    scroll-padding-top: 80px;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  .btn-animate:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+<header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md z-50">
+  <nav class="container mx-auto flex justify-between items-center py-4 px-6 md:px-12">
+    <a href="#home" class="text-3xl font-extrabold text-indigo-600 tracking-wide hover:text-indigo-700 transition-colors">VestiLux</a>
+    <ul class="hidden md:flex space-x-10 font-semibold text-gray-700">
+      <li><a href="#home" class="hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="hover:text-indigo-600 transition-colors">Sobre</a></li>
+      <li><a href="#contato" class="hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+    <button aria-label="Menu" id="btn-menu" class="md:hidden text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md shadow-md border-t border-gray-200">
+    <ul class="flex flex-col px-6 py-4 space-y-4 font-semibold text-gray-700 text-lg">
+      <li><a href="#home" class="block hover:text-indigo-600 transition-colors">Início</a></li>
+      <li><a href="#colecao" class="block hover:text-indigo-600 transition-colors">Coleção</a></li>
+      <li><a href="#acessorios" class="block hover:text-indigo-600 transition-colors">Acessórios</a></li>
+      <li><a href="#sobre" class="block hover:text-indigo-600 transition-colors">Sobre</a></li>
+      <li><a href="#contato" class="block hover:text-indigo-600 transition-colors">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="flex-grow pt-20">
+
+<section id="home" class="relative bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-50 min-h-[85vh] flex items-center overflow-hidden">
+  <div class="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
+    <div class="space-y-6 max-w-xl fade-in" style="animation-delay: 0.2s;">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-indigo-700 leading-tight tracking-tight drop-shadow-md">
+        Vista seu estilo com <span class="text-indigo-500">VestiLux</span>
+      </h1>
+      <p class="text-lg text-indigo-800/90 font-medium drop-shadow-sm">Moda e acessórios que refletem sua personalidade. Escolha peças únicas para todas as ocasiões.</p>
+      <a href="#colecao" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg btn-animate hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-400 transition-colors">Conheça a Coleção</a>
+    </div>
+    <div class="relative rounded-lg overflow-hidden shadow-xl fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=80" alt="Modelo vestindo roupa moderna" class="w-full h-full object-cover object-center" />
+      <div class="absolute bottom-4 left-4 bg-indigo-600 bg-opacity-70 text-white rounded-md px-3 py-1 font-semibold text-sm select-none">Elegância & Conforto</div>
+    </div>
+  </div>
+</section>
+
+<section id="colecao" class="container mx-auto px-6 md:px-12 py-16">
+  <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide fade-in" style="animation-delay: 0.2s;">Coleção Exclusiva</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.3s;">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vestido longo rosa" class="w-full h-64 object-cover object-top" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Vestido Longo Rosé</h3>
+        <p class="text-gray-600 mb-3">Fluido e elegante, perfeito para eventos especiais.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 249,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.4s;">
+      <img src="https://images.unsplash.com/photo-1520975697757-8d70f5c2a86d?auto=format&fit=crop&w=600&q=80" alt="Jaqueta jeans feminina" class="w-full h-64 object-cover object-center" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Jaqueta Jeans Vintage</h3>
+        <p class="text-gray-600 mb-3">Clássica, com lavagem suave e detalhes únicos.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 199,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.5s;">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=80" alt="Calça cargo" class="w-full h-64 object-cover object-top" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Calça Cargo Verde Militar</h3>
+        <p class="text-gray-600 mb-3">Conforto e estilo para o dia a dia urbano.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 179,90</span>
+      </div>
+    </article>
+    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.6s;">
+      <img src="https://images.unsplash.com/photo-1475180098321-4f0c821fbbf2?auto=format&fit=crop&w=600&q=80" alt="Blusa branca feminina" class="w-full h-64 object-cover object-center" loading="lazy" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold text-indigo-800 mb-2">Blusa Básica Off-White</h3>
+        <p class="text-gray-600 mb-3">Versátil e macia, ideal para combinações diversas.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 79,90</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="acessorios" class="bg-indigo-50 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-6xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12 text-center tracking-wide fade-in" style="animation-delay: 0.2s;">Acessórios que Transformam</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.3s;">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Bolsa de couro marrom" class="w-40 h-40 object-cover rounded-xl mb-6 shadow-md" loading="lazy" />
+        <h3 class="text-2xl font-semibold text-indigo-800 mb-3">Bolsa Couro Caramelo</h3>
+        <p class="text-gray-700 mb-4">Design elegante e espaço ideal para o dia a dia.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 299,90</span>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.4s;">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Relógio moderno prateado" class="w-40 h-40 object-cover rounded-xl mb-6 shadow-md" loading="lazy" />
+        <h3 class="text-2xl font-semibold text-indigo-800 mb-3">Relógio Minimalista Prata</h3>
+        <p class="text-gray-700 mb-4">Estilo clean que combina com qualquer look.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 349,90</span>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300 fade-in" style="animation-delay: 0.5s;">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=400&q=80" alt="Óculos de sol moderno" class="w-40 h-40 object-cover rounded-xl mb-6 shadow-md" loading="lazy" />
+        <h3 class="text-2xl font-semibold text-indigo-800 mb-3">Óculos de Sol Retro</h3>
+        <p class="text-gray-700 mb-4">Proteção UV com design atemporal.</p>
+        <span class="font-bold text-indigo-600 text-lg">R$ 179,90</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="container mx-auto px-6 md:px-12 py-16 max-w-5xl">
+  <h2 class="text-4xl font-extrabold text-indigo-700 mb-10 text-center tracking-wide fade-in" style="animation-delay: 0.2s;">Sobre a VestiLux</h2>
+  <div class="flex flex-col md:flex-row gap-12 items-center md:items-start">
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=80" alt="Equipe da loja de roupas" class="rounded-xl shadow-lg w-full max-w-md object-cover fade-in" style="animation-delay: 0.3s;" loading="lazy" />
+    <div class="text-gray-700 text-lg leading-relaxed fade-in" style="animation-delay: 0.4s;">
+      <p>Na VestiLux, acreditamos que a moda é uma forma de expressão e empoderamento. Com curadoria cuidadosa e foco em qualidade, trazemos peças que unem estilo, conforto e sustentabilidade.</p>
+      <p class="mt-6">Nossa missão é oferecer uma experiência única, conectando você às tendências que valorizam sua autenticidade, enquanto apoiamos práticas responsáveis no mercado de moda.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="bg-indigo-100 py-16 px-6 md:px-12">
+  <div class="container mx-auto max-w-3xl">
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-10 text-center tracking-wide fade-in" style="animation-delay: 0.2s;">Fale Conosco</h2>
+    <form class="bg-white rounded-xl shadow-lg p-8 fade-in" style="animation-delay: 0.3s;" action="#" method="POST" novalidate>
+      <div class="mb-6">
+        <label for="nome" class="block text-indigo-800 font-semibold mb-2">Nome</label>
+        <input id="nome" name="nome" type="text" required placeholder="Seu nome completo" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block text-indigo-800 font-semibold mb-2">E-mail</label>
+        <input id="email" name="email" type="email" required placeholder="seu@email.com" class="w-full border border-indigo-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+      </div>
+      <div class="mb-6">
+        <label for="mensagem" class="block text-indigo-800 font-semibold mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva sua mensagem aqui..." class="w-full border border-indigo-300 rounded-md px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-400 transition-colors btn-animate">Enviar</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-indigo-900 text-indigo-100 border-t border-indigo-800 select-text">
+  <div class="container mx-auto px-6 md:px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="space-y-2">
+      <h3 class="font-semibold text-lg border-b border-indigo-700 pb-2 mb-3">Informações Legais</h3>
+      <p><span class="font-semibold">CNPJ:</span> 46.097.876/0001-07</p>
+      <p><span class="font-semibold">Razão Social:</span> REGULARIZA JA LTDA</p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-lg border-b border-indigo-700 pb-2 mb-3">Contato</h3>
+      <p><span class="font-semibold">E-mail:</span> ENG.ARLEY.BARBOSA@GMAIL.COM</p>
+      <p><span class="font-semibold">Telefone:</span> <span id="telefone-comercial">89-988093743</span></p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-lg border-b border-indigo-700 pb-2 mb-3">Endereço</h3>
+      <p><span class="font-semibold">Logradouro:</span> RUA JOAQUIM DIAS, 320</p>
+      <p><span class="font-semibold">Bairro:</span> BODELANDIA</p>
+    </div>
+    <div class="space-y-2">
+      <h3 class="font-semibold text-lg border-b border-indigo-700 pb-2 mb-3">Localização</h3>
+      <p><span class="font-semibold">Município:</span> OEIRAS</p>
+      <p><span class="font-semibold">Estado:</span> PI</p>
+    </div>
+  </div>
+  <div class="border-t border-indigo-800 pt-6 pb-4 text-center text-indigo-300 text-sm flex flex-col sm:flex-row sm:justify-center sm:space-x-8 select-text">
+    <a href="#" class="hover:underline focus:underline transition">Termos de Uso</a>
+    <a href="#" class="hover:underline focus:underline transition">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+  const btnMenu = document.getElementById('btn-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  btnMenu.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.remove('hidden');
+    } else {
+      mobileMenu.classList.add('hidden');
+    }
+  });
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>
