@@ -2077,7 +2077,11 @@ class FacebookBot:
             except Exception as e:
                 print(f"[WABA] Category selection failed: {e}")
 
-        # Click "Continuar" — wait indefinitely if reCAPTCHA blocks it
+        # Click "Continuar" — wait indefinitely if reCAPTCHA blocks it.
+        # Mirrors _wiz_identity_check: the button's aria-disabled is the
+        # authoritative signal that Facebook has accepted the captcha. The
+        # recaptcha iframe usually stays in the DOM after a successful solve,
+        # so we don't gate on its presence.
         self._shot(page, "waba_pre_continuar")
         continuar_clicked = False
         while not continuar_clicked:
@@ -2087,10 +2091,8 @@ class FacebookBot:
                     _wait(3)
                     continue
                 aria = (btn.get_attribute("aria-disabled") or "").lower()
-                is_disabled = aria == "true" or bool(btn.get_attribute("disabled"))
-                has_captcha = page.locator('iframe[src*="recaptcha"]').count() > 0
-                if is_disabled or has_captcha:
-                    print("[WABA] reCAPTCHA detected or button disabled — waiting for manual solve (no timeout)...")
+                if aria == "true" or btn.get_attribute("disabled"):
+                    print("[WABA] Continuar disabled (reCAPTCHA or validation) — waiting for manual solve (no timeout)...")
                     _wait(3)
                     continue
                 btn.click()

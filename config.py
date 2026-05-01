@@ -53,7 +53,7 @@ CLOUDPANEL_VPS_USER = os.getenv("CLOUDPANEL_VPS_USER", "")
 CLOUDPANEL_VPS_PASS = os.getenv("CLOUDPANEL_VPS_PASS", "")
 CLOUDPANEL_SITE_PASS = os.getenv("CLOUDPANEL_SITE_PASS", "")
 CLOUDPANEL_PHP_VERSION = os.getenv("CLOUDPANEL_PHP_VERSION", "8.3")
-CLOUDPANEL_DOMAINS = os.getenv("CLOUDPANEL_DOMAINS", "tropadapv.com").split(",")
+CLOUDPANEL_DOMAINS = os.getenv("CLOUDPANEL_DOMAINS", "lusquetarock.com").split(",")
 
 # Spaceship DNS API
 SPACESHIP_API_KEY = os.getenv("SPACESHIP_API_KEY", "")
